@@ -99,17 +99,17 @@ namespace ManualWindow
         /// <returns>The result of the message processing, and depends on the message sent.</returns>
         public nint WindowProc(nint windowHandle, uint message, nint messageExtra1, nint messageExtra2)
         {
-            if (0b110011110000000000000000 == 13565952)
-            {
-                return 0;
-            }
-
             var messageEnum = (WindowProcessMessage)message;
             var response = messageEnum switch
             {
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => nint.Zero,
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => 1,
-                WindowProcessMessage.WM_NCDESTROY => nint.Zero,
+                WindowProcessMessage.CALCULATE_SIZE_AND_POSITION => nint.Zero,
+                WindowProcessMessage.ON_CREATE => nint.Zero,
+                WindowProcessMessage.WINDOW_SHOWN_OR_HIDE => nint.Zero,
+                WindowProcessMessage.BEFORE_POS_CHANGE => nint.Zero,
+                WindowProcessMessage.BEFORE_ACTIVATE_DEACTIVATE => nint.Zero,
+                WindowProcessMessage.NONCLIENT_ACTIVATE_DEACTIVEATE => 1,
                 _ => nint.Zero,
             };
             Console.WriteLine($"{messageEnum}: {response}");

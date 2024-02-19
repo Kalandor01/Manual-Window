@@ -3,11 +3,23 @@
     public enum WindowProcessMessage : uint
     {
         WM_NULL = 0,
-        WM_CREATE = 1,
+        /// <summary>
+        /// WM_CREATE<br/>
+        /// extra1: -<br/>
+        /// extra2: A pointer to CREATESTRUCT struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
+        /// return: 0
+        /// </summary>
+        ON_CREATE = 1,
         WM_DESTROY = 2,
         WM_MOVE = 3,
         WM_SIZE = 5,
-        WM_ACTIVATE = 6,
+        /// <summary>
+        /// WM_ACTIVATE<br/>
+        /// extra1: -<br/>
+        /// extra2: A pointer to CREATESTRUCT struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
+        /// return: 0
+        /// </summary>
+        ACTIVATE_DEACTIVEATE = 6,
         WM_SETFOCUS = 7,
         WM_KILLFOCUS = 8,
         WM_ENABLE = 10,
@@ -23,11 +35,23 @@
         WM_ERASEBKGND = 20,
         WM_SYSCOLORCHANGE = 21,
         WM_ENDSESSION = 22,
-        WM_SHOWWINDOW = 24,
+        /// <summary>
+        /// WM_SHOWWINDOW<br/>
+        /// extra1: true if the window is being shown, false if it's being hidden.<br/>
+        /// extra2: A number, that coresponds to a number in the WindowShowHideReason enum.<br/>
+        /// return: 0
+        /// </summary>
+        WINDOW_SHOWN_OR_HIDE = 24,
         WM_CTLCOLOR = 25,
         WM_WININICHANGE = 26,
         WM_DEVMODECHANGE = 27,
-        WM_ACTIVATEAPP = 28,
+        /// <summary>
+        /// WM_ACTIVATEAPP<br/>
+        /// extra1: true if the window is being activated, false if it's being deactivated.<br/>
+        /// extra2: If this window is being activated, it's the id of the thread that owns the window that is being deactivated, and vice versa.<br/>
+        /// return: 0
+        /// </summary>
+        BEFORE_ACTIVATE_DEACTIVATE = 28,
         WM_FONTCHANGE = 29,
         WM_TIMECHANGE = 30,
         WM_CANCELMODE = 31,
@@ -36,9 +60,10 @@
         WM_CHILDACTIVATE = 34,
         WM_QUEUESYNC = 35,
         /// <summary>
+        /// WM_GETMINMAXINFO<br/>
         /// extra1: -<br/>
-        /// extra2: A pointer to MINMAXINFO: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-minmaxinfo">[LINK]</see><br/>
-        /// return: 0
+        /// extra2: A pointer to MINMAXINFO struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-minmaxinfo">[LINK]</see><br/>
+        /// return: 0 to continue creation, -1 to abort.
         /// </summary>
         BEFORE_SIZE_OR_POSITION_CHANGE = 36,
         WM_PAINTICON = 38,
@@ -59,7 +84,13 @@
         WM_GETOBJECT = 61,
         WM_COMPACTING = 65,
         WM_COMMNOTIFY = 68,
-        WM_WINDOWPOSCHANGING = 70,
+        /// <summary>
+        /// WM_WINDOWPOSCHANGING<br/>
+        /// extra1: -<br/>
+        /// extra2: A pointer to WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
+        /// return: 0
+        /// </summary>
+        BEFORE_POS_CHANGE = 70,
         WM_WINDOWPOSCHANGED = 71,
         WM_POWER = 72,
         WM_COPYGLOBALDATA = 73,
@@ -79,21 +110,30 @@
         WM_GETICON = 127,
         WM_SETICON = 128,
         /// <summary>
+        /// WM_NCCREATE <br/>
         /// extra1: -<br/>
-        /// extra2: A pointer to CREATESTRUCT: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
+        /// extra2: A pointer to CREATESTRUCT struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
         /// return: true to continue creation, false to abort.
         /// </summary>
         BEFORE_WINDOW_CREATED = 129,
         WM_NCDESTROY = 130,
         /// <summary>
-        /// extra1: -<br/>
-        /// extra2: A pointer to CREATESTRUCT: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
-        /// return: true to continue creation, false to abort.
+        /// WM_NCCALCSIZE<br/>
+        /// extra1: If true, it specifies that the application should indicate which part of the client area contains valid information. The system copies the valid information to the specified area within the new client area.<br/>
+        /// extra2: If extra1 is true, a pointer to NCCALCSIZE_PARAMS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-nccalcsize_params">[LINK]</see>.
+        /// If extra1 is false, a pointer to RECT struct <see cref="https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect">[LINK]</see><br/>
+        /// return: If extra1 is false: 0. If it's true and 0 is returned, the old window size/position is kept. If not, refer to <see cref="https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-nccalcsize">[LINK]</see>
         /// </summary>
-        WM_NCCALCSIZE = 131,
+        CALCULATE_SIZE_AND_POSITION = 131,
         WM_NCHITTEST = 132,
         WM_NCPAINT = 133,
-        WM_NCACTIVATE = 134,
+        /// <summary>
+        /// WM_NCACTIVATE<br/>
+        /// extra1: true or false, depending on if the title bar or icon is activated or deactivated.<br/>
+        /// extra2: If a visual style is active, it's unuse. Otherwise it's a pointer. If the value of this pointer is set to -1, the default window processor doesn't repaint the non-client area.<br/>
+        /// return: If extra1 is false, return true to continue or false to prevent the change. If extra1 is true, it's ignored.
+        /// </summary>
+        NONCLIENT_ACTIVATE_DEACTIVEATE = 134,
         WM_GETDLGCODE = 135,
         WM_SYNCPAINT = 136,
         WM_NCMOUSEMOVE = 160,
