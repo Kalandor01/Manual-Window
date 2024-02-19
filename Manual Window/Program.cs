@@ -1,9 +1,11 @@
-﻿using System.Windows;
-
-internal class Program
+﻿namespace ManualWindow
 {
-    private static void Main(string[] args)
+    internal class Program
     {
-
+        private static void Main(string[] args)
+        {
+            var w = new Window();
+            w.CreateWindow();
+        }
     }
 }
