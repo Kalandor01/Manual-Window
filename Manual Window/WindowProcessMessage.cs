@@ -11,28 +11,58 @@
         /// </summary>
         ON_CREATE = 1,
         WM_DESTROY = 2,
-        WM_MOVE = 3,
-        WM_SIZE = 5,
+        /// <summary>
+        /// WM_MOVE<br/>
+        /// extra1: -<br/>
+        /// extra2: The position of the top left corner of the client area. The lower 16 bits is the x position and the upper 16 bits is the y position.<br/>
+        /// return: 0
+        /// </summary>
+        WINDOW_MOVED = 3,
+        /// <summary>
+        /// WM_SIZE<br/>
+        /// extra1: A number, that coresponds to a value in the WindowResizeType enum.<br/>
+        /// extra2: The new size of the client area. The lower 16 bits is the width and the upper 16 bits is the hieght.<br/>
+        /// return: 0
+        /// </summary>
+        WINDOW_SIZE_CHANGED = 5,
         /// <summary>
         /// WM_ACTIVATE<br/>
-        /// extra1: -<br/>
-        /// extra2: A pointer to CREATESTRUCT struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
+        /// extra1: The lower 16 bits of the value maps to a value in WindowActivatedLowerHalf. If the upper 16 bits are not 0, the window is minimized.<br/>
+        /// extra2: If WindowActivatedLowerHalf is DEACTIVATED, it's a pointer to the activatig window, otherwise it's to the deactivating one. The pointer can be null.<br/>
         /// return: 0
         /// </summary>
         ACTIVATE_DEACTIVEATE = 6,
-        WM_SETFOCUS = 7,
+        /// <summary>
+        /// WM_SETFOCUS<br/>
+        /// extra1: A handle to the window that has lost the keyboard focus. Can be null.<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        GAINED_KEYBOARD_FOCUS = 7,
         WM_KILLFOCUS = 8,
         WM_ENABLE = 10,
         WM_SETREDRAW = 11,
         WM_SETTEXT = 12,
         WM_GETTEXT = 13,
         WM_GETTEXTLENGTH = 14,
-        WM_PAINT = 15,
+        /// <summary>
+        /// WM_PAINT<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        PAINT_WINDOW_REQUEST = 15,
         WM_CLOSE = 16,
         WM_QUERYENDSESSION = 17,
         WM_QUIT = 18,
         WM_QUERYOPEN = 19,
-        WM_ERASEBKGND = 20,
+        /// <summary>
+        /// WM_ERASEBKGND<br/>
+        /// extra1: A handle to the device context.<br/>
+        /// extra2: -<br/>
+        /// return: nonzero if the application erases the background.
+        /// </summary>
+        BACKGROUND_ERASE_NEEDED = 20,
         WM_SYSCOLORCHANGE = 21,
         WM_ENDSESSION = 22,
         /// <summary>
@@ -90,8 +120,14 @@
         /// extra2: A pointer to WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
         /// return: 0
         /// </summary>
-        BEFORE_POS_CHANGE = 70,
-        WM_WINDOWPOSCHANGED = 71,
+        BEFORE_WINDOW_POS_CHANGE = 70,
+        /// <summary>
+        /// WM_WINDOWPOSCHANGED<br/>
+        /// extra1: -<br/>
+        /// extra2: A pointer to WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
+        /// return: 0
+        /// </summary>
+        WINDOW_POS_CHANGED = 71,
         WM_POWER = 72,
         WM_COPYGLOBALDATA = 73,
         WM_COPYDATA = 74,
@@ -107,7 +143,13 @@
         WM_STYLECHANGING = 124,
         WM_STYLECHANGED = 125,
         WM_DISPLAYCHANGE = 126,
-        WM_GETICON = 127,
+        /// <summary>
+        /// WM_GETICON <br/>
+        /// extra1: The type of the icon. The values map to the values of the WindowIconType enum.<br/>
+        /// extra2: The DPI of the icon being retrieved.<br/>
+        /// return: A handle to the large or small icon (HICON), depending on the value of extra1.
+        /// </summary>
+        GET_ICON = 127,
         WM_SETICON = 128,
         /// <summary>
         /// WM_NCCREATE <br/>
@@ -126,7 +168,13 @@
         /// </summary>
         CALCULATE_SIZE_AND_POSITION = 131,
         WM_NCHITTEST = 132,
-        WM_NCPAINT = 133,
+        /// <summary>
+        /// WM_NCPAINT<br/>
+        /// extra1: A handle to the update region of the window. The update region is clipped to the window frame.<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        FRAME_PAINT_NEEDED = 133,
         /// <summary>
         /// WM_NCACTIVATE<br/>
         /// extra1: true or false, depending on if the title bar or icon is activated or deactivated.<br/>
@@ -135,7 +183,13 @@
         /// </summary>
         NONCLIENT_ACTIVATE_DEACTIVEATE = 134,
         WM_GETDLGCODE = 135,
-        WM_SYNCPAINT = 136,
+        /// <summary>
+        /// WM_SYNCPAINT<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        SYNC_WINDOW_PAINT = 136,
         WM_NCMOUSEMOVE = 160,
         WM_NCLBUTTONDOWN = 161,
         WM_NCLBUTTONUP = 162,
@@ -334,8 +388,20 @@
         WM_DROPFILES = 563,
         WM_MDIREFRESHMENU = 564,
         WM_IME_REPORT = 640,
-        WM_IME_SETCONTEXT = 641,
-        WM_IME_NOTIFY = 642,
+        /// <summary>
+        /// WM_IME_SETCONTEXT<br/>
+        /// extra1: true if the window is active, and false otherwise.<br/>
+        /// extra2: The display options. The value is a composite of the values in the WindowActivateDeactivateDisplayOptionsPart enum.<br/>
+        /// return: Use the value returned by DefWindowProc or ImmIsUIMessage.
+        /// </summary>
+        IME_ACTIVATE_DEACTIVATE = 641,
+        /// <summary>
+        /// WM_IME_NOTIFY<br/>
+        /// extra1: The IME command type. The values map to the values of the IMENotifyCommand enum.<br/>
+        /// extra2: Depends on the command type from extra1. <see cref="https://learn.microsoft.com/en-us/windows/win32/intl/wm-ime-notify">[LINK]</see><br/>
+        /// return: Depends on the command type from extra1, but ALL commands seem to have no return value.
+        /// </summary>
+        IME_NOTIFY = 642,
         WM_IME_CONTROL = 643,
         WM_IME_COMPOSITIONFULL = 644,
         WM_IME_SELECT = 645,
@@ -360,7 +426,13 @@
         WM_DRAWCLIPBOARD = 776,
         WM_PAINTCLIPBOARD = 777,
         WM_VSCROLLCLIPBOARD = 778,
-        WM_SIZECLIPBOARD = 779,
+        /// <summary>
+        /// WM_SIZECLIPBOARD<br/>
+        /// extra1: a handle to the clipboard viewer window.<br/>
+        /// extra2: a pointer to RECT struct <see cref="https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect">[LINK]</see><br/>
+        /// return: 0
+        /// </summary>
+        CLIPBOARD_SIZE_CHANGED = 779,
         WM_ASKCBFORMATNAME = 780,
         WM_CHANGECBCHAIN = 781,
         WM_HSCROLLCLIPBOARD = 782,
