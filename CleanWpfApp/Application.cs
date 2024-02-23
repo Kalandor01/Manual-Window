@@ -1,10 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
-//
-//
-// Description:
+﻿// Description:
 //              The Application object is a global object that the Avalon platform
 //              uses to identify, reference, and communicate with an Avalon application.
 //
@@ -64,31 +58,24 @@ namespace CleanWpfApp
     /// <summary>
     /// Delegate for Startup Event
     /// </summary>
-    public delegate void StartupEventHandler(Object sender, StartupEventArgs e);
+    public delegate void StartupEventHandler(object sender, StartupEventArgs e);
 
     /// <summary>
     /// Delegate for the Exit event.
     /// </summary>
-    public delegate void ExitEventHandler(Object sender, ExitEventArgs e);
+    public delegate void ExitEventHandler(object sender, ExitEventArgs e);
 
     /// <summary>
     /// Delegate for SessionEnding event
     /// </summary>
-    public delegate void SessionEndingCancelEventHandler(Object sender, SessionEndingCancelEventArgs e);
+    public delegate void SessionEndingCancelEventHandler(object sender, SessionEndingCancelEventArgs e);
 
     #region Application Class
-
     /// <summary>
     /// Application base class
     /// </summary>
     public class Application : DispatcherObject, IHaveResources, IQueryAmbient
     {
-        //------------------------------------------------------
-        //
-        //  Constructors
-        //
-        //------------------------------------------------------
-
         #region Constructors
         /// <summary>
         /// The static constructor calls ApplicationInit
@@ -103,14 +90,6 @@ namespace CleanWpfApp
         /// </summary>
         public Application()
         {
-            #if DEBUG_CLR_MEM
-            if (CLRProfilerControl.ProcessIsUnderCLRProfiler &&
-               (CLRProfilerControl.CLRLoggingLevel >= CLRProfilerControl.CLRLogState.Performance))
-            {
-                CLRProfilerControl.CLRLogWriteLine("Application_Ctor");
-            }
-            #endif // DEBUG_CLR_MEM
-
             EventTrace.EasyTraceEvent(EventTrace.Keyword.KeywordGeneral | EventTrace.Keyword.KeywordPerf, EventTrace.Event.WClientAppCtor);
 
             lock (_globalLock)
@@ -127,12 +106,10 @@ namespace CleanWpfApp
                 else
                 {
                     //lock will be released, so no worries about throwing an exception inside the lock
-                    throw new InvalidOperationException(SR.MultiSingleton);
+                    throw new InvalidOperationException(Strings.MultiSingleton);
                 }
             }
 
-
-            //
             // (Application not shutting down when calling
             // Application.Current.Shutdown())
             //
@@ -156,7 +133,7 @@ namespace CleanWpfApp
                     // Event handler exception continuality: if exception occurs in Startup event handler,
                     // our state would not be corrupted because it is fired by posting the item in the queue.
                     // Please check Event handler exception continuality if the logic changes.
-                    StartupEventArgs e = new StartupEventArgs();
+                    var e = new StartupEventArgs();
                     OnStartup(e);
 
                     // PerformDefaultAction is used to cancel the default navigation for the case
@@ -171,16 +148,9 @@ namespace CleanWpfApp
                 },
                 null);
         }
-        #endregion Constructors
-
-        //------------------------------------------------------
-        //
-        //  Public Methods
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Public Methods
-
         ///<summary>
         ///     Run is called to start an application.
         ///
@@ -195,7 +165,7 @@ namespace CleanWpfApp
         public int Run()
         {
             EventTrace.EasyTraceEvent(EventTrace.Keyword.KeywordGeneral | EventTrace.Keyword.KeywordPerf, EventTrace.Event.WClientAppRun);
-            return this.Run(null);
+            return Run(null);
         }
 
         ///<summary>
@@ -214,7 +184,7 @@ namespace CleanWpfApp
         /// The passed Window must be created on the same thread as the Application object.  Furthermore, this Window is
         /// shown once the Application is run.</param>
         /// <returns>ExitCode of the application</returns>
-        public int Run(Window window)
+        public int Run(Window? window)
         {
             VerifyAccess();
             return RunInternal(window);
@@ -273,6 +243,7 @@ namespace CleanWpfApp
         {
             CriticalShutdown(exitCode);
         }
+
         internal void CriticalShutdown(int exitCode)
         {
             VerifyAccess();
@@ -361,7 +332,7 @@ namespace CleanWpfApp
 
         internal object FindResourceInternal(object resourceKey, bool allowDeferredResourceReference, bool mustReturnDeferredResourceReference)
         {
-            ResourceDictionary resources = _resources;
+            var resources = _resources;
 
             if (resources == null)
             {
@@ -648,11 +619,11 @@ namespace CleanWpfApp
             ArgumentNullException.ThrowIfNull(uriContent);
 
             if (uriContent.OriginalString == null)
-                throw new ArgumentException(SR.Format(SR.ArgumentPropertyMustNotBeNull, "uriContent", "OriginalString"));
+                throw new ArgumentException(SR.Format(Strings.ArgumentPropertyMustNotBeNull, "uriContent", "OriginalString"));
 
             if (uriContent.IsAbsoluteUri == true && !BaseUriHelper.IsPackApplicationUri(uriContent))
             {
-                throw new ArgumentException(SR.NonPackAppAbsoluteUriNotAllowed);
+                throw new ArgumentException(Strings.NonPackAppAbsoluteUriNotAllowed);
             }
 
             ContentFilePart part = GetResourceOrContentPart(uriContent) as ContentFilePart;
@@ -677,13 +648,13 @@ namespace CleanWpfApp
             ArgumentNullException.ThrowIfNull(uriRemote);
 
             if (uriRemote.OriginalString == null)
-                throw new ArgumentException(SR.Format(SR.ArgumentPropertyMustNotBeNull, "uriRemote", "OriginalString"));
+                throw new ArgumentException(SR.Format(Strings.ArgumentPropertyMustNotBeNull, "uriRemote", "OriginalString"));
 
             if (uriRemote.IsAbsoluteUri == true)
             {
                 if (BaseUriHelper.SiteOfOriginBaseUri.IsBaseOf(uriRemote) != true)
                 {
-                    throw new ArgumentException(SR.NonPackSooAbsoluteUriNotAllowed);
+                    throw new ArgumentException(Strings.NonPackSooAbsoluteUriNotAllowed);
                 }
             }
 
@@ -877,7 +848,7 @@ namespace CleanWpfApp
                 }
                 if (IsShuttingDown == true || _appIsShutdown == true)
                 {
-                    throw new InvalidOperationException(SR.ShutdownModeWhenAppShutdown);
+                    throw new InvalidOperationException(Strings.ShutdownModeWhenAppShutdown);
                 }
 
                 _shutdownMode = value;
@@ -904,7 +875,7 @@ namespace CleanWpfApp
                     {
                         // Shouldn't return null for property of type collection.
                         // It enables the Mort scenario: application.Resources.Add();
-                        _resources = new ResourceDictionary();
+                        _resources = [];
                         needToAddOwner = true;
                     }
 
@@ -929,11 +900,8 @@ namespace CleanWpfApp
                     _resources = value;
                 }
 
-                if (oldValue != null)
-                {
-                    // This app is no longer an owner for the old RD
-                    oldValue.RemoveOwner(this);
-                }
+                // This app is no longer an owner for the old RD
+                oldValue?.RemoveOwner(this);
 
                 if (value != null)
                 {
@@ -1016,11 +984,8 @@ namespace CleanWpfApp
                 // indexers are being used on the Hashtable object
                 lock (_globalLock)
                 {
-                    if (_htProps == null)
-                    {
-                        // so we will have 5 entries before we resize
-                        _htProps = new HybridDictionary(5);
-                    }
+                    // so we will have 5 entries before we resize
+                    _htProps ??= new HybridDictionary(5);
                     return _htProps;
                 }
             }
@@ -1057,20 +1022,13 @@ namespace CleanWpfApp
                         }
                         else
                         {
-                            throw new InvalidOperationException(SR.Format(SR.PropertyIsImmutable, "ResourceAssembly", "Application"));
+                            throw new InvalidOperationException(SR.Format(Strings.PropertyIsImmutable, "ResourceAssembly", "Application"));
                         }
                     }
                 }
             }
         }
-
-        #endregion Public Properties
-
-        //------------------------------------------------------
-        //
-        //  Public Events
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Public Events
         /// <summary>
@@ -1180,13 +1138,7 @@ namespace CleanWpfApp
         /// <summary>
         /// </summary>
         public event FragmentNavigationEventHandler FragmentNavigation;
-        #endregion Public Events
-
-        //------------------------------------------------------
-        //
-        //  Protected Methods
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Protected Methods
         /// <summary>
@@ -1205,12 +1157,7 @@ namespace CleanWpfApp
         protected virtual void OnStartup(StartupEventArgs e)
         {
             VerifyAccess();
-
-            StartupEventHandler handler = (StartupEventHandler)Events[EVENT_STARTUP];
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            ((StartupEventHandler)Events[EVENT_STARTUP])?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1228,12 +1175,7 @@ namespace CleanWpfApp
         protected virtual void OnExit(ExitEventArgs e)
         {
             VerifyAccess();
-
-            ExitEventHandler handler = (ExitEventHandler)Events[EVENT_EXIT];
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            ((ExitEventHandler)Events[EVENT_EXIT])?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1252,10 +1194,7 @@ namespace CleanWpfApp
         protected virtual void OnActivated(EventArgs e)
         {
             VerifyAccess();
-            if (Activated != null)
-            {
-                Activated(this, e);
-            }
+            Activated?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1275,10 +1214,7 @@ namespace CleanWpfApp
         protected virtual void OnDeactivated(EventArgs e)
         {
             VerifyAccess();
-            if (Deactivated != null)
-            {
-                Deactivated(this, e);
-            }
+            Deactivated?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1299,12 +1235,7 @@ namespace CleanWpfApp
         protected virtual void OnSessionEnding(SessionEndingCancelEventArgs e)
         {
             VerifyAccess();
-
-            SessionEndingCancelEventHandler handler = (SessionEndingCancelEventHandler)Events[EVENT_SESSIONENDING];
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            ((SessionEndingCancelEventHandler)Events[EVENT_SESSIONENDING])?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1320,10 +1251,7 @@ namespace CleanWpfApp
         protected virtual void OnNavigating(NavigatingCancelEventArgs e)
         {
             VerifyAccess();
-            if (Navigating != null)
-            {
-                Navigating(this, e);
-            }
+            Navigating?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1341,10 +1269,7 @@ namespace CleanWpfApp
         protected virtual void OnNavigated(NavigationEventArgs e)
         {
             VerifyAccess();
-            if (Navigated != null)
-            {
-                Navigated(this, e);
-            }
+            Navigated?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1361,10 +1286,7 @@ namespace CleanWpfApp
         protected virtual void OnNavigationProgress(NavigationProgressEventArgs e)
         {
             VerifyAccess();
-            if (NavigationProgress != null)
-            {
-                NavigationProgress(this, e);
-            }
+            NavigationProgress?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1381,10 +1303,7 @@ namespace CleanWpfApp
         protected virtual void OnNavigationFailed(NavigationFailedEventArgs e)
         {
             VerifyAccess();
-            if (NavigationFailed != null)
-            {
-                NavigationFailed(this, e);
-            }
+            NavigationFailed?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1402,10 +1321,7 @@ namespace CleanWpfApp
         protected virtual void OnLoadCompleted(NavigationEventArgs e)
         {
             VerifyAccess();
-            if (LoadCompleted != null)
-            {
-                LoadCompleted(this, e);
-            }
+            LoadCompleted?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1423,12 +1339,8 @@ namespace CleanWpfApp
         protected virtual void OnNavigationStopped(NavigationEventArgs e)
         {
             VerifyAccess();
-            if (NavigationStopped != null)
-            {
-                NavigationStopped(this, e);
-            }
+            NavigationStopped?.Invoke(this, e);
         }
-
 
         /// <summary>
         /// This method fires the FragmentNavigation event
@@ -1445,24 +1357,17 @@ namespace CleanWpfApp
         protected virtual void OnFragmentNavigation(FragmentNavigationEventArgs e)
         {
             VerifyAccess();
-            if (FragmentNavigation != null)
-            {
-                FragmentNavigation(this, e);
-            }
+            FragmentNavigation?.Invoke(this, e);
         }
-        #endregion Protected Methods
-
-        //------------------------------------------------------
-        //
-        //  Internal Methods
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Internal Methods
-
         // It would be nice to make this FamANDAssem (protected and internal) if c# supported it
         internal virtual void PerformNavigationStateChangeTasks(
-            bool isNavigationInitiator, bool playNavigatingSound, NavigationStateChange state)
+            bool isNavigationInitiator,
+            bool playNavigatingSound,
+            NavigationStateChange state
+        )
         {
             if (isNavigationInitiator)
             {
@@ -1482,7 +1387,6 @@ namespace CleanWpfApp
                 }
             }
         }
-
 
         /// <summary>
         /// Application Startup.
@@ -1535,8 +1439,10 @@ namespace CleanWpfApp
                     // this support when we can do breaking change. We need to understand what scenarios require
                     // the Application StartupUri to load content other than xaml/baml in the app resource or content file.
                     // If there are no interesting ones, we should remove this support.
-                    NavService = new NavigationService(null);
-                    NavService.AllowWindowNavigation = true;
+                    NavService = new NavigationService(null)
+                    {
+                        AllowWindowNavigation = true
+                    };
                     NavService.PreBPReady += new BPReadyEventHandler(OnPreBPReady);
                     NavService.Navigate(StartupUri);
                 }
@@ -1594,15 +1500,9 @@ namespace CleanWpfApp
                 // this will always be null in the browser hosted case since we we don't
                 // support Activate, Deactivate, and SessionEnding events in the
                 // browser scenario and thus we never create this hwndsource.
-                if (_parkingHwnd != null)
-                {
-                    _parkingHwnd.Dispose();
-                }
+                _parkingHwnd?.Dispose();
 
-                if (_events != null)
-                {
-                    _events.Dispose();
-                }
+                _events?.Dispose();
 
                 PreloadedPackages.Clear();
                 AppSecurityManager.ClearSecurityManager();
@@ -1616,17 +1516,9 @@ namespace CleanWpfApp
         // ApplicationProxyInternal.Run method calls this method directly to bypass the check
         // for browser hosted application in the public Run() method
         //
-        internal int RunInternal(Window window)
+        internal int RunInternal(Window? window)
         {
             VerifyAccess();
-
-#if DEBUG_CLR_MEM
-            if (CLRProfilerControl.ProcessIsUnderCLRProfiler &&
-               (CLRProfilerControl.CLRLoggingLevel >= CLRProfilerControl.CLRLogState.Performance))
-            {
-                CLRProfilerControl.CLRLogWriteLine("Application_Run");
-            }
-#endif // DEBUG_CLR_MEM
 
             EventTrace.EasyTraceEvent(EventTrace.Keyword.KeywordGeneral | EventTrace.Keyword.KeywordPerf, EventTrace.Event.WClientAppRun);
 
@@ -1645,14 +1537,14 @@ namespace CleanWpfApp
             // throw an exception
             if (_appIsShutdown == true)
             {
-                throw new InvalidOperationException(SR.Format(SR.CannotCallRunMultipleTimes, this.GetType().FullName));
+                throw new InvalidOperationException(SR.Format(Strings.CannotCallRunMultipleTimes, GetType().FullName));
             }
 
             if (window != null)
             {
                 if (window.CheckAccess() == false)
                 {
-                    throw new ArgumentException(SR.Format(SR.WindowPassedShouldBeOnApplicationThread, window.GetType().FullName, this.GetType().FullName));
+                    throw new ArgumentException(SR.Format(Strings.WindowPassedShouldBeOnApplicationThread, window.GetType().FullName, this.GetType().FullName));
                 }
 
                 if (WindowsInternal.HasItem(window) == false)
@@ -1660,10 +1552,7 @@ namespace CleanWpfApp
                     WindowsInternal.Add(window);
                 }
 
-                if (MainWindow == null)
-                {
-                    MainWindow = window;
-                }
+                MainWindow ??= window;
 
                 if (window.Visibility != Visibility.Visible)
                 {
@@ -1705,7 +1594,7 @@ namespace CleanWpfApp
         //   is created before the application.Run is called.
         internal NavigationWindow GetAppWindow()
         {
-            NavigationWindow appWin = new NavigationWindow();
+            var appWin = new NavigationWindow();
 
             // We don't want to show the window before the content is ready, but for compatibility reasons
             // we do want it to have an HWND available.  Not doing this can cause Application's MainWindow
@@ -1714,7 +1603,6 @@ namespace CleanWpfApp
 
             return appWin;
         }
-
 
         internal void FireNavigating(NavigatingCancelEventArgs e, bool isInitialNavigation)
         {
@@ -1759,17 +1647,9 @@ namespace CleanWpfApp
         {
             OnFragmentNavigation(e);
         }
-
-        #endregion Internal methods
-
-        //------------------------------------------------------
-        //
-        //  Internal Properties
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Internal Properties
-
         // The public Windows property returns a copy of the underlying
         // WindowCollection.  This property is used internally to enable
         // modyfying the underlying collection.
@@ -1779,10 +1659,7 @@ namespace CleanWpfApp
             {
                 lock (_globalLock)
                 {
-                    if (_appWindowList == null)
-                    {
-                        _appWindowList = new WindowCollection();
-                    }
+                    _appWindowList ??= new WindowCollection();
                     return _appWindowList;
                 }
             }
@@ -1801,10 +1678,7 @@ namespace CleanWpfApp
             {
                 lock (_globalLock)
                 {
-                    if (_nonAppWindowList == null)
-                    {
-                        _nonAppWindowList = new WindowCollection();
-                    }
+                    _nonAppWindowList ??= new WindowCollection();
                     return _nonAppWindowList;
                 }
             }
@@ -1857,7 +1731,6 @@ namespace CleanWpfApp
                 _serviceProvider = value;
             }
         }
-
 
         // is called by NavigationService to detect TopLevel container
         // We check there to call this only if NavigationService is on
@@ -1953,14 +1826,8 @@ namespace CleanWpfApp
                 _applicationMarkupBaseUri = value;
             }
         }
+        #endregion
 
-        #endregion Internal Properties
-
-        //------------------------------------------------------
-        //
-        //  Private Methods
-        //
-        //------------------------------------------------------
         #region Private Methods
         // <summary>
         // Sets up several things on startup.  If you want to use avalon services without using the
@@ -2038,7 +1905,7 @@ namespace CleanWpfApp
                     $"Unknown packageUri passed: {packageUri}");
 
                 Invariant.Assert(IsApplicationObjectShuttingDown);
-                throw new InvalidOperationException(SR.ApplicationShuttingDown);
+                throw new InvalidOperationException(Strings.ApplicationShuttingDown);
             }
             return package;
         }
@@ -2067,32 +1934,27 @@ namespace CleanWpfApp
                                 0,
                                 "",
                                 IntPtr.Zero,
-                                wrapperHooks);
+                                wrapperHooks
+                            );
             }
         }
 
         private IntPtr AppFilterMessage(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             IntPtr retInt = IntPtr.Zero;
-            switch ((WindowMessage)msg)
+            handled = (WindowMessage)(WindowMessage)msg switch
             {
-                case WindowMessage.WM_ACTIVATEAPP:
-                    handled = WmActivateApp(NativeMethods.IntPtrToInt32(wParam));
-                    break;
-                case WindowMessage.WM_QUERYENDSESSION:
-                    handled = WmQueryEndSession(lParam, ref retInt);
-                    break;
-                default:
-                    handled = false;
-                    break;
-            }
+                WindowMessage.WM_ACTIVATEAPP => WmActivateApp(NativeMethods.IntPtrToInt32(wParam)),
+                WindowMessage.WM_QUERYENDSESSION => WmQueryEndSession(lParam, ref retInt),
+                _ => false,
+            };
             return retInt;
         }
 
-        private bool WmActivateApp(Int32 wParam)
+        private bool WmActivateApp(int wParam)
         {
             int temp = wParam;
-            bool isActivated = (temp == 0 ? false : true);
+            bool isActivated = temp != 0;
 
             // Event handler exception continuality: if exception occurs in Activate/Deactivate event handlers, our state would not
             // be corrupted because no internal state are affected by Activate/Deactivate. Please check Event handler exception continuality
@@ -2116,7 +1978,7 @@ namespace CleanWpfApp
             // Event handler exception continuality: if exception occurs in SessionEnding event handlers, our state would not
             // be corrupted because no internal state are affected by SessionEnding. Please check Event handler exception continuality
             // if a state depending on this event is added.
-            SessionEndingCancelEventArgs secEventArgs = new SessionEndingCancelEventArgs((reason & NativeMethods.ENDSESSION_LOGOFF) != 0 ? ReasonSessionEnding.Logoff : ReasonSessionEnding.Shutdown);
+            var secEventArgs = new SessionEndingCancelEventArgs((reason & NativeMethods.ENDSESSION_LOGOFF) != 0 ? ReasonSessionEnding.Logoff : ReasonSessionEnding.Shutdown);
             OnSessionEnding(secEventArgs);
 
             // shut down the app if not cancelled
@@ -2184,7 +2046,7 @@ namespace CleanWpfApp
             if (_exitCode != exitCode)
             {
                 _exitCode = exitCode;
-                System.Environment.ExitCode = exitCode;
+                Environment.ExitCode = exitCode;
             }
         }
 
@@ -2237,8 +2099,7 @@ namespace CleanWpfApp
 
         private void ConfigAppWindowAndRootElement(object root, Uri uri)
         {
-            Window w = root as Window;
-            if (w == null)
+            if (root is not Window w)
             {
                 //Creates and returns a NavigationWindow for standalone cases
                 //For browser hosted cases, returns the RootBrowserWindow precreated by docobjhost
@@ -2270,7 +2131,6 @@ namespace CleanWpfApp
             }
         }
 
-
         /// <summary>
         /// Plays a system sound using the PlaySound api.  This is a managed equivalent of the
         /// internet explorer method IEPlaySoundEx() from ieplaysound.cpp.
@@ -2293,18 +2153,17 @@ namespace CleanWpfApp
             string regPath = $@"AppEvents\Schemes\Apps\Explorer\{soundName}\.current\";
             try
             {
-                using (RegistryKey soundKey = Registry.CurrentUser.OpenSubKey(regPath))
+                using RegistryKey soundKey = Registry.CurrentUser.OpenSubKey(regPath);
+                if (soundKey != null)
                 {
-                    if (soundKey != null)
-                    {
-                        soundFile = (string)(soundKey.GetValue(""));
-                    }
+                    soundFile = (string)soundKey.GetValue("");
                 }
             }
             // When the value of the register key is empty, the IndexOutofRangeException is thrown.
             // (Application.PlaySourd crash when the registry is broken)
-            catch (System.IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
+
             }
 
             return soundFile;
@@ -2314,10 +2173,7 @@ namespace CleanWpfApp
         {
             get
             {
-                if (_events == null)
-                {
-                    _events = new EventHandlerList();
-                }
+                _events ??= new EventHandlerList();
                 return _events;
             }
         }
@@ -2338,7 +2194,7 @@ namespace CleanWpfApp
                 //
                 // Get the top LoadBamlSynInfo from the stack.
                 //
-                NestedBamlLoadInfo loadBamlSyncInfo = s_NestedBamlLoadInfo.Peek() as NestedBamlLoadInfo;
+                var loadBamlSyncInfo = s_NestedBamlLoadInfo.Peek();
 
                 if (loadBamlSyncInfo != null && loadBamlSyncInfo.BamlUri != null &&
                     loadBamlSyncInfo.BamlStream != null &&
@@ -2350,7 +2206,7 @@ namespace CleanWpfApp
                     Invariant.Assert(fileInBamlConvert != null, "fileInBamlConvert should not be null");
                     Invariant.Assert(fileCurrent != null, "fileCurrent should not be null");
 
-                    if (String.Compare(fileInBamlConvert, fileCurrent, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(fileInBamlConvert, fileCurrent, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         //
                         // This is the root element of the xaml page which is being loaded to creat a tree
@@ -2363,8 +2219,8 @@ namespace CleanWpfApp
                     {
                         // We consider Pack://application,,,/page1.xaml refers to the same component as
                         // Pack://application,,,/myapp;Component/page1.xaml.
-                        string[] bamlConvertUriSegments = fileInBamlConvert.Split(new Char[] { '/', '\\' });
-                        string[] curUriSegments = fileCurrent.Split(new Char[] { '/', '\\' });
+                        string[] bamlConvertUriSegments = fileInBamlConvert.Split(['/', '\\']);
+                        string[] curUriSegments = fileCurrent.Split(['/', '\\']);
 
                         int l = bamlConvertUriSegments.Length;
                         int m = curUriSegments.Length;
@@ -2377,7 +2233,7 @@ namespace CleanWpfApp
                         if (Math.Abs(diff) == 1)
                         {
                             // Check whether the file name is the same.
-                            if (String.Compare(bamlConvertUriSegments[l - 1], curUriSegments[m - 1], StringComparison.OrdinalIgnoreCase) == 0)
+                            if (string.Compare(bamlConvertUriSegments[l - 1], curUriSegments[m - 1], StringComparison.OrdinalIgnoreCase) == 0)
                             {
                                 string component = (diff == 1) ? bamlConvertUriSegments[1] : curUriSegments[1];
 
@@ -2391,25 +2247,17 @@ namespace CleanWpfApp
             return isRootElement;
         }
 
-
         private object RunDispatcher(object ignore)
         {
             if (_ownDispatcherStarted)
             {
-                throw new InvalidOperationException(SR.ApplicationAlreadyRunning);
+                throw new InvalidOperationException(Strings.ApplicationAlreadyRunning);
             }
             _ownDispatcherStarted = true;
             Dispatcher.Run();
             return null;
         }
-
-        #endregion Private Methods
-
-        //------------------------------------------------------
-        //
-        //  Private Fields
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Private Fields
         static private object _globalLock;
@@ -2449,9 +2297,9 @@ namespace CleanWpfApp
         private EventHandlerList _events;
         private bool _hasImplicitStylesInResources;
 
-        private static readonly object EVENT_STARTUP = new object();
-        private static readonly object EVENT_EXIT = new object();
-        private static readonly object EVENT_SESSIONENDING = new object();
+        private static readonly object EVENT_STARTUP = new();
+        private static readonly object EVENT_EXIT = new();
+        private static readonly object EVENT_SESSIONENDING = new();
 
         private const SafeNativeMethods.PlaySoundFlags PLAYSOUND_FLAGS = SafeNativeMethods.PlaySoundFlags.SND_FILENAME |
                                                                             SafeNativeMethods.PlaySoundFlags.SND_NODEFAULT |
@@ -2460,14 +2308,8 @@ namespace CleanWpfApp
         private const string SYSTEM_SOUNDS_REGISTRY_BASE = @"HKEY_CURRENT_USER\AppEvents\Schemes\Apps\Explorer\";
         private const string SOUND_NAVIGATING = "Navigating";
         private const string SOUND_COMPLETE_NAVIGATION = "ActivatingDocument";
+        #endregion
 
-        #endregion Private Fields
-
-        //------------------------------------------------------
-        //
-        //  Private Types
-        //
-        //------------------------------------------------------
         #region NavigationStateChange
         internal enum NavigationStateChange : byte
         {
@@ -2475,11 +2317,9 @@ namespace CleanWpfApp
             Completed,
             Stopped,
         }
-        #endregion NavigationStateChange
+        #endregion
     }
-
-    #endregion Application Class
-
+    #endregion
 
     //
     // In Navigation(uri) and LoadComponent(uri), below scenarios might occur:
@@ -2508,7 +2348,6 @@ namespace CleanWpfApp
         }
 
         #region internal properties
-
         //
         // OuterBamlUri property
         //
@@ -2533,12 +2372,10 @@ namespace CleanWpfApp
         {
             get { return _SkipJournaledProperties; }
         }
-
         #endregion
 
 
         #region private field
-
         // Keep Uri which is being handled by Outer LoadBaml in this thread.
         private Uri _BamlUri = null;
 
@@ -2547,14 +2384,12 @@ namespace CleanWpfApp
 
         // Whether or not SkipJournalProperty when a baml stream is handled in Outer LoadBaml.
         private bool _SkipJournaledProperties = false;
-
         #endregion
     }
 
     #region enum ShutdownMode
-
     /// <summary>
-    ///     Enum for ShutdownMode
+    /// Enum for ShutdownMode
     /// </summary>
     public enum ShutdownMode : byte
     {
@@ -2575,13 +2410,11 @@ namespace CleanWpfApp
 
         // NOTE: if you add or remove any values in this enum, be sure to update Application.IsValidShutdownMode()
     }
-
-    #endregion enum ShutdownMode
+    #endregion
 
     #region enum ReasonSessionEnding
-
     /// <summary>
-    ///     Enum for ReasonSessionEnding
+    /// Enum for ReasonSessionEnding
     /// </summary>
     public enum ReasonSessionEnding : byte
     {
@@ -2594,5 +2427,5 @@ namespace CleanWpfApp
         /// </summary>
         Shutdown
     }
-    #endregion enum ReasonSessionEnding
+    #endregion
 }

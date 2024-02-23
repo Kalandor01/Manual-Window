@@ -57,9 +57,9 @@ namespace CleanWpfApp
         /// </summary>
         internal static string GetAssemblyPartialName(Assembly assembly)
         {
-            AssemblyName name = new AssemblyName(assembly.FullName);
+            var name = new AssemblyName(assembly.FullName);
             string partialName = name.Name;
-            return (partialName != null) ? partialName : string.Empty;
+            return partialName ?? string.Empty;
         }
 
         /// <summary>
@@ -70,8 +70,10 @@ namespace CleanWpfApp
                                     Assembly protoAssembly,
                                     string partialName)
         {
-            AssemblyName name = new AssemblyName(protoAssembly.FullName);
-            name.Name = partialName;
+            var name = new AssemblyName(protoAssembly.FullName)
+            {
+                Name = partialName
+            };
             return name.FullName;
         }
 
@@ -85,8 +87,7 @@ namespace CleanWpfApp
                 return new Point(double.NaN, double.NaN);
             }
             transform = relativeTo.TransformToAncestor(source.RootVisual);
-            Point ptRoot;
-            transform.TryTransform(point, out ptRoot);
+            transform.TryTransform(point, out var ptRoot);
             Point ptClient = PointUtil.RootToClient(ptRoot, source);
             Point ptScreen = PointUtil.ClientToScreen(ptClient, source);
 
@@ -101,7 +102,7 @@ namespace CleanWpfApp
         // We use a callback on GC to purge out collected assemblies, so we don't grow indefinitely.
         //
         static Dictionary<object, AssemblyName> _assemblies; // get key via GetKeyForAssembly
-        static object syncObject = new object();
+        static object syncObject = new();
         static bool _isGCCallbackPending;
 
         // PERF: Cache delegate for CleanupCollectedAssemblies to avoid allocating it each time.
@@ -121,7 +122,7 @@ namespace CleanWpfApp
 
             for (int i = assemblies.Length - 1; i >= 0; i--)
             {
-                AssemblyName curAsmName = GetAssemblyName(assemblies[i]);
+                var curAsmName = GetAssemblyName(assemblies[i]);
                 Version curVersion = curAsmName.Version;
                 CultureInfo curCulture = curAsmName.CultureInfo;
                 byte[] curKeyToken = curAsmName.GetPublicKeyToken();
@@ -139,13 +140,13 @@ namespace CleanWpfApp
 
         static AssemblyName GetAssemblyName(Assembly assembly)
         {
-            object key = assembly.IsDynamic ? (object)new WeakRefKey(assembly) : assembly;
+            object key = assembly.IsDynamic ? new WeakRefKey(assembly) : assembly;
             lock (syncObject)
             {
                 AssemblyName result;
                 if (_assemblies == null)
                 {
-                    _assemblies = new Dictionary<object, AssemblyName>();
+                    _assemblies = [];
                 }
                 else
 	            {
@@ -181,8 +182,7 @@ namespace CleanWpfApp
             {
                 foreach (object key in _assemblies.Keys)
                 {
-                    WeakReference weakRef = key as WeakReference;
-                    if (weakRef == null)
+                    if (key is not WeakReference weakRef)
                     {
                         continue;
                     }
@@ -194,10 +194,7 @@ namespace CleanWpfApp
                     else
                     {
                         // The target has been collected, add it to our list of keys to remove
-                        if (keysToRemove == null)
-                        {
-                            keysToRemove = new List<object>();
-                        }
+                        keysToRemove ??= [];
                         keysToRemove.Add(key);
                     }
                 }
@@ -219,38 +216,38 @@ namespace CleanWpfApp
             }
         }
 
-    //
-    // Determine if two Public Key Tokens are the same.
-    //
-    internal static bool IsSameKeyToken(byte[] reqKeyToken, byte[] curKeyToken)
-    {
-        bool isSame = false;
+        //
+        // Determine if two Public Key Tokens are the same.
+        //
+        internal static bool IsSameKeyToken(byte[] reqKeyToken, byte[] curKeyToken)
+        {
+            bool isSame = false;
 
-        if (reqKeyToken == null && curKeyToken == null)
-        {
-            // Both Key Tokens are not set, treat them as same.
-            isSame = true;
-        }
-        else if (reqKeyToken != null && curKeyToken != null)
-        {
-            // Both KeyTokens are set.
-            if (reqKeyToken.Length == curKeyToken.Length)
+            if (reqKeyToken == null && curKeyToken == null)
             {
+                // Both Key Tokens are not set, treat them as same.
                 isSame = true;
-
-                for (int i = 0; i < reqKeyToken.Length; i++)
+            }
+            else if (reqKeyToken != null && curKeyToken != null)
+            {
+                // Both KeyTokens are set.
+                if (reqKeyToken.Length == curKeyToken.Length)
                 {
-                    if (reqKeyToken[i] != curKeyToken[i])
+                    isSame = true;
+
+                    for (int i = 0; i < reqKeyToken.Length; i++)
                     {
-                        isSame = false;
-                        break;
+                        if (reqKeyToken[i] != curKeyToken[i])
+                        {
+                            isSame = false;
+                            break;
+                        }
                     }
                 }
             }
-        }
 
-        return isSame;
-    }
+            return isSame;
+        }
 
         // enum to choose between the various keys
         internal enum KeyToRead
@@ -268,31 +265,17 @@ namespace CleanWpfApp
             string regValue = null;
             bool fResult = false;
 
-            switch (key)
+            regValue = key switch
             {
-                case KeyToRead.WebBrowserDisable:
-                    regValue = RegistryKeys.value_WebBrowserDisallow;
-                    break;
-                case KeyToRead.MediaAudioDisable:
-                    regValue = RegistryKeys.value_MediaAudioDisallow;
-                    break;
-                case KeyToRead.MediaVideoDisable:
-                    regValue = RegistryKeys.value_MediaVideoDisallow;
-                    break;
-                case KeyToRead.MediaImageDisable:
-                    regValue = RegistryKeys.value_MediaImageDisallow;
-                    break;
-                case KeyToRead.MediaAudioOrVideoDisable:
-                    regValue = RegistryKeys.value_MediaAudioDisallow;
-                    break;
-                case KeyToRead.ScriptInteropDisable:
-                    regValue = RegistryKeys.value_ScriptInteropDisallow;
-                    break;
-                default:// throw exception for invalid key
-                throw(new System.ArgumentException(key.ToString()));
-
-            }
-
+                KeyToRead.WebBrowserDisable => RegistryKeys.value_WebBrowserDisallow,
+                KeyToRead.MediaAudioDisable => RegistryKeys.value_MediaAudioDisallow,
+                KeyToRead.MediaVideoDisable => RegistryKeys.value_MediaVideoDisallow,
+                KeyToRead.MediaImageDisable => RegistryKeys.value_MediaImageDisallow,
+                KeyToRead.MediaAudioOrVideoDisable => RegistryKeys.value_MediaAudioDisallow,
+                KeyToRead.ScriptInteropDisable => RegistryKeys.value_ScriptInteropDisallow,
+                // throw exception for invalid key
+                _ => throw new ArgumentException(key.ToString()),
+            };
             RegistryKey featureKey;
             object obj = null;
             bool keyValue = false;
@@ -376,9 +359,9 @@ namespace CleanWpfApp
 
         public static bool operator ==(WeakRefKey left, WeakRefKey right)
         {
-            if (object.ReferenceEquals(left, null))
+            if (left is null)
             {
-                return object.ReferenceEquals(right, null);
+                return right is null;
             }
             return left.Equals(right);
         }
