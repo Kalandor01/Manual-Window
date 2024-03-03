@@ -739,17 +739,9 @@ namespace CleanWpfApp
         {
             CookieHandler.SetCookie(uri, value);
         }
-
-        #endregion Public Methods
-
-        //------------------------------------------------------
-        //
-        //  Public Properties
-        //
-        //------------------------------------------------------
+        #endregion
 
         #region Public Properties
-
         /// <summary>
         ///     The Current property enables the developer to always get to the application in
         ///     AppDomain in which they are running.
@@ -1942,7 +1934,7 @@ namespace CleanWpfApp
         private IntPtr AppFilterMessage(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             IntPtr retInt = IntPtr.Zero;
-            handled = (WindowMessage)(WindowMessage)msg switch
+            handled = (WindowMessage)msg switch
             {
                 WindowMessage.WM_ACTIVATEAPP => WmActivateApp(NativeMethods.IntPtrToInt32(wParam)),
                 WindowMessage.WM_QUERYENDSESSION => WmQueryEndSession(lParam, ref retInt),
