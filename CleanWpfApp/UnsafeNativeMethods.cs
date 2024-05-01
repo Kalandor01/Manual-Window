@@ -564,7 +564,7 @@ namespace CleanWpfApp
 
         [DllImport(ExternDll.Wininet, SetLastError = true, ExactSpelling = true, EntryPoint = "InternetGetCookieExW", CharSet = CharSet.Unicode)]
         internal static extern bool InternetGetCookieEx([In] string Url, [In] string cookieName,
-            [Out] StringBuilder cookieData, [In, Out] ref UInt32 pchCookieData, uint flags, IntPtr reserved);
+            [Out] StringBuilder cookieData, [In, Out] ref uint pchCookieData, uint flags, IntPtr reserved);
 
         [DllImport(ExternDll.Wininet, SetLastError = true, ExactSpelling = true, EntryPoint = "InternetSetCookieExW", CharSet = CharSet.Unicode)]
         internal static extern uint InternetSetCookieEx([In] string Url, [In] string CookieName, [In] string cookieData, uint flags, [In] string p3pHeader);

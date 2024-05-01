@@ -9,11 +9,6 @@
 //              to define global properties and maintain state across multiple pages of markup.
 //
 
-
-//In order to avoid generating warnings about unknown message numbers and unknown pragmas
-//when compiling your C# source code with the actual C# compiler, you need to disable
-//warnings 1634 and 1691. (From PreSharp Documentation)
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -594,8 +589,7 @@ namespace CleanWpfApp
                 throw new ArgumentException(Strings.NonPackAppAbsoluteUriNotAllowed);
             }
 
-            ResourcePart part = GetResourceOrContentPart(uriResource) as ResourcePart;
-            return (part == null) ? null : new StreamResourceInfo(part.GetSeekableStream(), part.ContentType);
+            return (GetResourceOrContentPart(uriResource) is not ResourcePart part) ? null : new StreamResourceInfo(part.GetSeekableStream(), part.ContentType);
         }
 
         /// <summary>
@@ -619,15 +613,16 @@ namespace CleanWpfApp
             ArgumentNullException.ThrowIfNull(uriContent);
 
             if (uriContent.OriginalString == null)
-                throw new ArgumentException(SR.Format(Strings.ArgumentPropertyMustNotBeNull, "uriContent", "OriginalString"));
+            {
+                throw new ArgumentException(SR.Format(Strings.ArgumentPropertyMustNotBeNull, nameof(uriContent), "OriginalString"));
+            }
 
             if (uriContent.IsAbsoluteUri == true && !BaseUriHelper.IsPackApplicationUri(uriContent))
             {
                 throw new ArgumentException(Strings.NonPackAppAbsoluteUriNotAllowed);
             }
 
-            ContentFilePart part = GetResourceOrContentPart(uriContent) as ContentFilePart;
-            return (part == null) ? null : new StreamResourceInfo(part.GetSeekableStream(), part.ContentType);
+            return (GetResourceOrContentPart(uriContent) is not ContentFilePart part) ? null : new StreamResourceInfo(part.GetSeekableStream(), part.ContentType);
         }
 
         /// <summary>
@@ -643,7 +638,7 @@ namespace CleanWpfApp
         /// <returns>PackagePart or null</returns>
         public static StreamResourceInfo GetRemoteStream(Uri uriRemote)
         {
-            SiteOfOriginPart sooPart = null;
+            SiteOfOriginPart? sooPart = null;
 
             ArgumentNullException.ThrowIfNull(uriRemote);
 
@@ -658,10 +653,10 @@ namespace CleanWpfApp
                 }
             }
 
-            Uri resolvedUri = BindUriHelper.GetResolvedUri(BaseUriHelper.SiteOfOriginBaseUri, uriRemote);
+            var resolvedUri = BindUriHelper.GetResolvedUri(BaseUriHelper.SiteOfOriginBaseUri, uriRemote);
 
-            Uri packageUri = PackUriHelper.GetPackageUri(resolvedUri);
-            Uri partUri = PackUriHelper.GetPartUri(resolvedUri);
+            var packageUri = PackUriHelper.GetPackageUri(resolvedUri);
+            var partUri = PackUriHelper.GetPartUri(resolvedUri);
 
             //
             // SiteOfOriginContainer must have been added into the package cache, the code should just
@@ -679,7 +674,7 @@ namespace CleanWpfApp
             //
             // Verify if the sooPart is for a valid remote file.
             //
-            Stream stream = null;
+            Stream? stream = null;
 
             if (sooPart != null)
             {
@@ -722,7 +717,7 @@ namespace CleanWpfApp
         /// <Remarks>
         ///     Callers must have FileIOPermission(FileIOPermissionAccess.Read) or WebPermission(NetworkAccess.Connect) for the Uri, depending on whether the Uri is a file Uri or not, to call this API.
         /// </Remarks>
-        public static string GetCookie(Uri uri)
+        public static string? GetCookie(Uri uri)
         {
             return CookieHandler.GetCookie(uri, true/*throwIfNoCookie*/);
         }

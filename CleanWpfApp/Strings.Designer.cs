@@ -97,6 +97,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a single Unicode character..
+        /// </summary>
+        internal static string AccessKeyManager_NotAUnicodeCharacter {
+            get {
+                return ResourceManager.GetString("AccessKeyManager_NotAUnicodeCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot acquire break record due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string AcquireBreakRecordFailure {
+            get {
+                return ResourceManager.GetString("AcquireBreakRecordFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot acquire text penalty module due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string AcquirePenaltyModuleFailure {
+            get {
+                return ResourceManager.GetString("AcquirePenaltyModuleFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot attach multiple annotations..
         /// </summary>
         internal static string AddAnnotationsNotImplemented {
@@ -120,6 +147,15 @@ namespace CleanWpfApp {
         internal static string AddedItemNotInCollection {
             get {
                 return ResourceManager.GetString("AddedItemNotInCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot add text to &apos;{0}&apos;..
+        /// </summary>
+        internal static string AddText_Invalid {
+            get {
+                return ResourceManager.GetString("AddText_Invalid", resourceCulture);
             }
         }
         
@@ -160,6 +196,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If AllGestures is specified, it must be the only ApplicationGesture in the ApplicationGesture array..
+        /// </summary>
+        internal static string AllGesturesMustExistAlone {
+            get {
+                return ResourceManager.GetString("AllGesturesMustExistAlone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; element already contains a logical tree, so cannot apply the Style logical tree..
         /// </summary>
         internal static string AlreadyHasLogicalChildren {
@@ -178,6 +223,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AnimationTimeline of type &apos;{0}&apos; cannot be used to animate the &apos;{1}&apos; property of type &apos;{2}&apos;..
+        /// </summary>
+        internal static string Animation_AnimationTimelineTypeMismatch {
+            get {
+                return ResourceManager.GetString("Animation_AnimationTimelineTypeMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The animation(s) applied to the &apos;{0}&apos; property calculate a current value of &apos;{1}&apos;, which is not a valid value for the property..
+        /// </summary>
+        internal static string Animation_CalculatedValueIsInvalidForProperty {
+            get {
+                return ResourceManager.GetString("Animation_CalculatedValueIsInvalidForProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A child of KeyFrameAnimation in XAML must be a KeyFrame of a compatible type..
         /// </summary>
         internal static string Animation_ChildMustBeKeyFrame {
@@ -187,11 +250,56 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A child of KeyFrameAnimation in XAML must be a KeyFrame of a compatible type..
+        /// </summary>
+        internal static string Animation_ChildMustBeKeyFrame1 {
+            get {
+                return ResourceManager.GetString("Animation_ChildMustBeKeyFrame1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One of the animations in the timeline is a &apos;{0}&apos; and cannot be used to animate a property of type &apos;{1}&apos;..
+        /// </summary>
+        internal static string Animation_ChildTypeMismatch {
+            get {
+                return ResourceManager.GetString("Animation_ChildTypeMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property is not animatable on &apos;{1}&apos; class because the IsAnimationProhibited flag has been set on the UIPropertyMetadata used to associate the property with the class..
+        /// </summary>
+        internal static string Animation_DependencyPropertyIsNotAnimatable {
+            get {
+                return ResourceManager.GetString("Animation_DependencyPropertyIsNotAnimatable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot animate the &apos;{0}&apos; property on a &apos;{1}&apos; using a &apos;{2}&apos;. For details see the inner exception..
+        /// </summary>
+        internal static string Animation_Exception {
+            get {
+                return ResourceManager.GetString("Animation_Exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; cannot use default {1} value of &apos;{2}&apos;..
         /// </summary>
         internal static string Animation_Invalid_DefaultValue {
             get {
                 return ResourceManager.GetString("Animation_Invalid_DefaultValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; cannot use default {1} value of &apos;{2}&apos;..
+        /// </summary>
+        internal static string Animation_Invalid_DefaultValue1 {
+            get {
+                return ResourceManager.GetString("Animation_Invalid_DefaultValue1", resourceCulture);
             }
         }
         
@@ -214,11 +322,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid &apos;{1}&apos; value for class &apos;{2}&apos;. This value might have been supplied by the base value of the property being animated or the output value of another animation applied to the same property..
+        /// </summary>
+        internal static string Animation_InvalidBaseValue1 {
+            get {
+                return ResourceManager.GetString("Animation_InvalidBaseValue1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolved KeyTime for key frame at index {1} cannot be greater than resolved KeyTime for key frame at index {4}. KeyFrames[{1}] has specified KeyTime &apos;{2}&apos;, which resolves to time {3}; KeyFrames[{4}] has specified KeyTime &apos;{5}&apos;, which resolves to time {6}. Some KeyTimes are resolved relative to Begin time of &apos;{0}&apos; and others relative to its Duration, so some sets of KeyTimes are not valid for all Durations..
         /// </summary>
         internal static string Animation_InvalidResolvedKeyTimes {
             get {
                 return ResourceManager.GetString("Animation_InvalidResolvedKeyTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolved KeyTime for key frame at index {1} cannot be greater than resolved KeyTime for key frame at index {4}. KeyFrames[{1}] has specified KeyTime &apos;{2}&apos;, which resolves to time {3}Animation_InvalidAnimationUsingKeyFramesDuration.
+        /// </summary>
+        internal static string Animation_InvalidResolvedKeyTimes1 {
+            get {
+                return ResourceManager.GetString("Animation_InvalidResolvedKeyTimes1", resourceCulture);
             }
         }
         
@@ -232,11 +358,110 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{2}&apos; KeyTime value is not valid for key frame at index {1} of this &apos;{0}&apos; because it is greater than animation&apos;s Duration value &apos;{3}&apos;..
+        /// </summary>
+        internal static string Animation_InvalidTimeKeyTime1 {
+            get {
+                return ResourceManager.GetString("Animation_InvalidTimeKeyTime1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot set &apos;{0}&apos; to &apos;{1}&apos;. KeySpline values must be between 0.0 and 1.0..
+        /// </summary>
+        internal static string Animation_KeySpline_InvalidValue {
+            get {
+                return ResourceManager.GetString("Animation_KeySpline_InvalidValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid Percent value for a KeyTime. The Percent value must be a number from 0.0 to 1.0..
+        /// </summary>
+        internal static string Animation_KeyTime_InvalidPercentValue {
+            get {
+                return ResourceManager.GetString("Animation_KeyTime_InvalidPercentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot create a KeyTime with the value &apos;{0}&apos; because it is less than zero..
+        /// </summary>
+        internal static string Animation_KeyTime_LessThanZero {
+            get {
+                return ResourceManager.GetString("Animation_KeyTime_LessThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; value is not valid because it contains no animations..
+        /// </summary>
+        internal static string Animation_NoAnimationsSpecified {
+            get {
+                return ResourceManager.GetString("Animation_NoAnimationsSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to KeyFrameAnimation objects cannot have text objects as children..
         /// </summary>
         internal static string Animation_NoTextChildren {
             get {
                 return ResourceManager.GetString("Animation_NoTextChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KeyFrameAnimation objects cannot have text objects as children..
+        /// </summary>
+        internal static string Animation_NoTextChildren1 {
+            get {
+                return ResourceManager.GetString("Animation_NoTextChildren1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A &apos;{0}&apos; on the &apos;{1}&apos; property of a &apos;{2}&apos; returned a current value of UnsetValue.Instance, which is not valid..
+        /// </summary>
+        internal static string Animation_ReturnedUnsetValueInstance {
+            get {
+                return ResourceManager.GetString("Animation_ReturnedUnsetValueInstance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The HandoffBehavior value is not valid..
+        /// </summary>
+        internal static string Animation_UnrecognizedHandoffBehavior {
+            get {
+                return ResourceManager.GetString("Animation_UnrecognizedHandoffBehavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This AnimationEffect is already attached to a UIElement..
+        /// </summary>
+        internal static string AnimEffect_AlreadyAttached {
+            get {
+                return ResourceManager.GetString("AnimEffect_AlreadyAttached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This AnimationEffectCollection is already being used by another UIElement..
+        /// </summary>
+        internal static string AnimEffect_CollectionInUse {
+            get {
+                return ResourceManager.GetString("AnimEffect_CollectionInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This AnimationEffect is not attached to a Visual..
+        /// </summary>
+        internal static string AnimEffect_NoVisual {
+            get {
+                return ResourceManager.GetString("AnimEffect_NoVisual", resourceCulture);
             }
         }
         
@@ -318,6 +543,24 @@ namespace CleanWpfApp {
         internal static string ApplicationAlreadyRunning {
             get {
                 return ResourceManager.GetString("ApplicationAlreadyRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ApplicationGesture array must contain at least one member..
+        /// </summary>
+        internal static string ApplicationGestureArrayLengthIsZero {
+            get {
+                return ResourceManager.GetString("ApplicationGestureArrayLengthIsZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified ApplicationGesture is not valid..
+        /// </summary>
+        internal static string ApplicationGestureIsInvalid {
+            get {
+                return ResourceManager.GetString("ApplicationGestureIsInvalid", resourceCulture);
             }
         }
         
@@ -480,6 +723,69 @@ namespace CleanWpfApp {
         internal static string AudioVideo_InvalidMediaState {
             get {
                 return ResourceManager.GetString("AudioVideo_InvalidMediaState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid System.Windows.Automation.AutomationPeer. It is expected to be associated with a Window known to Automation..
+        /// </summary>
+        internal static string Automation_InvalidConnectedPeer {
+            get {
+                return ResourceManager.GetString("Automation_InvalidConnectedPeer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid System.Windows.Automation.AutomationEvent..
+        /// </summary>
+        internal static string Automation_InvalidEventId {
+            get {
+                return ResourceManager.GetString("Automation_InvalidEventId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid System.Windows.Automation.SynchronizedInputType..
+        /// </summary>
+        internal static string Automation_InvalidSynchronizedInputType {
+            get {
+                return ResourceManager.GetString("Automation_InvalidSynchronizedInputType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recursive call to Automation Peer API is not valid..
+        /// </summary>
+        internal static string Automation_RecursivePublicCall {
+            get {
+                return ResourceManager.GetString("Automation_RecursivePublicCall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported UI Automation event association..
+        /// </summary>
+        internal static string Automation_UnsupportedUIAutomationEventAssociation {
+            get {
+                return ResourceManager.GetString("Automation_UnsupportedUIAutomationEventAssociation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automation client cannot access UI because application is shutting down..
+        /// </summary>
+        internal static string AutomationDispatcherShutdown {
+            get {
+                return ResourceManager.GetString("AutomationDispatcherShutdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout occurred while attempting to access UI. The application might be busy or unresponsive..
+        /// </summary>
+        internal static string AutomationTimeout {
+            get {
+                return ResourceManager.GetString("AutomationTimeout", resourceCulture);
             }
         }
         
@@ -853,11 +1159,119 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BitmapCacheBrush does not support Opacity..
+        /// </summary>
+        internal static string BitmapCacheBrush_OpacityChanged {
+            get {
+                return ResourceManager.GetString("BitmapCacheBrush_OpacityChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapCacheBrush does not support RelativeTransform..
+        /// </summary>
+        internal static string BitmapCacheBrush_RelativeTransformChanged {
+            get {
+                return ResourceManager.GetString("BitmapCacheBrush_RelativeTransformChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapCacheBrush does not support Transform..
+        /// </summary>
+        internal static string BitmapCacheBrush_TransformChanged {
+            get {
+                return ResourceManager.GetString("BitmapCacheBrush_TransformChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt+Left;Backspace.
+        /// </summary>
+        internal static string BrowseBackKeyDisplayString {
+            get {
+                return ResourceManager.GetString("BrowseBackKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string BrowseBackText {
+            get {
+                return ResourceManager.GetString("BrowseBackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt+Right;Shift+Backspace.
+        /// </summary>
+        internal static string BrowseForwardKeyDisplayString {
+            get {
+                return ResourceManager.GetString("BrowseForwardKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forward.
+        /// </summary>
+        internal static string BrowseForwardText {
+            get {
+                return ResourceManager.GetString("BrowseForwardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt+Home;BrowserHome.
+        /// </summary>
+        internal static string BrowseHomeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("BrowseHomeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string BrowseHomeText {
+            get {
+                return ResourceManager.GetString("BrowseHomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browser hosting of WPF applications is not supported on this platform..
         /// </summary>
         internal static string BrowserHostingNotSupported {
             get {
                 return ResourceManager.GetString("BrowserHostingNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt+Esc;BrowserStop.
+        /// </summary>
+        internal static string BrowseStopKeyDisplayString {
+            get {
+                return ResourceManager.GetString("BrowseStopKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string BrowseStopText {
+            get {
+                return ResourceManager.GetString("BrowseStopText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized brush type in BAML file..
+        /// </summary>
+        internal static string BrushUnknownBamlType {
+            get {
+                return ResourceManager.GetString("BrushUnknownBamlType", resourceCulture);
             }
         }
         
@@ -880,11 +1294,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot access a disposed HTTP byte range downloader..
+        /// </summary>
+        internal static string ByteRangeDownloaderDisposed {
+            get {
+                return ResourceManager.GetString("ByteRangeDownloaderDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Byte range request failed..
+        /// </summary>
+        internal static string ByteRangeDownloaderErroredOut {
+            get {
+                return ResourceManager.GetString("ByteRangeDownloaderErroredOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HTTP byte range downloader is not initialized..
         /// </summary>
         internal static string ByteRangeDownloaderNotInitialized {
             get {
                 return ResourceManager.GetString("ByteRangeDownloaderNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server does not support byte range request..
+        /// </summary>
+        internal static string ByteRangeRequestIsNotSupported {
+            get {
+                return ResourceManager.GetString("ByteRangeRequestIsNotSupported", resourceCulture);
             }
         }
         
@@ -1078,6 +1519,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel Print.
+        /// </summary>
+        internal static string CancelPrintText {
+            get {
+                return ResourceManager.GetString("CancelPrintText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot attach a Visual that is already attached..
+        /// </summary>
+        internal static string CannotAttachVisualTwice {
+            get {
+                return ResourceManager.GetString("CannotAttachVisualTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot host WebBrowser in a popup..
         /// </summary>
         internal static string CannotBeInsidePopup {
@@ -1092,6 +1551,15 @@ namespace CleanWpfApp {
         internal static string CannotBeSelfParent {
             get {
                 return ResourceManager.GetString("CannotBeSelfParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; and &apos;{1}&apos; cannot both be null..
+        /// </summary>
+        internal static string CannotBothBeNull {
+            get {
+                return ResourceManager.GetString("CannotBothBeNull", resourceCulture);
             }
         }
         
@@ -1177,11 +1645,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot convert string value &apos;{0}&apos; to type &apos;{1}&apos;..
+        /// </summary>
+        internal static string CannotConvertStringToType1 {
+            get {
+                return ResourceManager.GetString("CannotConvertStringToType1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot convert type &apos;{0}&apos; to &apos;{1}&apos;..
         /// </summary>
         internal static string CannotConvertType {
             get {
                 return ResourceManager.GetString("CannotConvertType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot convert type &apos;{0}&apos; to &apos;{1}&apos;..
+        /// </summary>
+        internal static string CannotConvertType1 {
+            get {
+                return ResourceManager.GetString("CannotConvertType1", resourceCulture);
             }
         }
         
@@ -1402,11 +1888,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot modify a read-only container..
+        /// </summary>
+        internal static string CannotModifyReadOnlyContainer1 {
+            get {
+                return ResourceManager.GetString("CannotModifyReadOnlyContainer1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot modify the Visual children for this node because a tree walk is in progress..
+        /// </summary>
+        internal static string CannotModifyVisualChildrenDuringTreeWalk {
+            get {
+                return ResourceManager.GetString("CannotModifyVisualChildrenDuringTreeWalk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot Move items to an unknown position (-1)..
         /// </summary>
         internal static string CannotMoveToUnknownPosition {
             get {
                 return ResourceManager.GetString("CannotMoveToUnknownPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot navigate to application resource &apos;{0}&apos; by using a WebBrowser control. For URI navigation, the resource must be at the application&apos;s site of origin. Use the pack://siteoforigin:,,,/ prefix to avoid hard-coding the URI..
+        /// </summary>
+        internal static string CannotNavigateToApplicationResourcesInWebBrowser {
+            get {
+                return ResourceManager.GetString("CannotNavigateToApplicationResourcesInWebBrowser", resourceCulture);
             }
         }
         
@@ -1524,6 +2037,15 @@ namespace CleanWpfApp {
         internal static string CannotRetrievePartsOfWriteOnlyContainer {
             get {
                 return ResourceManager.GetString("CannotRetrievePartsOfWriteOnlyContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot get part or part information from a write-only container..
+        /// </summary>
+        internal static string CannotRetrievePartsOfWriteOnlyContainer1 {
+            get {
+                return ResourceManager.GetString("CannotRetrievePartsOfWriteOnlyContainer1", resourceCulture);
             }
         }
         
@@ -1906,6 +2428,51 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot read from the specified command buffer pointer..
+        /// </summary>
+        internal static string Channel_InvalidCommandBufferPointer {
+            get {
+                return ResourceManager.GetString("Channel_InvalidCommandBufferPointer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Metrics property of CharacterMetrics is missing a required field..
+        /// </summary>
+        internal static string CharacterMetrics_MissingRequiredField {
+            get {
+                return ResourceManager.GetString("CharacterMetrics_MissingRequiredField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CharacterMetrics is not valid. The horizontal advance (defined as the sum of BlackBoxWidth, LeftSideBearing, and RightSideBearing) cannot be negative..
+        /// </summary>
+        internal static string CharacterMetrics_NegativeHorizontalAdvance {
+            get {
+                return ResourceManager.GetString("CharacterMetrics_NegativeHorizontalAdvance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CharacterMetrics is not valid. The vertical advance (defined as the sum of BlackBoxHeight, TopSideBearing, and BottomSideBearing) cannot be negative..
+        /// </summary>
+        internal static string CharacterMetrics_NegativeVerticalAdvance {
+            get {
+                return ResourceManager.GetString("CharacterMetrics_NegativeVerticalAdvance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Metrics property of CharacterMetrics has too many fields..
+        /// </summary>
+        internal static string CharacterMetrics_TooManyFields {
+            get {
+                return ResourceManager.GetString("CharacterMetrics_TooManyFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; child does not have type &apos;{1}&apos; : &apos;{2}&apos;..
         /// </summary>
         internal static string ChildHasWrongType {
@@ -1969,6 +2536,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Class handlers can be registered only for UIElement or ContentElement and their subtypes..
+        /// </summary>
+        internal static string ClassTypeIllegal {
+            get {
+                return ResourceManager.GetString("ClassTypeIllegal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Clear Highlight.
         /// </summary>
         internal static string ClearHighlight {
@@ -2005,11 +2581,92 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot clone break record due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string CloneBreakRecordFailure {
+            get {
+                return ResourceManager.GetString("CloneBreakRecordFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        internal static string CloseText {
+            get {
+                return ResourceManager.GetString("CloseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A cluster map entry must be greater than or equal to a previous entry..
+        /// </summary>
+        internal static string ClusterMapEntriesShouldNotDecrease {
+            get {
+                return ResourceManager.GetString("ClusterMapEntriesShouldNotDecrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A cluster map entry must point to a valid glyph indices element..
+        /// </summary>
+        internal static string ClusterMapEntryShouldPointWithinGlyphIndices {
+            get {
+                return ResourceManager.GetString("ClusterMapEntryShouldPointWithinGlyphIndices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The first element in the cluster map must equal zero..
+        /// </summary>
+        internal static string ClusterMapFirstEntryMustBeZero {
+            get {
+                return ResourceManager.GetString("ClusterMapFirstEntryMustBeZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; character is outside the Unicode code point range..
+        /// </summary>
+        internal static string CodePointOutOfRange {
+            get {
+                return ResourceManager.GetString("CodePointOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destination array is not compatible with objects within &apos;{0}&apos;..
+        /// </summary>
+        internal static string Collection_BadDestArray {
+            get {
+                return ResourceManager.GetString("Collection_BadDestArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input array is not a valid rank..
+        /// </summary>
+        internal static string Collection_BadRank {
+            get {
+                return ResourceManager.GetString("Collection_BadRank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot add instance of type &apos;{1}&apos; to a collection of type &apos;{0}&apos;. Only items of type &apos;{2}&apos; are allowed..
         /// </summary>
         internal static string Collection_BadType {
             get {
                 return ResourceManager.GetString("Collection_BadType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot add instance of type &apos;{1}&apos; to a collection of type &apos;{0}&apos;. Only items of type &apos;{2}&apos; are allowed..
+        /// </summary>
+        internal static string Collection_BadType1 {
+            get {
+                return ResourceManager.GetString("Collection_BadType1", resourceCulture);
             }
         }
         
@@ -2023,11 +2680,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot pass multidimensional array to the CopyTo method on a collection..
+        /// </summary>
+        internal static string Collection_CopyTo_ArrayCannotBeMultidimensional1 {
+            get {
+                return ResourceManager.GetString("Collection_CopyTo_ArrayCannotBeMultidimensional1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; parameter value is equal to or greater than the length of the &apos;{1}&apos; parameter value..
         /// </summary>
         internal static string Collection_CopyTo_IndexGreaterThanOrEqualToArrayLength {
             get {
                 return ResourceManager.GetString("Collection_CopyTo_IndexGreaterThanOrEqualToArrayLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; parameter value is equal to or greater than the length of the &apos;{1}&apos; parameter value..
+        /// </summary>
+        internal static string Collection_CopyTo_IndexGreaterThanOrEqualToArrayLength1 {
+            get {
+                return ResourceManager.GetString("Collection_CopyTo_IndexGreaterThanOrEqualToArrayLength1", resourceCulture);
             }
         }
         
@@ -2041,11 +2716,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of elements in this collection is greater than the available space from &apos;{0}&apos; to the end of destination &apos;{1}&apos;..
+        /// </summary>
+        internal static string Collection_CopyTo_NumberOfElementsExceedsArrayLength1 {
+            get {
+                return ResourceManager.GetString("Collection_CopyTo_NumberOfElementsExceedsArrayLength1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot add null to a collection of type &apos;{0}&apos;..
         /// </summary>
         internal static string Collection_NoNull {
             get {
                 return ResourceManager.GetString("Collection_NoNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot add null to the collection..
+        /// </summary>
+        internal static string Collection_NoNull1 {
+            get {
+                return ResourceManager.GetString("Collection_NoNull1", resourceCulture);
             }
         }
         
@@ -2077,11 +2770,92 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; key already exists in the collection..
+        /// </summary>
+        internal static string CollectionDuplicateKey {
+            get {
+                return ResourceManager.GetString("CollectionDuplicateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collection was modified during enumeration..
+        /// </summary>
+        internal static string CollectionEnumerationError {
+            get {
+                return ResourceManager.GetString("CollectionEnumerationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This collection is fixed size..
+        /// </summary>
+        internal static string CollectionIsFixedSize {
+            get {
+                return ResourceManager.GetString("CollectionIsFixedSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of elements in this collection must be greater than zero..
+        /// </summary>
+        internal static string CollectionNumberOfElementsMustBeGreaterThanZero {
+            get {
+                return ResourceManager.GetString("CollectionNumberOfElementsMustBeGreaterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of elements in this collection must be less than or equal to &apos;{0}&apos;..
         /// </summary>
         internal static string CollectionNumberOfElementsMustBeLessOrEqualTo {
             get {
                 return ResourceManager.GetString("CollectionNumberOfElementsMustBeLessOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of elements in this collection must be less than or equal to &apos;{0}&apos;..
+        /// </summary>
+        internal static string CollectionNumberOfElementsMustBeLessOrEqualTo1 {
+            get {
+                return ResourceManager.GetString("CollectionNumberOfElementsMustBeLessOrEqualTo1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of elements in this collection should equal &apos;{0}&apos;..
+        /// </summary>
+        internal static string CollectionNumberOfElementsShouldBeEqualTo {
+            get {
+                return ResourceManager.GetString("CollectionNumberOfElementsShouldBeEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collection accepts only objects of type CommandBinding..
+        /// </summary>
+        internal static string CollectionOnlyAcceptsCommandBindings {
+            get {
+                return ResourceManager.GetString("CollectionOnlyAcceptsCommandBindings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collection accepts only objects of type InputBinding..
+        /// </summary>
+        internal static string CollectionOnlyAcceptsInputBindings {
+            get {
+                return ResourceManager.GetString("CollectionOnlyAcceptsInputBindings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collection accepts only objects of type InputGesture..
+        /// </summary>
+        internal static string CollectionOnlyAcceptsInputGestures {
+            get {
+                return ResourceManager.GetString("CollectionOnlyAcceptsInputGestures", resourceCulture);
             }
         }
         
@@ -2131,6 +2905,51 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color context must be sRGB or scRGB for this operation..
+        /// </summary>
+        internal static string Color_ColorContextNotsRGB_or_scRGB {
+            get {
+                return ResourceManager.GetString("Color_ColorContextNotsRGB_or_scRGB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color context types mismatch..
+        /// </summary>
+        internal static string Color_ColorContextTypeMismatch {
+            get {
+                return ResourceManager.GetString("Color_ColorContextTypeMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color context dimensions mismatch..
+        /// </summary>
+        internal static string Color_DimensionMismatch {
+            get {
+                return ResourceManager.GetString("Color_DimensionMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color context is null..
+        /// </summary>
+        internal static string Color_NullColorContext {
+            get {
+                return ResourceManager.GetString("Color_NullColorContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is too large to be a valid ColorContext..
+        /// </summary>
+        internal static string ColorContext_FileTooLarge {
+            get {
+                return ResourceManager.GetString("ColorContext_FileTooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The source image for the ProfileImage markup is not specified..
         /// </summary>
         internal static string ColorConvertedBitmapExtensionNoSourceImage {
@@ -2176,6 +2995,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The property &apos;{0}&apos; cannot be changed. The &apos;{1}&apos; class has been sealed..
+        /// </summary>
+        internal static string CompatibilityPreferencesSealed1 {
+            get {
+                return ResourceManager.GetString("CompatibilityPreferencesSealed1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typography properties are not valid..
+        /// </summary>
+        internal static string CompileFeatureSet_InvalidTypographyProperties {
+            get {
+                return ResourceManager.GetString("CompileFeatureSet_InvalidTypographyProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; component is already in presentation context..
         /// </summary>
         internal static string ComponentAlreadyInPresentationContext {
@@ -2199,6 +3036,105 @@ namespace CleanWpfApp {
         internal static string CompositeCollectionResetOnlyOnClear {
             get {
                 return ResourceManager.GetString("CompositeCollectionResetOnlyOnClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A FontFamily cannot have more than one FamilyTypeface with the same Style, Weight, and Stretch..
+        /// </summary>
+        internal static string CompositeFont_DuplicateTypeface {
+            get {
+                return ResourceManager.GetString("CompositeFont_DuplicateTypeface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The FontFamily cannot hold any more FamilyMaps..
+        /// </summary>
+        internal static string CompositeFont_TooManyFamilyMaps {
+            get {
+                return ResourceManager.GetString("CompositeFont_TooManyFamilyMaps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid value for {0} attribute..
+        /// </summary>
+        internal static string CompositeFontAttributeValue1 {
+            get {
+                return ResourceManager.GetString("CompositeFontAttributeValue1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid value for {0} attribute: {1}.
+        /// </summary>
+        internal static string CompositeFontAttributeValue2 {
+            get {
+                return ResourceManager.GetString("CompositeFontAttributeValue2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unicode range is not valid..
+        /// </summary>
+        internal static string CompositeFontInvalidUnicodeRange {
+            get {
+                return ResourceManager.GetString("CompositeFontInvalidUnicodeRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required attribute &apos;{0}&apos;..
+        /// </summary>
+        internal static string CompositeFontMissingAttribute {
+            get {
+                return ResourceManager.GetString("CompositeFontMissingAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required element &apos;{0}&apos;..
+        /// </summary>
+        internal static string CompositeFontMissingElement {
+            get {
+                return ResourceManager.GetString("CompositeFontMissingElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The composite font contains significant whitespace where none is expected..
+        /// </summary>
+        internal static string CompositeFontSignificantWhitespace {
+            get {
+                return ResourceManager.GetString("CompositeFontSignificantWhitespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; attribute in XML namespace &apos;{1}&apos; not recognized. Note that attribute names are case sensitive..
+        /// </summary>
+        internal static string CompositeFontUnknownAttribute {
+            get {
+                return ResourceManager.GetString("CompositeFontUnknownAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; element in XML namespace &apos;{1}&apos; not recognized. Note that element names are case sensitive..
+        /// </summary>
+        internal static string CompositeFontUnknownElement {
+            get {
+                return ResourceManager.GetString("CompositeFontUnknownElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The root Visual of a VisualTarget cannot have a parent..
+        /// </summary>
+        internal static string CompositionTarget_RootVisual_HasParent {
+            get {
+                return ResourceManager.GetString("CompositionTarget_RootVisual_HasParent", resourceCulture);
             }
         }
         
@@ -2244,6 +3180,15 @@ namespace CleanWpfApp {
         internal static string ConditionValueOfMarkupExtensionNotSupported {
             get {
                 return ResourceManager.GetString("ConditionValueOfMarkupExtensionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Possible constructor recursion detected..
+        /// </summary>
+        internal static string ConstructorRecursion {
+            get {
+                return ResourceManager.GetString("ConstructorRecursion", resourceCulture);
             }
         }
         
@@ -2311,6 +3256,42 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shift+F10;Apps.
+        /// </summary>
+        internal static string ContextMenuKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ContextMenuKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Context Menu.
+        /// </summary>
+        internal static string ContextMenuText {
+            get {
+                return ResourceManager.GetString("ContextMenuText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot convert from type..
+        /// </summary>
+        internal static string Converter_ConvertFromNotSupported {
+            get {
+                return ResourceManager.GetString("Converter_ConvertFromNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot convert to type..
+        /// </summary>
+        internal static string Converter_ConvertToNotSupported {
+            get {
+                return ResourceManager.GetString("Converter_ConvertToNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; ValueSerializer cannot convert from &apos;{1}&apos;..
         /// </summary>
         internal static string ConvertFromException {
@@ -2325,6 +3306,24 @@ namespace CleanWpfApp {
         internal static string ConvertToException {
             get {
                 return ResourceManager.GetString("ConvertToException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+C;Ctrl+Insert.
+        /// </summary>
+        internal static string CopyKeyDisplayString {
+            get {
+                return ResourceManager.GetString("CopyKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string CopyText {
+            get {
+                return ResourceManager.GetString("CopyText", resourceCulture);
             }
         }
         
@@ -2356,6 +3355,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string CorrectionListKey {
+            get {
+                return ResourceManager.GetString("CorrectionListKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string CorrectionListKeyDisplayString {
+            get {
+                return ResourceManager.GetString("CorrectionListKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correction List.
+        /// </summary>
+        internal static string CorrectionListText {
+            get {
+                return ResourceManager.GetString("CorrectionListText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File contains corrupted data..
         /// </summary>
         internal static string CorruptedData {
@@ -2370,6 +3396,42 @@ namespace CleanWpfApp {
         internal static string CorruptStream {
             get {
                 return ResourceManager.GetString("CorruptStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count must be less than or equal to remaining number of bits in stream..
+        /// </summary>
+        internal static string CountOfBitsGreatThanRemainingBits {
+            get {
+                return ResourceManager.GetString("CountOfBitsGreatThanRemainingBits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count must be less than or equal to bits per byte and greater than zero..
+        /// </summary>
+        internal static string CountOfBitsOutOfRange {
+            get {
+                return ResourceManager.GetString("CountOfBitsOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot format breakpoints due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string CreateBreaksFailure {
+            get {
+                return ResourceManager.GetString("CreateBreaksFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot create text formatting context due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string CreateContextFailure {
+            get {
+                return ResourceManager.GetString("CreateContextFailure", resourceCulture);
             }
         }
         
@@ -2392,6 +3454,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot format a line of text due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string CreateLineFailure {
+            get {
+                return ResourceManager.GetString("CreateLineFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create mode parameter must be either FileMode.Create or FileMode.Open..
         /// </summary>
         internal static string CreateModeMustBeCreateOrOpen {
@@ -2406,6 +3477,15 @@ namespace CleanWpfApp {
         internal static string CreateNewOnNonEmptyStream {
             get {
                 return ResourceManager.GetString("CreateNewOnNonEmptyStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot format a paragraph cache due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string CreateParaBreakingSessionFailure {
+            get {
+                return ResourceManager.GetString("CreateParaBreakingSessionFailure", resourceCulture);
             }
         }
         
@@ -2500,6 +3580,42 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current dispatcher cannot be found..
+        /// </summary>
+        internal static string CurrentDispatcherNotFound {
+            get {
+                return ResourceManager.GetString("CurrentDispatcherNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load cursor from the stream..
+        /// </summary>
+        internal static string Cursor_InvalidStream {
+            get {
+                return ResourceManager.GetString("Cursor_InvalidStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load cursor file &apos;{0}&apos;..
+        /// </summary>
+        internal static string Cursor_LoadImageFailure {
+            get {
+                return ResourceManager.GetString("Cursor_LoadImageFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; has unsupported extension for cursor..
+        /// </summary>
+        internal static string Cursor_UnsupportedFormat {
+            get {
+                return ResourceManager.GetString("Cursor_UnsupportedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; CustomContentState object must be serializable..
         /// </summary>
         internal static string CustomContentStateMustBeSerializable {
@@ -2554,6 +3670,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl+X;Shift+Delete.
+        /// </summary>
+        internal static string CutKeyDisplayString {
+            get {
+                return ResourceManager.GetString("CutKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut.
+        /// </summary>
+        internal static string CutText {
+            get {
+                return ResourceManager.GetString("CutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cyclic reference found while evaluating the Style property on element &apos;{0}&apos;..
         /// </summary>
         internal static string CyclicStyleReferenceDetected {
@@ -2568,6 +3702,60 @@ namespace CleanWpfApp {
         internal static string CyclicThemeStyleReferenceDetected {
             get {
                 return ResourceManager.GetString("CyclicThemeStyleReferenceDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An antialiased back buffer requires a IDirect3DDevice9Ex device..
+        /// </summary>
+        internal static string D3DImage_AARequires9Ex {
+            get {
+                return ResourceManager.GetString("D3DImage_AARequires9Ex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back buffer&apos;s device is not valid..
+        /// </summary>
+        internal static string D3DImage_InvalidDevice {
+            get {
+                return ResourceManager.GetString("D3DImage_InvalidDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back buffer&apos;s pool does not meet the requirements for the resource type..
+        /// </summary>
+        internal static string D3DImage_InvalidPool {
+            get {
+                return ResourceManager.GetString("D3DImage_InvalidPool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back buffer&apos;s usage does not meet the requirements for the resource type..
+        /// </summary>
+        internal static string D3DImage_InvalidUsage {
+            get {
+                return ResourceManager.GetString("D3DImage_InvalidUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call this method without a back buffer..
+        /// </summary>
+        internal static string D3DImage_MustHaveBackBuffer {
+            get {
+                return ResourceManager.GetString("D3DImage_MustHaveBackBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back buffer&apos;s size is too large..
+        /// </summary>
+        internal static string D3DImage_SurfaceTooBig {
+            get {
+                return ResourceManager.GetString("D3DImage_SurfaceTooBig", resourceCulture);
             }
         }
         
@@ -2770,6 +3958,69 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot SetData on a frozen OLE data object..
+        /// </summary>
+        internal static string DataObject_CannotSetDataOnAFozenOLEDataDbject {
+            get {
+                return ResourceManager.GetString("DataObject_CannotSetDataOnAFozenOLEDataDbject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; data format is not present on DataObject..
+        /// </summary>
+        internal static string DataObject_DataFormatNotPresentOnDataObject {
+            get {
+                return ResourceManager.GetString("DataObject_DataFormatNotPresentOnDataObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data object must have at least one format..
+        /// </summary>
+        internal static string DataObject_DataObjectMustHaveAtLeastOneFormat {
+            get {
+                return ResourceManager.GetString("DataObject_DataObjectMustHaveAtLeastOneFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty string is not a valid value for parameter &apos;format&apos;..
+        /// </summary>
+        internal static string DataObject_EmptyFormatNotAllowed {
+            get {
+                return ResourceManager.GetString("DataObject_EmptyFormatNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; file drop path is not valid..
+        /// </summary>
+        internal static string DataObject_FileDropListHasInvalidFileDropPath {
+            get {
+                return ResourceManager.GetString("DataObject_FileDropListHasInvalidFileDropPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; must contain at least one file drop path..
+        /// </summary>
+        internal static string DataObject_FileDropListIsEmpty {
+            get {
+                return ResourceManager.GetString("DataObject_FileDropListIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; dwDirection parameter value is not supported..
+        /// </summary>
+        internal static string DataObject_NotImplementedEnumFormatEtc {
+            get {
+                return ResourceManager.GetString("DataObject_NotImplementedEnumFormatEtc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The given data space label name is already in use..
         /// </summary>
         internal static string DataSpaceLabelInUse {
@@ -2874,6 +4125,51 @@ namespace CleanWpfApp {
         internal static string DatePickerTextBox_TemplatePartIsOfIncorrectType {
             get {
                 return ResourceManager.GetString("DatePickerTextBox_TemplatePartIsOfIncorrectType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompression of packet data failed..
+        /// </summary>
+        internal static string DecompressPacketDataFailed {
+            get {
+                return ResourceManager.GetString("DecompressPacketDataFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompression of property data failed..
+        /// </summary>
+        internal static string DecompressPropertyFailed {
+            get {
+                return ResourceManager.GetString("DecompressPropertyFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string DecreaseZoomKey {
+            get {
+                return ResourceManager.GetString("DecreaseZoomKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string DecreaseZoomKeyDisplayString {
+            get {
+                return ResourceManager.GetString("DecreaseZoomKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease Zoom.
+        /// </summary>
+        internal static string DecreaseZoomText {
+            get {
+                return ResourceManager.GetString("DecreaseZoomText", resourceCulture);
             }
         }
         
@@ -2995,11 +4291,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Del.
+        /// </summary>
+        internal static string DeleteKeyDisplayString {
+            get {
+                return ResourceManager.GetString("DeleteKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to D_elete Notes.
         /// </summary>
         internal static string DeleteNotes {
             get {
                 return ResourceManager.GetString("DeleteNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteText {
+            get {
+                return ResourceManager.GetString("DeleteText", resourceCulture);
             }
         }
         
@@ -3099,6 +4413,15 @@ namespace CleanWpfApp {
         internal static string DigSigDuplicateCertificate {
             get {
                 return ResourceManager.GetString("DigSigDuplicateCertificate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find a part of the path &apos;{0}&apos;..
+        /// </summary>
+        internal static string DirectoryNotFoundExceptionWithFileName {
+            get {
+                return ResourceManager.GetString("DirectoryNotFoundExceptionWithFileName", resourceCulture);
             }
         }
         
@@ -3562,6 +4885,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; DragAction is not valid..
+        /// </summary>
+        internal static string DragDrop_DragActionInvalid {
+            get {
+                return ResourceManager.GetString("DragDrop_DragActionInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; DragDropEffects is not valid..
+        /// </summary>
+        internal static string DragDrop_DragDropEffectsInvalid {
+            get {
+                return ResourceManager.GetString("DragDrop_DragDropEffectsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can only call DragMove when primary mouse button is down..
         /// </summary>
         internal static string DragMoveFail {
@@ -3571,11 +4912,56 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This Pop operation has no corresponding Push to remove from the stack because the stack depth of the DrawingContext is zero..
+        /// </summary>
+        internal static string DrawingContext_TooManyPops {
+            get {
+                return ResourceManager.GetString("DrawingContext_TooManyPops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This object has an outstanding DrawingContext. The DrawingContext must be Closed or Disposed before making Open or Append calls..
+        /// </summary>
+        internal static string DrawingGroup_AlreadyOpen {
+            get {
+                return ResourceManager.GetString("DrawingGroup_AlreadyOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot append to a frozen DrawingGroup.Children collection..
+        /// </summary>
+        internal static string DrawingGroup_CannotAppendToFrozenCollection {
+            get {
+                return ResourceManager.GetString("DrawingGroup_CannotAppendToFrozenCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot append to a null DrawingGroup.Children collection..
+        /// </summary>
+        internal static string DrawingGroup_CannotAppendToNullCollection {
+            get {
+                return ResourceManager.GetString("DrawingGroup_CannotAppendToNullCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; type does not have a matching DependencyObjectType..
         /// </summary>
         internal static string DTypeNotSupportForSystemType {
             get {
                 return ResourceManager.GetString("DTypeNotSupportForSystemType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate ApplicationGesture values are not allowed..
+        /// </summary>
+        internal static string DuplicateApplicationGestureFound {
+            get {
+                return ResourceManager.GetString("DuplicateApplicationGestureFound", resourceCulture);
             }
         }
         
@@ -3603,6 +4989,15 @@ namespace CleanWpfApp {
         internal static string DuplicatedUri {
             get {
                 return ResourceManager.GetString("DuplicatedUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RoutedEvent Name &apos;{0}&apos; for OwnerType &apos;{1}&apos; already used..
+        /// </summary>
+        internal static string DuplicateEventName {
+            get {
+                return ResourceManager.GetString("DuplicateEventName", resourceCulture);
             }
         }
         
@@ -3643,6 +5038,195 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duplicate Stroke in StrokeCollectionChangedEventArgs.Added..
+        /// </summary>
+        internal static string DuplicateStrokeAdded {
+            get {
+                return ResourceManager.GetString("DuplicateStrokeAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A pixel shader using Pixel Shader Model 2.0 cannot be set because registers only available in Pixel Shader Model 3.0 are being used..
+        /// </summary>
+        internal static string Effect_20ShaderUsing30Registers {
+            get {
+                return ResourceManager.GetString("Effect_20ShaderUsing30Registers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapEffect and Effect cannot be combined on a Visual..
+        /// </summary>
+        internal static string Effect_CombinedLegacyAndNew {
+            get {
+                return ResourceManager.GetString("Effect_CombinedLegacyAndNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call BitmapEffect.GetOutput directly with a ContextInputSource. Provide a valid BitmapSource..
+        /// </summary>
+        internal static string Effect_No_ContextInputSource {
+            get {
+                return ResourceManager.GetString("Effect_No_ContextInputSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no input set..
+        /// </summary>
+        internal static string Effect_No_InputSource {
+            get {
+                return ResourceManager.GetString("Effect_No_InputSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; PixelFormat is not supported for this operation..
+        /// </summary>
+        internal static string Effect_PixelFormat {
+            get {
+                return ResourceManager.GetString("Effect_PixelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred on the render thread with a user-supplied shader..
+        /// </summary>
+        internal static string Effect_RenderThreadError {
+            get {
+                return ResourceManager.GetString("Effect_RenderThreadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel Shader Model 2.0 requires floating point constants to be in registers [0-31]..
+        /// </summary>
+        internal static string Effect_Shader20ConstantRegisterLimit {
+            get {
+                return ResourceManager.GetString("Effect_Shader20ConstantRegisterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel Shader Model 2.0 requires sampler constants to be in registers [0-3]..
+        /// </summary>
+        internal static string Effect_Shader20SamplerRegisterLimit {
+            get {
+                return ResourceManager.GetString("Effect_Shader20SamplerRegisterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel Shader Model 3.0 requires boolean constants to be in registers [0-15]..
+        /// </summary>
+        internal static string Effect_Shader30BoolConstantRegisterLimit {
+            get {
+                return ResourceManager.GetString("Effect_Shader30BoolConstantRegisterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel Shader Model 3.0 requires floating point constants to be in registers [0-223]..
+        /// </summary>
+        internal static string Effect_Shader30FloatConstantRegisterLimit {
+            get {
+                return ResourceManager.GetString("Effect_Shader30FloatConstantRegisterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel Shader Model 3.0 requires integer constants to be in registers [0-15]..
+        /// </summary>
+        internal static string Effect_Shader30IntConstantRegisterLimit {
+            get {
+                return ResourceManager.GetString("Effect_Shader30IntConstantRegisterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel Shader Model 3.0 requires sampler constants to be in registers [0-7]..
+        /// </summary>
+        internal static string Effect_Shader30SamplerRegisterLimit {
+            get {
+                return ResourceManager.GetString("Effect_Shader30SamplerRegisterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shader bytecode must be an integral number of 4-byte words..
+        /// </summary>
+        internal static string Effect_ShaderBytecodeSize {
+            get {
+                return ResourceManager.GetString("Effect_ShaderBytecodeSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No shader bytecode present.  Must either set UriSource or call SetStreamSource..
+        /// </summary>
+        internal static string Effect_ShaderBytecodeSource {
+            get {
+                return ResourceManager.GetString("Effect_ShaderBytecodeSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shader constant of type &apos;{0}&apos; is not allowed..
+        /// </summary>
+        internal static string Effect_ShaderConstantType {
+            get {
+                return ResourceManager.GetString("Effect_ShaderConstantType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Padding must be non-negative..
+        /// </summary>
+        internal static string Effect_ShaderEffectPadding {
+            get {
+                return ResourceManager.GetString("Effect_ShaderEffectPadding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PixelShader must be set on ShaderEffect..
+        /// </summary>
+        internal static string Effect_ShaderPixelShaderSet {
+            get {
+                return ResourceManager.GetString("Effect_ShaderPixelShaderSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel shader sampler must be Effect.ImplicitInput, or an instance of BitmapCacheBrush, VisualBrush, or ImageBrush..
+        /// </summary>
+        internal static string Effect_ShaderSamplerType {
+            get {
+                return ResourceManager.GetString("Effect_ShaderSamplerType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PixelShader only accepts seekable streams..
+        /// </summary>
+        internal static string Effect_ShaderSeekableStream {
+            get {
+                return ResourceManager.GetString("Effect_ShaderSeekableStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uri must be a file or pack Uri..
+        /// </summary>
+        internal static string Effect_SourceUriMustBeFileOrPack {
+            get {
+                return ResourceManager.GetString("Effect_SourceUriMustBeFileOrPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; element must be empty..
         /// </summary>
         internal static string ElementIsNotEmptyElement {
@@ -3666,6 +5250,51 @@ namespace CleanWpfApp {
         internal static string ElementMustBelongToTemplate {
             get {
                 return ResourceManager.GetString("ElementMustBelongToTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty arrays are not a valid argument value..
+        /// </summary>
+        internal static string EmptyArray {
+            get {
+                return ResourceManager.GetString("EmptyArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The array cannot be empty..
+        /// </summary>
+        internal static string EmptyArrayNotAllowedAsArgument {
+            get {
+                return ResourceManager.GetString("EmptyArrayNotAllowedAsArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data to load..
+        /// </summary>
+        internal static string EmptyDataToLoad {
+            get {
+                return ResourceManager.GetString("EmptyDataToLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collection cannot be empty..
+        /// </summary>
+        internal static string EmptyScToReplace {
+            get {
+                return ResourceManager.GetString("EmptyScToReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The replacement StrokeCollection cannot be empty..
+        /// </summary>
+        internal static string EmptyScToReplaceWith {
+            get {
+                return ResourceManager.GetString("EmptyScToReplaceWith", resourceCulture);
             }
         }
         
@@ -3724,11 +5353,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EndHitTesting has already been called on the IncrementalHitTester..
+        /// </summary>
+        internal static string EndHitTestingCalled {
+            get {
+                return ResourceManager.GetString("EndHitTestingCalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must call BeginInit before EndInit..
         /// </summary>
         internal static string EndInitWithoutBeginInitNotSupported {
             get {
                 return ResourceManager.GetString("EndInitWithoutBeginInitNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of stream reached..
+        /// </summary>
+        internal static string EndOfStreamReached {
+            get {
+                return ResourceManager.GetString("EndOfStreamReached", resourceCulture);
             }
         }
         
@@ -3751,11 +5398,56 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; enumeration value is not valid..
+        /// </summary>
+        internal static string Enum_Invalid1 {
+            get {
+                return ResourceManager.GetString("Enum_Invalid1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The enumerator is not valid because the collection changed..
+        /// </summary>
+        internal static string Enumerator_CollectionChanged {
+            get {
+                return ResourceManager.GetString("Enumerator_CollectionChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The enumerator has not been started..
+        /// </summary>
+        internal static string Enumerator_NotStarted {
+            get {
+                return ResourceManager.GetString("Enumerator_NotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The enumerator has reached the end of the collection..
+        /// </summary>
+        internal static string Enumerator_ReachedEnd {
+            get {
+                return ResourceManager.GetString("Enumerator_ReachedEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No current object to return..
         /// </summary>
         internal static string Enumerator_VerifyContext {
             get {
                 return ResourceManager.GetString("Enumerator_VerifyContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No current object to return..
+        /// </summary>
+        internal static string Enumerator_VerifyContext1 {
+            get {
+                return ResourceManager.GetString("Enumerator_VerifyContext1", resourceCulture);
             }
         }
         
@@ -3801,6 +5493,51 @@ namespace CleanWpfApp {
         internal static string EnumeratorVersionChanged {
             get {
                 return ResourceManager.GetString("EnumeratorVersionChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot enumerate contents in a line due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string EnumLineFailure {
+            get {
+                return ResourceManager.GetString("EnumLineFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ExtendedProperty is already part of the ExtendedPropertyCollection..
+        /// </summary>
+        internal static string EPExists {
+            get {
+                return ResourceManager.GetString("EPExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The GUID is not part of the ExtendedPropertyCollection..
+        /// </summary>
+        internal static string EPGuidNotFound {
+            get {
+                return ResourceManager.GetString("EPGuidNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property not set..
+        /// </summary>
+        internal static string EPNotFound {
+            get {
+                return ResourceManager.GetString("EPNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event arguments must be non-null..
+        /// </summary>
+        internal static string EventArgIsNull {
+            get {
+                return ResourceManager.GetString("EventArgIsNull", resourceCulture);
             }
         }
         
@@ -3976,6 +5713,96 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shift+Down.
+        /// </summary>
+        internal static string ExtendSelectionDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ExtendSelectionDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extend Selection Down.
+        /// </summary>
+        internal static string ExtendSelectionDownText {
+            get {
+                return ResourceManager.GetString("ExtendSelectionDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+Left.
+        /// </summary>
+        internal static string ExtendSelectionLeftKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ExtendSelectionLeftKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extend Selection Left.
+        /// </summary>
+        internal static string ExtendSelectionLeftText {
+            get {
+                return ResourceManager.GetString("ExtendSelectionLeftText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+Right.
+        /// </summary>
+        internal static string ExtendSelectionRightKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ExtendSelectionRightKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extend Selection Right.
+        /// </summary>
+        internal static string ExtendSelectionRightText {
+            get {
+                return ResourceManager.GetString("ExtendSelectionRightText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+Up.
+        /// </summary>
+        internal static string ExtendSelectionUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ExtendSelectionUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extend Selection Up.
+        /// </summary>
+        internal static string ExtendSelectionUpText {
+            get {
+                return ResourceManager.GetString("ExtendSelectionUpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font face index must be greater than or equal to zero..
+        /// </summary>
+        internal static string FaceIndexMustBePositiveOrZero {
+            get {
+                return ResourceManager.GetString("FaceIndexMustBePositiveOrZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nonzero font face index values are valid only for TrueType collections (.ttc)..
+        /// </summary>
+        internal static string FaceIndexValidOnlyForTTC {
+            get {
+                return ResourceManager.GetString("FaceIndexValidOnlyForTTC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to resume the page function of type {0}. Make sure the type has a default constructor and its assembly is accessible..
         /// </summary>
         internal static string FailedResumePageFunction {
@@ -4008,6 +5835,42 @@ namespace CleanWpfApp {
         internal static string FailToNavigateUsingHyperlinkTarget {
             get {
                 return ResourceManager.GetString("FailToNavigateUsingHyperlinkTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot load system composite fonts. Location not found..
+        /// </summary>
+        internal static string FamilyCollection_CannotFindCompositeFontsLocation {
+            get {
+                return ResourceManager.GetString("FamilyCollection_CannotFindCompositeFontsLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot add FamilyMap because Target property is not set..
+        /// </summary>
+        internal static string FamilyMap_TargetNotSet {
+            get {
+                return ResourceManager.GetString("FamilyMap_TargetNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+I.
+        /// </summary>
+        internal static string FavoritesKeyDisplayString {
+            get {
+                return ResourceManager.GetString("FavoritesKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorites.
+        /// </summary>
+        internal static string FavoritesText {
+            get {
+                return ResourceManager.GetString("FavoritesText", resourceCulture);
             }
         }
         
@@ -4096,11 +5959,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input file or data stream does not conform to the expected file format specification..
+        /// </summary>
+        internal static string FileFormatException1 {
+            get {
+                return ResourceManager.GetString("FileFormatException1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; file does not conform to the expected file format specification..
         /// </summary>
         internal static string FileFormatExceptionWithFileName {
             get {
                 return ResourceManager.GetString("FileFormatExceptionWithFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; file does not conform to the expected file format specification..
+        /// </summary>
+        internal static string FileFormatExceptionWithFileName1 {
+            get {
+                return ResourceManager.GetString("FileFormatExceptionWithFileName1", resourceCulture);
             }
         }
         
@@ -4137,6 +6018,15 @@ namespace CleanWpfApp {
         internal static string FileNameNullOrEmpty {
             get {
                 return ResourceManager.GetString("FileNameNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find file &apos;{0}&apos;..
+        /// </summary>
+        internal static string FileNotFoundExceptionWithFileName {
+            get {
+                return ResourceManager.GetString("FileNotFoundExceptionWithFileName", resourceCulture);
             }
         }
         
@@ -4294,6 +6184,51 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl+F.
+        /// </summary>
+        internal static string FindKeyDisplayString {
+            get {
+                return ResourceManager.GetString("FindKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find.
+        /// </summary>
+        internal static string FindText {
+            get {
+                return ResourceManager.GetString("FindText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string FirstPageKey {
+            get {
+                return ResourceManager.GetString("FirstPageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string FirstPageKeyDisplayString {
+            get {
+                return ResourceManager.GetString("FirstPageKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Page.
+        /// </summary>
+        internal static string FirstPageText {
+            get {
+                return ResourceManager.GetString("FirstPageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FixedDocument&apos;s GetObjectPosition expects a DependencyObject as a parameter..
         /// </summary>
         internal static string FixedDocumentExpectsDependencyObject {
@@ -4308,6 +6243,15 @@ namespace CleanWpfApp {
         internal static string FixedDocumentReadonly {
             get {
                 return ResourceManager.GetString("FixedDocumentReadonly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized float type in BAML file..
+        /// </summary>
+        internal static string FloatUnknownBamlType {
+            get {
+                return ResourceManager.GetString("FloatUnknownBamlType", resourceCulture);
             }
         }
         
@@ -4429,6 +6373,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stream does not support Flush..
+        /// </summary>
+        internal static string FlushNotSupported {
+            get {
+                return ResourceManager.GetString("FlushNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A named FontFamily object cannot be modified..
+        /// </summary>
+        internal static string FontFamily_ReadOnly {
+            get {
+                return ResourceManager.GetString("FontFamily_ReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page dimensions exceed maximum allowed value of 3.579 million pixels..
         /// </summary>
         internal static string FormatRestrictionsExceeded {
@@ -4501,6 +6463,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specified value of type &apos;{0}&apos; must have IsFrozen set to false to modify..
+        /// </summary>
+        internal static string Freezable_CantBeFrozen1 {
+            get {
+                return ResourceManager.GetString("Freezable_CantBeFrozen1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This Freezable cannot be frozen..
         /// </summary>
         internal static string Freezable_CantFreeze {
@@ -4510,11 +6481,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clone of an instance of type &apos;{0}&apos; is null or not an instance of &apos;{0}&apos;..
+        /// </summary>
+        internal static string Freezable_CloneInvalidType {
+            get {
+                return ResourceManager.GetString("Freezable_CloneInvalidType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The provided DependencyObject is not a context for this Freezable..
         /// </summary>
         internal static string Freezable_NotAContext {
             get {
                 return ResourceManager.GetString("Freezable_NotAContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot change FreezableCollection during a CollectionChanged event..
+        /// </summary>
+        internal static string Freezable_Reentrant {
+            get {
+                return ResourceManager.GetString("Freezable_Reentrant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown/unexpected change event.
+        /// </summary>
+        internal static string Freezable_UnexpectedChange {
+            get {
+                return ResourceManager.GetString("Freezable_UnexpectedChange", resourceCulture);
             }
         }
         
@@ -4564,11 +6562,47 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The object passed to &apos;{0}&apos; is not a valid type..
+        /// </summary>
+        internal static string General_BadType {
+            get {
+                return ResourceManager.GetString("General_BadType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expected object of type &apos;{0}&apos;..
         /// </summary>
         internal static string General_Expected_Type {
             get {
                 return ResourceManager.GetString("General_Expected_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected object of type &apos;{0}&apos;..
+        /// </summary>
+        internal static string General_Expected_Type1 {
+            get {
+                return ResourceManager.GetString("General_Expected_Type1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The object is marked &apos;Read Only&apos;..
+        /// </summary>
+        internal static string General_ObjectIsReadOnly {
+            get {
+                return ResourceManager.GetString("General_ObjectIsReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The transform is not defined for the point..
+        /// </summary>
+        internal static string GeneralTransform_TransformFailed {
+            get {
+                return ResourceManager.GetString("GeneralTransform_TransformFailed", resourceCulture);
             }
         }
         
@@ -4726,6 +6760,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arithmetic error found while trying to perform this operation..
+        /// </summary>
+        internal static string Geometry_BadNumber {
+            get {
+                return ResourceManager.GetString("Geometry_BadNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No gesture recognizer is available on the system..
+        /// </summary>
+        internal static string GestureRecognizerNotAvailable {
+            get {
+                return ResourceManager.GetString("GestureRecognizerNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PackagePart subclass must implement GetContentTypeCore method if passing a null value for the content type when PackagePart object is constructed..
         /// </summary>
         internal static string GetContentTypeCoreNotImplemented {
@@ -4744,6 +6796,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot retrieve penalty module handle due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string GetPenaltyModuleHandleFailure {
+            get {
+                return ResourceManager.GetString("GetPenaltyModuleHandleFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot get response for web request to &apos;{0}&apos;..
         /// </summary>
         internal static string GetResponseFailed {
@@ -4753,11 +6814,47 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot get response for web request to &apos;{0}&apos;..
+        /// </summary>
+        internal static string GetResponseFailed1 {
+            get {
+                return ResourceManager.GetString("GetResponseFailed1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot get stream from WebResponse for URI &apos;{0}&apos;..
         /// </summary>
         internal static string GetStreamFailed {
             get {
                 return ResourceManager.GetString("GetStreamFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Values for advanceWidths and glyphOffsets constitute too large of a GlyphRun. The area of its bounding box, measured in renderingEmSize squares, is &apos;{0}&apos; but it cannot exceed &apos;{1}&apos;..
+        /// </summary>
+        internal static string GlyphAreaTooBig {
+            get {
+                return ResourceManager.GetString("GlyphAreaTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  advanceWidths and glyphOffsets constitute coordinate too large for glyph at index &apos;{0}&apos;. For renderingEmSize &apos;{1}&apos; the values cannot exceed &apos;{2}&apos;..
+        /// </summary>
+        internal static string GlyphCoordinateTooBig {
+            get {
+                return ResourceManager.GetString("GlyphCoordinateTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; glyph index is not valid for the specified font..
+        /// </summary>
+        internal static string GlyphIndexOutOfRange {
+            get {
+                return ResourceManager.GetString("GlyphIndexOutOfRange", resourceCulture);
             }
         }
         
@@ -4870,6 +6967,42 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Glyph typeface URI does not point to a previously recorded glyph typeface..
+        /// </summary>
+        internal static string GlyphTypefaceNotRecorded {
+            get {
+                return ResourceManager.GetString("GlyphTypefaceNotRecorded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string GoToPageKey {
+            get {
+                return ResourceManager.GetString("GoToPageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string GoToPageKeyDisplayString {
+            get {
+                return ResourceManager.GetString("GoToPageKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go To Page.
+        /// </summary>
+        internal static string GoToPageText {
+            get {
+                return ResourceManager.GetString("GoToPageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter of unexpected type &apos;{0}&apos;. Expected type is &apos;{1}&apos;..
         /// </summary>
         internal static string Grid_UnexpectedParameterType {
@@ -4942,6 +7075,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Handler type is mismatched..
+        /// </summary>
+        internal static string HandlerTypeIllegal1 {
+            get {
+                return ResourceManager.GetString("HandlerTypeIllegal1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reusable hash algorithm must be specified..
         /// </summary>
         internal static string HashAlgorithmMustBeReusable {
@@ -4956,6 +7098,42 @@ namespace CleanWpfApp {
         internal static string HasLogicalParent {
             get {
                 return ResourceManager.GetString("HasLogicalParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F1.
+        /// </summary>
+        internal static string HelpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("HelpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string HelpText {
+            get {
+                return ResourceManager.GetString("HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; HitTestParameters are not supported on &apos;{1}&apos;..
+        /// </summary>
+        internal static string HitTest_Invalid {
+            get {
+                return ResourceManager.GetString("HitTest_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hit testing with a singular MatrixCamera is not supported..
+        /// </summary>
+        internal static string HitTest_Singular {
+            get {
+                return ResourceManager.GetString("HitTest_Singular", resourceCulture);
             }
         }
         
@@ -5032,11 +7210,65 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot access a disposed HwndSource..
+        /// </summary>
+        internal static string HwndSourceDisposed {
+            get {
+                return ResourceManager.GetString("HwndSourceDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HwndSubclass.Attach has already been called;  it cannot be called again..
         /// </summary>
         internal static string HwndSubclassMultipleAttach {
             get {
                 return ResourceManager.GetString("HwndSubclassMultipleAttach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Due to protocol mismatch hardware support is not available..
+        /// </summary>
+        internal static string HwndTarget_HardwareNotSupportDueToProtocolMismatch {
+            get {
+                return ResourceManager.GetString("HwndTarget_HardwareNotSupportDueToProtocolMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified handle is not a valid window handle..
+        /// </summary>
+        internal static string HwndTarget_InvalidWindowHandle {
+            get {
+                return ResourceManager.GetString("HwndTarget_InvalidWindowHandle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified window does not belong to the current process..
+        /// </summary>
+        internal static string HwndTarget_InvalidWindowProcess {
+            get {
+                return ResourceManager.GetString("HwndTarget_InvalidWindowProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified window does not belong to the current thread..
+        /// </summary>
+        internal static string HwndTarget_InvalidWindowThread {
+            get {
+                return ResourceManager.GetString("HwndTarget_InvalidWindowThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Another HwndTarget is associated with this window..
+        /// </summary>
+        internal static string HwndTarget_WindowAlreadyHasContent {
+            get {
+                return ResourceManager.GetString("HwndTarget_WindowAlreadyHasContent", resourceCulture);
             }
         }
         
@@ -5055,6 +7287,15 @@ namespace CleanWpfApp {
         internal static string HyphenatorDisposed {
             get {
                 return ResourceManager.GetString("HyphenatorDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot animate the &apos;{0}&apos; property on &apos;{1}&apos; because the object is sealed or frozen..
+        /// </summary>
+        internal static string IAnimatable_CantAnimateSealedDO {
+            get {
+                return ResourceManager.GetString("IAnimatable_CantAnimateSealedDO", resourceCulture);
             }
         }
         
@@ -5122,6 +7363,735 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alpha threshold must be from 0 through 100..
+        /// </summary>
+        internal static string Image_AlphaThresholdOutOfRange {
+            get {
+                return ResourceManager.GetString("Image_AlphaThresholdOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bitmap specified does not have the correct dimensions..
+        /// </summary>
+        internal static string Image_BadDimensions {
+            get {
+                return ResourceManager.GetString("Image_BadDimensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image has corrupted metadata header..
+        /// </summary>
+        internal static string Image_BadMetadataHeader {
+            get {
+                return ResourceManager.GetString("Image_BadMetadataHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; not a valid pixel format..
+        /// </summary>
+        internal static string Image_BadPixelFormat {
+            get {
+                return ResourceManager.GetString("Image_BadPixelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stream is corrupted..
+        /// </summary>
+        internal static string Image_BadStreamData {
+            get {
+                return ResourceManager.GetString("Image_BadStreamData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DLL version not correct..
+        /// </summary>
+        internal static string Image_BadVersion {
+            get {
+                return ResourceManager.GetString("Image_BadVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to create temporary file for download..
+        /// </summary>
+        internal static string Image_CannotCreateTempFile {
+            get {
+                return ResourceManager.GetString("Image_CannotCreateTempFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Image passed to the ImageVisualManager cannot be frozen..
+        /// </summary>
+        internal static string Image_CantBeFrozen {
+            get {
+                return ResourceManager.GetString("Image_CantBeFrozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The codec cannot use the type of stream provided..
+        /// </summary>
+        internal static string Image_CantDealWithStream {
+            get {
+                return ResourceManager.GetString("Image_CantDealWithStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The codec cannot use the type of URI provided..
+        /// </summary>
+        internal static string Image_CantDealWithUri {
+            get {
+                return ResourceManager.GetString("Image_CantDealWithUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Codec added more than once..
+        /// </summary>
+        internal static string Image_CodecPresent {
+            get {
+                return ResourceManager.GetString("Image_CodecPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color context is not valid..
+        /// </summary>
+        internal static string Image_ColorContextInvalid {
+            get {
+                return ResourceManager.GetString("Image_ColorContextInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color transform is not valid..
+        /// </summary>
+        internal static string Image_ColorTransformInvalid {
+            get {
+                return ResourceManager.GetString("Image_ColorTransformInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No imaging component suitable to complete this operation was found..
+        /// </summary>
+        internal static string Image_ComponentNotFound {
+            get {
+                return ResourceManager.GetString("Image_ComponentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The mime type registered with the system does not match the mime type of the file..
+        /// </summary>
+        internal static string Image_ContentTypeDoesNotMatchDecoder {
+            get {
+                return ResourceManager.GetString("Image_ContentTypeDoesNotMatchDecoder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image decoder cannot decode the image. The image might be corrupted..
+        /// </summary>
+        internal static string Image_DecoderError {
+            get {
+                return ResourceManager.GetString("Image_DecoderError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The system display state is not valid..
+        /// </summary>
+        internal static string Image_DisplayStateInvalid {
+            get {
+                return ResourceManager.GetString("Image_DisplayStateInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate copies of metadata present..
+        /// </summary>
+        internal static string Image_DuplicateMetadataPresent {
+            get {
+                return ResourceManager.GetString("Image_DuplicateMetadataPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The designated BitmapEncoder does not support ColorContexts..
+        /// </summary>
+        internal static string Image_EncoderNoColorContext {
+            get {
+                return ResourceManager.GetString("Image_EncoderNoColorContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The designated BitmapEncoder does not support global metadata..
+        /// </summary>
+        internal static string Image_EncoderNoGlobalMetadata {
+            get {
+                return ResourceManager.GetString("Image_EncoderNoGlobalMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The designated BitmapEncoder does not support global thumbnails..
+        /// </summary>
+        internal static string Image_EncoderNoGlobalThumbnail {
+            get {
+                return ResourceManager.GetString("Image_EncoderNoGlobalThumbnail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The designated BitmapEncoder does not support previews..
+        /// </summary>
+        internal static string Image_EncoderNoPreview {
+            get {
+                return ResourceManager.GetString("Image_EncoderNoPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call EndInit without a matching BeginInit call..
+        /// </summary>
+        internal static string Image_EndInitWithoutBeginInit {
+            get {
+                return ResourceManager.GetString("Image_EndInitWithoutBeginInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image is missing a frame..
+        /// </summary>
+        internal static string Image_FrameMissing {
+            get {
+                return ResourceManager.GetString("Image_FrameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This class does not support cloning..
+        /// </summary>
+        internal static string Image_FreezableCloneNotAllowed {
+            get {
+                return ResourceManager.GetString("Image_FreezableCloneNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty GUID is not valid for &apos;{0}&apos;..
+        /// </summary>
+        internal static string Image_GuidEmpty {
+            get {
+                return ResourceManager.GetString("Image_GuidEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image cannot be decoded. The image header might be corrupted..
+        /// </summary>
+        internal static string Image_HeaderError {
+            get {
+                return ResourceManager.GetString("Image_HeaderError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify a palette when using an indexed pixel format..
+        /// </summary>
+        internal static string Image_IndexedPixelFormatRequiresPalette {
+            get {
+                return ResourceManager.GetString("Image_IndexedPixelFormatRequiresPalette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already in an initializing state..
+        /// </summary>
+        internal static string Image_InInitialize {
+            get {
+                return ResourceManager.GetString("Image_InInitialize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapImage initialization is not complete. Call the EndInit method to complete the initialization..
+        /// </summary>
+        internal static string Image_InitializationIncomplete {
+            get {
+                return ResourceManager.GetString("Image_InitializationIncomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InPlaceBitmapMetadataWriter cannot be copied..
+        /// </summary>
+        internal static string Image_InplaceMetadataNoCopy {
+            get {
+                return ResourceManager.GetString("Image_InplaceMetadataNoCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buffer size is not sufficient..
+        /// </summary>
+        internal static string Image_InsufficientBuffer {
+            get {
+                return ResourceManager.GetString("Image_InsufficientBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buffer not large enough to copy memory..
+        /// </summary>
+        internal static string Image_InsufficientBufferSize {
+            get {
+                return ResourceManager.GetString("Image_InsufficientBufferSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred..
+        /// </summary>
+        internal static string Image_InternalError {
+            get {
+                return ResourceManager.GetString("Image_InternalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot match the type of this array to a pixel format..
+        /// </summary>
+        internal static string Image_InvalidArrayForPixel {
+            get {
+                return ResourceManager.GetString("Image_InvalidArrayForPixel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitmap color context is not valid..
+        /// </summary>
+        internal static string Image_InvalidColorContext {
+            get {
+                return ResourceManager.GetString("Image_InvalidColorContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character is not valid in metadata query request..
+        /// </summary>
+        internal static string Image_InvalidQueryCharacter {
+            get {
+                return ResourceManager.GetString("Image_InvalidQueryCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata query request is not valid..
+        /// </summary>
+        internal static string Image_InvalidQueryRequest {
+            get {
+                return ResourceManager.GetString("Image_InvalidQueryRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The lock count cannot exceed UInt32.MaxValue..
+        /// </summary>
+        internal static string Image_LockCountLimit {
+            get {
+                return ResourceManager.GetString("Image_LockCountLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapMetadata initialization incomplete..
+        /// </summary>
+        internal static string Image_MetadataInitializationIncomplete {
+            get {
+                return ResourceManager.GetString("Image_MetadataInitializationIncomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bitmap metadata is not compatible with this container format..
+        /// </summary>
+        internal static string Image_MetadataNotCompatible {
+            get {
+                return ResourceManager.GetString("Image_MetadataNotCompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapMetadata is not available on BitmapImage..
+        /// </summary>
+        internal static string Image_MetadataNotSupported {
+            get {
+                return ResourceManager.GetString("Image_MetadataNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitmap metadata cannot be changed..
+        /// </summary>
+        internal static string Image_MetadataReadOnly {
+            get {
+                return ResourceManager.GetString("Image_MetadataReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot add any more top-level metadata blocks..
+        /// </summary>
+        internal static string Image_MetadataSizeFixed {
+            get {
+                return ResourceManager.GetString("Image_MetadataSizeFixed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call this method while the image is unlocked..
+        /// </summary>
+        internal static string Image_MustBeLocked {
+            get {
+                return ResourceManager.GetString("Image_MustBeLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property &apos;{0}&apos; or property &apos;{1}&apos; must be set..
+        /// </summary>
+        internal static string Image_NeitherArgument {
+            get {
+                return ResourceManager.GetString("Image_NeitherArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property is not set..
+        /// </summary>
+        internal static string Image_NoArgument {
+            get {
+                return ResourceManager.GetString("Image_NoArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No codec found that can decode the specified file..
+        /// </summary>
+        internal static string Image_NoCodecsFound {
+            get {
+                return ResourceManager.GetString("Image_NoCodecsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image does not contain any frames..
+        /// </summary>
+        internal static string Image_NoDecodeFrames {
+            get {
+                return ResourceManager.GetString("Image_NoDecodeFrames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot save an image with no frames..
+        /// </summary>
+        internal static string Image_NoFrames {
+            get {
+                return ResourceManager.GetString("Image_NoFrames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified image does not contain a palette..
+        /// </summary>
+        internal static string Image_NoPalette {
+            get {
+                return ResourceManager.GetString("Image_NoPalette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information was found about this pixel format..
+        /// </summary>
+        internal static string Image_NoPixelFormatFound {
+            get {
+                return ResourceManager.GetString("Image_NoPixelFormatFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitmap does not contain thumbnail..
+        /// </summary>
+        internal static string Image_NoThumbnail {
+            get {
+                return ResourceManager.GetString("Image_NoThumbnail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitmapImage has not been initialized.  Call the BeginInit method, set the appropriate properties, and then call the EndInit method..
+        /// </summary>
+        internal static string Image_NotInitialized {
+            get {
+                return ResourceManager.GetString("Image_NotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot set the initializing state more than once..
+        /// </summary>
+        internal static string Image_OnlyOneInit {
+            get {
+                return ResourceManager.GetString("Image_OnlyOneInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call Save on an Encoder more than once..
+        /// </summary>
+        internal static string Image_OnlyOneSave {
+            get {
+                return ResourceManager.GetString("Image_OnlyOneSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transform must be a combination of scales, flips, and 90 degree rotations..
+        /// </summary>
+        internal static string Image_OnlyOrthogonal {
+            get {
+                return ResourceManager.GetString("Image_OnlyOrthogonal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In place editing of bitmap metadata is not allowed because the original source is not writable..
+        /// </summary>
+        internal static string Image_OriginalStreamReadOnly {
+            get {
+                return ResourceManager.GetString("Image_OriginalStreamReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image data generated an overflow during processing..
+        /// </summary>
+        internal static string Image_Overflow {
+            get {
+                return ResourceManager.GetString("Image_Overflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of colors in the palette is larger than the maximum allowed by the supplied pixel format..
+        /// </summary>
+        internal static string Image_PaletteColorsDoNotMatchFormat {
+            get {
+                return ResourceManager.GetString("Image_PaletteColorsDoNotMatchFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must use a fixed palette type. &apos;{0}&apos; not supported here..
+        /// </summary>
+        internal static string Image_PaletteFixedType {
+            get {
+                return ResourceManager.GetString("Image_PaletteFixedType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot create a palette with less than 1 color or more than 256 colors..
+        /// </summary>
+        internal static string Image_PaletteZeroColors {
+            get {
+                return ResourceManager.GetString("Image_PaletteZeroColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property cannot be found..
+        /// </summary>
+        internal static string Image_PropertyNotFound {
+            get {
+                return ResourceManager.GetString("Image_PropertyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This codec does not support the specified property..
+        /// </summary>
+        internal static string Image_PropertyNotSupported {
+            get {
+                return ResourceManager.GetString("Image_PropertyNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property is corrupted..
+        /// </summary>
+        internal static string Image_PropertySize {
+            get {
+                return ResourceManager.GetString("Image_PropertySize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected property type or value..
+        /// </summary>
+        internal static string Image_PropertyUnexpectedType {
+            get {
+                return ResourceManager.GetString("Image_PropertyUnexpectedType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The metadata query is valid only at the root of the metadata hierarchy..
+        /// </summary>
+        internal static string Image_RequestOnlyValidAtMetadataRoot {
+            get {
+                return ResourceManager.GetString("Image_RequestOnlyValidAtMetadataRoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot set this property outside a BeginInit/EndInit block..
+        /// </summary>
+        internal static string Image_SetPropertyOutsideBeginEndInit {
+            get {
+                return ResourceManager.GetString("Image_SetPropertyOutsideBeginEndInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot invert singular matrix..
+        /// </summary>
+        internal static string Image_SingularMatrix {
+            get {
+                return ResourceManager.GetString("Image_SingularMatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bad Rotation parameter. Only Rotate0, Rotate90, Rotate180, and Rotate270 are supported..
+        /// </summary>
+        internal static string Image_SizeOptionsAngle {
+            get {
+                return ResourceManager.GetString("Image_SizeOptionsAngle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image dimensions are out of the range supported by this codec..
+        /// </summary>
+        internal static string Image_SizeOutOfRange {
+            get {
+                return ResourceManager.GetString("Image_SizeOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata stream is not available for this operation..
+        /// </summary>
+        internal static string Image_StreamNotAvailable {
+            get {
+                return ResourceManager.GetString("Image_StreamNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot read from the stream..
+        /// </summary>
+        internal static string Image_StreamRead {
+            get {
+                return ResourceManager.GetString("Image_StreamRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot write to the stream..
+        /// </summary>
+        internal static string Image_StreamWrite {
+            get {
+                return ResourceManager.GetString("Image_StreamWrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bitmap has too many scanlines for the specified encoder..
+        /// </summary>
+        internal static string Image_TooManyScanlines {
+            get {
+                return ResourceManager.GetString("Image_TooManyScanlines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commit unsuccessful because too much metadata changed..
+        /// </summary>
+        internal static string Image_TooMuchMetadata {
+            get {
+                return ResourceManager.GetString("Image_TooMuchMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected type of metadata..
+        /// </summary>
+        internal static string Image_UnexpectedMetadataType {
+            get {
+                return ResourceManager.GetString("Image_UnexpectedMetadataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image format is unrecognized..
+        /// </summary>
+        internal static string Image_UnknownFormat {
+            get {
+                return ResourceManager.GetString("Image_UnknownFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation not supported..
+        /// </summary>
+        internal static string Image_UnsupportedOperation {
+            get {
+                return ResourceManager.GetString("Image_UnsupportedOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixel format not supported..
+        /// </summary>
+        internal static string Image_UnsupportedPixelFormat {
+            get {
+                return ResourceManager.GetString("Image_UnsupportedPixelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation caused an invalid state..
+        /// </summary>
+        internal static string Image_WrongState {
+            get {
+                return ResourceManager.GetString("Image_WrongState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If SortDescriptions is overridden in derived classes, then must also override &apos;{0}&apos;..
         /// </summary>
         internal static string ImplementOtherMembersWithSort {
@@ -5154,6 +8124,15 @@ namespace CleanWpfApp {
         internal static string IncompatibleModeOrAccess {
             get {
                 return ResourceManager.GetString("IncompatibleModeOrAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The StylusPointDescriptions are incompatible. Use the StylusPointDescription.GetCommonDescription method to find a common StylusPointDescription and then call StylusPointCollection.Reformat to return a compatible StylusPointCollection..
+        /// </summary>
+        internal static string IncompatibleStylusPointDescriptions {
+            get {
+                return ResourceManager.GetString("IncompatibleStylusPointDescriptions", resourceCulture);
             }
         }
         
@@ -5203,6 +8182,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IncreaseZoomKey {
+            get {
+                return ResourceManager.GetString("IncreaseZoomKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IncreaseZoomKeyDisplayString {
+            get {
+                return ResourceManager.GetString("IncreaseZoomKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Zoom.
+        /// </summary>
+        internal static string IncreaseZoomText {
+            get {
+                return ResourceManager.GetString("IncreaseZoomText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot use indexed Value on PropertyDescriptor..
         /// </summary>
         internal static string IndexedPropDescNotImplemented {
@@ -5239,6 +8245,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The object is already being initialized..
+        /// </summary>
+        internal static string InInitialization {
+            get {
+                return ResourceManager.GetString("InInitialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation fails because the object is not fully initialized..
+        /// </summary>
+        internal static string InitializationIncomplete {
+            get {
+                return ResourceManager.GetString("InitializationIncomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot initialize compressor..
+        /// </summary>
+        internal static string InitializingCompressorFailed {
+            get {
+                return ResourceManager.GetString("InitializingCompressorFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Esc.
         /// </summary>
         internal static string InkCanvasDeselectKeyDisplayString {
@@ -5253,6 +8286,69 @@ namespace CleanWpfApp {
         internal static string InnerPackageUriHasFragment {
             get {
                 return ResourceManager.GetString("InnerPackageUriHasFragment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InnerRequest not available for preloaded packages..
+        /// </summary>
+        internal static string InnerRequestNotAllowed {
+            get {
+                return ResourceManager.GetString("InnerRequestNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesture accepts only objects of type &apos;{0}&apos;..
+        /// </summary>
+        internal static string InputBinding_ExpectedInputGesture {
+            get {
+                return ResourceManager.GetString("InputBinding_ExpectedInputGesture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InputLanguageManager is not ready to change the current input languages..
+        /// </summary>
+        internal static string InputLanguageManager_NotReadyToChangeCurrentLanguage {
+            get {
+                return ResourceManager.GetString("InputLanguageManager_NotReadyToChangeCurrentLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid ImeConversionMode..
+        /// </summary>
+        internal static string InputMethod_InvalidConversionMode {
+            get {
+                return ResourceManager.GetString("InputMethod_InvalidConversionMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid ImeSentenceMode..
+        /// </summary>
+        internal static string InputMethod_InvalidSentenceMode {
+            get {
+                return ResourceManager.GetString("InputMethod_InvalidSentenceMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The InputProviderSite has already been disposed..
+        /// </summary>
+        internal static string InputProviderSiteDisposed {
+            get {
+                return ResourceManager.GetString("InputProviderSiteDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid InputScopeName..
+        /// </summary>
+        internal static string InputScope_InvalidInputScopeName {
+            get {
+                return ResourceManager.GetString("InputScope_InvalidInputScopeName", resourceCulture);
             }
         }
         
@@ -5289,6 +8385,60 @@ namespace CleanWpfApp {
         internal static string IntegerCollectionLengthLessThanZero {
             get {
                 return ResourceManager.GetString("IntegerCollectionLengthLessThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integer collection size cannot be negative..
+        /// </summary>
+        internal static string IntegerCollectionLengthLessThanZero1 {
+            get {
+                return ResourceManager.GetString("IntegerCollectionLengthLessThanZero1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid type for IInputElement. UIElement, ContentElement or UIElement3D expected..
+        /// </summary>
+        internal static string Invalid_IInputElement {
+            get {
+                return ResourceManager.GetString("Invalid_IInputElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length of the ISF data must be greater than zero..
+        /// </summary>
+        internal static string Invalid_isfData_Length {
+            get {
+                return ResourceManager.GetString("Invalid_isfData_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The URI specified is invalid..
+        /// </summary>
+        internal static string Invalid_URI {
+            get {
+                return ResourceManager.GetString("Invalid_URI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An absolute URI in a font family name must have file:// scheme..
+        /// </summary>
+        internal static string InvalidAbsoluteUriInFontFamilyName {
+            get {
+                return ResourceManager.GetString("InvalidAbsoluteUriInFontFamilyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The additional data passed in does not match what is expected based on the StylusPointDescription..
+        /// </summary>
+        internal static string InvalidAdditionalDataForStylusPoint {
+            get {
+                return ResourceManager.GetString("InvalidAdditionalDataForStylusPoint", resourceCulture);
             }
         }
         
@@ -5347,11 +8497,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum buffer length must be within actual buffer length..
+        /// </summary>
+        internal static string InvalidBufferLength {
+            get {
+                return ResourceManager.GetString("InvalidBufferLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Byte ranges are not valid in &apos;{0}&apos;..
         /// </summary>
         internal static string InvalidByteRanges {
             get {
                 return ResourceManager.GetString("InvalidByteRanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Byte ranges are not valid in &apos;{0}&apos;..
+        /// </summary>
+        internal static string InvalidByteRanges1 {
+            get {
+                return ResourceManager.GetString("InvalidByteRanges1", resourceCulture);
             }
         }
         
@@ -5446,11 +8614,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; cursor type is not valid..
+        /// </summary>
+        internal static string InvalidCursorType {
+            get {
+                return ResourceManager.GetString("InvalidCursorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Serializer does not support custom BAML serialization operations..
         /// </summary>
         internal static string InvalidCustomSerialize {
             get {
                 return ResourceManager.GetString("InvalidCustomSerialize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified data is invalid, see inner exception for details..
+        /// </summary>
+        internal static string InvalidDataInISF {
+            get {
+                return ResourceManager.GetString("InvalidDataInISF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property data must be a non-reference variant compatible type..
+        /// </summary>
+        internal static string InvalidDataTypeForExtendedProperty {
+            get {
+                return ResourceManager.GetString("InvalidDataTypeForExtendedProperty", resourceCulture);
             }
         }
         
@@ -5491,6 +8686,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value is out of range..
+        /// </summary>
+        internal static string InvalidDiameter1 {
+            get {
+                return ResourceManager.GetString("InvalidDiameter1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; document property type is not valid..
         /// </summary>
         internal static string InvalidDocumentPropertyType {
@@ -5505,6 +8709,24 @@ namespace CleanWpfApp {
         internal static string InvalidDocumentPropertyVariantType {
             get {
                 return ResourceManager.GetString("InvalidDocumentPropertyVariantType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height must be greater than or equal to DrawingAttributes.MinHeight and less than or equal to DrawingAttribute.MaxHeight..
+        /// </summary>
+        internal static string InvalidDrawingAttributesHeight {
+            get {
+                return ResourceManager.GetString("InvalidDrawingAttributesHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width must be greater than or equal to DrawingAttributes.MinWidth and less than or equal to DrawingAttribute.MaxWidth..
+        /// </summary>
+        internal static string InvalidDrawingAttributesWidth {
+            get {
+                return ResourceManager.GetString("InvalidDrawingAttributesWidth", resourceCulture);
             }
         }
         
@@ -5545,6 +8767,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extended property data type is not valid..
+        /// </summary>
+        internal static string InvalidEpInIsf {
+            get {
+                return ResourceManager.GetString("InvalidEpInIsf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event argument is invalid..
         /// </summary>
         internal static string InvalidEvent {
@@ -5563,11 +8794,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The event handle is not usable..
+        /// </summary>
+        internal static string InvalidEventHandle1 {
+            get {
+                return ResourceManager.GetString("InvalidEventHandle1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guid.Empty is not a valid value..
         /// </summary>
         internal static string InvalidGuid {
             get {
                 return ResourceManager.GetString("InvalidGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GUID cannot be empty..
+        /// </summary>
+        internal static string InvalidGuid1 {
+            get {
+                return ResourceManager.GetString("InvalidGuid1", resourceCulture);
             }
         }
         
@@ -5586,6 +8835,24 @@ namespace CleanWpfApp {
         internal static string InvalidInkForeground {
             get {
                 return ResourceManager.GetString("InvalidInkForeground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified GUID represents a button, so isButton must be true..
+        /// </summary>
+        internal static string InvalidIsButtonForId {
+            get {
+                return ResourceManager.GetString("InvalidIsButtonForId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified GUID does not represent a button, so isButton must be false..
+        /// </summary>
+        internal static string InvalidIsButtonForId2 {
+            get {
+                return ResourceManager.GetString("InvalidIsButtonForId2", resourceCulture);
             }
         }
         
@@ -5640,6 +8907,33 @@ namespace CleanWpfApp {
         internal static string InvalidLocCommentValue {
             get {
                 return ResourceManager.GetString("InvalidLocCommentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Infinity member value is not valid in Matrix..
+        /// </summary>
+        internal static string InvalidMatrixContainsInfinity {
+            get {
+                return ResourceManager.GetString("InvalidMatrixContainsInfinity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NaN is not a valid value for Matrix member..
+        /// </summary>
+        internal static string InvalidMatrixContainsNaN {
+            get {
+                return ResourceManager.GetString("InvalidMatrixContainsNaN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StylusPointPropertyInfos that are buttons must have a minimum of 0 and a maximum of 1..
+        /// </summary>
+        internal static string InvalidMinMaxForButton {
+            get {
+                return ResourceManager.GetString("InvalidMinMaxForButton", resourceCulture);
             }
         }
         
@@ -5752,6 +9046,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The part name does not correspond to its content type..
+        /// </summary>
+        internal static string InvalidPartName {
+            get {
+                return ResourceManager.GetString("InvalidPartName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Part URI is not valid per rules defined in the Open Packaging Conventions specification..
         /// </summary>
         internal static string InvalidPartUri {
@@ -5788,6 +9091,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PermissionState value &apos;{0}&apos; is not valid for this Permission..
+        /// </summary>
+        internal static string InvalidPermissionStateValue1 {
+            get {
+                return ResourceManager.GetString("InvalidPermissionStateValue1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Permission type is not valid. Expected &apos;{0}&apos;..
         /// </summary>
         internal static string InvalidPermissionType {
@@ -5797,11 +9109,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Permission type is not valid. Expected &apos;{0}&apos;..
+        /// </summary>
+        internal static string InvalidPermissionType1 {
+            get {
+                return ResourceManager.GetString("InvalidPermissionType1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Point value..
         /// </summary>
         internal static string InvalidPoint {
             get {
                 return ResourceManager.GetString("InvalidPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pressure must be a value between 0 and 1..
+        /// </summary>
+        internal static string InvalidPressureValue {
+            get {
+                return ResourceManager.GetString("InvalidPressureValue", resourceCulture);
             }
         }
         
@@ -5860,6 +9190,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The stroke being removed does not exist in the current collection..
+        /// </summary>
+        internal static string InvalidRemovedStroke {
+            get {
+                return ResourceManager.GetString("InvalidRemovedStroke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stroke being replaced does not exist in the current collection..
+        /// </summary>
+        internal static string InvalidReplacedStroke {
+            get {
+                return ResourceManager.GetString("InvalidReplacedStroke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTTP byte range downloader can support only HTTP or HTTPS schemes..
+        /// </summary>
+        internal static string InvalidScheme {
+            get {
+                return ResourceManager.GetString("InvalidScheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selection is not valid because it spans pages that do not exist..
         /// </summary>
         internal static string InvalidSelectionPages {
@@ -5883,6 +9240,24 @@ namespace CleanWpfApp {
         internal static string InvalidSFContentType {
             get {
                 return ResourceManager.GetString("InvalidSFContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; must be a relative URI for site of origin..
+        /// </summary>
+        internal static string InvalidSiteOfOriginUri {
+            get {
+                return ResourceManager.GetString("InvalidSiteOfOriginUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified size is less than the information decoded in the ISF stream..
+        /// </summary>
+        internal static string InvalidSizeSpecified {
+            get {
+                return ResourceManager.GetString("InvalidSizeSpecified", resourceCulture);
             }
         }
         
@@ -5932,6 +9307,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stream is not valid..
+        /// </summary>
+        internal static string InvalidStream {
+            get {
+                return ResourceManager.GetString("InvalidStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; value is not valid. It must contain one or four delimited Lengths..
         /// </summary>
         internal static string InvalidStringCornerRadius {
@@ -5968,6 +9352,105 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Translation is not valid..
+        /// </summary>
+        internal static string InvalidSttValue {
+            get {
+                return ResourceManager.GetString("InvalidSttValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StylusPointCollection cannot be empty when attached to a Stroke..
+        /// </summary>
+        internal static string InvalidStylusPointCollectionZeroCount {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointCollectionZeroCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified collection cannot be empty..
+        /// </summary>
+        internal static string InvalidStylusPointConstructionZeroLengthCollection {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointConstructionZeroLengthCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StylusPointDescription must contain at least X, Y and NormalPressure in that order..
+        /// </summary>
+        internal static string InvalidStylusPointDescription {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When constructing a StylusPointDescription, any StylusPointPropertyInfos that represent buttons must be placed at the end of the collection..
+        /// </summary>
+        internal static string InvalidStylusPointDescriptionButtonsMustBeLast {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointDescriptionButtonsMustBeLast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StylusPointDescription cannot contain duplicate StylusPointPropertyInfos..
+        /// </summary>
+        internal static string InvalidStylusPointDescriptionDuplicatesFound {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointDescriptionDuplicatesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified StylusPointDescription must be a subset..
+        /// </summary>
+        internal static string InvalidStylusPointDescriptionSubset {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointDescriptionSubset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StylusPointDescription supports no more than 31 buttons..
+        /// </summary>
+        internal static string InvalidStylusPointDescriptionTooManyButtons {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointDescriptionTooManyButtons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The StylusPoint does not support the specified StylusPointProperty..
+        /// </summary>
+        internal static string InvalidStylusPointProperty {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution must be at least 0.0f..
+        /// </summary>
+        internal static string InvalidStylusPointPropertyInfoResolution {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointPropertyInfoResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value cannot be Double.NaN..
+        /// </summary>
+        internal static string InvalidStylusPointXYNaN {
+            get {
+                return ResourceManager.GetString("InvalidStylusPointXYNaN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; subtree processor is not valid..
         /// </summary>
         internal static string InvalidSubTreeProcessor {
@@ -5991,6 +9474,24 @@ namespace CleanWpfApp {
         internal static string InvalidTempFileName {
             get {
                 return ResourceManager.GetString("InvalidTempFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot have empty name of a temporary file..
+        /// </summary>
+        internal static string InvalidTempFileName1 {
+            get {
+                return ResourceManager.GetString("InvalidTempFileName1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested TextDecorationCollection string is not valid: &apos;{0}&apos;..
+        /// </summary>
+        internal static string InvalidTextDecorationCollectionString {
+            get {
+                return ResourceManager.GetString("InvalidTextDecorationCollectionString", resourceCulture);
             }
         }
         
@@ -6058,11 +9559,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid value &apos;{0}&apos; for type &apos;{1}&apos;..
+        /// </summary>
+        internal static string InvalidValueOfType {
+            get {
+                return ResourceManager.GetString("InvalidValueOfType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AttachedAnnotation value is not valid..
         /// </summary>
         internal static string InvalidValueSpecified {
             get {
                 return ResourceManager.GetString("InvalidValueSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value must be of type &apos;{0}&apos;..
+        /// </summary>
+        internal static string InvalidValueType {
+            get {
+                return ResourceManager.GetString("InvalidValueType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value must be of type &apos;{0}&apos; or &apos;{1}&apos;..
+        /// </summary>
+        internal static string InvalidValueType1 {
+            get {
+                return ResourceManager.GetString("InvalidValueType1", resourceCulture);
             }
         }
         
@@ -6099,6 +9627,33 @@ namespace CleanWpfApp {
         internal static string IOBufferOverflow {
             get {
                 return ResourceManager.GetString("IOBufferOverflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A read or write operation references a location outside the bounds of the buffer provided..
+        /// </summary>
+        internal static string IOBufferOverflow1 {
+            get {
+                return ResourceManager.GetString("IOBufferOverflow1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/O error when opening file &apos;{0}&apos;..
+        /// </summary>
+        internal static string IOExceptionWithFileName {
+            get {
+                return ResourceManager.GetString("IOExceptionWithFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InkSerializedFormat operation failed..
+        /// </summary>
+        internal static string IsfOperationFailed {
+            get {
+                return ResourceManager.GetString("IsfOperationFailed", resourceCulture);
             }
         }
         
@@ -6364,6 +9919,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The specified keyboard sink is already owned by a site..
+        /// </summary>
+        internal static string KeyboardSinkAlreadyOwned {
+            get {
+                return ResourceManager.GetString("KeyboardSinkAlreadyOwned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified keyboard sink must be a UIElement..
+        /// </summary>
+        internal static string KeyboardSinkMustBeAnElement {
+            get {
+                return ResourceManager.GetString("KeyboardSinkMustBeAnElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified keyboard sink is not a child of this source..
+        /// </summary>
+        internal static string KeyboardSinkNotAChild {
+            get {
+                return ResourceManager.GetString("KeyboardSinkNotAChild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The key collection includes entry that is not valid. It must be an IBamlDictionaryKey..
         /// </summary>
         internal static string KeyCollectionHasInvalidKey {
@@ -6513,6 +10095,15 @@ namespace CleanWpfApp {
         internal static string KeyEnterParagraphBreakDisplayString {
             get {
                 return ResourceManager.GetString("KeyEnterParagraphBreakDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}+{1}&apos; key and modifier combination is not supported for KeyGesture..
+        /// </summary>
+        internal static string KeyGesture_Invalid {
+            get {
+                return ResourceManager.GetString("KeyGesture_Invalid", resourceCulture);
             }
         }
         
@@ -7138,6 +10729,42 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LastPageKey {
+            get {
+                return ResourceManager.GetString("LastPageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LastPageKeyDisplayString {
+            get {
+                return ResourceManager.GetString("LastPageKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Page.
+        /// </summary>
+        internal static string LastPageText {
+            get {
+                return ResourceManager.GetString("LastPageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layout recursion reached allowed limit to avoid stack overflow: &apos;{0}&apos;. Either the tree contains a loop or is too deep..
+        /// </summary>
+        internal static string LayoutManager_DeepRecursion {
+            get {
+                return ResourceManager.GetString("LayoutManager_DeepRecursion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; string cannot be converted to Length..
         /// </summary>
         internal static string LengthFormatError {
@@ -7318,6 +10945,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unrecognized ManipulationMode flag was encountered..
+        /// </summary>
+        internal static string Manipulation_InvalidManipulationMode {
+            get {
+                return ResourceManager.GetString("Manipulation_InvalidManipulationMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manipulation is not active on the specified element..
+        /// </summary>
+        internal static string Manipulation_ManipulationNotActive {
+            get {
+                return ResourceManager.GetString("Manipulation_ManipulationNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsManipulationEnabled is not set to true on the specified element..
+        /// </summary>
+        internal static string Manipulation_ManipulationNotEnabled {
+            get {
+                return ResourceManager.GetString("Manipulation_ManipulationNotEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Items in the array must be type &apos;{0}&apos;. One or more items cannot be cast to this type..
         /// </summary>
         internal static string MarkupExtensionArrayBadType {
@@ -7453,6 +11107,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot invert the matrix, because the matrix is not invertible..
+        /// </summary>
+        internal static string Matrix3D_NotInvertible {
+            get {
+                return ResourceManager.GetString("Matrix3D_NotInvertible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified Matrix must be invertible..
+        /// </summary>
+        internal static string MatrixNotInvertible {
+            get {
+                return ResourceManager.GetString("MatrixNotInvertible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum StickyNoteControl size has been exceeded..
         /// </summary>
         internal static string MaximumNoteSizeExceeded {
@@ -7480,11 +11152,884 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Media file download failed..
+        /// </summary>
+        internal static string Media_DownloadFailed {
+            get {
+                return ResourceManager.GetString("Media_DownloadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installed codecs do not support the media file format..
+        /// </summary>
+        internal static string Media_FileFormatNotSupported {
+            get {
+                return ResourceManager.GetString("Media_FileFormatNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find the media file..
+        /// </summary>
+        internal static string Media_FileNotFound {
+            get {
+                return ResourceManager.GetString("Media_FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display driver must support video acceleration for video or audio playback..
+        /// </summary>
+        internal static string Media_HardwareVideoAccelerationNotAvailable {
+            get {
+                return ResourceManager.GetString("Media_HardwareVideoAccelerationNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are insufficient video resources available for video or audio playback..
+        /// </summary>
+        internal static string Media_InsufficientVideoResources {
+            get {
+                return ResourceManager.GetString("Media_InsufficientVideoResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value does not fall within the expected range..
+        /// </summary>
+        internal static string Media_InvalidArgument {
+            get {
+                return ResourceManager.GetString("Media_InvalidArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Media Player version 10 or later is required..
+        /// </summary>
+        internal static string Media_InvalidWmpVersion {
+            get {
+                return ResourceManager.GetString("Media_InvalidWmpVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access was denied on the media file..
+        /// </summary>
+        internal static string Media_LogonFailure {
+            get {
+                return ResourceManager.GetString("Media_LogonFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot perform this operation while a clock is assigned to the media player..
+        /// </summary>
+        internal static string Media_NotAllowedWhileTimingEngineInControl {
+            get {
+                return ResourceManager.GetString("Media_NotAllowedWhileTimingEngineInControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only site-of-origin pack URIs are supported for media..
+        /// </summary>
+        internal static string Media_PackURIsAreNotSupported {
+            get {
+                return ResourceManager.GetString("Media_PackURIsAreNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No operations are valid on a closed media player except open and close..
+        /// </summary>
+        internal static string Media_PlayerIsClosed {
+            get {
+                return ResourceManager.GetString("Media_PlayerIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized playlist file format..
+        /// </summary>
+        internal static string Media_PlaylistFormatNotSupported {
+            get {
+                return ResourceManager.GetString("Media_PlaylistFormatNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot access the stream after it is closed..
+        /// </summary>
+        internal static string Media_StreamClosed {
+            get {
+                return ResourceManager.GetString("Media_StreamClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accessed an uninitialized media resource..
+        /// </summary>
+        internal static string Media_UninitializedResource {
+            get {
+                return ResourceManager.GetString("Media_UninitializedResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Channel type is not recognized..
+        /// </summary>
+        internal static string Media_UnknownChannelType {
+            get {
+                return ResourceManager.GetString("Media_UnknownChannelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown media error occurred..
+        /// </summary>
+        internal static string Media_UnknownMediaExecption {
+            get {
+                return ResourceManager.GetString("Media_UnknownMediaExecption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must specify URI..
+        /// </summary>
+        internal static string Media_UriNotSpecified {
+            get {
+                return ResourceManager.GetString("Media_UriNotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaBoostBassKey {
+            get {
+                return ResourceManager.GetString("MediaBoostBassKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaBoostBassKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaBoostBassKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boost Bass.
+        /// </summary>
+        internal static string MediaBoostBassText {
+            get {
+                return ResourceManager.GetString("MediaBoostBassText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaChannelDownKey {
+            get {
+                return ResourceManager.GetString("MediaChannelDownKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaChannelDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaChannelDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Channel Down.
+        /// </summary>
+        internal static string MediaChannelDownText {
+            get {
+                return ResourceManager.GetString("MediaChannelDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaChannelUpKey {
+            get {
+                return ResourceManager.GetString("MediaChannelUpKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaChannelUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaChannelUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Channel Up.
+        /// </summary>
+        internal static string MediaChannelUpText {
+            get {
+                return ResourceManager.GetString("MediaChannelUpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call this API during the OnRender callback. During OnRender, only drawing operations that draw the content of the Visual can be performed..
+        /// </summary>
+        internal static string MediaContext_APINotAllowed {
+            get {
+                return ResourceManager.GetString("MediaContext_APINotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An infinite loop appears to have resulted from cross-dependent views..
+        /// </summary>
+        internal static string MediaContext_InfiniteLayoutLoop {
+            get {
+                return ResourceManager.GetString("MediaContext_InfiniteLayoutLoop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An infinite loop appears to have resulted from repeatedly invalidating the TimeManager during the Layout/Render process..
+        /// </summary>
+        internal static string MediaContext_InfiniteTickLoop {
+            get {
+                return ResourceManager.GetString("MediaContext_InfiniteTickLoop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid user-specified pixel shader.  Register a PixelShader.InvalidPixelShaderEncountered event handler to avoid this exception being raised..
+        /// </summary>
+        internal static string MediaContext_NoBadShaderHandler {
+            get {
+                return ResourceManager.GetString("MediaContext_NoBadShaderHandler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out of video memory..
+        /// </summary>
+        internal static string MediaContext_OutOfVideoMemory {
+            get {
+                return ResourceManager.GetString("MediaContext_OutOfVideoMemory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unspecified error occurred on the render thread..
+        /// </summary>
+        internal static string MediaContext_RenderThreadError {
+            get {
+                return ResourceManager.GetString("MediaContext_RenderThreadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseBassKey {
+            get {
+                return ResourceManager.GetString("MediaDecreaseBassKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseBassKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaDecreaseBassKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease Bass.
+        /// </summary>
+        internal static string MediaDecreaseBassText {
+            get {
+                return ResourceManager.GetString("MediaDecreaseBassText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseMicrophoneVolumeKey {
+            get {
+                return ResourceManager.GetString("MediaDecreaseMicrophoneVolumeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseMicrophoneVolumeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaDecreaseMicrophoneVolumeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease Microphone Volume.
+        /// </summary>
+        internal static string MediaDecreaseMicrophoneVolumeText {
+            get {
+                return ResourceManager.GetString("MediaDecreaseMicrophoneVolumeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseTrebleKey {
+            get {
+                return ResourceManager.GetString("MediaDecreaseTrebleKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseTrebleKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaDecreaseTrebleKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease Treble.
+        /// </summary>
+        internal static string MediaDecreaseTrebleText {
+            get {
+                return ResourceManager.GetString("MediaDecreaseTrebleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseVolumeKey {
+            get {
+                return ResourceManager.GetString("MediaDecreaseVolumeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaDecreaseVolumeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaDecreaseVolumeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease Volume.
+        /// </summary>
+        internal static string MediaDecreaseVolumeText {
+            get {
+                return ResourceManager.GetString("MediaDecreaseVolumeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot set source on MediaElement driven by clock..
         /// </summary>
         internal static string MediaElement_CannotSetSourceOnMediaElementDrivenByClock {
             get {
                 return ResourceManager.GetString("MediaElement_CannotSetSourceOnMediaElementDrivenByClock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaFastForwardKey {
+            get {
+                return ResourceManager.GetString("MediaFastForwardKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaFastForwardKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaFastForwardKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast Forward.
+        /// </summary>
+        internal static string MediaFastForwardText {
+            get {
+                return ResourceManager.GetString("MediaFastForwardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseBassKey {
+            get {
+                return ResourceManager.GetString("MediaIncreaseBassKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseBassKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaIncreaseBassKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Bass.
+        /// </summary>
+        internal static string MediaIncreaseBassText {
+            get {
+                return ResourceManager.GetString("MediaIncreaseBassText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseMicrophoneVolumeKey {
+            get {
+                return ResourceManager.GetString("MediaIncreaseMicrophoneVolumeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseMicrophoneVolumeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaIncreaseMicrophoneVolumeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Microphone Volume.
+        /// </summary>
+        internal static string MediaIncreaseMicrophoneVolumeText {
+            get {
+                return ResourceManager.GetString("MediaIncreaseMicrophoneVolumeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseTrebleKey {
+            get {
+                return ResourceManager.GetString("MediaIncreaseTrebleKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseTrebleKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaIncreaseTrebleKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Treble.
+        /// </summary>
+        internal static string MediaIncreaseTrebleText {
+            get {
+                return ResourceManager.GetString("MediaIncreaseTrebleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseVolumeKey {
+            get {
+                return ResourceManager.GetString("MediaIncreaseVolumeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaIncreaseVolumeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaIncreaseVolumeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Volume.
+        /// </summary>
+        internal static string MediaIncreaseVolumeText {
+            get {
+                return ResourceManager.GetString("MediaIncreaseVolumeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaMuteMicrophoneVolumeKey {
+            get {
+                return ResourceManager.GetString("MediaMuteMicrophoneVolumeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaMuteMicrophoneVolumeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaMuteMicrophoneVolumeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mute Microphone Volume.
+        /// </summary>
+        internal static string MediaMuteMicrophoneVolumeText {
+            get {
+                return ResourceManager.GetString("MediaMuteMicrophoneVolumeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaMuteVolumeKey {
+            get {
+                return ResourceManager.GetString("MediaMuteVolumeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaMuteVolumeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaMuteVolumeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mute Volume.
+        /// </summary>
+        internal static string MediaMuteVolumeText {
+            get {
+                return ResourceManager.GetString("MediaMuteVolumeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaNextTrackKey {
+            get {
+                return ResourceManager.GetString("MediaNextTrackKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaNextTrackKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaNextTrackKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Track.
+        /// </summary>
+        internal static string MediaNextTrackText {
+            get {
+                return ResourceManager.GetString("MediaNextTrackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaPauseKey {
+            get {
+                return ResourceManager.GetString("MediaPauseKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaPauseKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaPauseKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        internal static string MediaPauseText {
+            get {
+                return ResourceManager.GetString("MediaPauseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaPlayKey {
+            get {
+                return ResourceManager.GetString("MediaPlayKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaPlayKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaPlayKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        internal static string MediaPlayText {
+            get {
+                return ResourceManager.GetString("MediaPlayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaPreviousTrackKey {
+            get {
+                return ResourceManager.GetString("MediaPreviousTrackKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaPreviousTrackKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaPreviousTrackKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Track.
+        /// </summary>
+        internal static string MediaPreviousTrackText {
+            get {
+                return ResourceManager.GetString("MediaPreviousTrackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaRecordKey {
+            get {
+                return ResourceManager.GetString("MediaRecordKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaRecordKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaRecordKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record.
+        /// </summary>
+        internal static string MediaRecordText {
+            get {
+                return ResourceManager.GetString("MediaRecordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaRewindKey {
+            get {
+                return ResourceManager.GetString("MediaRewindKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaRewindKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaRewindKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rewind.
+        /// </summary>
+        internal static string MediaRewindText {
+            get {
+                return ResourceManager.GetString("MediaRewindText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaSelectKey {
+            get {
+                return ResourceManager.GetString("MediaSelectKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaSelectKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaSelectKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        internal static string MediaSelectText {
+            get {
+                return ResourceManager.GetString("MediaSelectText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaStopKey {
+            get {
+                return ResourceManager.GetString("MediaStopKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaStopKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaStopKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string MediaStopText {
+            get {
+                return ResourceManager.GetString("MediaStopText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This API was accessed with arguments from the wrong context..
+        /// </summary>
+        internal static string MediaSystem_ApiInvalidContext {
+            get {
+                return ResourceManager.GetString("MediaSystem_ApiInvalidContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received an out of order connect or disconnect message..
+        /// </summary>
+        internal static string MediaSystem_OutOfOrderConnectOrDisconnect {
+            get {
+                return ResourceManager.GetString("MediaSystem_OutOfOrderConnectOrDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaToggleMicrophoneOnOffKey {
+            get {
+                return ResourceManager.GetString("MediaToggleMicrophoneOnOffKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaToggleMicrophoneOnOffKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaToggleMicrophoneOnOffKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Microphone OnOff.
+        /// </summary>
+        internal static string MediaToggleMicrophoneOnOffText {
+            get {
+                return ResourceManager.GetString("MediaToggleMicrophoneOnOffText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaTogglePlayPauseKey {
+            get {
+                return ResourceManager.GetString("MediaTogglePlayPauseKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MediaTogglePlayPauseKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MediaTogglePlayPauseKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Play Pause.
+        /// </summary>
+        internal static string MediaTogglePlayPauseText {
+            get {
+                return ResourceManager.GetString("MediaTogglePlayPauseText", resourceCulture);
             }
         }
         
@@ -7521,6 +12066,33 @@ namespace CleanWpfApp {
         internal static string MethodAvailableOnlyInStreamingCreation {
             get {
                 return ResourceManager.GetString("MethodAvailableOnlyInStreamingCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; method cannot be called at this time..
+        /// </summary>
+        internal static string MethodCallNotAllowed {
+            get {
+                return ResourceManager.GetString("MethodCallNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mismatched versions of PresentationCore.dll, Milcore.dll, WindowsCodecs.dll, or D3d9.dll. Check that these DLLs come from the same source..
+        /// </summary>
+        internal static string MilErr_UnsupportedVersion {
+            get {
+                return ResourceManager.GetString("MilErr_UnsupportedVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RoutedEvent in RoutedEventArgs and EventRoute are mismatched..
+        /// </summary>
+        internal static string Mismatched_RoutedEvent {
+            get {
+                return ResourceManager.GetString("Mismatched_RoutedEvent", resourceCulture);
             }
         }
         
@@ -7642,11 +12214,173 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Down.
+        /// </summary>
+        internal static string MoveDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Down.
+        /// </summary>
+        internal static string MoveDownText {
+            get {
+                return ResourceManager.GetString("MoveDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+Left.
+        /// </summary>
+        internal static string MoveFocusBackKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveFocusBackKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Focus Back.
+        /// </summary>
+        internal static string MoveFocusBackText {
+            get {
+                return ResourceManager.GetString("MoveFocusBackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+Down.
+        /// </summary>
+        internal static string MoveFocusDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveFocusDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Focus Down.
+        /// </summary>
+        internal static string MoveFocusDownText {
+            get {
+                return ResourceManager.GetString("MoveFocusDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+Right.
+        /// </summary>
+        internal static string MoveFocusForwardKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveFocusForwardKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Focus Forward.
+        /// </summary>
+        internal static string MoveFocusForwardText {
+            get {
+                return ResourceManager.GetString("MoveFocusForwardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+PageDown.
+        /// </summary>
+        internal static string MoveFocusPageDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveFocusPageDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Focus Page Down.
+        /// </summary>
+        internal static string MoveFocusPageDownText {
+            get {
+                return ResourceManager.GetString("MoveFocusPageDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+PageUp.
+        /// </summary>
+        internal static string MoveFocusPageUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveFocusPageUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Focus Page Up.
+        /// </summary>
+        internal static string MoveFocusPageUpText {
+            get {
+                return ResourceManager.GetString("MoveFocusPageUpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+Up.
+        /// </summary>
+        internal static string MoveFocusUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveFocusUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Focus Up.
+        /// </summary>
+        internal static string MoveFocusUpText {
+            get {
+                return ResourceManager.GetString("MoveFocusUpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot move an item in a selection when selection is in progress..
         /// </summary>
         internal static string MoveInDeferSelectionActive {
             get {
                 return ResourceManager.GetString("MoveInDeferSelectionActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left.
+        /// </summary>
+        internal static string MoveLeftKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveLeftKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Left.
+        /// </summary>
+        internal static string MoveLeftText {
+            get {
+                return ResourceManager.GetString("MoveLeftText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        internal static string MoveRightKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveRightKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Right.
+        /// </summary>
+        internal static string MoveRightText {
+            get {
+                return ResourceManager.GetString("MoveRightText", resourceCulture);
             }
         }
         
@@ -7660,11 +12394,101 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        internal static string MoveToEndKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveToEndKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move To End.
+        /// </summary>
+        internal static string MoveToEndText {
+            get {
+                return ResourceManager.GetString("MoveToEndText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string MoveToHomeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveToHomeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move To Home.
+        /// </summary>
+        internal static string MoveToHomeText {
+            get {
+                return ResourceManager.GetString("MoveToHomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IStorage/IStream::MoveTo not supported..
         /// </summary>
         internal static string MoveToNYI {
             get {
                 return ResourceManager.GetString("MoveToNYI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PageDown.
+        /// </summary>
+        internal static string MoveToPageDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveToPageDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move To Page Down.
+        /// </summary>
+        internal static string MoveToPageDownText {
+            get {
+                return ResourceManager.GetString("MoveToPageDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PageUp.
+        /// </summary>
+        internal static string MoveToPageUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveToPageUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move To Page Up.
+        /// </summary>
+        internal static string MoveToPageUpText {
+            get {
+                return ResourceManager.GetString("MoveToPageUpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Up.
+        /// </summary>
+        internal static string MoveUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("MoveUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Up.
+        /// </summary>
+        internal static string MoveUpText {
+            get {
+                return ResourceManager.GetString("MoveUpText", resourceCulture);
             }
         }
         
@@ -7728,6 +12552,15 @@ namespace CleanWpfApp {
         internal static string MultiSingleton {
             get {
                 return ResourceManager.GetString("MultiSingleton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot have more than one &apos;{0}&apos; instance in the same AppDomain..
+        /// </summary>
+        internal static string MultiSingleton1 {
+            get {
+                return ResourceManager.GetString("MultiSingleton1", resourceCulture);
             }
         }
         
@@ -7975,6 +12808,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string NavigateJournalKey {
+            get {
+                return ResourceManager.GetString("NavigateJournalKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string NavigateJournalKeyDisplayString {
+            get {
+                return ResourceManager.GetString("NavigateJournalKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navigate Journal.
+        /// </summary>
+        internal static string NavigateJournalText {
+            get {
+                return ResourceManager.GetString("NavigateJournalText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Page.
         /// </summary>
         internal static string NavWindowMenuCurrentPage {
@@ -8007,6 +12867,51 @@ namespace CleanWpfApp {
         internal static string NestedBeginInitNotSupported {
             get {
                 return ResourceManager.GetString("NestedBeginInitNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+N.
+        /// </summary>
+        internal static string NewKeyDisplayString {
+            get {
+                return ResourceManager.GetString("NewKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string NewText {
+            get {
+                return ResourceManager.GetString("NewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string NextPageKey {
+            get {
+                return ResourceManager.GetString("NextPageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string NextPageKeyDisplayString {
+            get {
+                return ResourceManager.GetString("NextPageKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Page.
+        /// </summary>
+        internal static string NextPageText {
+            get {
+                return ResourceManager.GetString("NextPageText", resourceCulture);
             }
         }
         
@@ -8137,11 +13042,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine encountered a non-CLS exception..
+        /// </summary>
+        internal static string NonCLSException1 {
+            get {
+                return ResourceManager.GetString("NonCLSException1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unsupported URI syntax. Method expects a relative URI or a pack://application:,,,/ form of absolute URI..
         /// </summary>
         internal static string NonPackAppAbsoluteUriNotAllowed {
             get {
                 return ResourceManager.GetString("NonPackAppAbsoluteUriNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported Uri syntax. Method expects a relative Uri or a pack://application:,,,/ form of absolute Uri..
+        /// </summary>
+        internal static string NonPackAppAbsoluteUriNotAllowed1 {
+            get {
+                return ResourceManager.GetString("NonPackAppAbsoluteUriNotAllowed1", resourceCulture);
             }
         }
         
@@ -8160,6 +13083,15 @@ namespace CleanWpfApp {
         internal static string NonWhiteSpaceInAddText {
             get {
                 return ResourceManager.GetString("NonWhiteSpaceInAddText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text content is not allowed on this element. Cannot add the text &apos;{0}&apos;..
+        /// </summary>
+        internal static string NonWhiteSpaceInAddText1 {
+            get {
+                return ResourceManager.GetString("NonWhiteSpaceInAddText1", resourceCulture);
             }
         }
         
@@ -8218,11 +13150,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a Command.
+        /// </summary>
+        internal static string NotACommandText {
+            get {
+                return ResourceManager.GetString("NotACommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot call DragMove or Activate before a Window is shown..
         /// </summary>
         internal static string NotAllowedBeforeShow {
             get {
                 return ResourceManager.GetString("NotAllowedBeforeShow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The package URI is not allowed in the package store..
+        /// </summary>
+        internal static string NotAllowedPackageUri {
+            get {
+                return ResourceManager.GetString("NotAllowedPackageUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only PreProcessInput and PostProcessInput events can access InputManager staging area..
+        /// </summary>
+        internal static string NotAllowedToAccessStagingArea {
+            get {
+                return ResourceManager.GetString("NotAllowedToAccessStagingArea", resourceCulture);
             }
         }
         
@@ -8286,6 +13245,15 @@ namespace CleanWpfApp {
         internal static string NotInAssociatedTree {
             get {
                 return ResourceManager.GetString("NotInAssociatedTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The object is not being initialized..
+        /// </summary>
+        internal static string NotInInitialization {
+            get {
+                return ResourceManager.GetString("NotInInitialization", resourceCulture);
             }
         }
         
@@ -8362,11 +13330,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; parameter cannot be null unless &apos;{1}&apos; is an absolute URI..
+        /// </summary>
+        internal static string NullBaseUriParam {
+            get {
+                return ResourceManager.GetString("NullBaseUriParam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GetContentTypeCore method cannot return null for the content type stream..
         /// </summary>
         internal static string NullContentTypeProvided {
             get {
                 return ResourceManager.GetString("NullContentTypeProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hwnd of zero is not valid..
+        /// </summary>
+        internal static string NullHwnd {
+            get {
+                return ResourceManager.GetString("NullHwnd", resourceCulture);
             }
         }
         
@@ -8497,6 +13483,60 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offset must be non-negative..
+        /// </summary>
+        internal static string OffsetNegative1 {
+            get {
+                return ResourceManager.GetString("OffsetNegative1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OleRegisterDragDrop failed with return code &apos;{0}&apos; and window handle &apos;{1}&apos;..
+        /// </summary>
+        internal static string OleRegisterDragDropFailure {
+            get {
+                return ResourceManager.GetString("OleRegisterDragDropFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OleRevokeDragDrop failed with return code &apos;{0}&apos; and window handle &apos;{1}&apos;..
+        /// </summary>
+        internal static string OleRevokeDragDropFailure {
+            get {
+                return ResourceManager.GetString("OleRevokeDragDropFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OleInitialize failed for &apos;{0}&apos;..
+        /// </summary>
+        internal static string OleServicesContext_oleInitializeFailure {
+            get {
+                return ResourceManager.GetString("OleServicesContext_oleInitializeFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current thread must be set to single thread apartment (STA) mode before OLE calls can be made..
+        /// </summary>
+        internal static string OleServicesContext_ThreadMustBeSTA {
+            get {
+                return ResourceManager.GetString("OleServicesContext_ThreadMustBeSTA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keyboard processing can only process keyboard messages..
+        /// </summary>
+        internal static string OnlyAcceptsKeyMessages {
+            get {
+                return ResourceManager.GetString("OnlyAcceptsKeyMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only FileShare.Read and FileShare.None are supported..
         /// </summary>
         internal static string OnlyFileShareReadAndFileShareNoneSupported {
@@ -8520,6 +13560,15 @@ namespace CleanWpfApp {
         internal static string OnlyFlowFixedSupported {
             get {
                 return ResourceManager.GetString("OnlyFlowFixedSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The object is already initialized and cannot be initialized again..
+        /// </summary>
+        internal static string OnlyOneInitialization {
+            get {
+                return ResourceManager.GetString("OnlyOneInitialization", resourceCulture);
             }
         }
         
@@ -8551,6 +13600,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl+O.
+        /// </summary>
+        internal static string OpenKeyDisplayString {
+            get {
+                return ResourceManager.GetString("OpenKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string OpenText {
+            get {
+                return ResourceManager.GetString("OpenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Package.{0} is not supported in streaming production..
         /// </summary>
         internal static string OperationIsNotSupportedInStreamingProduction {
@@ -8569,6 +13636,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paragraph must be allowed to wrap in total-fit formatting..
+        /// </summary>
+        internal static string OptimalParagraphMustWrap {
+            get {
+                return ResourceManager.GetString("OptimalParagraphMustWrap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Override tag is not valid per the schema. Verify that attributes are correct..
         /// </summary>
         internal static string OverrideTagDoesNotMatchSchema {
@@ -8583,6 +13659,15 @@ namespace CleanWpfApp {
         internal static string OverridingMetadataDoesNotMatchBaseMetadataType {
             get {
                 return ResourceManager.GetString("OverridingMetadataDoesNotMatchBaseMetadataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A package with the same URI is already in the package store..
+        /// </summary>
+        internal static string PackageAlreadyExists {
+            get {
+                return ResourceManager.GetString("PackageAlreadyExists", resourceCulture);
             }
         }
         
@@ -8659,6 +13744,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cache policy is not valid..
+        /// </summary>
+        internal static string PackWebRequestCachePolicyIllegal {
+            get {
+                return ResourceManager.GetString("PackWebRequestCachePolicyIllegal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VirtualizationCacheLength of Unit &apos;Page&apos; is not a valid value for IHierarchicalVirtualizationAndScrollInfo.ConstraintCacheSizeAfter/BeforeViewport property..
         /// </summary>
         internal static string PageCacheSizeNotAllowed {
@@ -8700,6 +13794,24 @@ namespace CleanWpfApp {
         internal static string PageContentUnsupportedPageType {
             get {
                 return ResourceManager.GetString("PageContentUnsupportedPageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified ContentPosition is not valid for this element..
+        /// </summary>
+        internal static string PaginatorMissingContentPosition {
+            get {
+                return ResourceManager.GetString("PaginatorMissingContentPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page number cannot be negative..
+        /// </summary>
+        internal static string PaginatorNegativePageNumber {
+            get {
+                return ResourceManager.GetString("PaginatorNegativePageNumber", resourceCulture);
             }
         }
         
@@ -8772,6 +13884,33 @@ namespace CleanWpfApp {
         internal static string ParentOfPageMustBeWindowOrFrame {
             get {
                 return ResourceManager.GetString("ParentOfPageMustBeWindowOrFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect form &apos;{0}&apos; found parsing &apos;{1}&apos; string..
+        /// </summary>
+        internal static string Parser_BadForm {
+            get {
+                return ResourceManager.GetString("Parser_BadForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty string not allowed..
+        /// </summary>
+        internal static string Parser_Empty {
+            get {
+                return ResourceManager.GetString("Parser_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected token &apos;{0}&apos; encountered at position &apos;{1}&apos;..
+        /// </summary>
+        internal static string Parser_UnexpectedToken {
+            get {
+                return ResourceManager.GetString("Parser_UnexpectedToken", resourceCulture);
             }
         }
         
@@ -10009,6 +15148,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Token is not valid..
+        /// </summary>
+        internal static string Parsers_IllegalToken {
+            get {
+                return ResourceManager.GetString("Parsers_IllegalToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token is not valid because it is more than 250 characters..
+        /// </summary>
+        internal static string Parsers_IllegalToken_250_Chars {
+            get {
+                return ResourceManager.GetString("Parsers_IllegalToken_250_Chars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SynchronousMode attribute must be on root tag..
         /// </summary>
         internal static string ParserSyncOnRoot {
@@ -10315,6 +15472,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl+V;Shift+Insert.
+        /// </summary>
+        internal static string PasteKeyDisplayString {
+            get {
+                return ResourceManager.GetString("PasteKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        internal static string PasteText {
+            get {
+                return ResourceManager.GetString("PasteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error in newly produced path figures..
+        /// </summary>
+        internal static string PathGeometry_InternalReadBackError {
+            get {
+                return ResourceManager.GetString("PathGeometry_InternalReadBackError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Path string cannot include an empty element..
         /// </summary>
         internal static string PathHasEmptyElement {
@@ -10351,6 +15535,69 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; file name is longer than the system-defined maximum length..
+        /// </summary>
+        internal static string PathTooLongExceptionWithFileName {
+            get {
+                return ResourceManager.GetString("PathTooLongExceptionWithFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} failed to load from static constructor..
+        /// </summary>
+        internal static string PenImcDllVerificationFailed {
+            get {
+                return ResourceManager.GetString("PenImcDllVerificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SxS COM registration of {0} failed..
+        /// </summary>
+        internal static string PenImcSxSRegistrationFailed {
+            get {
+                return ResourceManager.GetString("PenImcSxSRegistrationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot access a disposed pen service..
+        /// </summary>
+        internal static string Penservice_Disposed {
+            get {
+                return ResourceManager.GetString("Penservice_Disposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected size of packet from pen service..
+        /// </summary>
+        internal static string PenService_InvalidPacketData {
+            get {
+                return ResourceManager.GetString("PenService_InvalidPacketData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The window is already registered for stylus input..
+        /// </summary>
+        internal static string PenService_WindowAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("PenService_WindowAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The window is not registered for stylus input..
+        /// </summary>
+        internal static string PenService_WindowNotRegistered {
+            get {
+                return ResourceManager.GetString("PenService_WindowNotRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot find piece with the specified piece number..
         /// </summary>
         internal static string PieceDoesNotExist {
@@ -10383,6 +15630,33 @@ namespace CleanWpfApp {
         internal static string PositionalArgumentsWrongLength {
             get {
                 return ResourceManager.GetString("PositionalArgumentsWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PreviousPageKey {
+            get {
+                return ResourceManager.GetString("PreviousPageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PreviousPageKeyDisplayString {
+            get {
+                return ResourceManager.GetString("PreviousPageKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Page.
+        /// </summary>
+        internal static string PreviousPageText {
+            get {
+                return ResourceManager.GetString("PreviousPageText", resourceCulture);
             }
         }
         
@@ -10459,6 +15733,42 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ctrl+P.
+        /// </summary>
+        internal static string PrintKeyDisplayString {
+            get {
+                return ResourceManager.GetString("PrintKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+F2.
+        /// </summary>
+        internal static string PrintPreviewKeyDisplayString {
+            get {
+                return ResourceManager.GetString("PrintPreviewKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print Preview.
+        /// </summary>
+        internal static string PrintPreviewText {
+            get {
+                return ResourceManager.GetString("PrintPreviewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print.
+        /// </summary>
+        internal static string PrintText {
+            get {
+                return ResourceManager.GetString("PrintText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot set value on ProgressBar because it is read-only..
         /// </summary>
         internal static string ProgressBarReadOnly {
@@ -10468,11 +15778,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to F4.
+        /// </summary>
+        internal static string PropertiesKeyDisplayString {
+            get {
+                return ResourceManager.GetString("PropertiesKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        internal static string PropertiesText {
+            get {
+                return ResourceManager.GetString("PropertiesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; property was already registered by &apos;{1}&apos;..
         /// </summary>
         internal static string PropertyAlreadyRegistered {
             get {
                 return ResourceManager.GetString("PropertyAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property value must be greater than or equal to zero..
+        /// </summary>
+        internal static string PropertyCannotBeNegative {
+            get {
+                return ResourceManager.GetString("PropertyCannotBeNegative", resourceCulture);
             }
         }
         
@@ -10509,6 +15846,15 @@ namespace CleanWpfApp {
         internal static string PropertyIsInitializeOnly {
             get {
                 return ResourceManager.GetString("PropertyIsInitializeOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property value must be greater than zero..
+        /// </summary>
+        internal static string PropertyMustBeGreaterThanZero {
+            get {
+                return ResourceManager.GetString("PropertyMustBeGreaterThanZero", resourceCulture);
             }
         }
         
@@ -10554,6 +15900,33 @@ namespace CleanWpfApp {
         internal static string PropertyNotSupported {
             get {
                 return ResourceManager.GetString("PropertyNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property of the &apos;{1}&apos; class must be less than or equal to &apos;{2}&apos;..
+        /// </summary>
+        internal static string PropertyOfClassCannotBeGreaterThan {
+            get {
+                return ResourceManager.GetString("PropertyOfClassCannotBeGreaterThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property of the &apos;{1}&apos; class cannot be null..
+        /// </summary>
+        internal static string PropertyOfClassCannotBeNull {
+            get {
+                return ResourceManager.GetString("PropertyOfClassCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property of the &apos;{1}&apos; class must be greater than zero..
+        /// </summary>
+        internal static string PropertyOfClassMustBeGreaterThanZero {
+            get {
+                return ResourceManager.GetString("PropertyOfClassMustBeGreaterThanZero", resourceCulture);
             }
         }
         
@@ -10648,6 +16021,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; property value cannot be NaN..
+        /// </summary>
+        internal static string PropertyValueCannotBeNaN {
+            get {
+                return ResourceManager.GetString("PropertyValueCannotBeNaN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected number of attributes is found on &apos;{0}&apos;..
         /// </summary>
         internal static string PropertyWrongNumbOfAttribsDefinedOn {
@@ -10702,6 +16084,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zero axis of rotation specified..
+        /// </summary>
+        internal static string Quaternion_ZeroAxisSpecified {
+            get {
+                return ResourceManager.GetString("Quaternion_ZeroAxisSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot query text information due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string QueryLineFailure {
+            get {
+                return ResourceManager.GetString("QueryLineFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Range actions are not supported..
         /// </summary>
         internal static string RangeActionsNotSupported {
@@ -10738,6 +16138,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Count of bytes to read cannot be negative..
+        /// </summary>
+        internal static string ReadCountNegative1 {
+            get {
+                return ResourceManager.GetString("ReadCountNegative1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File contains data in format version {0}, but the software can only read that data in format version {1} or lower..
         /// </summary>
         internal static string ReaderVersionError {
@@ -10770,6 +16179,15 @@ namespace CleanWpfApp {
         internal static string ReadOnlyDesignerCoersionNotAllowed {
             get {
                 return ResourceManager.GetString("ReadOnlyDesignerCoersionNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation not supported on a read-only InputGestureCollection..
+        /// </summary>
+        internal static string ReadOnlyInputGesturesCollection {
+            get {
+                return ResourceManager.GetString("ReadOnlyInputGesturesCollection", resourceCulture);
             }
         }
         
@@ -10846,6 +16264,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rectangle cannot be empty..
+        /// </summary>
+        internal static string Rect_Empty {
+            get {
+                return ResourceManager.GetString("Rect_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Width and Height cannot be negative..
         /// </summary>
         internal static string Rect_WidthAndHeightCannotBeNegative {
@@ -10855,11 +16282,83 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot call the method..
+        /// </summary>
+        internal static string Rect3D_CannotCallMethod {
+            get {
+                return ResourceManager.GetString("Rect3D_CannotCallMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot modify this property on the Empty Rect3D..
+        /// </summary>
+        internal static string Rect3D_CannotModifyEmptyRect {
+            get {
+                return ResourceManager.GetString("Rect3D_CannotModifyEmptyRect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+Y.
+        /// </summary>
+        internal static string RedoKeyDisplayString {
+            get {
+                return ResourceManager.GetString("RedoKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redo.
+        /// </summary>
+        internal static string RedoText {
+            get {
+                return ResourceManager.GetString("RedoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The visual tree has been changed during a &apos;{0}&apos; event..
+        /// </summary>
+        internal static string ReentrantVisualTreeChangeError {
+            get {
+                return ResourceManager.GetString("ReentrantVisualTreeChangeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WARNING. The visual tree has been changed during a &apos;{0}&apos; event.  This is not supported in a production application.  Be sure to correct this before shipping the application..
+        /// </summary>
+        internal static string ReentrantVisualTreeChangeWarning {
+            get {
+                return ResourceManager.GetString("ReentrantVisualTreeChangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value cannot be null. Object reference: &apos;{0}&apos;..
         /// </summary>
         internal static string ReferenceIsNull {
             get {
                 return ResourceManager.GetString("ReferenceIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F5.
+        /// </summary>
+        internal static string RefreshKeyDisplayString {
+            get {
+                return ResourceManager.GetString("RefreshKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string RefreshText {
+            get {
+                return ResourceManager.GetString("RefreshText", resourceCulture);
             }
         }
         
@@ -10999,6 +16498,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot release penalty resource due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string RelievePenaltyResourceFailure {
+            get {
+                return ResourceManager.GetString("RelievePenaltyResourceFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collection Remove event must specify item position..
         /// </summary>
         internal static string RemovedItemNotFound {
@@ -11040,6 +16548,33 @@ namespace CleanWpfApp {
         internal static string ReparentModelChildIllegal {
             get {
                 return ResourceManager.GetString("ReparentModelChildIllegal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+H.
+        /// </summary>
+        internal static string ReplaceKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ReplaceKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace.
+        /// </summary>
+        internal static string ReplaceText {
+            get {
+                return ResourceManager.GetString("ReplaceText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation is not allowed after the first request is made..
+        /// </summary>
+        internal static string RequestAlreadyStarted {
+            get {
+                return ResourceManager.GetString("RequestAlreadyStarted", resourceCulture);
             }
         }
         
@@ -11103,6 +16638,15 @@ namespace CleanWpfApp {
         internal static string RequiresExplicitCulture {
             get {
                 return ResourceManager.GetString("RequiresExplicitCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The calling thread must be STA, because many UI components require this..
+        /// </summary>
+        internal static string RequiresSTA {
+            get {
+                return ResourceManager.GetString("RequiresSTA", resourceCulture);
             }
         }
         
@@ -11175,6 +16719,15 @@ namespace CleanWpfApp {
         internal static string ResourceDictionaryLoadFromFailure {
             get {
                 return ResourceManager.GetString("ResourceDictionaryLoadFromFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current CachePolicy is CacheOnly but the requested resource does not exist in the cache..
+        /// </summary>
+        internal static string ResourceNotFoundUnderCacheOnlyPolicy {
+            get {
+                return ResourceManager.GetString("ResourceNotFoundUnderCacheOnlyPolicy", resourceCulture);
             }
         }
         
@@ -12070,6 +17623,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Every RoutedEventArgs must have a non-null RoutedEvent associated with it..
+        /// </summary>
+        internal static string RoutedEventArgsMustHaveRoutedEvent {
+            get {
+                return ResourceManager.GetString("RoutedEventArgsMustHaveRoutedEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot change the RoutedEvent property while the RoutedEvent is being routed..
+        /// </summary>
+        internal static string RoutedEventCannotChangeWhileRouting {
+            get {
+                return ResourceManager.GetString("RoutedEventCannotChangeWhileRouting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot modify the RowLayout because it does not exist..
         /// </summary>
         internal static string RowCacheCannotModifyNonExistentLayout {
@@ -12102,6 +17673,78 @@ namespace CleanWpfApp {
         internal static string RuntimeTypeRequired {
             get {
                 return ResourceManager.GetString("RuntimeTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save As.
+        /// </summary>
+        internal static string SaveAsText {
+            get {
+                return ResourceManager.GetString("SaveAsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+S.
+        /// </summary>
+        internal static string SaveKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SaveKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string SaveText {
+            get {
+                return ResourceManager.GetString("SaveText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Strokes have changed..
+        /// </summary>
+        internal static string SCDataChanged {
+            get {
+                return ResourceManager.GetString("SCDataChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path of erasing stroke cannot be null..
+        /// </summary>
+        internal static string SCErasePath {
+            get {
+                return ResourceManager.GetString("SCErasePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erasing Shape cannot be null..
+        /// </summary>
+        internal static string SCEraseShape {
+            get {
+                return ResourceManager.GetString("SCEraseShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot resolve current inner request URI schema. Bypass cache only for resolvable schema types such as http, ftp, or file..
+        /// </summary>
+        internal static string SchemaInvalidForTransport {
+            get {
+                return ResourceManager.GetString("SchemaInvalidForTransport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The scope must be a UIElement or ContentElement..
+        /// </summary>
+        internal static string ScopeMustBeUIElementOrContent {
+            get {
+                return ResourceManager.GetString("ScopeMustBeUIElementOrContent", resourceCulture);
             }
         }
         
@@ -12223,6 +17866,123 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ScrollByLineKey {
+            get {
+                return ResourceManager.GetString("ScrollByLineKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ScrollByLineKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ScrollByLineKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scroll By Line.
+        /// </summary>
+        internal static string ScrollByLineText {
+            get {
+                return ResourceManager.GetString("ScrollByLineText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PageDown.
+        /// </summary>
+        internal static string ScrollPageDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ScrollPageDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scroll Page Down.
+        /// </summary>
+        internal static string ScrollPageDownText {
+            get {
+                return ResourceManager.GetString("ScrollPageDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ScrollPageLeftKey {
+            get {
+                return ResourceManager.GetString("ScrollPageLeftKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ScrollPageLeftKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ScrollPageLeftKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scroll Page Left.
+        /// </summary>
+        internal static string ScrollPageLeftText {
+            get {
+                return ResourceManager.GetString("ScrollPageLeftText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ScrollPageRightKey {
+            get {
+                return ResourceManager.GetString("ScrollPageRightKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ScrollPageRightKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ScrollPageRightKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scroll Page Right.
+        /// </summary>
+        internal static string ScrollPageRightText {
+            get {
+                return ResourceManager.GetString("ScrollPageRightText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PageUp.
+        /// </summary>
+        internal static string ScrollPageUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ScrollPageUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scroll Page Up.
+        /// </summary>
+        internal static string ScrollPageUpText {
+            get {
+                return ResourceManager.GetString("ScrollPageUpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; parameter value cannot be NaN..
         /// </summary>
         internal static string ScrollViewer_CannotBeNaN {
@@ -12241,11 +18001,47 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to F3.
+        /// </summary>
+        internal static string SearchKey {
+            get {
+                return ResourceManager.GetString("SearchKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F3.
+        /// </summary>
+        internal static string SearchKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SearchKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string SearchText {
+            get {
+                return ResourceManager.GetString("SearchText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot set SandboxExternalContent to true in partial trust..
         /// </summary>
         internal static string SecurityExceptionForSettingSandboxExternalToTrue {
             get {
                 return ResourceManager.GetString("SecurityExceptionForSettingSandboxExternalToTrue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot set SandboxExternalContent to true in partial trust..
+        /// </summary>
+        internal static string SecurityExceptionForSettingSandboxExternalToTrue1 {
+            get {
+                return ResourceManager.GetString("SecurityExceptionForSettingSandboxExternalToTrue1", resourceCulture);
             }
         }
         
@@ -12268,6 +18064,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot set seek pointer to a negative position..
+        /// </summary>
+        internal static string SeekNegative1 {
+            get {
+                return ResourceManager.GetString("SeekNegative1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stream does not support Seek..
         /// </summary>
         internal static string SeekNotSupported {
@@ -12282,6 +18087,33 @@ namespace CleanWpfApp {
         internal static string SeekOriginInvalid {
             get {
                 return ResourceManager.GetString("SeekOriginInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SeekOrigin value is not valid..
+        /// </summary>
+        internal static string SeekOriginInvalid1 {
+            get {
+                return ResourceManager.GetString("SeekOriginInvalid1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+A.
+        /// </summary>
+        internal static string SelectAllKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SelectAllKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select All.
+        /// </summary>
+        internal static string SelectAllText {
+            get {
+                return ResourceManager.GetString("SelectAllText", resourceCulture);
             }
         }
         
@@ -12336,6 +18168,78 @@ namespace CleanWpfApp {
         internal static string SelectionMustBeServiceProvider {
             get {
                 return ResourceManager.GetString("SelectionMustBeServiceProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+End.
+        /// </summary>
+        internal static string SelectToEndKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SelectToEndKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select To End.
+        /// </summary>
+        internal static string SelectToEndText {
+            get {
+                return ResourceManager.GetString("SelectToEndText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+Home.
+        /// </summary>
+        internal static string SelectToHomeKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SelectToHomeKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select To Home.
+        /// </summary>
+        internal static string SelectToHomeText {
+            get {
+                return ResourceManager.GetString("SelectToHomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+PageDown.
+        /// </summary>
+        internal static string SelectToPageDownKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SelectToPageDownKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select To PageDown.
+        /// </summary>
+        internal static string SelectToPageDownText {
+            get {
+                return ResourceManager.GetString("SelectToPageDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift+PageUp.
+        /// </summary>
+        internal static string SelectToPageUpKeyDisplayString {
+            get {
+                return ResourceManager.GetString("SelectToPageUpKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select To PageUp.
+        /// </summary>
+        internal static string SelectToPageUpText {
+            get {
+                return ResourceManager.GetString("SelectToPageUpText", resourceCulture);
             }
         }
         
@@ -12430,11 +18334,38 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot set breaking conditions due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string SetBreakingFailure {
+            get {
+                return ResourceManager.GetString("SetBreakingFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot set document context due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string SetDocFailure {
+            get {
+                return ResourceManager.GetString("SetDocFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The target element cannot receive focus..
         /// </summary>
         internal static string SetFocusFailed {
             get {
                 return ResourceManager.GetString("SetFocusFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target element cannot receive focus..
+        /// </summary>
+        internal static string SetFocusFailed1 {
+            get {
+                return ResourceManager.GetString("SetFocusFailed1", resourceCulture);
             }
         }
         
@@ -12457,6 +18388,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stream does not support SetLength..
+        /// </summary>
+        internal static string SetLengthNotSupported1 {
+            get {
+                return ResourceManager.GetString("SetLengthNotSupported1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot set a property on object &apos;{0}&apos; because it is in a read-only state..
         /// </summary>
         internal static string SetOnReadOnlyObjectNotAllowed {
@@ -12471,6 +18411,15 @@ namespace CleanWpfApp {
         internal static string SetPositionNotSupported {
             get {
                 return ResourceManager.GetString("SetPositionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text formatting engine cannot set tab stop due to error: &apos;{0}&apos;..
+        /// </summary>
+        internal static string SetTabsFailure {
+            get {
+                return ResourceManager.GetString("SetTabsFailure", resourceCulture);
             }
         }
         
@@ -12565,6 +18514,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sideways right to left text is not supported..
+        /// </summary>
+        internal static string SidewaysRTLTextIsNotSupported {
+            get {
+                return ResourceManager.GetString("SidewaysRTLTextIsNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Signature was deleted..
         /// </summary>
         internal static string SignatureDeleted {
@@ -12637,6 +18595,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot modify this property on the Empty Size3D..
+        /// </summary>
+        internal static string Size3D_CannotModifyEmptySize {
+            get {
+                return ResourceManager.GetString("Size3D_CannotModifyEmptySize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot set a negative dimension..
+        /// </summary>
+        internal static string Size3D_DimensionCannotBeNegative {
+            get {
+                return ResourceManager.GetString("Size3D_DimensionCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SortDescription must have a nonempty property name..
         /// </summary>
         internal static string SortDescriptionPropertyNameCannotBeEmpty {
@@ -12673,6 +18649,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must set Source in RoutedEventArgs before building event route or invoking handlers..
+        /// </summary>
+        internal static string SourceNotSet {
+            get {
+                return ResourceManager.GetString("SourceNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must create DependencySource on same Thread as the DependencyObject..
         /// </summary>
         internal static string SourcesMustBeInSameThread {
@@ -12687,6 +18672,15 @@ namespace CleanWpfApp {
         internal static string SpecialMethodMustBePublic {
             get {
                 return ResourceManager.GetString("SpecialMethodMustBePublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The CultureInfo object used for number substitution must be a specific culture, not a neutral culture or InvariantCulture..
+        /// </summary>
+        internal static string SpecificNumberCultureRequired {
+            get {
+                return ResourceManager.GetString("SpecificNumberCultureRequired", resourceCulture);
             }
         }
         
@@ -12741,6 +18735,24 @@ namespace CleanWpfApp {
         internal static string StaticResourceInXamlOnly {
             get {
                 return ResourceManager.GetString("StaticResourceInXamlOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Esc.
+        /// </summary>
+        internal static string StopKeyDisplayString {
+            get {
+                return ResourceManager.GetString("StopKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string StopText {
+            get {
+                return ResourceManager.GetString("StopText", resourceCulture);
             }
         }
         
@@ -13087,6 +19099,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BeginFigure must be called before this API..
+        /// </summary>
+        internal static string StreamGeometry_NeedBeginFigure {
+            get {
+                return ResourceManager.GetString("StreamGeometry_NeedBeginFigure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to StreamInfo object was disposed..
         /// </summary>
         internal static string StreamInfoDisposed {
@@ -13213,11 +19234,56 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter cannot be a zero-length string..
+        /// </summary>
+        internal static string StringEmpty1 {
+            get {
+                return ResourceManager.GetString("StringEmpty1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected String Id {0}. String IDs must be sequential..
         /// </summary>
         internal static string StringIdOutOfSequence {
             get {
                 return ResourceManager.GetString("StringIdOutOfSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of strokes is two..
+        /// </summary>
+        internal static string StrokeCollectionCountTooBig {
+            get {
+                return ResourceManager.GetString("StrokeCollectionCountTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified StrokeCollection is read-only..
+        /// </summary>
+        internal static string StrokeCollectionIsReadOnly {
+            get {
+                return ResourceManager.GetString("StrokeCollectionIsReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A duplicate stroke cannot be added to StrokeCollection..
+        /// </summary>
+        internal static string StrokeIsDuplicated {
+            get {
+                return ResourceManager.GetString("StrokeIsDuplicated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The strokes being replaced must exist contiguously in the current StrokeCollection..
+        /// </summary>
+        internal static string StrokesNotContiguously {
+            get {
+                return ResourceManager.GetString("StrokesNotContiguously", resourceCulture);
             }
         }
         
@@ -13497,6 +19563,105 @@ namespace CleanWpfApp {
         internal static string StyleValueOfExpressionNotSupported {
             get {
                 return ResourceManager.GetString("StyleValueOfExpressionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NotifyWhenProcessed can be called only during OnStylusDown, OnStylusMove, or OnStylusUp..
+        /// </summary>
+        internal static string Stylus_CanOnlyCallForDownMoveOrUp {
+            get {
+                return ResourceManager.GetString("Stylus_CanOnlyCallForDownMoveOrUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No current object to return..
+        /// </summary>
+        internal static string Stylus_EnumeratorFailure {
+            get {
+                return ResourceManager.GetString("Stylus_EnumeratorFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid index in the collection..
+        /// </summary>
+        internal static string Stylus_IndexOutOfRange {
+            get {
+                return ResourceManager.GetString("Stylus_IndexOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; must be greater than or equal to &apos;{1}&apos;..
+        /// </summary>
+        internal static string Stylus_InvalidMax {
+            get {
+                return ResourceManager.GetString("Stylus_InvalidMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix is not invertible..
+        /// </summary>
+        internal static string Stylus_MatrixNotInvertable {
+            get {
+                return ResourceManager.GetString("Stylus_MatrixNotInvertable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stylus or Mouse must be in the down state when calling Reset..
+        /// </summary>
+        internal static string Stylus_MustBeDownToCallReset {
+            get {
+                return ResourceManager.GetString("Stylus_MustBeDownToCallReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stylus input encountered an error..
+        /// </summary>
+        internal static string Stylus_PenContextFailure {
+            get {
+                return ResourceManager.GetString("Stylus_PenContextFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; already exists in the collection..
+        /// </summary>
+        internal static string Stylus_PlugInIsDuplicated {
+            get {
+                return ResourceManager.GetString("Stylus_PlugInIsDuplicated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; must be non-null..
+        /// </summary>
+        internal static string Stylus_PlugInIsNull {
+            get {
+                return ResourceManager.GetString("Stylus_PlugInIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; does not exist in the collection..
+        /// </summary>
+        internal static string Stylus_PlugInNotExist {
+            get {
+                return ResourceManager.GetString("Stylus_PlugInNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count of points must be greater than zero..
+        /// </summary>
+        internal static string Stylus_StylusPointsCantBeEmpty {
+            get {
+                return ResourceManager.GetString("Stylus_StylusPointsCantBeEmpty", resourceCulture);
             }
         }
         
@@ -13987,6 +20152,60 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text breakpoint was previously disposed..
+        /// </summary>
+        internal static string TextBreakpointHasBeenDisposed {
+            get {
+                return ResourceManager.GetString("TextBreakpointHasBeenDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result text cannot be null..
+        /// </summary>
+        internal static string TextComposition_NullResultText {
+            get {
+                return ResourceManager.GetString("TextComposition_NullResultText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; does not have a valid InputManager..
+        /// </summary>
+        internal static string TextCompositionManager_NoInputManager {
+            get {
+                return ResourceManager.GetString("TextCompositionManager_NoInputManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; has already finished..
+        /// </summary>
+        internal static string TextCompositionManager_TextCompositionHasDone {
+            get {
+                return ResourceManager.GetString("TextCompositionManager_TextCompositionHasDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; has already started..
+        /// </summary>
+        internal static string TextCompositionManager_TextCompositionHasStarted {
+            get {
+                return ResourceManager.GetString("TextCompositionManager_TextCompositionHasStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; has not yet started..
+        /// </summary>
+        internal static string TextCompositionManager_TextCompositionNotStarted {
+            get {
+                return ResourceManager.GetString("TextCompositionManager_TextCompositionNotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UndoManager created more than once..
         /// </summary>
         internal static string TextContainer_UndoManagerCreatedMoreThanOnce {
@@ -14131,11 +20350,47 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot reenter Text formatting engine during optimal paragraph formatting..
+        /// </summary>
+        internal static string TextFormatterReentranceProhibited {
+            get {
+                return ResourceManager.GetString("TextFormatterReentranceProhibited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text line was previously disposed..
+        /// </summary>
+        internal static string TextLineHasBeenDisposed {
+            get {
+                return ResourceManager.GetString("TextLineHasBeenDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The return value of TextEmbeddedObject.Format contains an out-of-range value for the Width property..
+        /// </summary>
+        internal static string TextObjectMetrics_WidthOutOfRange {
+            get {
+                return ResourceManager.GetString("TextObjectMetrics_WidthOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; parameter of unexpected type &apos;{1}&apos;. Expected type is UIElement or FrameworkContentElement..
         /// </summary>
         internal static string TextPanelIllegalParaTypeForIAddChild {
             get {
                 return ResourceManager.GetString("TextPanelIllegalParaTypeForIAddChild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text penalty module was previously disposed..
+        /// </summary>
+        internal static string TextPenaltyModuleHasBeenDisposed {
+            get {
+                return ResourceManager.GetString("TextPenaltyModuleHasBeenDisposed", resourceCulture);
             }
         }
         
@@ -14154,6 +20409,15 @@ namespace CleanWpfApp {
         internal static string TextPositionIsFrozen {
             get {
                 return ResourceManager.GetString("TextPositionIsFrozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; parameter value is not a valid child element of the text provider..
+        /// </summary>
+        internal static string TextProvider_InvalidChild {
+            get {
+                return ResourceManager.GetString("TextProvider_InvalidChild", resourceCulture);
             }
         }
         
@@ -14248,11 +20512,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; parameter value is not a valid ITextRangeProvider..
+        /// </summary>
+        internal static string TextRangeProvider_InvalidRangeProvider {
+            get {
+                return ResourceManager.GetString("TextRangeProvider_InvalidRangeProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Range must come from the same text provider..
         /// </summary>
         internal static string TextRangeProvider_WrongTextRange {
             get {
                 return ResourceManager.GetString("TextRangeProvider_WrongTextRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Properties member of this text run cannot be null..
+        /// </summary>
+        internal static string TextRunPropertiesCannotBeNull {
+            get {
+                return ResourceManager.GetString("TextRunPropertiesCannotBeNull", resourceCulture);
             }
         }
         
@@ -14545,11 +20827,245 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The sum of AccelerationRatio and DecelerationRatio must be less than or equal to one..
+        /// </summary>
+        internal static string Timing_AccelAndDecelGreaterThanOne {
+            get {
+                return ResourceManager.GetString("Timing_AccelAndDecelGreaterThanOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CanSlip is supported only on timelines without AutoReverse, AccelerationRatio, or DecelerationRatio..
+        /// </summary>
+        internal static string Timing_CanSlipOnlyOnSimpleTimelines {
+            get {
+                return ResourceManager.GetString("Timing_CanSlipOnlyOnSimpleTimelines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A child of a Timeline in &quot;XAML&quot; must also be a Timeline or a class that derives from Timeline..
+        /// </summary>
+        internal static string Timing_ChildMustBeTimeline {
+            get {
+                return ResourceManager.GetString("Timing_ChildMustBeTimeline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0}.CreateClock method returned a pre-existing object, rather than a new object inheriting from TimelineClock..
+        /// </summary>
+        internal static string Timing_CreateClockMustReturnNewClock {
+            get {
+                return ResourceManager.GetString("Timing_CreateClockMustReturnNewClock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified timeline belongs to a different thread than this timeline..
+        /// </summary>
+        internal static string Timing_DifferentThreads {
+            get {
+                return ResourceManager.GetString("Timing_DifferentThreads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The enumeration is no longer valid because the collection it enumerates has changed..
+        /// </summary>
+        internal static string Timing_EnumeratorInvalidated {
+            get {
+                return ResourceManager.GetString("Timing_EnumeratorInvalidated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The enumerator is out of range..
+        /// </summary>
+        internal static string Timing_EnumeratorOutOfRange {
+            get {
+                return ResourceManager.GetString("Timing_EnumeratorOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property value must be between 0.0 and 1.0..
+        /// </summary>
+        internal static string Timing_InvalidArgAccelAndDecel {
+            get {
+                return ResourceManager.GetString("Timing_InvalidArgAccelAndDecel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property value must be finite and greater than or equal to zero..
+        /// </summary>
+        internal static string Timing_InvalidArgFiniteNonNegative {
+            get {
+                return ResourceManager.GetString("Timing_InvalidArgFiniteNonNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property value must be finite and greater than zero..
+        /// </summary>
+        internal static string Timing_InvalidArgFinitePositive {
+            get {
+                return ResourceManager.GetString("Timing_InvalidArgFinitePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property value must be greater than or equal to zero or indefinite..
+        /// </summary>
+        internal static string Timing_InvalidArgNonNegative {
+            get {
+                return ResourceManager.GetString("Timing_InvalidArgNonNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property value must be greater than zero or indefinite..
+        /// </summary>
+        internal static string Timing_InvalidArgPositive {
+            get {
+                return ResourceManager.GetString("Timing_InvalidArgPositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline objects cannot have text objects as children..
+        /// </summary>
+        internal static string Timing_NoTextChildren {
+            get {
+                return ResourceManager.GetString("Timing_NoTextChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to return a TimeSpan property value for a Duration value of &apos;{0}&apos;. Check the HasTimeSpan property before requesting the TimeSpan property value from a Duration..
+        /// </summary>
+        internal static string Timing_NotTimeSpan {
+            get {
+                return ResourceManager.GetString("Timing_NotTimeSpan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A timing operation has been not been queued in the appropriate order..
+        /// </summary>
+        internal static string Timing_OperationEnqueuedOutOfOrder {
+            get {
+                return ResourceManager.GetString("Timing_OperationEnqueuedOutOfOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid IterationCount value for a RepeatBehavior structure. An IterationCount value must represent a number that is greater than or equal to zero but not infinite..
+        /// </summary>
+        internal static string Timing_RepeatBehaviorInvalidIterationCount {
+            get {
+                return ResourceManager.GetString("Timing_RepeatBehaviorInvalidIterationCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid RepeatDuration value for a RepeatBehavior structure. A RepeatDuration value must be a TimeSpan value greater than or equal to zero ticks..
+        /// </summary>
+        internal static string Timing_RepeatBehaviorInvalidRepeatDuration {
+            get {
+                return ResourceManager.GetString("Timing_RepeatBehaviorInvalidRepeatDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; RepeatBehavior does not represent an iteration count and does not have an IterationCount value..
+        /// </summary>
+        internal static string Timing_RepeatBehaviorNotIterationCount {
+            get {
+                return ResourceManager.GetString("Timing_RepeatBehaviorNotIterationCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; RepeatBehavior does not represent a repeat duration and does not have a RepeatDuration value..
+        /// </summary>
+        internal static string Timing_RepeatBehaviorNotRepeatDuration {
+            get {
+                return ResourceManager.GetString("Timing_RepeatBehaviorNotRepeatDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ClockController.Seek method was called with arguments that describe a seek destination that seeks a child with Slip but no defined duration. It is unclear if we are seeking the child or seeking past the child&apos;s duration..
+        /// </summary>
+        internal static string Timing_SeekDestinationAmbiguousDueToSlip {
+            get {
+                return ResourceManager.GetString("Timing_SeekDestinationAmbiguousDueToSlip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ClockController.Seek method was called using TimeSeekOrigin.Duration as the seekOrigin parameter for a Clock that has a duration of Forever. Clocks that have duration of Forever must use TimeSeekOrigin.BeginTime..
+        /// </summary>
+        internal static string Timing_SeekDestinationIndefinite {
+            get {
+                return ResourceManager.GetString("Timing_SeekDestinationIndefinite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ClockController.Seek method was called with arguments that describe a seek destination with a negative value. The seek destination must be a time greater than or equal to zero..
+        /// </summary>
+        internal static string Timing_SeekDestinationNegative {
+            get {
+                return ResourceManager.GetString("Timing_SeekDestinationNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot call the ClockController.SkipToFill method for a Clock that has a Duration or RepeatDuration of Forever, because this Clock will never reach its fill period..
+        /// </summary>
+        internal static string Timing_SkipToFillDestinationIndefinite {
+            get {
+                return ResourceManager.GetString("Timing_SkipToFillDestinationIndefinite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SlipBehavior.Slip is supported only on root ParallelTimelines that do not reverse, accelerate, decelerate, or have a RepeatBehavior specified as a Duration..
+        /// </summary>
+        internal static string Timing_SlipBehavior_SlipOnlyOnSimpleTimelines {
+            get {
+                return ResourceManager.GetString("Timing_SlipBehavior_SlipOnlyOnSimpleTimelines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clocks with CanSlip cannot have parents or ancestors with AutoReverse, AccelerationRatio, or DecelerationRatio..
+        /// </summary>
+        internal static string Timing_SlipBehavior_SyncOnlyWithSimpleParents {
+            get {
+                return ResourceManager.GetString("Timing_SlipBehavior_SyncOnlyWithSimpleParents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Empty token encountered at position {0} while parsing &apos;{1}&apos;..
         /// </summary>
         internal static string TokenizerHelperEmptyToken {
             get {
                 return ResourceManager.GetString("TokenizerHelperEmptyToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty token encountered at position {0} while parsing &apos;{1}&apos;..
+        /// </summary>
+        internal static string TokenizerHelperEmptyToken1 {
+            get {
+                return ResourceManager.GetString("TokenizerHelperEmptyToken1", resourceCulture);
             }
         }
         
@@ -14563,6 +21079,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extra data encountered at position {0} while parsing &apos;{1}&apos;..
+        /// </summary>
+        internal static string TokenizerHelperExtraDataEncountered1 {
+            get {
+                return ResourceManager.GetString("TokenizerHelperExtraDataEncountered1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing end quote encountered while parsing &apos;{0}&apos;..
         /// </summary>
         internal static string TokenizerHelperMissingEndQuote {
@@ -14572,11 +21097,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing end quote encountered while parsing &apos;{0}&apos;..
+        /// </summary>
+        internal static string TokenizerHelperMissingEndQuote1 {
+            get {
+                return ResourceManager.GetString("TokenizerHelperMissingEndQuote1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Premature string termination encountered while parsing &apos;{0}&apos;..
         /// </summary>
         internal static string TokenizerHelperPrematureStringTermination {
             get {
                 return ResourceManager.GetString("TokenizerHelperPrematureStringTermination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premature string termination encountered while parsing &apos;{0}&apos;..
+        /// </summary>
+        internal static string TokenizerHelperPrematureStringTermination1 {
+            get {
+                return ResourceManager.GetString("TokenizerHelperPrematureStringTermination1", resourceCulture);
             }
         }
         
@@ -14613,6 +21156,24 @@ namespace CleanWpfApp {
         internal static string TooManyDependencyProperties {
             get {
                 return ResourceManager.GetString("TooManyDependencyProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Too many glyph runs in the scene to render..
+        /// </summary>
+        internal static string TooManyGlyphRuns {
+            get {
+                return ResourceManager.GetString("TooManyGlyphRuns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RoutedEvent/EventPrivateKey limit exceeded. Routed events or EventPrivateKey for CLR events are typically static class members registered with field initializers or static constructors. In this case, routed events or EventPrivateKeys might be getting initialized in instance constructors, causing the limit to be exceeded..
+        /// </summary>
+        internal static string TooManyRoutedEvents {
+            get {
+                return ResourceManager.GetString("TooManyRoutedEvents", resourceCulture);
             }
         }
         
@@ -14716,6 +21277,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Touch.
+        /// </summary>
+        internal static string Touch_Category {
+            get {
+                return ResourceManager.GetString("Touch_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TouchDevice is already activated..
+        /// </summary>
+        internal static string Touch_DeviceAlreadyActivated {
+            get {
+                return ResourceManager.GetString("Touch_DeviceAlreadyActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TouchDevice is not activated..
+        /// </summary>
+        internal static string Touch_DeviceNotActivated {
+            get {
+                return ResourceManager.GetString("Touch_DeviceNotActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must set IncreaseRepeatButton and DecreaseRepeatButton properties of Track to different RepeatButton instances..
         /// </summary>
         internal static string Track_SameButtons {
@@ -14811,6 +21399,15 @@ namespace CleanWpfApp {
         internal static string TransformTypeUnsupported {
             get {
                 return ResourceManager.GetString("TransformTypeUnsupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potential cycle in tree found while building the event route..
+        /// </summary>
+        internal static string TreeLoop {
+            get {
+                return ResourceManager.GetString("TreeLoop", resourceCulture);
             }
         }
         
@@ -14923,6 +21520,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot change property metadata after it has been associated with a property..
+        /// </summary>
+        internal static string TypeMetadataCannotChangeAfterUse1 {
+            get {
+                return ResourceManager.GetString("TypeMetadataCannotChangeAfterUse1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; type must derive from DependencyObject..
         /// </summary>
         internal static string TypeMustBeDependencyObjectDerived {
@@ -14995,6 +21601,42 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot call Arrange on a UIElement with infinite size or NaN. Parent of type &apos;{0}&apos; invokes the UIElement. Arrange called on element of type &apos;{1}&apos;..
+        /// </summary>
+        internal static string UIElement_Layout_InfinityArrange {
+            get {
+                return ResourceManager.GetString("UIElement_Layout_InfinityArrange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UIElement.Measure(availableSize) cannot be called with NaN size..
+        /// </summary>
+        internal static string UIElement_Layout_NaNMeasure {
+            get {
+                return ResourceManager.GetString("UIElement_Layout_NaNMeasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layout measurement override of element &apos;{0}&apos; should not return NaN values as its DesiredSize..
+        /// </summary>
+        internal static string UIElement_Layout_NaNReturned {
+            get {
+                return ResourceManager.GetString("UIElement_Layout_NaNReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layout measurement override of element &apos;{0}&apos; should not return PositiveInfinity as its DesiredSize, even if Infinity is passed in as available size..
+        /// </summary>
+        internal static string UIElement_Layout_PositiveInfinityReturned {
+            get {
+                return ResourceManager.GetString("UIElement_Layout_PositiveInfinityReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A PageFunction without Content must either initiate a navigation or call OnReturn..
         /// </summary>
         internal static string UiLessPageFunctionNotCallingOnReturn {
@@ -15058,6 +21700,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access denied to the path &apos;{0}&apos;..
+        /// </summary>
+        internal static string UnauthorizedAccessExceptionWithFileName {
+            get {
+                return ResourceManager.GetString("UnauthorizedAccessExceptionWithFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undefined HighlightAnchor..
         /// </summary>
         internal static string UndefinedHighlightAnchor {
@@ -15072,6 +21723,15 @@ namespace CleanWpfApp {
         internal static string UndoContainerTypeMismatch {
             get {
                 return ResourceManager.GetString("UndoContainerTypeMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl+Z.
+        /// </summary>
+        internal static string UndoKeyDisplayString {
+            get {
+                return ResourceManager.GetString("UndoKeyDisplayString", resourceCulture);
             }
         }
         
@@ -15117,6 +21777,15 @@ namespace CleanWpfApp {
         internal static string UndoServiceDisabled {
             get {
                 return ResourceManager.GetString("UndoServiceDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo.
+        /// </summary>
+        internal static string UndoText {
+            get {
+                return ResourceManager.GetString("UndoText", resourceCulture);
             }
         }
         
@@ -15211,11 +21880,29 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter is unexpected type &apos;{0}&apos;. Expected type is &apos;{1}&apos;..
+        /// </summary>
+        internal static string UnexpectedParameterType1 {
+            get {
+                return ResourceManager.GetString("UnexpectedParameterType1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expected {0} property, got {1}..
         /// </summary>
         internal static string UnexpectedProperty {
             get {
                 return ResourceManager.GetString("UnexpectedProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected Stroke in PropertyDataChangedEventArgs.Owner..
+        /// </summary>
+        internal static string UnexpectedStroke {
+            get {
+                return ResourceManager.GetString("UnexpectedStroke", resourceCulture);
             }
         }
         
@@ -15346,6 +22033,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown path operation attempted..
+        /// </summary>
+        internal static string UnknownPathOperationType {
+            get {
+                return ResourceManager.GetString("UnknownPathOperationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unrecognized reference component type..
         /// </summary>
         internal static string UnknownReferenceComponentType {
@@ -15360,6 +22056,33 @@ namespace CleanWpfApp {
         internal static string UnknownReferenceSerialize {
             get {
                 return ResourceManager.GetString("UnknownReferenceSerialize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized Stroke in PropertyDataChangedEventArgs.Owner..
+        /// </summary>
+        internal static string UnknownStroke {
+            get {
+                return ResourceManager.GetString("UnknownStroke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized Stroke in Stroke.Invalidated event arguments..
+        /// </summary>
+        internal static string UnknownStroke1 {
+            get {
+                return ResourceManager.GetString("UnknownStroke1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrecognized Stroke in StrokeCollectionChangedEventArgs.Removed..
+        /// </summary>
+        internal static string UnknownStroke3 {
+            get {
+                return ResourceManager.GetString("UnknownStroke3", resourceCulture);
             }
         }
         
@@ -15418,6 +22141,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to initialize GestureRecognizer..
+        /// </summary>
+        internal static string UnspecifiedGestureConstructionException {
+            get {
+                return ResourceManager.GetString("UnspecifiedGestureConstructionException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesture recognition failed..
+        /// </summary>
+        internal static string UnspecifiedGestureException {
+            get {
+                return ResourceManager.GetString("UnspecifiedGestureException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to set enabled gestures..
+        /// </summary>
+        internal static string UnspecifiedSetEnabledGesturesException {
+            get {
+                return ResourceManager.GetString("UnspecifiedSetEnabledGesturesException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unrecognized Key &apos;{0}&apos;..
         /// </summary>
         internal static string Unsupported_Key {
@@ -15432,6 +22182,15 @@ namespace CleanWpfApp {
         internal static string Unsupported_Modifier {
             get {
                 return ResourceManager.GetString("Unsupported_Modifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported MouseAction &apos;{0}&apos;..
+        /// </summary>
+        internal static string Unsupported_MouseAction {
+            get {
+                return ResourceManager.GetString("Unsupported_MouseAction", resourceCulture);
             }
         }
         
@@ -15535,11 +22294,47 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to URI must be absolute. Relative URIs are not supported..
+        /// </summary>
+        internal static string UriMustBeAbsolute {
+            get {
+                return ResourceManager.GetString("UriMustBeAbsolute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font family Uri should have either file:// or pack://application: scheme..
+        /// </summary>
+        internal static string UriMustBeFileOrPack {
+            get {
+                return ResourceManager.GetString("UriMustBeFileOrPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URI must be absolute..
+        /// </summary>
+        internal static string UriNotAbsolute {
+            get {
+                return ResourceManager.GetString("UriNotAbsolute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The component &apos;{0}&apos; does not have a resource identified by the URI &apos;{1}&apos;..
         /// </summary>
         internal static string UriNotMatchWithRootType {
             get {
                 return ResourceManager.GetString("UriNotMatchWithRootType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This factory supports only URIs with the &apos;{0}&apos; scheme..
+        /// </summary>
+        internal static string UriSchemeMismatch {
+            get {
+                return ResourceManager.GetString("UriSchemeMismatch", resourceCulture);
             }
         }
         
@@ -15598,6 +22393,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UsesPerPixelOpacity is obsolete and should not be set when using UsesPerPixelTransparency.
+        /// </summary>
+        internal static string UsesPerPixelOpacityIsObsolete {
+            get {
+                return ResourceManager.GetString("UsesPerPixelOpacityIsObsolete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value &apos;{0}&apos; could not be converted..
         /// </summary>
         internal static string Validation_ConversionFailed {
@@ -15639,6 +22443,15 @@ namespace CleanWpfApp {
         internal static string ValueNotBetweenInt32MinMax {
             get {
                 return ResourceManager.GetString("ValueNotBetweenInt32MinMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value is not valid for the specified GUID..
+        /// </summary>
+        internal static string ValueNotValidForGuid {
+            get {
+                return ResourceManager.GetString("ValueNotValidForGuid", resourceCulture);
             }
         }
         
@@ -15724,6 +22537,24 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MaterialGroup cannot be an interactive Material (IsVisualHostMaterial is true)..
+        /// </summary>
+        internal static string Viewport2DVisual3D_MaterialGroupIsInteractiveMaterial {
+            get {
+                return ResourceManager.GetString("Viewport2DVisual3D_MaterialGroupIsInteractiveMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viewport2DVisual3D supports only one interactive Material..
+        /// </summary>
+        internal static string Viewport2DVisual3D_MultipleInteractiveMaterials {
+            get {
+                return ResourceManager.GetString("Viewport2DVisual3D_MultipleInteractiveMaterials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This collection does not support changing values with specific indexes..
         /// </summary>
         internal static string VirtualizedCellInfoCollection_DoesNotSupportIndexChanges {
@@ -15756,6 +22587,150 @@ namespace CleanWpfApp {
         internal static string Visual_ArgumentOutOfRange {
             get {
                 return ResourceManager.GetString("Visual_ArgumentOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified index is out of range or child at index is null. Do not call this method if VisualChildrenCount returns zero, indicating that the Visual has no children..
+        /// </summary>
+        internal static string Visual_ArgumentOutOfRange1 {
+            get {
+                return ResourceManager.GetString("Visual_ArgumentOutOfRange1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Visual cannot transform the given point..
+        /// </summary>
+        internal static string Visual_CannotTransformPoint {
+            get {
+                return ResourceManager.GetString("Visual_CannotTransformPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must disconnect specified child from current parent Visual before attaching to new parent Visual..
+        /// </summary>
+        internal static string Visual_HasParent {
+            get {
+                return ResourceManager.GetString("Visual_HasParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified Visual and this Visual do not share a common ancestor, so there is no valid transformation between the two Visuals..
+        /// </summary>
+        internal static string Visual_NoCommonAncestor {
+            get {
+                return ResourceManager.GetString("Visual_NoCommonAncestor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Visual is not connected to a PresentationSource..
+        /// </summary>
+        internal static string Visual_NoPresentationSource {
+            get {
+                return ResourceManager.GetString("Visual_NoPresentationSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a Visual3D..
+        /// </summary>
+        internal static string Visual_NotA3DVisual {
+            get {
+                return ResourceManager.GetString("Visual_NotA3DVisual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified Visual is not a descendant of this Visual..
+        /// </summary>
+        internal static string Visual_NotADescendant {
+            get {
+                return ResourceManager.GetString("Visual_NotADescendant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified Visual is not an ancestor of this Visual..
+        /// </summary>
+        internal static string Visual_NotAnAncestor {
+            get {
+                return ResourceManager.GetString("Visual_NotAnAncestor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a Visual or Visual3D..
+        /// </summary>
+        internal static string Visual_NotAVisual {
+            get {
+                return ResourceManager.GetString("Visual_NotAVisual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified Visual is not a child of this Visual..
+        /// </summary>
+        internal static string Visual_NotChild {
+            get {
+                return ResourceManager.GetString("Visual_NotChild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified Visual cannot be detached..
+        /// </summary>
+        internal static string VisualCannotBeDetached {
+            get {
+                return ResourceManager.GetString("VisualCannotBeDetached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified index is already in use. Disconnect the Visual child at the specified index first..
+        /// </summary>
+        internal static string VisualCollection_EntryInUse {
+            get {
+                return ResourceManager.GetString("VisualCollection_EntryInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of entries exceeds specified capacity of the VisualCollection..
+        /// </summary>
+        internal static string VisualCollection_NotEnoughCapacity {
+            get {
+                return ResourceManager.GetString("VisualCollection_NotEnoughCapacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VisualCollection is read only and cannot be modified..
+        /// </summary>
+        internal static string VisualCollection_ReadOnly {
+            get {
+                return ResourceManager.GetString("VisualCollection_ReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified Visual is already a child of another Visual or the root of a CompositionTarget..
+        /// </summary>
+        internal static string VisualCollection_VisualHasParent {
+            get {
+                return ResourceManager.GetString("VisualCollection_VisualHasParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Another target is already connected to this HostVisual..
+        /// </summary>
+        internal static string VisualTarget_AnotherTargetAlreadyConnected {
+            get {
+                return ResourceManager.GetString("VisualTarget_AnotherTargetAlreadyConnected", resourceCulture);
             }
         }
         
@@ -15801,6 +22776,51 @@ namespace CleanWpfApp {
         internal static string WebRequestCreationFailed {
             get {
                 return ResourceManager.GetString("WebRequestCreationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebRequest timed out. Response did not arrive before the specified Timeout period elapsed..
+        /// </summary>
+        internal static string WebRequestTimeout {
+            get {
+                return ResourceManager.GetString("WebRequestTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error closing the WebResponse..
+        /// </summary>
+        internal static string WebResponseCloseFailure {
+            get {
+                return ResourceManager.GetString("WebResponseCloseFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error processing WebResponse..
+        /// </summary>
+        internal static string WebResponseFailure {
+            get {
+                return ResourceManager.GetString("WebResponseFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested PackagePart not found in target resource..
+        /// </summary>
+        internal static string WebResponsePartNotFound {
+            get {
+                return ResourceManager.GetString("WebResponsePartNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object must be initialized before operation can be performed..
+        /// </summary>
+        internal static string WIC_NotInitialized {
+            get {
+                return ResourceManager.GetString("WIC_NotInitialized", resourceCulture);
             }
         }
         
@@ -15904,6 +22924,15 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stream does not support writing..
+        /// </summary>
+        internal static string WriteNotSupported1 {
+            get {
+                return ResourceManager.GetString("WriteNotSupported1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot read from write-only stream..
         /// </summary>
         internal static string WriteOnlyStream {
@@ -15945,6 +22974,15 @@ namespace CleanWpfApp {
         internal static string WrongDocumentPropertyVariantType {
             get {
                 return ResourceManager.GetString("WrongDocumentPropertyVariantType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The required pattern for URI containing &quot;;component&quot; is &quot;AssemblyName;Vxxxx;PublicKey;component&quot;, where Vxxxx is the assembly version and PublicKey is the 16-character string representing the assembly public key token. Vxxxx and PublicKey are optional..
+        /// </summary>
+        internal static string WrongFirstSegment {
+            get {
+                return ResourceManager.GetString("WrongFirstSegment", resourceCulture);
             }
         }
         
@@ -16201,6 +23239,33 @@ namespace CleanWpfApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no registered CultureInfo with the IetfLanguageTag &apos;{0}&apos;..
+        /// </summary>
+        internal static string XmlLangGetCultureFailure {
+            get {
+                return ResourceManager.GetString("XmlLangGetCultureFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find non-neutral culture related to &apos;{0}&apos;..
+        /// </summary>
+        internal static string XmlLangGetSpecificCulture {
+            get {
+                return ResourceManager.GetString("XmlLangGetSpecificCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; language tag must be empty or must conform to grammar defined in IETF RFC 3066..
+        /// </summary>
+        internal static string XmlLangMalformed {
+            get {
+                return ResourceManager.GetString("XmlLangMalformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot add &apos;{0}&apos; more than once to the same &apos;{1}&apos;..
         /// </summary>
         internal static string XmlNodeAlreadyOwned {
@@ -16431,6 +23496,33 @@ namespace CleanWpfApp {
         internal static string ZLibVersionError {
             get {
                 return ResourceManager.GetString("ZLibVersionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ZoomKey {
+            get {
+                return ResourceManager.GetString("ZoomKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ZoomKeyDisplayString {
+            get {
+                return ResourceManager.GetString("ZoomKeyDisplayString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoom.
+        /// </summary>
+        internal static string ZoomText {
+            get {
+                return ResourceManager.GetString("ZoomText", resourceCulture);
             }
         }
     }

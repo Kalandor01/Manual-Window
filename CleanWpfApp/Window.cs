@@ -2901,12 +2901,6 @@ namespace CleanWpfApp
         }
         #endregion Internal Methods
 
-
-        //----------------------------------------------
-        //
-        // Internal Properties
-        //
-        //----------------------------------------------
         #region Internal Properties
 
         internal bool HwndCreatedButNotShown
@@ -3067,11 +3061,6 @@ namespace CleanWpfApp
         }
         #endregion Internal Properties
 
-        //----------------------------------------------
-        //
-        // Internal Fields
-        //
-        //----------------------------------------------
         #region Internal Fields
 
         /// <summary>
@@ -3084,12 +3073,6 @@ namespace CleanWpfApp
 
         #endregion Internal Fields
 
-
-        //----------------------------------------------
-        //
-        // Internal Types
-        //
-        //----------------------------------------------
         #region Internal Types
         // similar to the one in FE except that it takes care of SizeToContent
         // while determining the min/max values for height and width.
@@ -3110,11 +3093,6 @@ namespace CleanWpfApp
         }
         #endregion Internal Types
 
-        //----------------------------------------------
-        //
-        // Private Methods
-        //
-        //----------------------------------------------
         #region Private Methods
         private Size MeasureOverrideHelper(Size constraint)
         {
@@ -6871,11 +6849,6 @@ namespace CleanWpfApp
 
         #endregion
 
-        //----------------------------------------------
-        //
-        // Private Properties
-        //
-        //----------------------------------------------
         #region Private Properties
 
         private SizeToContent HwndSourceSizeToContent
@@ -6969,12 +6942,6 @@ namespace CleanWpfApp
 
         #endregion Private Properties
 
-
-        //----------------------------------------------
-        //
-        // Private Fields
-        //
-        //----------------------------------------------
         #region Private Fields
 
         private SourceWindowHelper _swh;                               // object that will hold the window
@@ -7689,10 +7656,7 @@ namespace CleanWpfApp
         #endregion DTypeThemeStyleKey
     }
 
-
-
     #region Enums
-
     /// <summary>
     /// WindowStyle
     /// </summary>
@@ -7720,7 +7684,6 @@ namespace CleanWpfApp
 
         // NOTE: if you add or remove any values in this enum, be sure to update Window.IsValidWindowStyle()
     }
-
 
     /// <summary>
     /// WindowState
@@ -7755,7 +7718,7 @@ namespace CleanWpfApp
         /// FullScreen
         /// </summary>
         FullScreen = 4
-#endif //THEATRE_FULLSCREEN
+#endif
     }
 
     /// <summary>
@@ -7816,7 +7779,7 @@ namespace CleanWpfApp
 
         // NOTE: if you add or remove any values in this enum, be sure to update Window.IsValidResizeMode()
     }
-    #endregion Enums
+    #endregion
 
     internal class SingleChildEnumerator : IEnumerator
     {
