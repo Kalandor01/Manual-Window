@@ -1403,8 +1403,8 @@ namespace CleanWpfApp
                     // BACK COMPAT:
                     // We need to fire Navigating event to be back compact with V1.
                     // We should drop this when we can do breaking change.
-                    Uri relativeUri = BindUriHelper.GetUriRelativeToPackAppBase(StartupUri);
-                    NavigatingCancelEventArgs e = new NavigatingCancelEventArgs(relativeUri, null, null, null, NavigationMode.New, null, null, true);
+                    var relativeUri = BindUriHelper.GetUriRelativeToPackAppBase(StartupUri);
+                    var e = new NavigatingCancelEventArgs(relativeUri, null, null, null, NavigationMode.New, null, null, true);
                     FireNavigating(e, true);
 
                     // Navigating can be cancelled.
@@ -1460,7 +1460,7 @@ namespace CleanWpfApp
             }
             WindowsInternal = null;
 
-            ExitEventArgs e = new ExitEventArgs(_exitCode);
+            var e = new ExitEventArgs(_exitCode);
 
             // Event handler exception continuality: if exception occurs in ShuttingDown event handler,
             // our cleanup action is to finish Shuttingdown.  Since Shuttingdown cannot be cancelled.
@@ -1562,7 +1562,7 @@ namespace CleanWpfApp
             //Shutdown DispatcherOperationCallback
 
             // Invoke the Dispatcher synchronously if we are not in the browser
-            RunDispatcher(null);
+            RunDispatcher();
 
             return _exitCode;
         }
@@ -2234,7 +2234,7 @@ namespace CleanWpfApp
             return isRootElement;
         }
 
-        private object RunDispatcher(object ignore)
+        private void RunDispatcher()
         {
             if (_ownDispatcherStarted)
             {
@@ -2242,7 +2242,6 @@ namespace CleanWpfApp
             }
             _ownDispatcherStarted = true;
             Dispatcher.Run();
-            return null;
         }
         #endregion
 
@@ -2251,7 +2250,7 @@ namespace CleanWpfApp
         static private bool _isShuttingDown;
         static private bool _appCreatedInThisAppDomain;
         static private Application _appInstance;
-        static private Assembly _resourceAssembly;
+        static private Assembly? _resourceAssembly;
 
         // Keep LoadBamlSyncInfo stack so that the Outer LoadBaml and Inner LoadBaml( ) for the same
         // Uri share the related information.
