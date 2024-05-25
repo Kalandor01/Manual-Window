@@ -3386,7 +3386,6 @@ namespace CleanWpfApp
         ///     for browser hosted case
         private void Initialize()
         {
-
             //  this makes MeasureCore / ArrangeCore to defer to direct MeasureOverride and ArrangeOverride calls
             //  without reading Width / Height properties and modifying input constraint size parameter...
             BypassLayoutPolicies = true;
@@ -3462,7 +3461,7 @@ namespace CleanWpfApp
         {
             if (GetValue(IWindowServiceProperty) == null)
             {
-                SetValue(IWindowServiceProperty, (IWindowService)this);
+                SetValue(IWindowServiceProperty, this);
             }
         }
 
@@ -3491,8 +3490,8 @@ namespace CleanWpfApp
         private bool CalculateWindowLocation(ref double leftDeviceUnits, ref double topDeviceUnits, Size currentSizeDeviceUnits)
         {
             Debug.Assert(IsSourceWindowNull == false, "_swh should not be null here");
-            double inLeft = leftDeviceUnits;
-            double inTop = topDeviceUnits;
+            var inLeft = leftDeviceUnits;
+            var inTop = topDeviceUnits;
 
             switch (_windowStartupLocation)
             {
@@ -3513,9 +3512,11 @@ namespace CleanWpfApp
                     // having the extra condition in the if statement below
                     //
 
-                    IntPtr hMonitor = IntPtr.Zero;
-                    if ((_ownerHandle == IntPtr.Zero) ||
-                        ((_hiddenWindow != null) && (_hiddenWindow.Handle == _ownerHandle)))
+                    nint hMonitor;
+                    if (
+                        (_ownerHandle == nint.Zero) ||
+                        ((_hiddenWindow != null) && (_hiddenWindow.Handle == _ownerHandle))
+                    )
                     {
                         hMonitor = GetCurrentMonitorFromMousePosition();
                     }
@@ -3526,13 +3527,13 @@ namespace CleanWpfApp
                         hMonitor = MonitorFromWindow(_ownerHandle);
                     }
 
-                    if (hMonitor != IntPtr.Zero)
+                    if (hMonitor != nint.Zero)
                     {
                         CalculateCenterScreenPosition(hMonitor, currentSizeDeviceUnits, ref leftDeviceUnits, ref topDeviceUnits);
                     }
                     break;
                 case WindowStartupLocation.CenterOwner:
-                    Rect ownerRectDeviceUnits = Rect.Empty;
+                    var ownerRectDeviceUnits = Rect.Empty;
 
                     // If the owner is WPF window.
                     // The owner can be non-WPF window. It can be set via WindowInteropHelper.Owner.
@@ -3556,12 +3557,12 @@ namespace CleanWpfApp
                         }
                         else
                         {
-                            Size size = Owner.WindowSize;
+                            var size = Owner.WindowSize;
                             ownerSizeDeviceUnits = new Point(size.Width, size.Height);
                         }
 
                         // A minimized window doesn't have valid Top,Left; that's why RestoreBounds.TopLeft is used.
-                        Point ownerLocationDeviceUnits = Owner.LogicalToDeviceUnits(new Point(Owner.Left, Owner.Top));
+                        var ownerLocationDeviceUnits = Owner.LogicalToDeviceUnits(new Point(Owner.Left, Owner.Top));
                         ownerRectDeviceUnits = new Rect(ownerLocationDeviceUnits.X, ownerLocationDeviceUnits.Y,
                             ownerSizeDeviceUnits.X, ownerSizeDeviceUnits.Y);
                     }
@@ -3582,13 +3583,12 @@ namespace CleanWpfApp
                         // (Window.CenterOwner doesn't make sure the window fits entirely on screen)
                         // Check the screen rect to make sure the window is shown on screen.
                         // It is the same as WinForms' behavior.
-                        NativeMethods.RECT workAreaRectDeviceUnits = WorkAreaBoundsForHwnd(_ownerHandle);
+                        var workAreaRectDeviceUnits = WorkAreaBoundsForHwnd(_ownerHandle);
                         leftDeviceUnits = Math.Min(leftDeviceUnits, workAreaRectDeviceUnits.right - currentSizeDeviceUnits.Width);
                         leftDeviceUnits = Math.Max(leftDeviceUnits, workAreaRectDeviceUnits.left);
                         topDeviceUnits = Math.Min(topDeviceUnits, workAreaRectDeviceUnits.bottom - currentSizeDeviceUnits.Height);
                         topDeviceUnits = Math.Max(topDeviceUnits, workAreaRectDeviceUnits.top);
                     }
-
                     break;
                 default:
                     break;
@@ -3598,7 +3598,7 @@ namespace CleanWpfApp
 
         private static NativeMethods.RECT WorkAreaBoundsForHwnd(IntPtr hwnd)
         {
-            IntPtr hMonitor = MonitorFromWindow(hwnd);
+            var hMonitor = MonitorFromWindow(hwnd);
 
             return WorkAreaBoundsForMointor(hMonitor);
         }
@@ -3615,7 +3615,7 @@ namespace CleanWpfApp
 
         private static IntPtr MonitorFromWindow(IntPtr hwnd)
         {
-            IntPtr hMonitor = SafeNativeMethods.MonitorFromWindow(new HandleRef(null, hwnd), NativeMethods.MONITOR_DEFAULTTONEAREST);
+            var hMonitor = SafeNativeMethods.MonitorFromWindow(new HandleRef(null, hwnd), NativeMethods.MONITOR_DEFAULTTONEAREST);
             if (hMonitor == IntPtr.Zero)
             {
                 throw new Win32Exception();
@@ -3833,10 +3833,10 @@ namespace CleanWpfApp
             // We'll keep track of the true count separately.
             var iconWindows = new HandleRef[]
             {
-                new HandleRef(this, CriticalHandle),
+                new(this, CriticalHandle),
                 default
             };
-            int iconWindowsCount = 1;
+            var iconWindowsCount = 1;
 
             if (_hiddenWindow != null)
             {
@@ -3844,21 +3844,23 @@ namespace CleanWpfApp
                 ++iconWindowsCount;
             }
 
-            for (int i = 0; i < iconWindowsCount; ++i)
+            for (var i = 0; i < iconWindowsCount; ++i)
             {
                 HandleRef hwnd = iconWindows[i];
 
                 UnsafeNativeMethods.SendMessage(
                                         hwnd,
                                         WindowMessage.WM_SETICON,
-                                        (IntPtr)NativeMethods.ICON_BIG,
-                                        largeIconHandle);
+                                        NativeMethods.ICON_BIG,
+                                        largeIconHandle
+                                    );
 
                 UnsafeNativeMethods.SendMessage(
                                         hwnd,
                                         WindowMessage.WM_SETICON,
-                                        (IntPtr)NativeMethods.ICON_SMALL,
-                                        smallIconHandle);
+                                        NativeMethods.ICON_SMALL,
+                                        smallIconHandle
+                                    );
             }
 
             // dispose the previous icon handle if it's not the default handle
@@ -3974,7 +3976,7 @@ namespace CleanWpfApp
             IntPtr lParam,
             ref bool handled)
         {
-            IntPtr retInt = IntPtr.Zero;
+            var retInt = IntPtr.Zero;
             WindowMessage message = (WindowMessage)msg;
 
             //
@@ -3999,10 +4001,7 @@ namespace CleanWpfApp
                 {
                     // Either Explorer's created a new button or it's time to try again.
                     // Stop deferring updates to the Taskbar.
-                    if (_taskbarRetryTimer != null)
-                    {
-                        _taskbarRetryTimer.Stop();
-                    }
+                    _taskbarRetryTimer?.Stop();
 
                     // We'll receive WM_TASKBARBUTTONCREATED at times other than when the Window was created,
                     //    e.g. Explorer restarting, in response to ShowInTaskbar=true, etc.
@@ -4080,7 +4079,7 @@ namespace CleanWpfApp
 
             // Event handler exception continuality: if exception occurs in Closing event handler, the
             // cleanup action is to finish closing.
-            CancelEventArgs e = new CancelEventArgs(false);
+            var e = new CancelEventArgs(false);
             try
             {
                 OnClosing(e);
@@ -4205,7 +4204,7 @@ namespace CleanWpfApp
         {
             // Close all owned windows
             // use internal version since we want to update the underlying collection
-            WindowCollection ownedWindows = OwnedWindowsInternal;
+            var ownedWindows = OwnedWindowsInternal;
 
             // need to discuss what the correct behavior is if one of the owned window throws exception
             // when closing.
@@ -4256,6 +4255,7 @@ namespace CleanWpfApp
                 }
             }
         }
+
         private bool WmDestroy()
         {
             // For WS_CHILD window, WM_SIZE, WM_MOVE (and maybe others) are called
@@ -4301,18 +4301,8 @@ namespace CleanWpfApp
                 return false;
             }
 
-            int loWord = NativeMethods.SignedLOWORD(wParam);
-            bool windowActivated;
-
-
-            if (loWord == NativeMethods.WA_INACTIVE)
-            {
-                windowActivated = false;
-            }
-            else
-            {
-                windowActivated = true;
-            }
+            var loWord = NativeMethods.SignedLOWORD(wParam);
+            var windowActivated = loWord != NativeMethods.WA_INACTIVE;
 
             HandleActivate(windowActivated);
 
@@ -4323,7 +4313,7 @@ namespace CleanWpfApp
         // to reflect what it would be when it's restored.
         private void UpdateDimensionsToRestoreBounds()
         {
-            Rect restoreRect = RestoreBounds;
+            var restoreRect = RestoreBounds;
             SetValue(LeftProperty, restoreRect.Left);
             SetValue(TopProperty, restoreRect.Top);
             SetValue(WidthProperty, restoreRect.Width);
@@ -4348,7 +4338,7 @@ namespace CleanWpfApp
                 return false;
             }
 
-            NativeMethods.RECT rc = WindowBounds;
+            var rc = WindowBounds;
             var windowSize = new Point(rc.right - rc.left, rc.bottom - rc.top);
             var ptLogicalUnits = DeviceToLogicalUnits(windowSize);
 
@@ -4506,7 +4496,7 @@ namespace CleanWpfApp
 
             // the input lparam gives the client location,
             // so just call GetWindowRect for Left and Top.
-            NativeMethods.RECT rc = WindowBounds;
+            var rc = WindowBounds;
 
             var ptLogicalUnits = DeviceToLogicalUnits(new Point(rc.left, rc.top));
 
@@ -4530,7 +4520,7 @@ namespace CleanWpfApp
                 //Invalidate AutomationPeer if it was created/used by Automation.
                 //This will schedule a deferred update of bounding rectangle and
                 //corresponding notification to the Automation layer.
-                AutomationPeer peer = UIElementAutomationPeer.FromElement(this);
+                var peer = UIElementAutomationPeer.FromElement(this);
                 peer?.InvalidatePeer();
             }
 
@@ -4613,7 +4603,7 @@ namespace CleanWpfApp
                 // Get the final MinMax size for this HWND based on Win32 track value and Min/Max setting
                 // in this instance.
                 //
-                WindowMinMax finalMinMax = GetWindowMinMax();
+                var finalMinMax = GetWindowMinMax();
 
                 // The finalMinMax struct keeps the desired Min/Max size for this hwnd in Logic Units.
                 var minSizeDeviceUnits = LogicalToDeviceUnits(new Point(finalMinMax.minWidth, finalMinMax.minHeight));
@@ -4673,8 +4663,8 @@ namespace CleanWpfApp
             }
 
             // mouse position wrt to the left/top of the screen
-            int x = NativeMethods.SignedLOWORD(lParam);
-            int y = NativeMethods.SignedHIWORD(lParam);
+            var x = NativeMethods.SignedLOWORD(lParam);
+            var y = NativeMethods.SignedHIWORD(lParam);
 
             // Find the client area 0,0 of the Window wrt the screen
             // This will be used to transform the mouse position from screen co-od
@@ -4682,7 +4672,7 @@ namespace CleanWpfApp
             // whether the mouse is currently over the resize grip control or not
 
 
-            NativeMethods.POINT pt = GetPointRelativeToWindow(x, y);
+            var pt = GetPointRelativeToWindow(x, y);
             var ptLogicalUnits = DeviceToLogicalUnits(new Point(pt.x, pt.y));
 
             // Now, (ptLogicalUnits.X, ptLogicalUnits.Y) is the mouse postion wrt to the
@@ -4695,7 +4685,7 @@ namespace CleanWpfApp
             //     x,y should be not be less than zero
             //     x,y should not be greater than RenderSize.Width and RenderSize.Height
 
-            GeneralTransform transfromFromWindow = this.TransformToDescendant(_resizeGripControl);
+            var transfromFromWindow = TransformToDescendant(_resizeGripControl);
             if (transfromFromWindow == null || !transfromFromWindow.TryTransform(ptLogicalUnits, out var mousePositionWRTResizeGripControl))
             {
                 return false;
@@ -4932,18 +4922,20 @@ namespace CleanWpfApp
                                 // switch to normal, we want activation to happen since the maximized state is always
                                 // activated and transitioning from activated to non-activated would be weird.
                                 //
-                                NativeMethods.WINDOWPLACEMENT placement = new NativeMethods.WINDOWPLACEMENT();
+                                var placement = new NativeMethods.WINDOWPLACEMENT();
                                 placement.length = Marshal.SizeOf(placement);
                                 UnsafeNativeMethods.GetWindowPlacement(hr, ref placement);
 
-                                if ((placement.flags & NativeMethods.WPF_RESTORETOMAXIMIZED) == NativeMethods.WPF_RESTORETOMAXIMIZED)
+                                if (
+                                    ShowActivated ||
+                                    (placement.flags & NativeMethods.WPF_RESTORETOMAXIMIZED) == NativeMethods.WPF_RESTORETOMAXIMIZED
+                                )
+                                {
                                     UnsafeNativeMethods.ShowWindow(hr, NativeMethods.SW_RESTORE);
+                                }
                                 else
                                 {
-                                    if (ShowActivated)
-                                        UnsafeNativeMethods.ShowWindow(hr, NativeMethods.SW_RESTORE);
-                                    else
-                                        UnsafeNativeMethods.ShowWindow(hr, NativeMethods.SW_SHOWNOACTIVATE);
+                                    UnsafeNativeMethods.ShowWindow(hr, NativeMethods.SW_SHOWNOACTIVATE);
                                 }
                             }
                             break;
@@ -5051,7 +5043,7 @@ namespace CleanWpfApp
         {
             var w = (Window)d;
 
-            Visibility newValue = (Visibility)value;
+            var newValue = (Visibility)value;
             if (newValue == Visibility.Visible)
             {
                 w.VerifyCanShow();
@@ -5165,7 +5157,7 @@ namespace CleanWpfApp
         /// update _isVisible and call CreateSourceWindow if
         /// it's the first time window is set to Visibile
         /// </summary>
-        private object ShowHelper(object booleanBox)
+        private object? ShowHelper(object booleanBox)
         {
             // Setting Visiblilty is async. When this is called from the async callback,
             // check whether the window is already closed.
@@ -5198,7 +5190,9 @@ namespace CleanWpfApp
             if (value)
             {
                 if (Application.IsShuttingDown)
+                {
                     return null;
+                }
 
                 SetShowKeyboardCueState();
 
@@ -5254,12 +5248,14 @@ namespace CleanWpfApp
                 //
                 // Determine whether this is a Topmost window without calling
                 // the Topmost property.  (This isn't allowed for xbap windows.)
-                bool isTopmost = (bool)GetValue(TopmostProperty);
-                if (isTopmost &&
+                var isTopmost = (bool)GetValue(TopmostProperty);
+                if (
+                    isTopmost &&
                     FrameworkCompatibilityPreferences.GetUseSetWindowPosForTopmostWindows() &&
-                    (nCmd == NativeMethods.SW_SHOW || nCmd == NativeMethods.SW_SHOWNA))
+                    (nCmd == NativeMethods.SW_SHOW || nCmd == NativeMethods.SW_SHOWNA)
+                )
                 {
-                    int flags = (nCmd == NativeMethods.SW_SHOWNA) ? NativeMethods.SWP_NOACTIVATE : 0;
+                    var flags = (nCmd == NativeMethods.SW_SHOWNA) ? NativeMethods.SWP_NOACTIVATE : 0;
                     UnsafeNativeMethods.SetWindowPos(
                         new HandleRef(this, CriticalHandle),
                         NativeMethods.HWND_TOPMOST,
@@ -5282,13 +5278,11 @@ namespace CleanWpfApp
 
 
             // dialog functionality; start dispatcher loop to block the call
-            if ((_showingAsDialog == true) && (_isVisible == true))
+            if (_showingAsDialog && _isVisible)
             {
-                //
                 // Since we exited the Context, we need to make sure
                 // we enter it before returning even if there is an
                 // exception
-                //
                 Debug.Assert(_dispatcherFrame == null, "_dispatcherFrame must be null here");
 
                 try
@@ -5311,13 +5305,12 @@ namespace CleanWpfApp
 
         internal virtual int nCmdForShow()
         {
-            var nCmd = WindowState switch
+            return WindowState switch
             {
                 WindowState.Maximized => NativeMethods.SW_SHOWMAXIMIZED,// The OS doesn't provide support for non-activated maximized windows.
                 WindowState.Minimized => ShowActivated ? NativeMethods.SW_SHOWMINIMIZED : NativeMethods.SW_SHOWMINNOACTIVE,
                 _ => ShowActivated ? NativeMethods.SW_SHOW : NativeMethods.SW_SHOWNA,
             };
-            return nCmd;
         }
 
         private void SafeStyleSetter()
@@ -5694,7 +5687,6 @@ namespace CleanWpfApp
         {
             var deltaX = 0;
             var deltaY = 0;
-            Point retPt;
 
             // First we get the monitor on which the window is on.  [Get/Set]WindowPlacement
             // co-ods are dependent on the monitor on which the window is on.
@@ -5714,6 +5706,7 @@ namespace CleanWpfApp
                 deltaY = workAreaRect.top - screenAreaRect.top;
             }
 
+            Point retPt;
             if (transformType == TransformType.WorkAreaToScreenArea)
             {
                 retPt = new Point(pt.X + deltaX, pt.Y + deltaY);
@@ -5774,7 +5767,7 @@ namespace CleanWpfApp
             // is not allowed
             w.VerifyApiSupported();
 
-            double top = (double)value;
+            var top = (double)value;
 
             // Move ValidateTopLeft calls from property
             // invalidation callback to PropertyMetadata
@@ -5975,7 +5968,7 @@ namespace CleanWpfApp
             // Adding check for IsCompositionTargetInvalid
             if (IsSourceWindowNull == false && IsCompositionTargetInvalid == false)
             {
-                using HwndStyleManager sm = HwndStyleManager.StartManaging(this, StyleFromHwnd, StyleExFromHwnd);
+                using var sm = HwndStyleManager.StartManaging(this, StyleFromHwnd, StyleExFromHwnd);
                 CreateResizibility();
             }
         }
@@ -6004,12 +5997,12 @@ namespace CleanWpfApp
             // Adding check for IsCompositionTargetInvalid
             if (!IsSourceWindowNull && !IsCompositionTargetInvalid)
             {
-                using HwndStyleManager sm = HwndStyleManager.StartManaging(this, StyleFromHwnd, StyleExFromHwnd);
+                using var sm = HwndStyleManager.StartManaging(this, StyleFromHwnd, StyleExFromHwnd);
                 CreateRtl();
             }
         }
 
-        private static object CoerceRenderTransform(DependencyObject d, object value)
+        private static object? CoerceRenderTransform(DependencyObject d, object value)
         {
             var renderTransformValue = (Transform)value;
 
@@ -6141,7 +6134,7 @@ namespace CleanWpfApp
                 return;
             }
 
-            HRESULT hr = HRESULT.S_OK;
+            var hr = HRESULT.S_OK;
             if (_taskbarList == null)
             {
                 // If we don't have a handle and there isn't a TaskbarItemInfo, then we don't have anything to apply or remove.
@@ -6150,7 +6143,7 @@ namespace CleanWpfApp
                     return;
                 }
 
-                ITaskbarList taskbarList = null;
+                ITaskbarList? taskbarList = null;
                 try
                 {
                     taskbarList = (ITaskbarList)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid(CLSID.TaskbarList)));
@@ -6224,7 +6217,7 @@ namespace CleanWpfApp
         {
             Debug.Assert(null != _taskbarList);
 
-            TaskbarItemInfo taskbarInfo = TaskbarItemInfo;
+            var taskbarInfo = TaskbarItemInfo;
             var tbpf = TBPF.NOPROGRESS;
 
             if (taskbarInfo != null)
@@ -6254,7 +6247,7 @@ namespace CleanWpfApp
                 }
             }
 
-            HRESULT hr = _taskbarList.SetProgressState(CriticalHandle, tbpf);
+            var hr = _taskbarList.SetProgressState(CriticalHandle, tbpf);
             if (hr.Succeeded)
             {
                 // Explicitly update this in case this property being set
@@ -6269,7 +6262,7 @@ namespace CleanWpfApp
         {
             Debug.Assert(null != _taskbarList);
 
-            TaskbarItemInfo taskbarInfo = TaskbarItemInfo;
+            var taskbarInfo = TaskbarItemInfo;
 
             // If we're not attached then don't modify this.
             if (
@@ -6293,8 +6286,8 @@ namespace CleanWpfApp
         {
             Debug.Assert(null != _taskbarList);
 
-            TaskbarItemInfo taskbarInfo = TaskbarItemInfo;
-            NativeMethods.IconHandle hicon = NativeMethods.IconHandle.GetInvalidIcon();
+            var taskbarInfo = TaskbarItemInfo;
+            var hicon = NativeMethods.IconHandle.GetInvalidIcon();
 
             // The additional string at the end of SetOverlayIcon sets the accDescription
             // for screen readers.  We don't currently have a property that utilizes this.
@@ -6318,8 +6311,8 @@ namespace CleanWpfApp
         {
             Debug.Assert(null != _taskbarList);
 
-            TaskbarItemInfo taskbarInfo = TaskbarItemInfo;
-            string tooltip = "";
+            var taskbarInfo = TaskbarItemInfo;
+            var tooltip = "";
 
             if (taskbarInfo != null)
             {
@@ -6464,7 +6457,7 @@ namespace CleanWpfApp
                                 nativeTB.szTip = wrappedTB.Description ?? "";
                                 if (wrappedTB.ImageSource != null)
                                 {
-                                    NativeMethods.IconHandle nativeIcon = IconHelper.CreateIconHandleFromImageSource(wrappedTB.ImageSource, _overlaySize);
+                                    var nativeIcon = IconHelper.CreateIconHandleFromImageSource(wrappedTB.ImageSource, _overlaySize);
                                     nativeTB.hIcon = nativeIcon.CriticalGetHandle();
                                     nativeIcons.Add(nativeIcon);
                                 }
@@ -6621,7 +6614,7 @@ namespace CleanWpfApp
                 }
                 finally
                 {
-                    HwndSource source = _swh.HwndSourceWindow;
+                    var source = _swh.HwndSourceWindow;
                     _swh = null;
 
                     if (source != null)
@@ -6668,7 +6661,9 @@ namespace CleanWpfApp
             // We don't support to show a maximized non-activated window.
             // Don't check this consistency in a RBW (would break because Visibility is set when launching the RBW).
             if (!_inTrustedSubWindow && WindowState == WindowState.Maximized && !ShowActivated)
+            {
                 throw new InvalidOperationException(Strings.ShowNonActivatedAndMaximized);
+            }
         }
 
         private static bool IsValidSizeToContent(SizeToContent value)
@@ -6887,9 +6882,9 @@ namespace CleanWpfApp
         /// <summary>
         ///     Application Instance
         /// </summary>
-        private System.Windows.Application App
+        private Application App
         {
-            get { return System.Windows.Application.Current; }
+            get { return Application.Current; }
         }
 
         /// <summary>
@@ -7029,8 +7024,10 @@ namespace CleanWpfApp
         internal static readonly DependencyProperty IWindowServiceProperty =
             DependencyProperty.RegisterAttached(
                 "IWindowService", typeof(IWindowService), typeof(Window),
-                new FrameworkPropertyMetadata((IWindowService)null,
-                FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.OverridesInheritanceBehavior)
+                new FrameworkPropertyMetadata(
+                    null,
+                    FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.OverridesInheritanceBehavior
+                )
             );
 
         DispatcherOperation _contentRenderedCallback;
@@ -7085,13 +7082,12 @@ namespace CleanWpfApp
             {
                 get
                 {
-                    IntPtr monitor;
                     var monitorInfo = new NativeMethods.MONITORINFOEX
                     {
                         cbSize = Marshal.SizeOf(typeof(NativeMethods.MONITORINFOEX))
                     };
 
-                    monitor = SafeNativeMethods.MonitorFromWindow(new HandleRef(this, CriticalHandle), NativeMethods.MONITOR_DEFAULTTONEAREST);
+                    var monitor = SafeNativeMethods.MonitorFromWindow(new HandleRef(this, CriticalHandle), NativeMethods.MONITOR_DEFAULTTONEAREST);
                     if (monitor != IntPtr.Zero)
                     {
                         SafeNativeMethods.GetMonitorInfo(new HandleRef(this, monitor), monitorInfo);
@@ -7186,7 +7182,7 @@ namespace CleanWpfApp
                 {
                     if (_sourceWindow != null)
                     {
-                        HwndTarget compositionTarget = _sourceWindow.CompositionTarget;
+                        var compositionTarget = _sourceWindow.CompositionTarget;
                         if (compositionTarget != null && compositionTarget.IsDisposed == false)
                         {
                             return compositionTarget;
