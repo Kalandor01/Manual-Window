@@ -1,70 +1,13 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.Graphics.Gdi;
 
 namespace ManualWindow
 {
     internal class Window
     {
-        [DllImport("kernel32.dll")]
-        static extern uint GetLastError();
-
-        [DllImport("user32.dll", EntryPoint = "MessageBox", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern int MessageBox(nint hWnd, string lpText, string lpCaption, uint uType);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool UpdateWindow(nint hWnd);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool ShowWindow(nint hWnd, int nCmdShow);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool DestroyWindow(nint hWnd);
-
-        [DllImport("user32.dll", EntryPoint = "CreateWindowEx", CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern nint CreateWindowEx(
-               int dwExStyle,
-               ushort regResult,
-               //string lpClassName,
-               string lpWindowName,
-               uint dwStyle,
-               int x,
-               int y,
-               int nWidth,
-               int nHeight,
-               nint hWndParent,
-               nint hMenu,
-               nint hInstance,
-               nint lpParam
-            );
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern ushort RegisterClassEx([In] ref WNDCLASSEX lpWndClass);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern nint DefWindowProc(nint hWnd, uint uMsg, nint wParam, nint lParam);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern void PostQuitMessage(int nExitCode);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern nint LoadCursor(nint hInstance, int lpCursorName);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern nint BeginPaint(nint hWnd, [In] ref PAINTSTRUCT lpPaint);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool EndPaint(nint hWnd, in PAINTSTRUCT lpPaint);
-
-        //[DllImport("user32.dll")]
-        //static extern sbyte GetMessage(out MSG lpMsg, IntPtr hWnd, uint wMsgFilterMin,
-        //   uint wMsgFilterMax);
-
-        //[DllImport("user32.dll")]
-        //static extern bool TranslateMessage([In] ref MSG lpMsg);
-
-        //[DllImport("user32.dll")]
-        //static extern IntPtr DispatchMessage([In] ref MSG lpmsg);
-
         delegate nint WndProc(nint hWnd, uint msg, nint wParam, nint lParam);
 
         const uint WS_OVERLAPPEDWINDOW = 0b1100_1111_0000_0000_0000_0000;
@@ -76,37 +19,6 @@ namespace ManualWindow
         const uint COLOR_WINDOW = 5;
         const uint COLOR_BACKGROUND = 1;
         const uint IDC_CROSS = 32515;
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        struct WNDCLASSEX
-        {
-            [MarshalAs(UnmanagedType.U4)]
-            public int cbSize;
-            [MarshalAs(UnmanagedType.U4)]
-            public int style;
-            public nint lpfnWndProc;
-            public int cbClsExtra;
-            public int cbWndExtra;
-            public nint hInstance;
-            public nint hIcon;
-            public nint hCursor;
-            public nint hbrBackground;
-            public string lpszMenuName;
-            public string lpszClassName;
-            public nint hIconSm;
-        }
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        struct PAINTSTRUCT
-        {
-            public nint hdc;
-            public bool fErase;
-            public nint rcPaint;
-            public bool fRestore;
-            public bool fIncUpdate;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
-            public byte[] rgbReserved;
-        }
 
         /// <summary>
         /// Returns a string representation of the message.
@@ -192,9 +104,20 @@ namespace ManualWindow
             switch (messageEnum)
             {
                 case WindowProcessMessage.PAINT_WINDOW_REQUEST:
-                    var ps = new PAINTSTRUCT();
-                    var res = BeginPaint(windowHandle, ref ps);
-                    var suc = EndPaint(windowHandle, ps);
+                    var hdc = NativeMethods.BeginPaint(windowHandle, out var ps);
+                    if (hdc == IntPtr.Zero)
+                    {
+                        var error = NativeMethods.GetLastError();
+                    }
+                    RECT rect;
+                    unsafe
+                    {
+                        rect = *(RECT*)&ps.rcPaint;
+                    }
+                    var brush = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_WINDOW);
+                    var res = NativeMethods.FillRect(new HDC(hdc), rect, brush);
+                    var suc = NativeMethods.EndPaint(windowHandle, ps);
+                    //PInvoke.UpdateWindow();
                     break;
             }
 
@@ -224,7 +147,7 @@ namespace ManualWindow
                 _ => nint.Zero,
             };
 
-            var defResponse = DefWindowProc(windowHandle, message, messageExtra1, messageExtra2);
+            var defResponse = NativeMethods.DefWindowProc(windowHandle, message, messageExtra1, messageExtra2);
             response = defResponse;
             Console.WriteLine(WindowMessageToString(windowHandle, message, messageExtra1, messageExtra2) + $"\t-> {response}");
             return response;
@@ -232,41 +155,41 @@ namespace ManualWindow
 
         public bool CreateWindow()
         {
-            var windowClass = new WNDCLASSEX
+            var windowClass = new NativeMethods.WNDCLASSEX
             {
-                cbSize = Marshal.SizeOf(typeof(WNDCLASSEX)),
+                cbSize = Marshal.SizeOf(typeof(NativeMethods.WNDCLASSEX)),
                 style = (int)(CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS), //Doubleclicks are active
                 hbrBackground = (nint)COLOR_BACKGROUND + 1, //Black background, +1 is necessary
                 cbClsExtra = 0,
                 cbWndExtra = 0,
                 hInstance = Marshal.GetHINSTANCE(GetType().Module), // alternative: Process.GetCurrentProcess().Handle
                 hIcon = nint.Zero,
-                hCursor = LoadCursor(nint.Zero, (int)IDC_CROSS),// Crosshair cursor
+                hCursor = NativeMethods.LoadCursor(nint.Zero, (int)IDC_CROSS),// Crosshair cursor
                 lpszMenuName = null,
                 lpszClassName = "myClass",
                 lpfnWndProc = Marshal.GetFunctionPointerForDelegate(new WndProc(WindowProc)),
                 hIconSm = nint.Zero
             };
 
-            var registrationResult = RegisterClassEx(ref windowClass);
+            var registrationResult = NativeMethods.RegisterClassEx(ref windowClass);
 
             if (registrationResult == 0)
             {
-                var error = GetLastError();
+                var error = NativeMethods.GetLastError();
                 return false;
             }
 
-            var windowHadle = CreateWindowEx(0, registrationResult, "Hello Win32", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, 0, 300, 400, nint.Zero, nint.Zero, windowClass.hInstance, nint.Zero);
+            var windowHadle = NativeMethods.CreateWindowEx(0, registrationResult, "Hello Win32", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, 0, 300, 400, nint.Zero, nint.Zero, windowClass.hInstance, nint.Zero);
 
             if (windowHadle == 0)
             {
-                var error = GetLastError();
+                var error = NativeMethods.GetLastError();
                 return false;
             }
-            ShowWindow(windowHadle, 1);
+            NativeMethods.ShowWindow(windowHadle, 1);
             while (true)
             {
-                var res = UpdateWindow(windowHadle);
+                var res = NativeMethods.UpdateWindow(windowHadle);
                 //Thread.Sleep(100);
             }
             return true;
