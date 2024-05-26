@@ -1,23 +1,13 @@
-﻿using System.Threading;
+﻿using Accessibility;
+using Microsoft.Win32.SafeHandles;
 using System.ComponentModel;
 using System.Diagnostics;
-using Accessibility;
-using SRCS = System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
-using System;
-using System.Collections;
-using System.IO;
-using System.Text;
-using System.Security;
-using Microsoft.Win32.SafeHandles;
-using MS.Internal;
-using MS.Internal.Interop;
-using MS.Utility;
-using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
-using CleanWpfApp;
-using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text;
+using System.Windows;
+using static CleanWpfApp.NativeMethods;
+using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 namespace CleanWpfApp
 {
@@ -179,7 +169,7 @@ namespace CleanWpfApp
 
         internal static int WaitForMultipleObjectsEx(int nCount, IntPtr[] pHandles, bool bWaitAll, int dwMilliseconds, bool bAlertable)
         {
-            int result = IntWaitForMultipleObjectsEx(nCount, pHandles, bWaitAll, dwMilliseconds, bAlertable);
+            var result = IntWaitForMultipleObjectsEx(nCount, pHandles, bWaitAll, dwMilliseconds, bAlertable);
             if (result == WAIT_FAILED)
             {
                 throw new Win32Exception();
@@ -193,7 +183,7 @@ namespace CleanWpfApp
 
         internal static int MsgWaitForMultipleObjectsEx(int nCount, IntPtr[] pHandles, int dwMilliseconds, int dwWakeMask, int dwFlags)
         {
-            int result = IntMsgWaitForMultipleObjectsEx(nCount, pHandles, dwMilliseconds, dwWakeMask, dwFlags);
+            var result = IntMsgWaitForMultipleObjectsEx(nCount, pHandles, dwMilliseconds, dwWakeMask, dwFlags);
             if(result == -1)
             {
                 throw new Win32Exception();
@@ -221,7 +211,7 @@ namespace CleanWpfApp
 
         internal static void UnregisterClass(IntPtr atomString /*lpClassName*/ , IntPtr hInstance)
         {
-            int result = IntUnregisterClass(atomString, hInstance);
+            var result = IntUnregisterClass(atomString, hInstance);
             if (result == 0)
             {
                 throw new Win32Exception();
@@ -238,7 +228,7 @@ namespace CleanWpfApp
 
         // Note that processes at or below SECURITY_MANDATORY_LOW_RID are not allowed to change the message filter.
         // If those processes call this function, it will fail and generate the extended error code, ERROR_ACCESS_DENIED.
-        internal static MS.Internal.Interop.HRESULT ChangeWindowMessageFilterEx(IntPtr hwnd, WindowMessage message, MSGFLT action, out MSGFLTINFO extStatus)
+        internal static HRESULT ChangeWindowMessageFilterEx(IntPtr hwnd, WindowMessage message, MSGFLT action, out MSGFLTINFO extStatus)
         {
             extStatus = MSGFLTINFO.NONE;
 
@@ -246,7 +236,7 @@ namespace CleanWpfApp
             // If we're not on either, then this message filter isolation doesn't exist.
             if (!Utilities.IsOSVistaOrNewer)
             {
-                return MS.Internal.Interop.HRESULT.S_FALSE;
+                return HRESULT.S_FALSE;
             }
 
             // If we're on Vista rather than Win7 then we can't use the Ex version of this function.
@@ -257,36 +247,36 @@ namespace CleanWpfApp
                 // Note that the Win7 MSGFLT_ALLOW/DISALLOW enum values map to the Vista MSGFLT_ADD/REMOVE
                 if (!IntChangeWindowMessageFilter(message, action))
                 {
-                    return (MS.Internal.Interop.HRESULT)Win32Error.GetLastError();
+                    return (HRESULT)Win32Error.GetLastError();
                 }
-                return MS.Internal.Interop.HRESULT.S_OK;
+                return HRESULT.S_OK;
             }
 
             var filterstruct = new CHANGEFILTERSTRUCT { cbSize = (uint)Marshal.SizeOf(typeof(CHANGEFILTERSTRUCT)) };
             if (!IntChangeWindowMessageFilterEx(hwnd, message, action, ref filterstruct))
             {
-                return (MS.Internal.Interop.HRESULT)Win32Error.GetLastError();
+                return (HRESULT)Win32Error.GetLastError();
             }
 
             extStatus = filterstruct.ExtStatus;
-            return MS.Internal.Interop.HRESULT.S_OK;
+            return HRESULT.S_OK;
         }
 
         [DllImport(ExternDll.Urlmon, ExactSpelling = true, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-        private static extern MS.Internal.Interop.HRESULT ObtainUserAgentString(int dwOption, StringBuilder userAgent, ref int length);
+        private static extern HRESULT ObtainUserAgentString(int dwOption, StringBuilder userAgent, ref int length);
 
         internal static string ObtainUserAgentString()
         {
-            int length = NativeMethods.MAX_PATH;
-            StringBuilder userAgentBuffer = new StringBuilder(length);
-            MS.Internal.Interop.HRESULT hr = ObtainUserAgentString(0 /*reserved. must be 0*/, userAgentBuffer, ref length);
+            var length = NativeMethods.MAX_PATH;
+            var userAgentBuffer = new StringBuilder(length);
+            var hr = ObtainUserAgentString(0 /*reserved. must be 0*/, userAgentBuffer, ref length);
 
             // Installing .NET 4.0 adds two parts to the user agent string, i.e.
             // .NET4.0C and .NET4.0E, potentially causing the user agent string to overflow its
             // documented maximum length of MAX_PATH. Turns out ObtainUserAgentString can return
             // a longer string if asked to do so. Therefore we grow the string dynamically when
             // needed, accommodating for this failure condition.
-            if (hr == MS.Internal.Interop.HRESULT.E_OUTOFMEMORY)
+            if (hr == HRESULT.E_OUTOFMEMORY)
             {
                 userAgentBuffer = new StringBuilder(length);
                 hr = ObtainUserAgentString(0 /*reserved. must be 0*/, userAgentBuffer, ref length);
@@ -968,8 +958,8 @@ namespace CleanWpfApp
             internal UInt32 uMsg;
             internal IntPtr wParam;
             internal IntPtr lParam;
-            internal Int32 ptX;
-            internal Int32 ptY;
+            internal int ptX;
+            internal int ptY;
             internal IntPtr hwnd;
         }
 
@@ -1165,28 +1155,28 @@ namespace CleanWpfApp
         public static extern int OleSetClipboard(IComDataObject pDataObj);
         [DllImport(ExternDll.Ole32, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern int OleFlushClipboard();
-#endif
+
         [DllImport(ExternDll.Uxtheme, CharSet = CharSet.Auto, BestFitMapping = false)]
         public static extern int GetCurrentThemeName(StringBuilder pszThemeFileName, int dwMaxNameChars, StringBuilder pszColorBuff, int dwMaxColorChars, StringBuilder pszSizeBuff, int cchMaxSizeChars);
 
         [DllImport(ExternDll.DwmAPI, BestFitMapping = false)]
-        public static extern int DwmIsCompositionEnabled(out Int32 enabled);
+        public static extern int DwmIsCompositionEnabled(out int enabled);
 
-        [DllImport(ExternDll.Kernel32, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(ExternDll.Kernel32, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern IntPtr GetCurrentThread();
 
 #if !DRT && !UIAUTOMATIONTYPES
-        [DllImport(ExternDll.User32, CharSet = System.Runtime.InteropServices.CharSet.Auto, BestFitMapping = false)]
+        [DllImport(ExternDll.User32, CharSet = CharSet.Auto, BestFitMapping = false)]
         public static extern WindowMessage RegisterWindowMessage(string msg);
 #endif
 
-        [DllImport(ExternDll.User32, EntryPoint = "SetWindowPos", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
+        [DllImport(ExternDll.User32, EntryPoint = "SetWindowPos", ExactSpelling = true, CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool SetWindowPos(HandleRef hWnd, HandleRef hWndInsertAfter, int x, int y, int cx, int cy, int flags);
 
-        [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
+        [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = CharSet.Auto, SetLastError = true)]
         public static extern IntPtr GetWindow(HandleRef hWnd, int uCmd);
 
-        [DllImport(ExternDll.Shcore, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
+        [DllImport(ExternDll.Shcore, CharSet = CharSet.Auto, SetLastError = true)]
         public static extern uint GetDpiForMonitor(HandleRef hMonitor, NativeMethods.MONITOR_DPI_TYPE dpiType, out uint dpiX, out uint dpiY);
 
         [DllImport(ExternDll.User32, EntryPoint = "IsProcessDPIAware", CharSet = CharSet.Auto, SetLastError = true)]
@@ -1198,10 +1188,10 @@ namespace CleanWpfApp
         [DllImport(ExternDll.User32, EntryPoint = "EnableNonClientDpiScaling", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool EnableNonClientDpiScaling(HandleRef hWnd);
 
-        [DllImport(ExternDll.User32, SetLastError = true, CharSet = System.Runtime.InteropServices.CharSet.Auto, BestFitMapping = false)]
+        [DllImport(ExternDll.User32, SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false)]
         public static extern int GetClassName(HandleRef hwnd, StringBuilder lpClassName, int nMaxCount);
 
-        [DllImport(ExternDll.User32, SetLastError = true, CharSet = System.Runtime.InteropServices.CharSet.Auto, BestFitMapping = false)]
+        [DllImport(ExternDll.User32, SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false)]
         public static extern int MessageBox(HandleRef hWnd, string text, string caption, int type);
 
         [DllImport(ExternDll.Uxtheme, CharSet = CharSet.Auto, BestFitMapping = false, EntryPoint = "SetWindowTheme")]
@@ -1220,10 +1210,10 @@ namespace CleanWpfApp
         [DllImport(ExternDll.User32, EntryPoint = "FillRect", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int CriticalFillRect(IntPtr hdc, ref NativeMethods.RECT rcFill, IntPtr brush);
 
-        [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern int GetBitmapBits(HandleRef hbmp, int cbBuffer, byte[] lpvBits);
 
-        [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool ShowWindow(HandleRef hWnd, int nCmdShow);
 
         public static void DeleteObject(HandleRef hObject)
@@ -1265,19 +1255,19 @@ namespace CleanWpfApp
         [DllImport(ExternDll.Gdi32, EntryPoint = "SelectObject", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern IntPtr CriticalSelectObject(HandleRef hdc, IntPtr obj);
 
-        [DllImport(ExternDll.User32, CharSet = System.Runtime.InteropServices.CharSet.Auto, BestFitMapping = false, SetLastError = true)]
+        [DllImport(ExternDll.User32, CharSet = CharSet.Auto, BestFitMapping = false, SetLastError = true)]
         public static extern int GetClipboardFormatName(int format, StringBuilder lpString, int cchMax);
 
-        [DllImport(ExternDll.User32, SetLastError = true, CharSet = System.Runtime.InteropServices.CharSet.Auto, BestFitMapping = false)]
+        [DllImport(ExternDll.User32, SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false)]
         public static extern int RegisterClipboardFormat(string format);
 
-        [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool BitBlt(HandleRef hDC, int x, int y, int nWidth, int nHeight,
                                          HandleRef hSrcDC, int xSrc, int ySrc, int dwRop);
-        [DllImport(ExternDll.User32, EntryPoint = "PrintWindow", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(ExternDll.User32, EntryPoint = "PrintWindow", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool CriticalPrintWindow(HandleRef hWnd, HandleRef hDC, int flags);
 
-        [DllImport(ExternDll.User32, EntryPoint = "RedrawWindow", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(ExternDll.User32, EntryPoint = "RedrawWindow", ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool CriticalRedrawWindow(HandleRef hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, int flags);
 
         [DllImport(ExternDll.Shell32, CharSet = CharSet.Auto, BestFitMapping = false)]
@@ -1789,7 +1779,7 @@ namespace CleanWpfApp
                                                 IntPtr wParam, IntPtr lParam);
 
         [DllImport(ExternDll.User32, CharSet = CharSet.Unicode, EntryPoint = "DefWindowProcW")]
-        public static extern IntPtr DefWindowProc(IntPtr hWnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr DefWindowProc(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport(ExternDll.Kernel32, SetLastError = true, EntryPoint = "GetProcAddress", CharSet = CharSet.Ansi, BestFitMapping = false)]
         public static extern IntPtr IntGetProcAddress(HandleRef hModule, string lpProcName);
@@ -2401,7 +2391,7 @@ namespace CleanWpfApp
             NameServicePrincipal = 10
         }
 
-        [ComImport(), Guid("00000122-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000122-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleDropTarget
         {
             [PreserveSig]
@@ -2439,7 +2429,7 @@ namespace CleanWpfApp
                 ref int pdwEffect);
         }
 
-        [ComImport(), Guid("00000121-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000121-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleDropSource
         {
             [PreserveSig]
@@ -2457,7 +2447,7 @@ namespace CleanWpfApp
         [
         ComImport(),
         Guid("B196B289-BAB4-101A-B69C-00AA00341D07"),
-        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
         ]
         public interface IOleControlSite
         {
@@ -2493,7 +2483,7 @@ namespace CleanWpfApp
             int ShowPropertyFrame();
         }
 
-        [ComImport(), Guid("00000118-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000118-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleClientSite
         {
             [PreserveSig]
@@ -2521,7 +2511,7 @@ namespace CleanWpfApp
             int RequestNewObjectLayout();
         }
 
-        [ComImport(), Guid("00000119-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000119-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleInPlaceSite
         {
             IntPtr GetWindow();
@@ -2574,7 +2564,7 @@ namespace CleanWpfApp
                 NativeMethods.COMRECT lprcPosRect);
         }
 
-        [ComImport(), Guid("9BFBBC02-EFF1-101A-84ED-00AA00341D07"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("9BFBBC02-EFF1-101A-84ED-00AA00341D07"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IPropertyNotifySink
         {
             void OnChanged(int dispID);
@@ -2583,7 +2573,7 @@ namespace CleanWpfApp
             int OnRequestEdit(int dispID);
         }
 
-        [ComImport(), Guid("00000100-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000100-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumUnknown
         {
             [PreserveSig]
@@ -2606,7 +2596,7 @@ namespace CleanWpfApp
                 out IEnumUnknown ppenum);
         }
 
-        [ComImport(), Guid("0000011B-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("0000011B-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleContainer
         {
             [PreserveSig]
@@ -2632,7 +2622,7 @@ namespace CleanWpfApp
                 bool fLock);
         }
 
-        [ComImport(), Guid("00000116-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000116-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleInPlaceFrame
         {
             IntPtr GetWindow();
@@ -3131,7 +3121,7 @@ namespace CleanWpfApp
 
         [ComImport(),
         Guid("B196B288-BAB4-101A-B69C-00AA00341D07"),
-        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IOleControl
         {
             [PreserveSig]
@@ -3172,21 +3162,20 @@ namespace CleanWpfApp
 
             [PreserveSig]
             int Advise(
-                   [In, MarshalAs(UnmanagedType.Interface)]
-                  object pUnkSink,
-                 ref int cookie);
+                [In, MarshalAs(UnmanagedType.Interface)]
+                object pUnkSink,
+                ref int cookie
+            );
 
 
             [PreserveSig]
-            int Unadvise(
-
-                     int cookie);
+            int Unadvise(int cookie);
 
             [PreserveSig]
             int EnumConnections(out object pEnum);
         }
 
-        [ComImport(), Guid("00020404-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00020404-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumVariant
         {
             [PreserveSig]
@@ -3209,7 +3198,7 @@ namespace CleanWpfApp
                    IEnumVariant[] ppenum);
         }
 
-        [ComImport(), Guid("00000104-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00000104-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumOLEVERB
         {
             [PreserveSig]
@@ -3234,7 +3223,7 @@ namespace CleanWpfApp
 
         // This interface has different parameter marshaling from System.Runtime.InteropServices.ComTypes.IStream.
         // They are incompatable. But type cast will succeed because they have the same guid.
-        [ComImport(), Guid("0000000C-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("0000000C-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IStream
         {
             int Read(
@@ -3252,7 +3241,6 @@ namespace CleanWpfApp
 
                      int dwOrigin);
 
-
             void SetSize(
                    [In, MarshalAs(UnmanagedType.I8)]
                  long libNewSize);
@@ -3266,14 +3254,9 @@ namespace CleanWpfApp
                     [Out, MarshalAs(UnmanagedType.LPArray)]
                  long[] pcbRead);
 
-
-            void Commit(
-
-                    int grfCommitFlags);
-
+            void Commit(int grfCommitFlags);
 
             void Revert();
-
 
             void LockRegion(
                    [In, MarshalAs(UnmanagedType.I8)]
@@ -3315,7 +3298,7 @@ namespace CleanWpfApp
             int FindConnectionPoint([In] ref Guid guid, [Out, MarshalAs(UnmanagedType.Interface)] out IConnectionPoint ppCP);
         }
 
-        [ComImport(), Guid("B196B285-BAB4-101A-B69C-00AA00341D07"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("B196B285-BAB4-101A-B69C-00AA00341D07"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumConnectionPoints
         {
             [PreserveSig]
@@ -3329,11 +3312,10 @@ namespace CleanWpfApp
             IEnumConnectionPoints Clone();
         }
 
-        [ComImport(), Guid("00020400-0000-0000-C000-000000000046"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("00020400-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IDispatch
         {
             #region <KeepInSync With="IDispatchEx">
-
             int GetTypeInfoCount();
 
             [return: MarshalAs(UnmanagedType.Interface)]
@@ -3344,7 +3326,7 @@ namespace CleanWpfApp
                  int lcid);
 
             [PreserveSig]
-            HR GetIDsOfNames(
+            HRESULT GetIDsOfNames(
                    [In]
                  ref Guid riid,
                    [In, MarshalAs(UnmanagedType.LPArray)]
@@ -3358,8 +3340,7 @@ namespace CleanWpfApp
 
 
             [PreserveSig]
-            HR Invoke(
-
+            HRESULT Invoke(
                     int dispIdMember,
                    [In]
                  ref Guid riid,
@@ -3378,11 +3359,10 @@ namespace CleanWpfApp
             #endregion
         }
 
-        [ComImport(), Guid("A6EF9860-C720-11D0-9337-00A0C90DCAA9"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("A6EF9860-C720-11D0-9337-00A0C90DCAA9"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IDispatchEx : IDispatch
         {
             #region <KeepInSync With="IDispatch">
-
             new int GetTypeInfoCount();
 
             [return: MarshalAs(UnmanagedType.Interface)]
@@ -3393,7 +3373,7 @@ namespace CleanWpfApp
                  int lcid);
 
             [PreserveSig]
-            new HR GetIDsOfNames(
+            new HRESULT GetIDsOfNames(
                    [In]
                  ref Guid riid,
                    [In, MarshalAs(UnmanagedType.LPArray)]
@@ -3407,7 +3387,7 @@ namespace CleanWpfApp
 
 
             [PreserveSig]
-            new HR Invoke(
+            new HRESULT Invoke(
                     int dispIdMember,
                    [In]
                  ref Guid riid,
@@ -3423,17 +3403,16 @@ namespace CleanWpfApp
                   NativeMethods.EXCEPINFO pExcepInfo,
                    [Out, MarshalAs(UnmanagedType.LPArray)]
                   IntPtr [] pArgErr);
-
             #endregion
 
             [PreserveSig]
-            HR GetDispID(
+            HRESULT GetDispID(
                 string name,
                 int nameProperties,
                 [Out] out int dispId);
 
             [PreserveSig]
-            HR InvokeEx(
+            HRESULT InvokeEx(
                 int dispId,
                 [MarshalAs(UnmanagedType.U4)] int lcid,
                 [MarshalAs(UnmanagedType.U4)] int flags,
@@ -3460,7 +3439,7 @@ namespace CleanWpfApp
             object GetNameSpaceParent();
         }
 
-        [ComImport(), Guid("6D5140C1-7436-11CE-8034-00AA006009FA"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("6D5140C1-7436-11CE-8034-00AA006009FA"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IServiceProvider
         {
             [return: MarshalAs(UnmanagedType.IUnknown)]
@@ -3472,7 +3451,6 @@ namespace CleanWpfApp
         TypeLibType(TypeLibTypeFlags.FHidden | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FOleAutomation)]
         public interface IWebBrowser2
         {
-            //
             // IWebBrowser members
 
             [DispId(100)]
@@ -3602,7 +3580,7 @@ namespace CleanWpfApp
         }
 
         [ComImport(), Guid("34A715A0-6587-11D0-924A-0020AFC7AC4D"),
-        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch),
+        InterfaceType(ComInterfaceType.InterfaceIsIDispatch),
         TypeLibType(TypeLibTypeFlags.FHidden)]
         public interface DWebBrowserEvents2
         {
@@ -3687,7 +3665,7 @@ namespace CleanWpfApp
 
         // Used to control the webbrowser appearance and provide DTE to script via window.external
         [ComImport(), Guid("BD3F23C0-D43E-11CF-893B-00AA00BDCE1A"),
-        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         internal interface IDocHostUIHandler
         {
             [return: MarshalAs(UnmanagedType.I4)]
@@ -4069,7 +4047,7 @@ namespace CleanWpfApp
         [DllImport(ExternDll.Oleaut32, PreserveSig = true)]
         private static extern int VariantClear(IntPtr pObject);
 
-        [ComImport(), Guid("7FD52380-4E07-101B-AE2D-08002B2EC713"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport(), Guid("7FD52380-4E07-101B-AE2D-08002B2EC713"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         internal interface IPersistStreamInit
         {
             void GetClassID(
@@ -4269,5 +4247,131 @@ namespace CleanWpfApp
         /// <returns>This method returns S_OK if successful or a failure code otherwise.</returns>
         [DllImport(ExternDll.Wldp, CallingConvention = CallingConvention.Winapi, ExactSpelling = true)]
         internal static extern int WldpIsDynamicCodePolicyEnabled([Out] out bool enabled);
+
+        internal class WIC
+        {
+            #region Constants
+            internal const int WINCODEC_SDK_VERSION = 0x0236;
+            internal static readonly Guid WICPixelFormat32bppPBGRA = new(0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x10);
+            #endregion
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "WICCreateImagingFactory_Proxy")]
+            internal static extern int CreateImagingFactory(
+                uint SDKVersion,
+                out IntPtr ppICodecFactory);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICImagingFactory_CreateStream_Proxy")]
+            internal static extern int /* HRESULT */ CreateStream(
+                IntPtr pICodecFactory,
+                out IntPtr /* IWICBitmapStream */ ppIStream);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICStream_InitializeFromMemory_Proxy")]
+            internal static extern int /*HRESULT*/ InitializeStreamFromMemory(
+                IntPtr pIWICStream,
+                IntPtr pbBuffer,
+                uint cbSize);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICImagingFactory_CreateDecoderFromStream_Proxy")]
+            internal static extern int /*HRESULT*/ CreateDecoderFromStream(
+                IntPtr pICodecFactory,
+                IntPtr /* IStream */ pIStream,
+                ref Guid guidVendor,
+                uint metadataFlags,
+                out IntPtr /* IWICBitmapDecoder */ ppIDecode);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICBitmapDecoder_GetFrame_Proxy")]
+            internal static extern int /* HRESULT */ GetFrame(
+                IntPtr /* IWICBitmapDecoder */ THIS_PTR,
+                uint index,
+                out IntPtr /* IWICBitmapFrameDecode */ ppIFrameDecode);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICImagingFactory_CreateFormatConverter_Proxy")]
+            internal static extern int /* HRESULT */ CreateFormatConverter(
+                IntPtr pICodecFactory,
+                out IntPtr /* IWICFormatConverter */ ppFormatConverter);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICFormatConverter_Initialize_Proxy")]
+            internal static extern int /* HRESULT */ InitializeFormatConverter(
+                IntPtr /* IWICFormatConverter */ THIS_PTR,
+                IntPtr /* IWICBitmapSource */ source,
+                ref Guid dstFormat,
+                int dither,
+                IntPtr /* IWICBitmapPalette */ bitmapPalette,
+                double alphaThreshold,
+                WICPaletteType paletteTranslate);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICImagingFactory_CreateBitmapFlipRotator_Proxy")]
+            internal static extern int /* HRESULT */ CreateBitmapFlipRotator(
+                IntPtr pICodecFactory,
+                out IntPtr /* IWICBitmapFlipRotator */ ppBitmapFlipRotator);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICBitmapFlipRotator_Initialize_Proxy")]
+            internal static extern int /* HRESULT */ InitializeBitmapFlipRotator(
+                IntPtr /* IWICBitmapFlipRotator */ THIS_PTR,
+                IntPtr /* IWICBitmapSource */ source,
+                WICBitmapTransformOptions options);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICBitmapSource_GetSize_Proxy")]
+            internal static extern int /* HRESULT */ GetBitmapSize(
+                IntPtr /* IWICBitmapSource */ THIS_PTR,
+                out int puiWidth,
+                out int puiHeight);
+
+            [DllImport(DllImport.WindowsCodecs, EntryPoint = "IWICBitmapSource_CopyPixels_Proxy")]
+            internal static extern int /* HRESULT */ CopyPixels(
+                IntPtr /* IWICBitmapSource */ THIS_PTR,
+                ref Int32Rect prc,
+                int cbStride,
+                int cbBufferSize,
+                IntPtr /* BYTE* */ pvPixels);
+
+            #region enums
+            internal enum WICBitmapTransformOptions
+            {
+                WICBitmapTransformRotate0 = 0,
+                WICBitmapTransformRotate90 = 0x1,
+                WICBitmapTransformRotate180 = 0x2,
+                WICBitmapTransformRotate270 = 0x3,
+                WICBitmapTransformFlipHorizontal = 0x8,
+                WICBitmapTransformFlipVertical = 0x10
+            }
+
+            internal enum WICPaletteType
+            {
+                WICPaletteTypeCustom = 0,
+                WICPaletteTypeOptimal = 1,
+                WICPaletteTypeFixedBW = 2,
+                WICPaletteTypeFixedHalftone8 = 3,
+                WICPaletteTypeFixedHalftone27 = 4,
+                WICPaletteTypeFixedHalftone64 = 5,
+                WICPaletteTypeFixedHalftone125 = 6,
+                WICPaletteTypeFixedHalftone216 = 7,
+                WICPaletteTypeFixedWebPalette = 7,
+                WICPaletteTypeFixedHalftone252 = 8,
+                WICPaletteTypeFixedHalftone256 = 9,
+                WICPaletteTypeFixedGray4 = 10,
+                WICPaletteTypeFixedGray16 = 11,
+                WICPaletteTypeFixedGray256 = 12
+            };
+            #endregion
+        }
+        
+        internal class HRESULTCLASS
+        {
+            public static void Check(int hr)
+            {
+                if (hr >= 0)
+                {
+                    return;
+                }
+                else
+                {
+                    // PresentationCore (wgx_render.cs) has a more complete system
+                    // for converting hresults to exceptions for MIL and windows codecs
+                    // but for splash screen we don't want to take a dependency on core.
+                    Marshal.ThrowExceptionForHR(hr, -1);
+                }
+            }
+        }
     }
 }

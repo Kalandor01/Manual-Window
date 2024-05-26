@@ -330,7 +330,7 @@ namespace CleanWpfApp
             // EnableThreadWindow(true) is called when dialog is going away.  Once dialog is closed and
             // thread windows have been enabled, then there no need to keep the array list around.
             // Please see BUG 929740 before making any changes to how _threadWindowHandles works.
-            _threadWindowHandles = new ArrayList();
+            _threadWindowHandles = [];
             //Get visible and enabled windows in the thread
             // If the callback function returns true for all windows in the thread, the return value is true.
             // If the callback function returns false on any enumerated window, or if there are no windows
@@ -342,7 +342,7 @@ namespace CleanWpfApp
             //disable those windows
             EnableThreadWindows(false);
 
-            IntPtr hWndCapture = SafeNativeMethods.GetCapture();
+            var hWndCapture = SafeNativeMethods.GetCapture();
             if (hWndCapture != IntPtr.Zero)
             {
                 //
@@ -3057,7 +3057,7 @@ namespace CleanWpfApp
             }
             set
             {
-                _styleExDoNotUse = new SecurityCriticalDataForSet<int>((int)value);
+                _styleExDoNotUse = new SecurityCriticalDataForSet<int>(value);
                 Manager.Dirty = true;
             }
         }
@@ -5315,7 +5315,7 @@ namespace CleanWpfApp
 
         private void SafeStyleSetter()
         {
-            using HwndStyleManager sm = HwndStyleManager.StartManaging(this, StyleFromHwnd, StyleExFromHwnd);
+            using var sm = HwndStyleManager.StartManaging(this, StyleFromHwnd, StyleExFromHwnd);
             _Style = _isVisible ? (_Style | NativeMethods.WS_VISIBLE) : _Style;
         }
         private static bool _ValidateSizeToContentCallback(object value)
