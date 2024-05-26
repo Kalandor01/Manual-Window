@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Gdi;
+using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace ManualWindow
 {
@@ -229,7 +230,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmessagew#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll")]
-        internal static extern sbyte GetMessage(nint lpMsg, nint hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
+        internal static extern sbyte GetMessage(out MSG lpMsg, nint hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
 
         /// <summary>Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next time the thread calls the GetMessage or PeekMessage function.</summary>
         /// <param name="lpMsg">
@@ -245,7 +246,7 @@ namespace ManualWindow
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translatemessage#">Read more on docs.microsoft.com</see>.</para>
         /// </remarks>
         [DllImport("user32.dll")]
-        internal static extern bool TranslateMessage(nint lpMsg);
+        internal static extern bool TranslateMessage(in MSG lpMsg);
 
         /// <summary>Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the GetMessage function. (DispatchMessageW)</summary>
         /// <param name="lpMsg">
@@ -260,7 +261,7 @@ namespace ManualWindow
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dispatchmessagew#">Read more on docs.microsoft.com</see>.</para>
         /// </remarks>
         [DllImport("user32.dll")]
-        internal static extern LRESULT DispatchMessage(nint lpMsg);
+        internal static extern LRESULT DispatchMessage(in MSG lpMsg);
         #endregion
 
         #region Structs

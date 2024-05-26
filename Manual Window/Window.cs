@@ -1,8 +1,8 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Gdi;
+using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace ManualWindow
 {
@@ -117,7 +117,7 @@ namespace ManualWindow
                     var brush = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_WINDOW);
                     var res = NativeMethods.FillRect(new HDC(hdc), rect, brush);
                     var suc = NativeMethods.EndPaint(windowHandle, ps);
-                    //PInvoke.UpdateWindow();
+                    //Windows.Win32.PInvoke.DispatchMessage();
                     break;
             }
 
@@ -187,11 +187,26 @@ namespace ManualWindow
                 return false;
             }
             NativeMethods.ShowWindow(windowHadle, 1);
-            while (true)
+
+            sbyte res = 0;
+            do
             {
-                var res = NativeMethods.UpdateWindow(windowHadle);
-                //Thread.Sleep(100);
+                res = NativeMethods.GetMessage(out var msg, windowHadle, 0, 0);
+                if (res == 0)
+                {
+                    continue;
+                }
+
+                if (res == -1)
+                {
+                    var error = NativeMethods.GetLastError();
+                    return false;
+                }
+
+                //var r = NativeMethods.TranslateMessage(msg);
+                NativeMethods.DispatchMessage(msg);
             }
+            while (res != 0);
             return true;
         }
     }
