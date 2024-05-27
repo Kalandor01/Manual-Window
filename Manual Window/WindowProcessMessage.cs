@@ -38,8 +38,14 @@
         /// extra2: -<br/>
         /// return: 0
         /// </summary>
-        GAINED_KEYBOARD_FOCUS = 7,
-        WM_KILLFOCUS = 8,
+        AFTER_KEYBOARD_FOCUS_GAINED = 7,
+        /// <summary>
+        /// WM_KILLFOCUS<br/>
+        /// extra1: A handle to the window that receives the keyboard focus. Can be null.<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        BEFORE_KEYBOARD_FOCUS_LOST = 8,
         WM_ENABLE = 10,
         WM_SETREDRAW = 11,
         WM_SETTEXT = 12,
@@ -167,7 +173,13 @@
         /// return: If extra1 is false: 0. If it's true and 0 is returned, the old window size/position is kept. If not, refer to <see cref="https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-nccalcsize">[LINK]</see>
         /// </summary>
         CALCULATE_SIZE_AND_POSITION = 131,
-        WM_NCHITTEST = 132,
+        /// <summary>
+        /// WM_NCHITTEST<br/>
+        /// extra1: -<br/>
+        /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the screen.<br/>
+        /// return: One of the values from the WindowPart enum.
+        /// </summary>
+        SCREEN_POS_TO_WINDOW_PART = 132,
         /// <summary>
         /// WM_NCPAINT<br/>
         /// extra1: A handle to the update region of the window. The update region is clipped to the window frame.<br/>
@@ -190,6 +202,8 @@
         /// return: 0
         /// </summary>
         SYNC_WINDOW_PAINT = 136,
+        WM_MOUSEQUERY = 155,
+
         WM_NCMOUSEMOVE = 160,
         WM_NCLBUTTONDOWN = 161,
         WM_NCLBUTTONUP = 162,
@@ -272,6 +286,7 @@
         WM_SYSKEYUP = 261,
         WM_SYSCHAR = 262,
         WM_SYSDEADCHAR = 263,
+        WM_KEYLAST = 264,
         WM_UNICHAR_OR_WM_KEYLAST = 265,
         WM_WNT_CONVERTREQUESTEX = 265,
         WM_CONVERTREQUEST = 266,
@@ -387,6 +402,17 @@
         WM_EXITSIZEMOVE = 562,
         WM_DROPFILES = 563,
         WM_MDIREFRESHMENU = 564,
+        WM_POINTERDEVICECHANGE = 568,
+        WM_POINTERDEVICEINRANGE = 569,
+        WM_POINTERDEVICEOUTOFRANGE = 570,
+        WM_POINTERUPDATE = 581,
+        WM_POINTERDOWN = 582,
+        WM_POINTERUP = 583,
+        WM_POINTERENTER = 585,
+        WM_POINTERLEAVE = 586,
+        WM_POINTERACTIVATE = 587,
+        WM_POINTERCAPTURECHANGED = 588,
+
         WM_IME_REPORT = 640,
         /// <summary>
         /// WM_IME_SETCONTEXT<br/>
@@ -415,6 +441,18 @@
         WM_MOUSEHOVER = 673,
         WM_NCMOUSELEAVE = 674,
         WM_MOUSELEAVE = 675,
+
+        WM_TABLET_DEFBASE = 704,
+        //WM_TABLET_MAXOFFSET = 0x20,
+        WM_TABLET_ADDED = WM_TABLET_DEFBASE + 8,
+        WM_TABLET_DELETED = WM_TABLET_DEFBASE + 9,
+        WM_TABLET_FLICK = WM_TABLET_DEFBASE + 11,
+        WM_TABLET_QUERYSYSTEMGESTURESTATUS = WM_TABLET_DEFBASE + 12,
+
+        WM_DPICHANGED = 736,
+        WM_DPICHANGED_BEFOREPARENT = 738,
+        WM_DPICHANGED_AFTERPARENT = 739,
+
         WM_CUT = 768,
         WM_COPY = 769,
         WM_PASTE = 770,
@@ -440,9 +478,28 @@
         WM_PALETTEISCHANGING = 784,
         WM_PALETTECHANGED = 785,
         WM_HOTKEY = 786,
+        WM_WTSSESSION_CHANGE = 689,
         WM_PRINT = 791,
         WM_PRINTCLIENT = 792,
         WM_APPCOMMAND = 793,
+        WM_THEMECHANGED = 794,
+
+        WM_DWMCOMPOSITIONCHANGED = 798,
+        /// <summary>
+        /// WM_DWMNCRENDERINGCHANGED<br/>
+        /// extra1: whether DWM rendering is enabled for the non-client area of the window.<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_AREA_RENDERING_POLICY_CHANGED = 799,
+        WM_DWMCOLORIZATIONCOLORCHANGED = 800,
+        WM_DWMWINDOWMAXIMIZEDCHANGE = 801,
+
+        #region Windows 7
+        WM_DWMSENDICONICTHUMBNAIL = 803,
+        WM_DWMSENDICONICLIVEPREVIEWBITMAP = 806,
+        #endregion
+
         WM_HANDHELDFIRST = 856,
         WM_HANDHELDLAST = 863,
         WM_AFXFIRST = 864,

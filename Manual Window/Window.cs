@@ -1,24 +1,35 @@
-﻿using System.Runtime.InteropServices;
-using Windows.Win32;
+﻿using System.Drawing;
+using System.Runtime.InteropServices;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Gdi;
-using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace ManualWindow
 {
     internal class Window
     {
-        delegate nint WndProc(nint hWnd, uint msg, nint wParam, nint lParam);
-
         const uint WS_OVERLAPPEDWINDOW = 0b1100_1111_0000_0000_0000_0000;
         const uint WS_VISIBLE = 0x10000000;
         const uint CS_USEDEFAULT = 0x80000000;
         const uint CS_DBLCLKS = 8;
         const uint CS_VREDRAW = 1;
         const uint CS_HREDRAW = 2;
-        const uint COLOR_WINDOW = 5;
-        const uint COLOR_BACKGROUND = 1;
         const uint IDC_CROSS = 32515;
+
+        /// <summary>
+        /// Utility function for getting screen position from <paramref name="lParam"/>.
+        /// </summary>
+        /// <param name="lParam"></param>
+        /// <returns></returns>
+        public static Point PointFromLParam(nint lParam)
+        {
+            return new Point((int)lParam & 0xFFFF, ((int)lParam >> 16) & 0xFFFF);
+        }
+
+        public CursorPosWindowPart GetWindowPartFromPos(nint lparam)
+        {
+            var pos = PointFromLParam(lparam);
+            return CursorPosWindowPart.CLIENT;
+        }
 
         /// <summary>
         /// Returns a string representation of the message.
@@ -27,8 +38,17 @@ namespace ManualWindow
         /// <param name="message">The message.</param>
         /// <param name="messageExtra1">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <param name="messageExtra2">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
-        public static string WindowMessageToString(nint windowHandle, uint message, nint messageExtra1, nint messageExtra2)
+        /// <param name="sendTime">The timestamp the message was sent.</param>
+        public static string WindowMessageToString(
+            HWND windowHandle,
+            uint message,
+            nint messageExtra1,
+            nint messageExtra2,
+            DateTime? sendTime = null
+        )
         {
+            var sendDt = sendTime ?? DateTime.Now;
+
             string ActivateDeactivateDisplay()
             {
                 var activatedReason = (WindowActivatedLowerHalf)(ushort)messageExtra1;
@@ -74,7 +94,7 @@ namespace ManualWindow
                         )
                     }]",
                 WindowProcessMessage.IME_NOTIFY => $"command type: {(IMENotifyCommand)messageExtra1}, argument: {messageExtra2}",
-                WindowProcessMessage.GAINED_KEYBOARD_FOCUS => $"keyboard focus lost window handle: {messageExtra1}",
+                WindowProcessMessage.AFTER_KEYBOARD_FOCUS_GAINED => $"keyboard focus lost window handle: {messageExtra1}",
                 WindowProcessMessage.FRAME_PAINT_NEEDED => $"window update region handle: {messageExtra1}",
                 WindowProcessMessage.BACKGROUND_ERASE_NEEDED => $"device context handle: {messageExtra1}",
                 WindowProcessMessage.WINDOW_POS_CHANGED => $"WINDOWPOS pointer: {messageExtra2}",
@@ -83,10 +103,24 @@ namespace ManualWindow
                 WindowProcessMessage.WINDOW_MOVED => MovedDisplay(),
                 WindowProcessMessage.PAINT_WINDOW_REQUEST => null,
                 WindowProcessMessage.SYNC_WINDOW_PAINT => null,
+                WindowProcessMessage.NONCLIENT_AREA_RENDERING_POLICY_CHANGED => $"DWM rendering for the non-client area of the window: {(messageExtra1 == 1 ? "enabled" : "disabled")}",
+                WindowProcessMessage.BEFORE_KEYBOARD_FOCUS_LOST => $"keyboard focus gained window handle: {messageExtra1}",
+                WindowProcessMessage.SCREEN_POS_TO_WINDOW_PART => $"cursor pos: {PointFromLParam(messageExtra2)}",
                 _ => "[UNREGISTERED MESSAGE]",
             };
 
-            return $"{messageEnum}{(Enum.IsDefined(messageEnum) ? "" : " [UNKNOWN MESSAGE]")}{(extraText is null ? "" : $" -> {extraText}")}";
+            return $"[{sendDt}] {messageEnum}{(Enum.IsDefined(messageEnum) ? "" : " [UNKNOWN MESSAGE]")}{(extraText is null ? "" : $" -> {extraText}")}";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void DisplayLastSystemError()
+        {
+            var errorCode = Marshal.GetLastWin32Error();
+            string errorMessage = Marshal.GetPInvokeErrorMessage(errorCode);
+            var message =  $"ERROR({errorCode}) {errorMessage}";
+            Console.WriteLine(message);
         }
 
         /// <summary>
@@ -97,31 +131,24 @@ namespace ManualWindow
         /// <param name="messageExtra1">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <param name="messageExtra2">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <returns>The result of the message processing, and depends on the message sent.</returns>
-        public nint WindowProc(nint windowHandle, uint message, nint messageExtra1, nint messageExtra2)
+        public nint ProcessMessage(HWND windowHandle, WindowProcessMessage message, nint messageExtra1, nint messageExtra2)
         {
-            var messageEnum = (WindowProcessMessage)message;
-
-            switch (messageEnum)
+            switch (message)
             {
                 case WindowProcessMessage.PAINT_WINDOW_REQUEST:
                     var hdc = NativeMethods.BeginPaint(windowHandle, out var ps);
-                    if (hdc == IntPtr.Zero)
+                    if (hdc == nint.Zero)
                     {
-                        var error = NativeMethods.GetLastError();
-                    }
-                    RECT rect;
-                    unsafe
-                    {
-                        rect = *(RECT*)&ps.rcPaint;
+                        DisplayLastSystemError();
                     }
                     var brush = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_WINDOW);
-                    var res = NativeMethods.FillRect(new HDC(hdc), rect, brush);
+                    var res = NativeMethods.FillRect(new HDC(hdc), ps.rcPaint, brush);
                     var suc = NativeMethods.EndPaint(windowHandle, ps);
-                    //Windows.Win32.PInvoke.DispatchMessage();
+                    //Windows.Win32.PInvoke.LocalFree();
                     break;
             }
 
-            var response = messageEnum switch
+            return message switch
             {
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => nint.Zero,
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => 1,
@@ -135,7 +162,7 @@ namespace ManualWindow
                 WindowProcessMessage.GET_ICON => nint.Zero,
                 WindowProcessMessage.IME_ACTIVATE_DEACTIVATE => nint.Zero,
                 WindowProcessMessage.IME_NOTIFY => nint.Zero,
-                WindowProcessMessage.GAINED_KEYBOARD_FOCUS => nint.Zero,
+                WindowProcessMessage.AFTER_KEYBOARD_FOCUS_GAINED => nint.Zero,
                 WindowProcessMessage.FRAME_PAINT_NEEDED => nint.Zero,
                 WindowProcessMessage.BACKGROUND_ERASE_NEEDED => nint.Zero,
                 WindowProcessMessage.WINDOW_POS_CHANGED => nint.Zero,
@@ -144,12 +171,43 @@ namespace ManualWindow
                 WindowProcessMessage.WINDOW_MOVED => nint.Zero,
                 WindowProcessMessage.PAINT_WINDOW_REQUEST => nint.Zero,
                 WindowProcessMessage.SYNC_WINDOW_PAINT => nint.Zero,
+                WindowProcessMessage.NONCLIENT_AREA_RENDERING_POLICY_CHANGED => nint.Zero,
+                WindowProcessMessage.BEFORE_KEYBOARD_FOCUS_LOST => nint.Zero,
+                WindowProcessMessage.SCREEN_POS_TO_WINDOW_PART => (int)GetWindowPartFromPos(messageExtra2),
                 _ => nint.Zero,
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="windowHandle">A handle to the window.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="messageExtra1">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
+        /// <param name="messageExtra2">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
+        /// <returns>The result of the message processing, and depends on the message sent.</returns>
+        public nint WindowProc(HWND windowHandle, uint message, nint messageExtra1, nint messageExtra2)
+        {
+            var messageEnum = (WindowProcessMessage)message;
+            var knownMessage = Enum.IsDefined(messageEnum);
+            var response = nint.Zero;
+            if (knownMessage)
+            {
+                response = ProcessMessage(windowHandle, messageEnum, messageExtra1, messageExtra2);
+            }
+            else
+            {
+                Console.WriteLine($"UNKNOWN MESSAGE: {message}");
+            }
 
             var defResponse = NativeMethods.DefWindowProc(windowHandle, message, messageExtra1, messageExtra2);
+
+            if (knownMessage)
+            {
+                Console.WriteLine(WindowMessageToString(windowHandle, message, messageExtra1, messageExtra2) + $"\t-> {response}{(response != defResponse ? $"(def: {defResponse})" : "")}");
+            }
             response = defResponse;
-            Console.WriteLine(WindowMessageToString(windowHandle, message, messageExtra1, messageExtra2) + $"\t-> {response}");
+
             return response;
         }
 
@@ -159,7 +217,7 @@ namespace ManualWindow
             {
                 cbSize = Marshal.SizeOf(typeof(NativeMethods.WNDCLASSEX)),
                 style = (int)(CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS), //Doubleclicks are active
-                hbrBackground = (nint)COLOR_BACKGROUND + 1, //Black background, +1 is necessary
+                hbrBackground = (nint)SysColorIndex.COLOR_BACKGROUND + 1,
                 cbClsExtra = 0,
                 cbWndExtra = 0,
                 hInstance = Marshal.GetHINSTANCE(GetType().Module), // alternative: Process.GetCurrentProcess().Handle
@@ -167,7 +225,7 @@ namespace ManualWindow
                 hCursor = NativeMethods.LoadCursor(nint.Zero, (int)IDC_CROSS),// Crosshair cursor
                 lpszMenuName = null,
                 lpszClassName = "myClass",
-                lpfnWndProc = Marshal.GetFunctionPointerForDelegate(new WndProc(WindowProc)),
+                lpfnWndProc = new NativeMethods.WndProc(WindowProc),
                 hIconSm = nint.Zero
             };
 
@@ -175,15 +233,28 @@ namespace ManualWindow
 
             if (registrationResult == 0)
             {
-                var error = NativeMethods.GetLastError();
+                DisplayLastSystemError();
                 return false;
             }
 
-            var windowHadle = NativeMethods.CreateWindowEx(0, registrationResult, "Hello Win32", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, 0, 300, 400, nint.Zero, nint.Zero, windowClass.hInstance, nint.Zero);
+            var windowHadle = NativeMethods.CreateWindowEx(
+                0,
+                registrationResult,
+                "Hello Win32",
+                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+                0,
+                0,
+                300,
+                400,
+                new HWND(nint.Zero),
+                nint.Zero,
+                windowClass.hInstance,
+                nint.Zero
+            );
 
-            if (windowHadle == 0)
+            if (windowHadle == HWND.Null)
             {
-                var error = NativeMethods.GetLastError();
+                DisplayLastSystemError();
                 return false;
             }
             NativeMethods.ShowWindow(windowHadle, 1);
@@ -199,7 +270,7 @@ namespace ManualWindow
 
                 if (res == -1)
                 {
-                    var error = NativeMethods.GetLastError();
+                    DisplayLastSystemError();
                     return false;
                 }
 
