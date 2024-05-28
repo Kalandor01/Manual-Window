@@ -429,6 +429,35 @@ namespace ManualWindow
                 }
             }
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINTS
+        {
+            public short x;
+            public short y;
+
+            public POINTS(nint pointer)
+            {
+                POINTS ps = new POINTS();
+                unsafe
+                {
+                    ps = *(POINTS*)&pointer;
+                }
+                x = ps.x;
+                y = ps.y;
+            }
+
+            public POINTS(short x, short y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public override string ToString()
+            {
+                return $"({x}, {y})";
+            }
+        }
         #endregion
     }
 }
