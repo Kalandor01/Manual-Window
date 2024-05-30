@@ -229,15 +229,69 @@
         /// return: 0
         /// </summary>
         NONCLIENT_MOUSE_MOVE = 160,
-        WM_NCLBUTTONDOWN = 161,
-        WM_NCLBUTTONUP = 162,
-        WM_NCLBUTTONDBLCLK = 163,
-        WM_NCRBUTTONDOWN = 164,
-        WM_NCRBUTTONUP = 165,
-        WM_NCRBUTTONDBLCLK = 166,
-        WM_NCMBUTTONDOWN = 167,
-        WM_NCMBUTTONUP = 168,
-        WM_NCMBUTTONDBLCLK = 169,
+        /// <summary>
+        /// WM_NCLBUTTONDOWN<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_LEFT_BUTTON_DOWN = 161,
+        /// <summary>
+        /// WM_NCLBUTTONUP<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_LEFT_BUTTON_UP = 162,
+        /// <summary>
+        /// WM_NCLBUTTONDBLCLK<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_LEFT_BUTTON_DOUBLE_CLICK = 163,
+        /// <summary>
+        /// WM_NCRBUTTONDOWN<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_RIGHT_BUTTON_DOWN = 164,
+        /// <summary>
+        /// WM_NCRBUTTONUP<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_RIGHT_BUTTON_UP = 165,
+        /// <summary>
+        /// WM_NCRBUTTONDBLCLK<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_RIGHT_BUTTON_DOUBLE_CLICK = 166,
+        /// <summary>
+        /// WM_NCMBUTTONDOWN<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_MIDDLE_BUTTON_DOWN = 167,
+        /// <summary>
+        /// WM_NCMBUTTONUP<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_MIDDLE_BUTTON_UP = 168,
+        /// <summary>
+        /// WM_NCMBUTTONDBLCLK<br/>
+        /// extra1: A value from the CursorPosWindowPart enum.<br/>
+        /// extra2: A POINTS structure that contains the x and y coordinates of the cursor. The coordinates are relative to the upper-left corner of the screen.<br/>
+        /// return: 0
+        /// </summary>
+        NONCLIENT_MIDDLE_BUTTON_DOUBLE_CLICK = 169,
         WM_NCXBUTTONDOWN = 171,
         WM_NCXBUTTONUP = 172,
         WM_NCXBUTTONDBLCLK = 173,
@@ -459,10 +513,34 @@
         MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK = 521,
         // symbolic constant
         //WM_MOUSELAST = 521,
-        WM_MOUSEWHEEL = 522,
-        WM_XBUTTONDOWN = 523,
-        WM_XBUTTONUP = 524,
-        WM_XBUTTONDBLCLK = 525,
+        /// <summary>
+        /// WM_MOUSEWHEEL<br/>
+        /// extra1: The lower half is a combination of values from MouseVirtualKey enum. The upper half is the distance the wheel rotated multiplied by WHEEL_DELTA(120). Positive values for scrollin up, negative for scrolling down.<br/>
+        /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
+        /// return: 0
+        /// </summary>
+        MOUSE_WHEEL_SCROLL = 522,
+        /// <summary>
+        /// WM_XBUTTONDOWN<br/>
+        /// extra1: The lower half is a combination of values from MouseVirtualKey enum. The upper half is whitch x button was pressed (1 for X button 1, 2 for X button 2).<br/>
+        /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
+        /// return: true
+        /// </summary>
+        X_BUTTON_DOWN = 523,
+        /// <summary>
+        /// WM_XBUTTONUP<br/>
+        /// extra1: The lower half is a combination of values from MouseVirtualKey enum. The upper half is whitch x button was pressed (1 for X button 1, 2 for X button 2).<br/>
+        /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
+        /// return: true
+        /// </summary>
+        X_BUTTON_UP = 524,
+        /// <summary>
+        /// WM_XBUTTONDBLCLK<br/>
+        /// extra1: The lower half is a combination of values from MouseVirtualKey enum. The upper half is whitch x button was pressed (1 for X button 1, 2 for X button 2).<br/>
+        /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
+        /// return: true
+        /// </summary>
+        X_BUTTON_DOUBLE_CLICK = 525,
         WM_MOUSEHWHEEL = 526,
         WM_PARENTNOTIFY = 528,
         WM_ENTERMENULOOP = 529,

@@ -14,6 +14,7 @@ namespace ManualWindow
         const uint CS_VREDRAW = 1;
         const uint CS_HREDRAW = 2;
         const uint IDC_CROSS = 32515;
+        const int WHEEL_DELTA = 120;
 
         /// <summary>
         /// Utility function for getting screen position from <paramref name="lParam"/>.
@@ -57,15 +58,15 @@ namespace ManualWindow
             DateTime? sendTime = null
         )
         {
-            string MouseEventParamsExtraText()
-            {
-                return $"buttons pressed: [{string.Join(", ", Enum.GetValues<MouseVirtualKey>().Where(key => (messageExtra1 & (int)key) != 0))}] , cursor pos: {PointFromLParam(messageExtra2)}";
-            }
-
             string ContextMenuRequestExtraPart()
             {
                 var pos = new NativeMethods.POINTS((short)GetLowerHalf(messageExtra2), (short)GetUpperHalf(messageExtra2));
                 return pos.x == -1 && pos.x == -1 ? "[NOT RIGHT CLICK TRIGGERED]" : pos.ToString();
+            }
+
+            IEnumerable<MouseVirtualKey> GetPressedVirtualKeys(int keysPressed)
+            {
+                return Enum.GetValues<MouseVirtualKey>().Where(key => (keysPressed & (int)key) != 0);
             }
 
             var sendDt = sendTime ?? DateTime.Now;
@@ -107,7 +108,17 @@ namespace ManualWindow
                 WindowProcessMessage.BEFORE_KEYBOARD_FOCUS_LOST => $"keyboard focus gained window handle: {messageExtra1}",
                 WindowProcessMessage.SCREEN_POS_TO_WINDOW_PART => $"cursor pos: {PointFromLParam(messageExtra2)}",
                 WindowProcessMessage.CURSOR_MOVE => $"cursor window handle: {messageExtra1}, part hit: {(CursorPosWindowPart)GetLowerHalf(messageExtra2)}, event trigger: {(WindowProcessMessage)GetUpperHalf(messageExtra2)}",
-                WindowProcessMessage.NONCLIENT_MOUSE_MOVE => $"part hit: {(CursorPosWindowPart)messageExtra1}, cursor pos: {new NativeMethods.POINTS(messageExtra2)}",
+                WindowProcessMessage.NONCLIENT_MOUSE_MOVE or
+                WindowProcessMessage.NONCLIENT_LEFT_BUTTON_DOWN or
+                WindowProcessMessage.NONCLIENT_LEFT_BUTTON_UP or
+                WindowProcessMessage.NONCLIENT_LEFT_BUTTON_DOUBLE_CLICK or
+                WindowProcessMessage.NONCLIENT_RIGHT_BUTTON_DOWN or
+                WindowProcessMessage.NONCLIENT_RIGHT_BUTTON_UP or
+                WindowProcessMessage.NONCLIENT_RIGHT_BUTTON_DOUBLE_CLICK or
+                WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOWN or
+                WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_UP or
+                WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOUBLE_CLICK
+                    => $"part hit: {(CursorPosWindowPart)messageExtra1}, cursor pos: {new NativeMethods.POINTS(messageExtra2)}",
                 WindowProcessMessage.MOUSE_MOVE or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_DOWN or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_UP or
@@ -118,9 +129,14 @@ namespace ManualWindow
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOWN or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_UP or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK
-                     => MouseEventParamsExtraText(),
+                     => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys((int)messageExtra1))}], cursor pos: {PointFromLParam(messageExtra2)}",
                 WindowProcessMessage.MOUSE_KEY_PRESSED_IN_INACTIVE_WINDOW => $"activated top level window handle {messageExtra1}, part hit: {(CursorPosWindowPart)GetLowerHalf(messageExtra2)}, mouse message ID: {(WindowProcessMessage)GetUpperHalf(messageExtra2)}",
                 WindowProcessMessage.CONTEXT_MENU_REQUESTED => $"menu requested window handle: {messageExtra1}, trigger location: {ContextMenuRequestExtraPart()}",
+                WindowProcessMessage.MOUSE_WHEEL_SCROLL => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(GetLowerHalf(messageExtra1)))}], distance rotated: {(short)GetUpperHalf(messageExtra1)}, cursor pos: {PointFromLParam(messageExtra2)}",
+                WindowProcessMessage.X_BUTTON_DOWN or
+                WindowProcessMessage.X_BUTTON_UP or
+                WindowProcessMessage.X_BUTTON_DOUBLE_CLICK
+                    => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(GetLowerHalf(messageExtra1)))}], X button {GetUpperHalf(messageExtra1)} triggered this event, cursor pos: {PointFromLParam(messageExtra2)}",
                 _ => "[UNREGISTERED MESSAGE]",
             };
 
@@ -181,6 +197,15 @@ namespace ManualWindow
                 WindowProcessMessage.NONCLIENT_AREA_RENDERING_POLICY_CHANGED or
                 WindowProcessMessage.BEFORE_KEYBOARD_FOCUS_LOST or
                 WindowProcessMessage.NONCLIENT_MOUSE_MOVE or
+                WindowProcessMessage.NONCLIENT_LEFT_BUTTON_DOWN or
+                WindowProcessMessage.NONCLIENT_LEFT_BUTTON_UP or
+                WindowProcessMessage.NONCLIENT_LEFT_BUTTON_DOUBLE_CLICK or
+                WindowProcessMessage.NONCLIENT_RIGHT_BUTTON_DOWN or
+                WindowProcessMessage.NONCLIENT_RIGHT_BUTTON_UP or
+                WindowProcessMessage.NONCLIENT_RIGHT_BUTTON_DOUBLE_CLICK or
+                WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOWN or
+                WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_UP or
+                WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOUBLE_CLICK or
                 WindowProcessMessage.MOUSE_LEAVE_NONCLIENT_AREA or
                 WindowProcessMessage.MOUSE_MOVE or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_DOWN or
@@ -192,8 +217,13 @@ namespace ManualWindow
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOWN or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_UP or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK or
-                WindowProcessMessage.CONTEXT_MENU_REQUESTED
+                WindowProcessMessage.CONTEXT_MENU_REQUESTED or
+                WindowProcessMessage.MOUSE_WHEEL_SCROLL
                     => nint.Zero,
+                WindowProcessMessage.X_BUTTON_DOWN or
+                WindowProcessMessage.X_BUTTON_UP or
+                WindowProcessMessage.X_BUTTON_DOUBLE_CLICK
+                    => 1,
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => nint.Zero,
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => 1,
                 WindowProcessMessage.CALCULATE_SIZE_AND_POSITION => nint.Zero,
