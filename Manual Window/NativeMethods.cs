@@ -389,6 +389,19 @@ namespace ManualWindow
             public int right;
             public int bottom;
 
+            public RECT(nint pointer)
+            {
+                var r = new RECT();
+                unsafe
+                {
+                    r = *(RECT*)&pointer;
+                }
+                left = r.left;
+                top = r.top;
+                right = r.right;
+                bottom = r.bottom;
+            }
+
             public RECT(int left, int top, int right, int bottom)
             {
                 this.left = left;
@@ -428,6 +441,12 @@ namespace ManualWindow
                     return left >= right || top >= bottom;
                 }
             }
+
+            public override string ToString()
+            {
+                //return $"pos: ({right}, {bottom}), size: ({Width}, {Height})";
+                return $"t: {top}, l: {left}, r: {right}, b: {bottom}";
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -438,7 +457,7 @@ namespace ManualWindow
 
             public POINTS(nint pointer)
             {
-                POINTS ps = new POINTS();
+                var ps = new POINTS();
                 unsafe
                 {
                     ps = *(POINTS*)&pointer;
@@ -456,6 +475,69 @@ namespace ManualWindow
             public override string ToString()
             {
                 return $"({x}, {y})";
+            }
+        }
+
+        /// <summary>
+        /// Contains information about the size and position of a window.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct WINDOWPOS
+        {
+            /// <summary>
+            /// A handle to the window.
+            /// </summary>
+            public HWND hwnd;
+            /// <summary>
+            /// A handle to the window in front of this window in the Z order, or a special value (-2 - 1).
+            /// </summary>
+            public HWND hwndInsertAfter;
+            /// <summary>
+            /// The position of the left edge of the window.
+            /// </summary>
+            public int x;
+            /// <summary>
+            /// The position of the top edge of the window.
+            /// </summary>
+            public int y;
+            /// <summary>
+            /// The window width, in pixels.
+            /// </summary>
+            public int width;
+            /// <summary>
+            /// The window height, in pixels.
+            /// </summary>
+            public int height;
+            /// <summary>
+            /// The window position. A combination of values from the WindowPosFlags enum.
+            /// </summary>
+            public uint flags;
+
+            /// <summary>
+            /// <inheritdoc cref="WINDOWPOS" path="//summary"/>
+            /// </summary>
+            /// <param name="pointer">A pointer to a WINDOWPOS object.</param>
+            public WINDOWPOS(nint pointer)
+            {
+                var wp = new WINDOWPOS();
+                unsafe
+                {
+                    wp = *(WINDOWPOS*)&pointer;
+                }
+
+                hwnd = wp.hwnd;
+                hwndInsertAfter = wp.hwndInsertAfter;
+                x = wp.x;
+                y = wp.y;
+                width = wp.width;
+                height = wp.height;
+                flags = wp.flags;
+            }
+
+            public override string ToString()
+            {
+                var f = flags;
+                return $"pos: ({x}, {y}), size: ({width}, {height}), flags: [{string.Join(", ", Enum.GetValues<WindowPosFlags>().Where(flag => ((int)flag & f) != 0))}]";
             }
         }
         #endregion

@@ -75,14 +75,16 @@ namespace ManualWindow
             {
                 WindowProcessMessage.PAINT_WINDOW_REQUEST or
                 WindowProcessMessage.SYNC_WINDOW_PAINT or
-                WindowProcessMessage.MOUSE_LEAVE_NONCLIENT_AREA
+                WindowProcessMessage.MOUSE_LEAVE_NONCLIENT_AREA or
+                WindowProcessMessage.ENTER_SIZING_OR_MOVING_MODE or
+                WindowProcessMessage.EXIT_SIZING_OR_MOVING_MODE
                     => null,
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => $"MINMAXINFO pointer: {messageExtra2}",
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => $"CREATESTRUCT pointer: {messageExtra2}",
                 WindowProcessMessage.CALCULATE_SIZE_AND_POSITION => $"{(messageExtra1 == 1 ? "NCCALCSIZE_PARAMS" : "RECT")} pointer: {messageExtra2}{(messageExtra1 == 0 ? "" : " The application should indicate which part of the client area contains valid information.")}",
                 WindowProcessMessage.ON_CREATE => $"CREATESTRUCT pointer: {messageExtra2}",
                 WindowProcessMessage.WINDOW_SHOWN_OR_HIDE => $"window {(messageExtra1 == 1 ? "shown" : "hidden")}, reson: {(WindowShowHideReason)messageExtra2}",
-                WindowProcessMessage.BEFORE_WINDOW_POS_CHANGE => $"WINDOWPOS pointer: {messageExtra2}",
+                WindowProcessMessage.BEFORE_WINDOW_POS_CHANGE => $"the WINDOWPOS object: {new NativeMethods.WINDOWPOS(messageExtra2)}",
                 WindowProcessMessage.BEFORE_ACTIVATE_DEACTIVATE => $"window {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
                 WindowProcessMessage.NONCLIENT_ACTIVATE_DEACTIVEATE => $"title bar/icon {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
                 WindowProcessMessage.ACTIVATE_DEACTIVEATE => $"(de)activation method: {(WindowActivatedLowerHalf)GetLowerHalf(messageExtra1)}, window {(GetUpperHalf(messageExtra1) == 0 ? "not" : "")} minimized, pointer to {((WindowActivatedLowerHalf)GetLowerHalf(messageExtra1) == WindowActivatedLowerHalf.DEACTIVATED ? "" : "de")}activating window: {messageExtra2}",
@@ -100,7 +102,7 @@ namespace ManualWindow
                 WindowProcessMessage.AFTER_KEYBOARD_FOCUS_GAINED => $"keyboard focus lost window handle: {messageExtra1}",
                 WindowProcessMessage.FRAME_PAINT_NEEDED => $"window update region handle: {messageExtra1}",
                 WindowProcessMessage.BACKGROUND_ERASE_NEEDED => $"device context handle: {messageExtra1}",
-                WindowProcessMessage.WINDOW_POS_CHANGED => $"WINDOWPOS pointer: {messageExtra2}",
+                WindowProcessMessage.WINDOW_POS_CHANGED => $"the WINDOWPOS(pointer: {messageExtra2}) object: {new NativeMethods.WINDOWPOS(messageExtra2)}",
                 WindowProcessMessage.CLIPBOARD_SIZE_CHANGED => $"clipboard viewer window hadle: {messageExtra1}, RECT pointer: {messageExtra2}",
                 WindowProcessMessage.WINDOW_SIZE_CHANGED => $"resize type: {(WindowResizeType)messageExtra1}, new size: [width: {GetLowerHalf(messageExtra2)}, height: {GetUpperHalf(messageExtra2)}]",
                 WindowProcessMessage.WINDOW_MOVED => $"new position: [x: {GetLowerHalf(messageExtra2)}, y: {GetUpperHalf(messageExtra2)}]",
@@ -137,6 +139,10 @@ namespace ManualWindow
                 WindowProcessMessage.X_BUTTON_UP or
                 WindowProcessMessage.X_BUTTON_DOUBLE_CLICK
                     => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(GetLowerHalf(messageExtra1)))}], X button {GetUpperHalf(messageExtra1)} triggered this event, cursor pos: {PointFromLParam(messageExtra2)}",
+                WindowProcessMessage.WINDOW_MENU_COMMAND => $"command: {(SystemCommand)messageExtra1}, cursor pos: {PointFromLParam(messageExtra2)}",
+                WindowProcessMessage.MOUSE_CAPTURE_LOST => $"capture gainet window handle: {messageExtra2}",
+                WindowProcessMessage.WINDOW_MOVING => $"current position RECT pointer: {messageExtra2}",
+                WindowProcessMessage.WINDOW_SIZING => $"sized edge: {(WindowSizingEdge)messageExtra1}, current position RECT pointer: {messageExtra2}",
                 _ => "[UNREGISTERED MESSAGE]",
             };
 
@@ -218,11 +224,17 @@ namespace ManualWindow
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_UP or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK or
                 WindowProcessMessage.CONTEXT_MENU_REQUESTED or
-                WindowProcessMessage.MOUSE_WHEEL_SCROLL
+                WindowProcessMessage.MOUSE_WHEEL_SCROLL or
+                WindowProcessMessage.WINDOW_MENU_COMMAND or
+                WindowProcessMessage.MOUSE_CAPTURE_LOST or
+                WindowProcessMessage.ENTER_SIZING_OR_MOVING_MODE or
+                WindowProcessMessage.EXIT_SIZING_OR_MOVING_MODE
                     => nint.Zero,
                 WindowProcessMessage.X_BUTTON_DOWN or
                 WindowProcessMessage.X_BUTTON_UP or
-                WindowProcessMessage.X_BUTTON_DOUBLE_CLICK
+                WindowProcessMessage.X_BUTTON_DOUBLE_CLICK or
+                WindowProcessMessage.WINDOW_MOVING or
+                WindowProcessMessage.WINDOW_SIZING
                     => 1,
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => nint.Zero,
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => 1,

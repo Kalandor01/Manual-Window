@@ -135,14 +135,14 @@
         /// <summary>
         /// WM_WINDOWPOSCHANGING<br/>
         /// extra1: -<br/>
-        /// extra2: A pointer to WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
+        /// extra2: A pointer to a WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
         /// return: 0
         /// </summary>
         BEFORE_WINDOW_POS_CHANGE = 70,
         /// <summary>
         /// WM_WINDOWPOSCHANGED<br/>
         /// extra1: -<br/>
-        /// extra2: A pointer to WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
+        /// extra2: A pointer to a WINDOWPOS struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowpos">[LINK]</see><br/>
         /// return: 0
         /// </summary>
         WINDOW_POS_CHANGED = 71,
@@ -376,7 +376,13 @@
         WM_IME_KEYLAST = 271,
         WM_INITDIALOG = 272,
         WM_COMMAND = 273,
-        WM_SYSCOMMAND = 274,
+        /// <summary>
+        /// WM_SYSCOMMAND<br/>
+        /// extra1: A value from the SystemCommand enum.<br/>
+        /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the screen. Or sometimes not?<br/>
+        /// return: 0
+        /// </summary>
+        WINDOW_MENU_COMMAND = 274,
         WM_TIMER = 275,
         WM_HSCROLL = 276,
         WM_VSCROLL = 277,
@@ -443,70 +449,70 @@
         //WM_MOUSEFIRST = 512,
         /// <summary>
         /// WM_MOUSEMOVE<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_MOVE = 512,
         /// <summary>
         /// WM_LBUTTONDOWN<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_LEFT_BUTTON_DOWN = 513,
         /// <summary>
         /// WM_LBUTTONUP<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_LEFT_BUTTON_UP = 514,
         /// <summary>
         /// WM_LBUTTONDBLCLK<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_LEFT_BUTTON_DOUBLE_CLICK = 515,
         /// <summary>
         /// WM_RBUTTONDOWN<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_RIGHT_BUTTON_DOWN = 516,
         /// <summary>
         /// WM_RBUTTONUP<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_RIGHT_BUTTON_UP = 517,
         /// <summary>
         /// WM_RBUTTONDBLCLK<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_RIGHT_BUTTON_DOUBLE_CLICK = 518,
         /// <summary>
         /// WM_MBUTTONDOWN<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_MIDDLE_BUTTON_DOWN = 519,
         /// <summary>
         /// WM_MBUTTONUP<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
         MOUSE_MIDDLE_BUTTON_UP = 520,
         /// <summary>
         /// WM_MBUTTONDBLCLK<br/>
-        /// extra1: A combination of values from MouseVirtualKey enum.<br/>
+        /// extra1: A combination of values from the MouseVirtualKey enum.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.<br/>
         /// return: 0
         /// </summary>
@@ -546,9 +552,27 @@
         WM_ENTERMENULOOP = 529,
         WM_EXITMENULOOP = 530,
         WM_NEXTMENU = 531,
-        WM_SIZING = 532,
-        WM_CAPTURECHANGED = 533,
-        WM_MOVING = 534,
+        /// <summary>
+        /// WM_SIZING<br/>
+        /// extra1: The edge of the window that is being sized. A value from the WindowSizingEdge enum.<br/>
+        /// extra2: A pointer to a RECT structure with the current position of the window, in screen coordinates.<br/>
+        /// return: true
+        /// </summary>
+        WINDOW_SIZING = 532,
+        /// <summary>
+        /// WM_CAPTURECHANGED<br/>
+        /// extra1: -<br/>
+        /// extra2: A handle to the window gaining the mouse capture.<br/>
+        /// return: 0
+        /// </summary>
+        MOUSE_CAPTURE_LOST = 533,
+        /// <summary>
+        /// WM_MOVING<br/>
+        /// extra1: -<br/>
+        /// extra2: A pointer to a RECT structure with the current position of the window, in screen coordinates.<br/>
+        /// return: true
+        /// </summary>
+        WINDOW_MOVING = 534,
         WM_POWERBROADCAST = 536,
         WM_DEVICECHANGE = 537,
         WM_MDICREATE = 544,
@@ -562,8 +586,20 @@
         WM_MDIICONARRANGE = 552,
         WM_MDIGETACTIVE = 553,
         WM_MDISETMENU = 560,
-        WM_ENTERSIZEMOVE = 561,
-        WM_EXITSIZEMOVE = 562,
+        /// <summary>
+        /// WM_ENTERSIZEMOVE<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        ENTER_SIZING_OR_MOVING_MODE = 561,
+        /// <summary>
+        /// WM_EXITSIZEMOVE<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        EXIT_SIZING_OR_MOVING_MODE = 562,
         WM_DROPFILES = 563,
         WM_MDIREFRESHMENU = 564,
         WM_POINTERDEVICECHANGE = 568,
