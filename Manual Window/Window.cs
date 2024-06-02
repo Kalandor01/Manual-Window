@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Gdi;
@@ -152,12 +153,17 @@ namespace ManualWindow
         /// <summary>
         /// 
         /// </summary>
-        public static void DisplayLastSystemError()
+        public static void ThrowLastSystemError()
         {
             var errorCode = Marshal.GetLastWin32Error();
-            string errorMessage = Marshal.GetPInvokeErrorMessage(errorCode);
-            var message =  $"ERROR({errorCode}) {errorMessage}";
+            if (errorCode == 0)
+            {
+                return;
+            }
+            var error = new Win32Exception(errorCode);
+            var message =  $"ERROR({errorCode}) {error.Message}";
             Console.WriteLine(message);
+            throw error;
         }
 
         /// <summary>
@@ -176,12 +182,11 @@ namespace ManualWindow
                     var hdc = NativeMethods.BeginPaint(windowHandle, out var ps);
                     if (hdc == nint.Zero)
                     {
-                        DisplayLastSystemError();
+                        ThrowLastSystemError();
                     }
                     var brush = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_WINDOW);
                     var res = NativeMethods.FillRect(new HDC(hdc), ps.rcPaint, brush);
                     var suc = NativeMethods.EndPaint(windowHandle, ps);
-                    //Windows.Win32.PInvoke.LocalFree();
                     break;
             }
 
@@ -306,7 +311,7 @@ namespace ManualWindow
 
             if (registrationResult == 0)
             {
-                DisplayLastSystemError();
+                ThrowLastSystemError();
                 return false;
             }
 
@@ -327,7 +332,7 @@ namespace ManualWindow
 
             if (windowHadle == HWND.Null)
             {
-                DisplayLastSystemError();
+                ThrowLastSystemError();
                 return false;
             }
             NativeMethods.ShowWindow(windowHadle, 1);
@@ -343,7 +348,7 @@ namespace ManualWindow
 
                 if (res == -1)
                 {
-                    DisplayLastSystemError();
+                    ThrowLastSystemError();
                     return false;
                 }
 

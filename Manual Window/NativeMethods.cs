@@ -337,6 +337,53 @@ namespace ManualWindow
 		/// </remarks>
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern nint LocalFree(nint hMem);
+
+        /// <summary>Retrieves a copy of the character string associated with the specified global atom. (Unicode)</summary>
+		/// <param name="nAtom">
+		/// <para>Type: <b>ATOM</b> The global atom associated with the character string to be retrieved.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lpBuffer">
+		/// <para>Type: <b>LPTSTR</b> The buffer for the character string.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="nSize">
+		/// <para>Type: <b>int</b> The size, in characters, of the buffer.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <returns>
+		/// <para>Type: <b>UINT</b> If the function succeeds, the return value is the length of the string copied to the buffer, in characters, not including the terminating null character. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para>The string returned for an integer atom (an atom whose value is in the range 0x0001 to 0xBFFF) is a null-terminated string in which the first character is a pound sign (#) and the remaining characters represent the unsigned integer atom value. <h3><a id="Security_Considerations"></a><a id="security_considerations"></a><a id="SECURITY_CONSIDERATIONS"></a>Security Considerations</h3> Using this function incorrectly might compromise the security of your program. Incorrect use of this function includes not correctly specifying the size of the <i>lpBuffer</i> parameter. Also, note that a global atom is accessible by anyone; thus, privacy and the integrity of its contents is not assured.</para>
+		/// <para>> [!NOTE] > The winbase.h header defines GlobalGetAtomName as an alias which automatically selects the ANSI or Unicode version of this function based on the definition of the UNICODE preprocessor constant. Mixing usage of the encoding-neutral alias with code that not encoding-neutral can lead to mismatches that result in compilation or runtime errors. For more information, see [Conventions for Function Prototypes](/windows/win32/intl/conventions-for-function-prototypes).</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+		[DllImport("kernel32.dll", ExactSpelling = true, EntryPoint = "GlobalGetAtomNameW", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern uint GlobalGetAtomName(ushort nAtom, PWSTR lpBuffer, int nSize);
+
+        /// <summary>Retrieves from the clipboard the name of the specified registered format. The function copies the name to the specified buffer. (Unicode)</summary>
+		/// <param name="format">
+		/// <para>Type: <b>UINT</b> The type of format to be retrieved. This parameter must not specify any of the predefined clipboard formats.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lpszFormatName">
+		/// <para>Type: <b>LPTSTR</b> The buffer that is to receive the format name.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="cchMaxCount">
+		/// <para>Type: <b>int</b> The maximum length, in characters, of the string to be copied to the buffer. If the name exceeds this limit, it is truncated.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <returns>
+		/// <para>Type: <b>int</b> If the function succeeds, the return value is the length, in characters, of the string copied to the buffer. If the function fails, the return value is zero, indicating that the requested format does not exist or is predefined. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para><h3><a id="Security_Considerations"></a><a id="security_considerations"></a><a id="SECURITY_CONSIDERATIONS"></a>Security Considerations</h3> Using this function incorrectly might compromise the security of your program. For example, miscalculating the proper size of the <i>lpszFormatName</i> buffer, especially when the application is used in both ANSI and Unicode versions, can cause a buffer overflow. Also, note that the string is truncated if it is longer than the <i>cchMaxCount</i> parameter, which can lead to loss of information.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+		[DllImport("user32.dll", ExactSpelling = true, EntryPoint = "GetClipboardFormatNameW", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int GetClipboardFormatName(uint format, PWSTR lpszFormatName, int cchMaxCount);
         #endregion
 
         #region delegates
