@@ -167,7 +167,7 @@ namespace ManualWindow
         }
 
         /// <summary>
-        /// 
+        /// Processes the window message.
         /// </summary>
         /// <param name="windowHandle">A handle to the window.</param>
         /// <param name="message">The message.</param>
