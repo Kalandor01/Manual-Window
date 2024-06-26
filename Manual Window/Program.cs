@@ -5,7 +5,7 @@
         private static void Main(string[] args)
         {
             var w = new Window();
-            w.CreateWindow();
+            w.ShowWindow();
         }
     }
 }

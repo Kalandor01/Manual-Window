@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     /// <summary>
     /// The type of resizing requested, when the WINDOW_SIZE_CHANGED window process message fires.

@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     /// <summary>
     /// The posible values for the lower 16 bits of the extra1 variable from the ACTIVATE_DEACTIVEATE window process message.

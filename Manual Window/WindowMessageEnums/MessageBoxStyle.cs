@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     public enum MessageBoxStyle : uint
     {
@@ -21,7 +21,7 @@
         ICON_INFORMATION = 0x00000040,
 
         USERICON = 0x00000080,
-        
+
         DEFAULT_BUTTON1 = 0x00000000,
         DEFAULT_BUTTON2 = 0x00000100,
         DEFAULT_BUTTON3 = 0x00000200,
@@ -30,7 +30,7 @@
         APPL_MODAL = 0x00000000,
         SYSTEM_MODAL = 0x00001000,
         TASK_MODAL = 0x00002000,
-        
+
         NOFOCUS = 0x00008000,
         SETFOREGROUND = 0x00010000,
         DEFAULT_DESKTOP_ONLY = 0x00020000,

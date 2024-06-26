@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     public enum WindowSizingEdge
     {

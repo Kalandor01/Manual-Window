@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     /// <summary>
     /// The posible values for the extra1 variable from the GET_ICON window process message.

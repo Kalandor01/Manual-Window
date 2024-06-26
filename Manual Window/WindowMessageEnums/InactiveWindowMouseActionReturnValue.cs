@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     /// <summary>
     /// Whether the window should be activated and whether the ID of the mouse message should be discarded.

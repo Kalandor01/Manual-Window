@@ -1,4 +1,4 @@
-﻿namespace ManualWindow
+﻿namespace ManualWindow.WindowMessageEnums
 {
     /// <summary>
     /// The posible reasons for a WINDOW_SHOWN_OR_HIDE window process message firing.

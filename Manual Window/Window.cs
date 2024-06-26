@@ -1,22 +1,35 @@
-﻿using System.ComponentModel;
+﻿using ManualWindow.NativeMethodEnums;
+using ManualWindow.NativeMethodStructs;
+using ManualWindow.WindowMessageEnums;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using Windows.Win32.Foundation;
+using Windows.Win32;
 using Windows.Win32.Graphics.Gdi;
 
 namespace ManualWindow
 {
-    internal class Window
+    public class Window
     {
+        #region Constants
         const uint WS_OVERLAPPEDWINDOW = 0b1100_1111_0000_0000_0000_0000;
         const uint WS_VISIBLE = 0x10000000;
-        const uint CS_USEDEFAULT = 0x80000000;
-        const uint CS_DBLCLKS = 8;
-        const uint CS_VREDRAW = 1;
-        const uint CS_HREDRAW = 2;
         const uint IDC_CROSS = 32515;
         const int WHEEL_DELTA = 120;
+        #endregion
 
+        #region Private fields
+        private WindowHandle _windowHandle;
+        #endregion
+
+        #region Constructors
+        public Window()
+        {
+            RegisterWindow();
+        }
+        #endregion
+
+        #region Public fnctions
         /// <summary>
         /// Utility function for getting screen position from <paramref name="lParam"/>.
         /// </summary>
@@ -52,7 +65,7 @@ namespace ManualWindow
         /// <param name="messageExtra2">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <param name="sendTime">The timestamp the message was sent.</param>
         public static string WindowMessageToString(
-            HWND windowHandle,
+            WindowHandle windowHandle,
             uint message,
             nint messageExtra1,
             nint messageExtra2,
@@ -61,7 +74,7 @@ namespace ManualWindow
         {
             string ContextMenuRequestExtraPart()
             {
-                var pos = new NativeMethods.POINTS((short)GetLowerHalf(messageExtra2), (short)GetUpperHalf(messageExtra2));
+                var pos = new Points((short)GetLowerHalf(messageExtra2), (short)GetUpperHalf(messageExtra2));
                 return pos.x == -1 && pos.x == -1 ? "[NOT RIGHT CLICK TRIGGERED]" : pos.ToString();
             }
 
@@ -85,7 +98,7 @@ namespace ManualWindow
                 WindowProcessMessage.CALCULATE_SIZE_AND_POSITION => $"{(messageExtra1 == 1 ? "NCCALCSIZE_PARAMS" : "RECT")} pointer: {messageExtra2}{(messageExtra1 == 0 ? "" : " The application should indicate which part of the client area contains valid information.")}",
                 WindowProcessMessage.ON_CREATE => $"CREATESTRUCT pointer: {messageExtra2}",
                 WindowProcessMessage.WINDOW_SHOWN_OR_HIDE => $"window {(messageExtra1 == 1 ? "shown" : "hidden")}, reson: {(WindowShowHideReason)messageExtra2}",
-                WindowProcessMessage.BEFORE_WINDOW_POS_CHANGE => $"the WINDOWPOS object: {new NativeMethods.WINDOWPOS(messageExtra2)}",
+                WindowProcessMessage.BEFORE_WINDOW_POS_CHANGE => $"the WINDOWPOS object: {new WindowPos(messageExtra2)}",
                 WindowProcessMessage.BEFORE_ACTIVATE_DEACTIVATE => $"window {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
                 WindowProcessMessage.NONCLIENT_ACTIVATE_DEACTIVEATE => $"title bar/icon {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
                 WindowProcessMessage.ACTIVATE_DEACTIVEATE => $"(de)activation method: {(WindowActivatedLowerHalf)GetLowerHalf(messageExtra1)}, window {(GetUpperHalf(messageExtra1) == 0 ? "not" : "")} minimized, pointer to {((WindowActivatedLowerHalf)GetLowerHalf(messageExtra1) == WindowActivatedLowerHalf.DEACTIVATED ? "" : "de")}activating window: {messageExtra2}",
@@ -103,7 +116,7 @@ namespace ManualWindow
                 WindowProcessMessage.AFTER_KEYBOARD_FOCUS_GAINED => $"keyboard focus lost window handle: {messageExtra1}",
                 WindowProcessMessage.FRAME_PAINT_NEEDED => $"window update region handle: {messageExtra1}",
                 WindowProcessMessage.BACKGROUND_ERASE_NEEDED => $"device context handle: {messageExtra1}",
-                WindowProcessMessage.WINDOW_POS_CHANGED => $"the WINDOWPOS(pointer: {messageExtra2}) object: {new NativeMethods.WINDOWPOS(messageExtra2)}",
+                WindowProcessMessage.WINDOW_POS_CHANGED => $"the WINDOWPOS(pointer: {messageExtra2}) object: {new WindowPos(messageExtra2)}",
                 WindowProcessMessage.CLIPBOARD_SIZE_CHANGED => $"clipboard viewer window hadle: {messageExtra1}, RECT pointer: {messageExtra2}",
                 WindowProcessMessage.WINDOW_SIZE_CHANGED => $"resize type: {(WindowResizeType)messageExtra1}, new size: [width: {GetLowerHalf(messageExtra2)}, height: {GetUpperHalf(messageExtra2)}]",
                 WindowProcessMessage.WINDOW_MOVED => $"new position: [x: {GetLowerHalf(messageExtra2)}, y: {GetUpperHalf(messageExtra2)}]",
@@ -121,7 +134,7 @@ namespace ManualWindow
                 WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOWN or
                 WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_UP or
                 WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOUBLE_CLICK
-                    => $"part hit: {(CursorPosWindowPart)messageExtra1}, cursor pos: {new NativeMethods.POINTS(messageExtra2)}",
+                    => $"part hit: {(CursorPosWindowPart)messageExtra1}, cursor pos: {new Points(messageExtra2)}",
                 WindowProcessMessage.MOUSE_MOVE or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_DOWN or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_UP or
@@ -165,7 +178,9 @@ namespace ManualWindow
             Console.WriteLine(message);
             throw error;
         }
+        #endregion
 
+        #region Public methods
         /// <summary>
         /// Processes the window message.
         /// </summary>
@@ -174,7 +189,7 @@ namespace ManualWindow
         /// <param name="messageExtra1">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <param name="messageExtra2">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <returns>The result of the message processing, and depends on the message sent.</returns>
-        public nint ProcessMessage(HWND windowHandle, WindowProcessMessage message, nint messageExtra1, nint messageExtra2)
+        public nint ProcessMessage(WindowHandle windowHandle, WindowProcessMessage message, nint messageExtra1, nint messageExtra2)
         {
             switch (message)
             {
@@ -264,7 +279,7 @@ namespace ManualWindow
         /// <param name="messageExtra1">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <param name="messageExtra2">Additional message information. The contents of this depends on <paramref name="message"/>.</param>
         /// <returns>The result of the message processing, and depends on the message sent.</returns>
-        public nint WindowProc(HWND windowHandle, uint message, nint messageExtra1, nint messageExtra2)
+        public nint WindowProc(WindowHandle windowHandle, uint message, nint messageExtra1, nint messageExtra2)
         {
             var messageEnum = (WindowProcessMessage)message;
             var knownMessage = Enum.IsDefined(messageEnum);
@@ -289,22 +304,22 @@ namespace ManualWindow
             return response;
         }
 
-        public bool CreateWindow()
+        public bool RegisterWindow()
         {
-            var windowClass = new NativeMethods.WNDCLASSEX
+            var windowClass = new WindowClass
             {
-                cbSize = Marshal.SizeOf(typeof(NativeMethods.WNDCLASSEX)),
-                style = (int)(CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS), //Doubleclicks are active
-                hbrBackground = (nint)SysColorIndex.COLOR_BACKGROUND + 1,
+                cbSize = (uint)Marshal.SizeOf(typeof(WindowClass)),
+                style = WindowClassStyle.HREDRAW | WindowClassStyle.VREDRAW | WindowClassStyle.DBLCLKS,
+                lpfnWndProc = new WndProc(WindowProc),
                 cbClsExtra = 0,
                 cbWndExtra = 0,
                 hInstance = Marshal.GetHINSTANCE(GetType().Module), // alternative: Process.GetCurrentProcess().Handle
-                hIcon = nint.Zero,
-                hCursor = NativeMethods.LoadCursor(nint.Zero, (int)IDC_CROSS),// Crosshair cursor
+                hIcon = IconHandle.Null,
+                hCursor = NativeMethods.LoadCursor(nint.Zero, (int)IDC_CROSS), // Crosshair cursor
+                hbrBackground = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_BACKGROUND + 1),
                 lpszMenuName = null,
                 lpszClassName = "myClass",
-                lpfnWndProc = new NativeMethods.WndProc(WindowProc),
-                hIconSm = nint.Zero
+                hIconSm = IconHandle.Null
             };
 
             var registrationResult = NativeMethods.RegisterClassEx(ref windowClass);
@@ -315,32 +330,40 @@ namespace ManualWindow
                 return false;
             }
 
-            var windowHadle = NativeMethods.CreateWindowEx(
+            var windowHandle = NativeMethods.CreateWindowEx(
                 0,
                 registrationResult,
+                null,
                 "Hello Win32",
-                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+                WindowStyle.OVERLAPPEDWINDOW | WindowStyle.VISIBLE,
                 0,
                 0,
                 300,
                 400,
-                new HWND(nint.Zero),
+                new WindowHandle(nint.Zero),
                 nint.Zero,
                 windowClass.hInstance,
                 nint.Zero
             );
 
-            if (windowHadle == HWND.Null)
+            if (windowHandle == WindowHandle.Null)
             {
                 ThrowLastSystemError();
                 return false;
             }
-            NativeMethods.ShowWindow(windowHadle, 1);
+
+            _windowHandle = windowHandle;
+            return true;
+        }
+
+        public bool ShowWindow()
+        {
+            NativeMethods.ShowWindow(_windowHandle, ShowWindowCommand.SHOWNORMAL);
 
             sbyte res = 0;
             do
             {
-                res = NativeMethods.GetMessage(out var msg, windowHadle, 0, 0);
+                res = NativeMethods.GetMessage(out var msg, _windowHandle, 0, 0);
                 if (res == 0)
                 {
                     continue;
@@ -358,5 +381,6 @@ namespace ManualWindow
             while (res != 0);
             return true;
         }
+        #endregion
     }
 }

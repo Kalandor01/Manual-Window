@@ -1,4 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using ManualWindow.NativeMethodEnums;
+using ManualWindow.NativeMethodStructs;
+using ManualWindow.WindowMessageEnums;
+using System.Runtime.InteropServices;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Gdi;
 using Windows.Win32.UI.WindowsAndMessaging;
@@ -12,7 +15,7 @@ namespace ManualWindow
         /// 
         /// </summary>
         /// <returns></returns>
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern uint GetLastError();
 
         /// <summary>Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked. (MessageBoxW)</summary>
@@ -42,7 +45,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll", EntryPoint = "MessageBox", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern MessageBoxResult MessageBox(HWND hWnd, string lpText, string lpCaption, MessageBoxStyle uType);
+        internal static extern MessageBoxResult MessageBox(WindowHandle hWnd, string lpText, string lpCaption, MessageBoxStyle uType);
 
         /// <summary>The UpdateWindow function updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty.</summary>
 		/// <param name="hWnd">Handle to the window to be updated.</param>
@@ -53,92 +56,186 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-updatewindow">Learn more about this API from docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool UpdateWindow(HWND hWnd);
+        internal static extern bool UpdateWindow(WindowHandle hWnd);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="nCmdShow"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        /// <summary>Sets the specified window's show state.</summary>
+		/// <param name="hWnd">
+		/// <para>Type: <b>HWND</b> A handle to the window.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showwindow#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="nCmdShow">Type: <b>int</b></param>
+		/// <returns>
+		/// <para>Type: <b>BOOL</b> If the window was previously visible, the return value is nonzero. If the window was previously hidden, the return value is zero.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para>To perform certain special effects when showing or hiding a window, use <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-animatewindow">AnimateWindow</a>. The first time an application calls <b>ShowWindow</b>, it should use the <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-winmain">WinMain</a> function's <i>nCmdShow</i> parameter as its <i>nCmdShow</i> parameter. Subsequent calls to <b>ShowWindow</b> must use one of the values in the given list, instead of the one specified by the <b>WinMain</b> function's <i>nCmdShow</i> parameter. As noted in the discussion of the <i>nCmdShow</i> parameter, the <i>nCmdShow</i> value is ignored in the first call to <b>ShowWindow</b> if the program that launched the application specifies startup information in the  structure. In this case, <b>ShowWindow</b> uses the information specified in the <a href="https://docs.microsoft.com/windows/desktop/api/processthreadsapi/ns-processthreadsapi-startupinfoa">STARTUPINFO</a> structure to show the window. On subsequent calls, the application must call <b>ShowWindow</b> with <i>nCmdShow</i> set to <b>SW_SHOWDEFAULT</b> to use the startup information provided by the program that launched the application. This behavior is designed for the following situations: </para>
+		/// <para>This doc was truncated.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showwindow#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+        [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool ShowWindow(HWND hWnd, int nCmdShow);
+        internal static extern bool ShowWindow(WindowHandle hWnd, ShowWindowCommand nCmdShow);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool DestroyWindow(HWND hWnd);
+        /// <summary>Destroys the specified window.</summary>
+		/// <param name="hWnd">
+		/// <para>Type: <b>HWND</b> A handle to the window to be destroyed.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroywindow#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <returns>
+		/// <para>Type: <b>BOOL</b> If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para>A thread cannot use <b>DestroyWindow</b> to destroy a window created by a different thread. If the window being destroyed is a child window that does not have the <b>WS_EX_NOPARENTNOTIFY</b> style, a <a href="https://docs.microsoft.com/windows/win32/inputmsg/wm-parentnotify">WM_PARENTNOTIFY</a> message is sent to the parent.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroywindow#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool DestroyWindow(WindowHandle hWnd);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dwExStyle"></param>
-        /// <param name="regResult"></param>
-        /// <param name="lpWindowName"></param>
-        /// <param name="dwStyle"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="nWidth"></param>
-        /// <param name="nHeight"></param>
-        /// <param name="hWndParent"></param>
-        /// <param name="hMenu"></param>
-        /// <param name="hInstance"></param>
-        /// <param name="lpParam"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", EntryPoint = "CreateWindowEx", CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern HWND CreateWindowEx(
-               int dwExStyle,
+        /// <summary>Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function. (Unicode)</summary>
+		/// <param name="dwExStyle">
+		/// <para>Type: <b>DWORD</b> The extended window style of the window being created. For a list of possible values, see  <a href="https://docs.microsoft.com/windows/desktop/winmsg/extended-window-styles">Extended Window Styles</a>.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lpClassName">
+		/// <para>Type: <b>LPCTSTR</b> A <b>null</b>-terminated string or a class atom created by a previous call to the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-registerclassa">RegisterClass</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-registerclassexa">RegisterClassEx</a> function. The atom must be in the low-order word of <i>lpClassName</i>; the high-order word must be zero. If <i>lpClassName</i> is a string, it specifies the window class name. The class name can be any name registered with <b>RegisterClass</b> or <b>RegisterClassEx</b>, provided that the module that registers the class is also the module that creates the window. The class name can also be any of the predefined <a href="https://docs.microsoft.com/windows/desktop/winmsg/about-window-classes">system class</a> names.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lpWindowName">
+		/// <para>Type: <b>LPCTSTR</b> The window name. If the window style specifies a title bar, the window title pointed to by <i>lpWindowName</i> is displayed in the title bar. When using <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createwindowa">CreateWindow</a> to create controls, such as buttons, check boxes, and static controls, use <i>lpWindowName</i> to specify the text of the control. When creating a static control with the <b>SS_ICON</b> style, use <i>lpWindowName</i> to specify the icon name or identifier. To specify an identifier, use the syntax "#<i>num</i>".</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="dwStyle">
+		/// <para>Type: <b>DWORD</b> The style of the window being created. This parameter can be a combination of the <a href="https://docs.microsoft.com/windows/desktop/winmsg/window-styles">window style values</a>, plus the control styles indicated in the Remarks section.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="x">
+		/// <para>Type: <b>int</b> The initial horizontal position of the window. For an overlapped or pop-up window, the <i>x</i> parameter is the initial x-coordinate of the window's upper-left corner, in screen coordinates. For a child window, <i>x</i> is the x-coordinate of the upper-left corner of the window relative to the upper-left corner of the parent window's client area. If <i>x</i> is set to <b>CW_USEDEFAULT</b>, the system selects the default position for the window's upper-left corner and ignores the <i>y</i> parameter. <b>CW_USEDEFAULT</b> is valid only for overlapped windows; if it is specified for a pop-up or child window, the <i>x</i> and <i>y</i> parameters are set to zero.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="y">
+		/// <para>Type: <b>int</b> The initial vertical position of the window. For an overlapped or pop-up window, the <i>y</i> parameter is the initial y-coordinate of the window's upper-left corner, in screen coordinates. For a child window, <i>y</i> is the initial y-coordinate of the upper-left corner of the child window relative to the upper-left corner of the parent window's client area. For a list box <i>y</i> is the initial y-coordinate of the upper-left corner of the list box's client area relative to the upper-left corner of the parent window's client area.</para>
+		/// <para>If an overlapped window is created with the <b>WS_VISIBLE</b> style bit set and the <i>x</i> parameter is set to <b>CW_USEDEFAULT</b>, then the <i>y</i> parameter determines how the window is shown. If the <i>y</i> parameter is <b>CW_USEDEFAULT</b>, then the window manager calls <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-showwindow">ShowWindow</a> with the <b>SW_SHOW</b> flag after the window has been created. If the <i>y</i> parameter is some other value, then the window manager calls <b>ShowWindow</b> with that value as the <i>nCmdShow</i> parameter.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="nWidth">
+		/// <para>Type: <b>int</b> The width, in device units, of the window. For overlapped windows, <i>nWidth</i> is the window's width, in screen coordinates, or <b>CW_USEDEFAULT</b>. If <i>nWidth</i> is <b>CW_USEDEFAULT</b>, the system selects a default width and height for the window; the default width extends from the initial x-coordinates to the right edge of the screen; the default height extends from the initial y-coordinate to the top of the icon area. <b>CW_USEDEFAULT</b> is valid only for overlapped windows; if <b>CW_USEDEFAULT</b> is specified for a pop-up or child window, the <i>nWidth</i> and <i>nHeight</i> parameter are set to zero.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="nHeight">
+		/// <para>Type: <b>int</b> The height, in device units, of the window. For overlapped windows, <i>nHeight</i> is the window's height, in screen coordinates. If the <i>nWidth</i> parameter is set to <b>CW_USEDEFAULT</b>, the system ignores <i>nHeight</i>.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="hWndParent">
+		/// <para>Type: <b>HWND</b> A handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle. This parameter is optional for pop-up windows. To create a <a href="https://docs.microsoft.com/windows/desktop/winmsg/window-features">message-only window</a>, supply <b>HWND_MESSAGE</b> or a handle to an existing message-only window.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="hMenu">
+		/// <para>Type: <b>HMENU</b> A handle to a menu, or specifies a child-window identifier, depending on the window style. For an overlapped or pop-up window, <i>hMenu</i> identifies the menu to be used with the window; it can be <b>NULL</b> if the class menu is to be used. For a child window, <i>hMenu</i> specifies the child-window identifier, an integer value used by a dialog box control to notify its parent about events. The application determines the child-window identifier; it must be unique for all child windows with the same parent window.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="hInstance">
+		/// <para>Type: <b>HINSTANCE</b> A handle to the instance of the module to be associated with the window.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lpParam">
+		/// <para>Type: <b>LPVOID</b> Pointer to a value to be passed to the window through the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/ns-winuser-createstructa">CREATESTRUCT</a> structure (<b>lpCreateParams</b> member) pointed to by the <i>lParam</i> param of the <b>WM_CREATE</b> message.  This message is sent to the created window by this function before it returns. If an application calls <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createwindowa">CreateWindow</a> to create a MDI client window, <i>lpParam</i> should point to a <a href="https://docs.microsoft.com/windows/desktop/api/winuser/ns-winuser-clientcreatestruct">CLIENTCREATESTRUCT</a> structure. If an MDI client window calls <b>CreateWindow</b> to create an MDI child window, <i>lpParam</i> should point to a <a href="https://docs.microsoft.com/windows/desktop/api/winuser/ns-winuser-mdicreatestructa">MDICREATESTRUCT</a> structure. <i>lpParam</i> may be <b>NULL</b> if no additional data is needed.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <returns>
+		/// <para>Type: <b>HWND</b> If the function succeeds, the return value is a handle to the new window. If the function fails, the return value is <b>NULL</b>. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>. This function typically fails for one of the following reasons: </para>
+		/// <para>This doc was truncated.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para>The <b>CreateWindowEx</b> function sends <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-nccreate">WM_NCCREATE</a>, <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-nccalcsize">WM_NCCALCSIZE</a>, and <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-create">WM_CREATE</a> messages to the window being created. If the created window is a child window, its default position is at the bottom of the Z-order. If the created window is a top-level window, its default position is at the top of the Z-order (but beneath all topmost windows unless the created window is itself topmost). For information on controlling whether the Taskbar displays a button for the created window, see <a href="https://docs.microsoft.com/windows/desktop/shell/taskbar">Managing Taskbar Buttons</a>. For information on removing a window, see the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-destroywindow">DestroyWindow</a> function. The following predefined control classes can be specified in the <i>lpClassName</i> parameter. Note the corresponding control styles you can use in the <i>dwStyle</i> parameter. </para>
+		/// <para>This doc was truncated.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+        [DllImport("user32.dll", EntryPoint = "CreateWindowExW", SetLastError = true)]
+        public static extern WindowHandle CreateWindowEx(
+               WindowExStyle dwExStyle,
                ushort regResult,
-               //string lpClassName,
-               string lpWindowName,
-               uint dwStyle,
+               string? lpClassName,
+			   string? lpWindowName,
+               WindowStyle dwStyle,
                int x,
                int y,
                int nWidth,
                int nHeight,
-               HWND hWndParent,
+               WindowHandle hWndParent,
                nint hMenu,
                nint hInstance,
                nint lpParam
             );
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="lpWndClass"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern ushort RegisterClassEx([In] ref WNDCLASSEX lpWndClass);
+        /// <summary>Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function. (RegisterClassExW)</summary>
+        /// <returns>
+        /// <para>Type: <b>ATOM</b> If the function succeeds, the return value is a class atom that uniquely identifies the class being registered. This atom can only be used by the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createwindowa">CreateWindow</a>, <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createwindowexa">CreateWindowEx</a>, <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getclassinfoa">GetClassInfo</a>, <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getclassinfoexa">GetClassInfoEx</a>, <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-findwindowa">FindWindow</a>, <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-findwindowexa">FindWindowEx</a>, and <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-unregisterclassa">UnregisterClass</a> functions and the <b>IActiveIMMap::FilterClientWindows</b> method. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+        /// </returns>
+        /// <remarks>
+        /// <para>If you register the window class by using <b>RegisterClassExA</b>, the application tells the system that the windows of the created class expect messages with text or character parameters to use the ANSI character set; if you register it by using <b>RegisterClassExW</b>, the application requests that the system pass text parameters of messages as Unicode. The <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-iswindowunicode">IsWindowUnicode</a> function enables applications to query the nature of each window. For more information on ANSI and Unicode functions, see <a href="https://docs.microsoft.com/windows/desktop/Intl/conventions-for-function-prototypes">Conventions for Function Prototypes</a>. All window classes that an application registers are unregistered when it terminates. No window classes registered by a DLL are unregistered when the DLL is unloaded. A DLL must explicitly unregister its classes when it is unloaded.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclassexw#">Read more on docs.microsoft.com</see>.</para>
+        /// </remarks>
+        [DllImport("user32.dll", EntryPoint = "RegisterClassExW", SetLastError = true)]
+        internal static extern ushort RegisterClassEx([In] ref WindowClass lpWndClass);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="uMsg"></param>
-        /// <param name="wParam"></param>
-        /// <param name="lParam"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern nint DefWindowProc(HWND hWnd, uint uMsg, nint wParam, nint lParam);
+        /// <summary>Calls the default window procedure to provide default processing for any window messages that an application does not process. (Unicode)</summary>
+		/// <param name="hWnd">
+		/// <para>Type: <b>HWND</b> A handle to the window procedure that received the message.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="Msg">
+		/// <para>Type: <b>UINT</b> The message.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="wParam">
+		/// <para>Type: <b>WPARAM</b> Additional message information. The content of this parameter depends on the value of the <i>Msg</i> parameter.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lParam">
+		/// <para>Type: <b>LPARAM</b> Additional message information. The content of this parameter depends on the value of the <i>Msg</i> parameter.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <returns>
+		/// <para>Type: <b>LRESULT</b> The return value is the result of the message processing and depends on the message.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para>> [!NOTE] > The winuser.h header defines DefWindowProc as an alias which automatically selects the ANSI or Unicode version of this function based on the definition of the UNICODE preprocessor constant. Mixing usage of the encoding-neutral alias with code that not encoding-neutral can lead to mismatches that result in compilation or runtime errors. For more information, see [Conventions for Function Prototypes](/windows/win32/intl/conventions-for-function-prototypes).</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+        [DllImport("user32.dll", EntryPoint = "DefWindowProcW", SetLastError = true)]
+        internal static extern nint DefWindowProc(WindowHandle hWnd, uint uMsg, nint wParam, nint lParam);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="nExitCode"></param>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        /// <summary>Indicates to the system that a thread has made a request to terminate (quit). It is typically used in response to a WM_DESTROY message.</summary>
+		/// <param name="nExitCode">
+		/// <para>Type: <b>int</b> The application exit code. This value is used as the <i>wParam</i> parameter of the <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-quit">WM_QUIT</a> message.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postquitmessage#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <remarks>
+		/// <para>The <b>PostQuitMessage</b> function posts a <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-quit">WM_QUIT</a> message to the thread's message queue and returns immediately; the function simply indicates to the system that the thread is requesting to quit at some time in the future. When the thread retrieves the <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-quit">WM_QUIT</a> message from its message queue, it should exit its message loop and return control to the system. The exit value returned to the system must be the <i>wParam</i> parameter of the <b>WM_QUIT</b> message.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postquitmessage#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+        [DllImport("user32.dll", SetLastError = true)]
         internal static extern void PostQuitMessage(int nExitCode);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hInstance"></param>
-        /// <param name="lpCursorName"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        /// <summary>Loads the specified cursor resource from the executable (.EXE) file associated with an application instance. (Unicode)</summary>
+		/// <param name="hInstance">
+		/// <para>Type: <b>HINSTANCE</b> A handle to an instance of the module whose executable file contains the cursor to be loaded.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="lpCursorName">
+		/// <para>Type: <b>LPCTSTR</b> The name of the cursor resource to be loaded. Alternatively, this parameter can consist of the resource identifier in the low-order word and zero in the high-order word. The <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-makeintresourcea">MAKEINTRESOURCE</a> macro can also be used to create this value. To use one of the predefined cursors, the application must set the <i>hInstance</i> parameter to <b>NULL</b> and the <i>lpCursorName</i> parameter to one the following values. </para>
+		/// <para>This doc was truncated.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <returns>
+		/// <para>Type: <b>HCURSOR</b> If the function succeeds, the return value is the handle to the newly loaded cursor. If the function fails, the return value is <b>NULL</b>. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+		/// </returns>
+		/// <remarks>
+		/// <para>The <b>LoadCursor</b> function loads the cursor resource only if it has not been loaded; otherwise, it retrieves the handle to the existing resource. This function returns a valid cursor handle only if the <i>lpCursorName</i> parameter is a pointer to a cursor resource. If <i>lpCursorName</i> is a pointer to any type of resource other than a cursor (such as an icon), the return value is not <b>NULL</b>, even though it is not a valid cursor handle. The <b>LoadCursor</b> function searches the cursor resource most appropriate for the cursor for the current display device. The cursor resource can be a color or monochrome bitmap. <h3><a id="DPI_Virtualization"></a><a id="dpi_virtualization"></a><a id="DPI_VIRTUALIZATION"></a>DPI Virtualization</h3> This API does not participate in DPI virtualization. The output returned is not affected by the DPI of the calling thread.</para>
+		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw#">Read more on docs.microsoft.com</see>.</para>
+		/// </remarks>
+        [DllImport("user32.dll", EntryPoint = "LoadCursorW", SetLastError = true)]
         internal static extern nint LoadCursor(nint hInstance, int lpCursorName);
 
         /// <summary>The BeginPaint function prepares the specified window for painting and fills a PAINTSTRUCT structure with information about the painting.</summary>
@@ -151,8 +248,8 @@ namespace ManualWindow
 		/// <para>The <b>BeginPaint</b> function automatically sets the clipping region of the device context to exclude any area outside the update region. The update region is set by the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-invalidaterect">InvalidateRect</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-invalidatergn">InvalidateRgn</a> function and by the system after sizing, moving, creating, scrolling, or any other operation that affects the client area. If the update region is marked for erasing, <b>BeginPaint</b> sends a <b>WM_ERASEBKGND</b> message to the window. An application should not call <b>BeginPaint</b> except in response to a <b>WM_PAINT</b> message. Each call to <b>BeginPaint</b> must have a corresponding call to the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-endpaint">EndPaint</a> function. If the caret is in the area to be painted, <b>BeginPaint</b> automatically hides the caret to prevent it from being erased. If the window's class has a background brush, <b>BeginPaint</b> uses that brush to erase the background of the update region before returning. <h3><a id="DPI_Virtualization"></a><a id="dpi_virtualization"></a><a id="DPI_VIRTUALIZATION"></a>DPI Virtualization</h3> This API does not participate in DPI virtualization. The output returned is always in terms of physical pixels.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-beginpaint#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern nint BeginPaint(HWND hWnd, out PAINTSTRUCT lpPaint);
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern nint BeginPaint(WindowHandle hWnd, out PaintStruct lpPaint);
 
         /// <summary>The BeginPaint function prepares the specified window for painting and fills a PAINTSTRUCT structure with information about the painting.</summary>
 		/// <param name="hWnd">Handle to the window to be repainted.</param>
@@ -164,8 +261,9 @@ namespace ManualWindow
 		/// <para>The <b>BeginPaint</b> function automatically sets the clipping region of the device context to exclude any area outside the update region. The update region is set by the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-invalidaterect">InvalidateRect</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-invalidatergn">InvalidateRgn</a> function and by the system after sizing, moving, creating, scrolling, or any other operation that affects the client area. If the update region is marked for erasing, <b>BeginPaint</b> sends a <b>WM_ERASEBKGND</b> message to the window. An application should not call <b>BeginPaint</b> except in response to a <b>WM_PAINT</b> message. Each call to <b>BeginPaint</b> must have a corresponding call to the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-endpaint">EndPaint</a> function. If the caret is in the area to be painted, <b>BeginPaint</b> automatically hides the caret to prevent it from being erased. If the window's class has a background brush, <b>BeginPaint</b> uses that brush to erase the background of the update region before returning. <h3><a id="DPI_Virtualization"></a><a id="dpi_virtualization"></a><a id="DPI_VIRTUALIZATION"></a>DPI Virtualization</h3> This API does not participate in DPI virtualization. The output returned is always in terms of physical pixels.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-beginpaint#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool EndPaint(HWND hWnd, in PAINTSTRUCT lpPaint);
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool EndPaint(WindowHandle hWnd, in PaintStruct lpPaint);
 
         /// <summary>The FillRect function fills a rectangle by using the specified brush. This function includes the left and top borders, but excludes the right and bottom borders of the rectangle.</summary>
 		/// <param name="hDC">A handle to the device context.</param>
@@ -180,8 +278,8 @@ namespace ManualWindow
 		/// <para>This doc was truncated.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-fillrect#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int FillRect([In] HDC hDC, [In] RECT lprc, [In] HBRUSH hbr);
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern int FillRect([In] HDC hDC, [In] Rectangle lprc, [In] HBRUSH hbr);
 
         /// <summary>Retrieves the current color of the specified display element.</summary>
 		/// <param name="index">Type: <b>int</b></param>
@@ -192,7 +290,7 @@ namespace ManualWindow
 		/// <para>To display the component of the RGB  value, use the <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-getrvalue">GetRValue</a>, <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-getgvalue">GetGValue</a>, and <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-getbvalue">GetBValue</a> macros. System colors for monochrome displays are usually interpreted as shades of gray. To paint with a system color brush, an application should use <c>GetSysColorBrush(nIndex)</code>, instead of <code>CreateSolidBrush(GetSysColor(nIndex))</c>, because <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getsyscolorbrush">GetSysColorBrush</a> returns a cached brush, instead of allocating a new one. Color is an important visual element of most user interfaces. For guidelines about using color in your applications, see <a href="https://docs.microsoft.com/windows/win32/uxguide/vis-color">Color - Win32</a> and <a href="https://docs.microsoft.com/windows/apps/design/signature-experiences/color">Color in Windows 11</a>.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getsyscolor#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-		[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		[DllImport("user32.dll", SetLastError = true)]
         internal static extern uint GetSysColor(SysColorIndex index);
 
         /// <summary>The CreateSolidBrush function creates a logical brush that has the specified solid color.</summary>
@@ -204,7 +302,7 @@ namespace ManualWindow
 		/// <para>When you no longer need the <b>HBRUSH</b> object, call the <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-deleteobject">DeleteObject</a> function to delete it. A solid brush is a bitmap that the system uses to paint the interiors of filled shapes. After an application creates a brush by calling <b>CreateSolidBrush</b>, it can select that brush into any device context by calling the <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-selectobject">SelectObject</a> function. To paint with a system color brush, an application should use <c>GetSysColorBrush (nIndex)</code> instead of <code>CreateSolidBrush(GetSysColor(nIndex))</c>, because <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getsyscolorbrush">GetSysColorBrush</a> returns a cached brush instead of allocating a new one. <b>ICM:</b> No color management is done at brush creation. However, color management is performed when the brush is selected into an ICM-enabled device context.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createsolidbrush#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("gdi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport("gdi32.dll", SetLastError = true)]
         internal static extern HBRUSH CreateSolidBrush(COLORREF color);
 
         /// <summary>The GetSysColorBrush function retrieves a handle identifying a logical brush that corresponds to the specified color index.</summary>
@@ -214,7 +312,7 @@ namespace ManualWindow
 		/// <para>A brush is a bitmap that the system uses to paint the interiors of filled shapes. An application can retrieve the current system colors by calling the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getsyscolor">GetSysColor</a> function. An application can set the current system colors by calling the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-setsyscolors">SetSysColors</a> function. An application must not register a window class for a window using a system brush. To register a window class with a system color, see the documentation of the <b>hbrBackground</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/ns-winuser-wndclassa">WNDCLASS</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winuser/ns-winuser-wndclassexa">WNDCLASSEX</a> structures. System color brushes track changes in system colors. In other words, when the user changes a system color, the associated system color brush automatically changes to the new color. To paint with a system color brush, an application should use <b>GetSysColorBrush</b> (nIndex) instead of <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-createsolidbrush">CreateSolidBrush</a> ( <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getsyscolor">GetSysColor</a> (nIndex)), because <b>GetSysColorBrush</b> returns a cached brush instead of allocating a new one. System color brushes are owned by the system so you don't need to destroy them. Although you don't need to delete the logical brush that <b>GetSysColorBrush</b> returns, no harm occurs by calling <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-deleteobject">DeleteObject</a>.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getsyscolorbrush#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-		[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		[DllImport("user32.dll", SetLastError = true)]
         internal static extern HBRUSH GetSysColorBrush(SysColorIndex nIndex);
 
         /// <summary>Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for retrieval. (GetMessageW)</summary>
@@ -247,8 +345,8 @@ namespace ManualWindow
 		/// <para>This doc was truncated.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmessagew#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern sbyte GetMessage(out MSG lpMsg, HWND hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern sbyte GetMessage(out MSG lpMsg, WindowHandle hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
 
         /// <summary>Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next time the thread calls the GetMessage or PeekMessage function.</summary>
         /// <param name="lpMsg">
@@ -263,7 +361,8 @@ namespace ManualWindow
         /// <para><a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-keydown">WM_KEYDOWN</a> and <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-keyup">WM_KEYUP</a> combinations produce a <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-char">WM_CHAR</a> or <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-deadchar">WM_DEADCHAR</a> message. <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-syskeydown">WM_SYSKEYDOWN</a> and <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-syskeyup">WM_SYSKEYUP</a> combinations produce a <a href="https://docs.microsoft.com/windows/desktop/menurc/wm-syschar">WM_SYSCHAR</a> or <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-sysdeadchar">WM_SYSDEADCHAR</a> message. <b>TranslateMessage</b> produces <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-char">WM_CHAR</a> messages only for keys that are mapped to ASCII characters by the keyboard driver. If applications process virtual-key messages for some other purpose, they should not call <b>TranslateMessage</b>. For instance, an application should not call <b>TranslateMessage</b> if the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-translateacceleratora">TranslateAccelerator</a> function returns a nonzero value. Note that the application is responsible for retrieving and dispatching input messages to the dialog box. Most applications use the main message loop for this. However, to permit the user to move to and to select controls by using the keyboard, the application must call <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-isdialogmessagea">IsDialogMessage</a>. For more information, see  <a href="https://docs.microsoft.com/windows/desktop/dlgbox/dlgbox-programming-considerations">Dialog Box Keyboard Interface</a>.</para>
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translatemessage#">Read more on docs.microsoft.com</see>.</para>
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool TranslateMessage(in MSG lpMsg);
 
         /// <summary>Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the GetMessage function. (DispatchMessageW)</summary>
@@ -278,7 +377,7 @@ namespace ManualWindow
         /// <para>The <a href="https://docs.microsoft.com/windows/desktop/api/winuser/ns-winuser-msg">MSG</a> structure must contain valid message values. If the <i>lpmsg</i> parameter points to a <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-timer">WM_TIMER</a> message and the <i>lParam</i> parameter of the <b>WM_TIMER</b> message is not <b>NULL</b>, <i>lParam</i> points to a function that is called instead of the window procedure. Note that the application is responsible for retrieving and dispatching input messages to the dialog box. Most applications use the main message loop for this. However, to permit the user to move to and to select controls by using the keyboard, the application must call <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-isdialogmessagea">IsDialogMessage</a>. For more information, see <a href="https://docs.microsoft.com/windows/desktop/dlgbox/dlgbox-programming-considerations">Dialog Box Keyboard Interface</a>.</para>
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dispatchmessagew#">Read more on docs.microsoft.com</see>.</para>
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true)]
         internal static extern LRESULT DispatchMessage(in MSG lpMsg);
 
         /// <summary>The FormatMessageW (Unicode) function (winbase.h) formats a message string.</summary>
@@ -320,7 +419,7 @@ namespace ManualWindow
 		/// <para>This doc was truncated.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-formatmessagew#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		[DllImport("kernel32.dll", EntryPoint = "FormatMessageW", SetLastError = true)]
         internal static extern uint FormatMessageW(FormatMessageOptions dwFlags, nint lpSource, uint dwMessageId, uint dwLanguageId, ref nint lpBuffer, uint nSize, nint Arguments);
 
         /// <summary>Frees the specified local memory object and invalidates its handle.</summary>
@@ -335,7 +434,7 @@ namespace ManualWindow
 		/// <para>If the process tries to examine or modify the memory after it has been freed, heap corruption may occur or an access violation exception (EXCEPTION_ACCESS_VIOLATION) may be generated. If the <i>hMem</i> parameter is <b>NULL</b>, <b>LocalFree</b> ignores the parameter and returns <b>NULL</b>. The <b>LocalFree</b> function will free a locked memory object. A locked memory object has a lock count greater than zero. The <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-locallock">LocalLock</a> function locks a local memory object and increments the lock count by one. The <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-localunlock">LocalUnlock</a> function unlocks it and decrements the lock count by one. To get the lock count of a local memory object, use the <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-localflags">LocalFlags</a> function. If an application is running under a debug version of the system, <b>LocalFree</b> will issue a message that tells you that a locked object is being freed. If you are debugging the application, <b>LocalFree</b> will enter a breakpoint just before freeing a locked object. This allows you to verify the intended behavior, then continue execution.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-localfree#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern nint LocalFree(nint hMem);
 
         /// <summary>Retrieves a copy of the character string associated with the specified global atom. (Unicode)</summary>
@@ -359,7 +458,7 @@ namespace ManualWindow
 		/// <para>> [!NOTE] > The winbase.h header defines GlobalGetAtomName as an alias which automatically selects the ANSI or Unicode version of this function based on the definition of the UNICODE preprocessor constant. Mixing usage of the encoding-neutral alias with code that not encoding-neutral can lead to mismatches that result in compilation or runtime errors. For more information, see [Conventions for Function Prototypes](/windows/win32/intl/conventions-for-function-prototypes).</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-		[DllImport("kernel32.dll", ExactSpelling = true, EntryPoint = "GlobalGetAtomNameW", CharSet = CharSet.Unicode, SetLastError = true)]
+		[DllImport("kernel32.dll", EntryPoint = "GlobalGetAtomNameW", SetLastError = true)]
         internal static extern uint GlobalGetAtomName(ushort nAtom, PWSTR lpBuffer, int nSize);
 
         /// <summary>Retrieves from the clipboard the name of the specified registered format. The function copies the name to the specified buffer. (Unicode)</summary>
@@ -382,211 +481,8 @@ namespace ManualWindow
 		/// <para><h3><a id="Security_Considerations"></a><a id="security_considerations"></a><a id="SECURITY_CONSIDERATIONS"></a>Security Considerations</h3> Using this function incorrectly might compromise the security of your program. For example, miscalculating the proper size of the <i>lpszFormatName</i> buffer, especially when the application is used in both ANSI and Unicode versions, can cause a buffer overflow. Also, note that the string is truncated if it is longer than the <i>cchMaxCount</i> parameter, which can lead to loss of information.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-		[DllImport("user32.dll", ExactSpelling = true, EntryPoint = "GetClipboardFormatNameW", CharSet = CharSet.Unicode, SetLastError = true)]
+		[DllImport("user32.dll", EntryPoint = "GetClipboardFormatNameW", SetLastError = true)]
         internal static extern int GetClipboardFormatName(uint format, PWSTR lpszFormatName, int cchMaxCount);
-        #endregion
-
-        #region delegates
-        internal delegate nint WndProc(HWND hWnd, uint msg, nint wParam, nint lParam);
-        #endregion
-
-        #region Structs
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        internal struct WNDCLASSEX
-        {
-            [MarshalAs(UnmanagedType.U4)]
-            public int cbSize;
-            [MarshalAs(UnmanagedType.U4)]
-            public int style;
-            public WndProc lpfnWndProc;
-            public int cbClsExtra;
-            public int cbWndExtra;
-            public nint hInstance;
-            public nint hIcon;
-            public nint hCursor;
-            public nint hbrBackground;
-            public string lpszMenuName;
-            public string lpszClassName;
-            public nint hIconSm;
-        }
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        internal struct PAINTSTRUCT
-        {
-            /// <summary>
-            /// A handle to the device context.
-            /// </summary>
-            public HDC hdc;
-            public bool fErase;
-            /// <summary>
-            /// A handle to the rectangle that needs to be painted.
-            /// </summary>
-            public RECT rcPaint;
-            public bool fRestore;
-            public bool fIncUpdate;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
-            public byte[] rgbReserved;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            public int left;
-            public int top;
-            public int right;
-            public int bottom;
-
-            public RECT(nint pointer)
-            {
-                var r = new RECT();
-                unsafe
-                {
-                    r = *(RECT*)&pointer;
-                }
-                left = r.left;
-                top = r.top;
-                right = r.right;
-                bottom = r.bottom;
-            }
-
-            public RECT(int left, int top, int right, int bottom)
-            {
-                this.left = left;
-                this.top = top;
-                this.right = right;
-                this.bottom = bottom;
-            }
-
-            public int Width
-            {
-                get
-                {
-                    return right - left;
-                }
-            }
-
-            public int Height
-            {
-                get
-                {
-                    return bottom - top;
-                }
-            }
-
-            public void Offset(int dx, int dy)
-            {
-                left += dx;
-                top += dy;
-                right += dx;
-                bottom += dy;
-            }
-
-            public bool IsEmpty
-            {
-                get
-                {
-                    return left >= right || top >= bottom;
-                }
-            }
-
-            public override string ToString()
-            {
-                //return $"pos: ({right}, {bottom}), size: ({Width}, {Height})";
-                return $"t: {top}, l: {left}, r: {right}, b: {bottom}";
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINTS
-        {
-            public short x;
-            public short y;
-
-            public POINTS(nint pointer)
-            {
-                var ps = new POINTS();
-                unsafe
-                {
-                    ps = *(POINTS*)&pointer;
-                }
-                x = ps.x;
-                y = ps.y;
-            }
-
-            public POINTS(short x, short y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public override string ToString()
-            {
-                return $"({x}, {y})";
-            }
-        }
-
-        /// <summary>
-        /// Contains information about the size and position of a window.
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        public struct WINDOWPOS
-        {
-            /// <summary>
-            /// A handle to the window.
-            /// </summary>
-            public HWND hwnd;
-            /// <summary>
-            /// A handle to the window in front of this window in the Z order, or a special value (-2 - 1).
-            /// </summary>
-            public HWND hwndInsertAfter;
-            /// <summary>
-            /// The position of the left edge of the window.
-            /// </summary>
-            public int x;
-            /// <summary>
-            /// The position of the top edge of the window.
-            /// </summary>
-            public int y;
-            /// <summary>
-            /// The window width, in pixels.
-            /// </summary>
-            public int width;
-            /// <summary>
-            /// The window height, in pixels.
-            /// </summary>
-            public int height;
-            /// <summary>
-            /// The window position. A combination of values from the WindowPosFlags enum.
-            /// </summary>
-            public uint flags;
-
-            /// <summary>
-            /// <inheritdoc cref="WINDOWPOS" path="//summary"/>
-            /// </summary>
-            /// <param name="pointer">A pointer to a WINDOWPOS object.</param>
-            public WINDOWPOS(nint pointer)
-            {
-                var wp = new WINDOWPOS();
-                unsafe
-                {
-                    wp = *(WINDOWPOS*)&pointer;
-                }
-
-                hwnd = wp.hwnd;
-                hwndInsertAfter = wp.hwndInsertAfter;
-                x = wp.x;
-                y = wp.y;
-                width = wp.width;
-                height = wp.height;
-                flags = wp.flags;
-            }
-
-            public override string ToString()
-            {
-                var f = flags;
-                return $"pos: ({x}, {y}), size: ({width}, {height}), flags: [{string.Join(", ", Enum.GetValues<WindowPosFlags>().Where(flag => ((int)flag & f) != 0))}]";
-            }
-        }
         #endregion
     }
 }
