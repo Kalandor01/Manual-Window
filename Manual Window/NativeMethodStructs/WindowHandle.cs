@@ -1,30 +1,35 @@
-﻿namespace ManualWindow.NativeMethodStructs
+﻿using System.Diagnostics;
+
+namespace ManualWindow.NativeMethodStructs
 {
-    public readonly struct IconHandle
-        : IEquatable<IconHandle>
+    [DebuggerDisplay("{Value}")]
+    public readonly struct WindowHandle
+        : IEquatable<WindowHandle>
     {
         internal readonly IntPtr Value;
 
-        internal IconHandle(IntPtr value) => Value = value;
+        internal WindowHandle(IntPtr value) => Value = value;
 
-        internal static IconHandle Null => default;
+        internal static WindowHandle Null => default;
 
-        internal readonly bool IsNull => Value == default;
+        internal bool IsNull => Value == default;
 
-        public static implicit operator IntPtr(IconHandle value) => value.Value;
+        public static implicit operator IntPtr(WindowHandle value) => value.Value;
 
-        public static explicit operator IconHandle(IntPtr value) => new(value);
+        public static explicit operator WindowHandle(IntPtr value) => new(value);
 
-        public static bool operator ==(IconHandle left, IconHandle right) => left.Value == right.Value;
+        public static bool operator ==(WindowHandle left, WindowHandle right) => left.Value == right.Value;
 
-        public static bool operator !=(IconHandle left, IconHandle right) => !(left == right);
+        public static bool operator !=(WindowHandle left, WindowHandle right) => !(left == right);
 
-        public bool Equals(IconHandle other) => Value == other.Value;
+        public bool Equals(WindowHandle other) => Value == other.Value;
 
-        public override bool Equals(object obj) => obj is IconHandle other && Equals(other);
+        public override bool Equals(object obj) => obj is WindowHandle other && Equals(other);
 
         public override int GetHashCode() => Value.GetHashCode();
 
         public override string ToString() => $"0x{Value:x}";
+
+        //public static implicit operator HANDLE(WindowHandle value) => new HANDLE(value.Value);
     }
 }

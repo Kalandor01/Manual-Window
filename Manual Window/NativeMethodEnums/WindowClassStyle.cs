@@ -58,10 +58,10 @@
         /// </summary>
         GLOBALCLASS = 16384,
 
-		/// <summary>
-		/// ???
-		/// </summary>
-		IME = 65536,
+        /// <summary>
+        /// ???
+        /// </summary>
+        IME = 65536,
 
         /// <summary>
         /// Enables the drop shadow effect on a window. The effect is turned on and off through SPI_SETDROPSHADOW. Typically, this is enabled for small, short-lived windows such as menus to emphasize their Z-order relationship to other windows. Windows created from a class with this style must be top-level windows; they may not be child windows.

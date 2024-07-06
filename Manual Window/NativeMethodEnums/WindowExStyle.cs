@@ -1,6 +1,6 @@
 ﻿namespace ManualWindow.NativeMethodEnums
 {
-    internal enum WindowExStyle : uint
+    public enum WindowExStyle : uint
     {
         LEFT = 0x00000000,
         LTRREADING = 0x00000000,

@@ -1,6 +1,6 @@
 ﻿namespace ManualWindow.NativeMethodEnums
 {
-    internal enum WindowStyle : uint
+    public enum WindowStyle : uint
     {
         OVERLAPPED = 0x00000000,
         TILED = 0x00000000,

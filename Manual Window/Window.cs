@@ -4,7 +4,6 @@ using ManualWindow.WindowMessageEnums;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using Windows.Win32;
 using Windows.Win32.Graphics.Gdi;
 
 namespace ManualWindow
@@ -12,8 +11,9 @@ namespace ManualWindow
     public class Window
     {
         #region Constants
-        const uint WS_OVERLAPPEDWINDOW = 0b1100_1111_0000_0000_0000_0000;
-        const uint WS_VISIBLE = 0x10000000;
+        const uint CS_DBLCLKS = 8;
+        const uint CS_VREDRAW = 1;
+        const uint CS_HREDRAW = 2;
         const uint IDC_CROSS = 32515;
         const int WHEEL_DELTA = 120;
         #endregion
@@ -319,7 +319,7 @@ namespace ManualWindow
                 hbrBackground = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_BACKGROUND + 1),
                 lpszMenuName = null,
                 lpszClassName = "myClass",
-                hIconSm = IconHandle.Null
+                hIconSm = IconHandle.Null,
             };
 
             var registrationResult = NativeMethods.RegisterClassEx(ref windowClass);
@@ -333,7 +333,6 @@ namespace ManualWindow
             var windowHandle = NativeMethods.CreateWindowEx(
                 0,
                 registrationResult,
-                null,
                 "Hello Win32",
                 WindowStyle.OVERLAPPEDWINDOW | WindowStyle.VISIBLE,
                 0,
