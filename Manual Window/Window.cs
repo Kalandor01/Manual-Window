@@ -225,6 +225,22 @@ namespace ManualWindow
         }
         #endregion
 
+        private int bgColorIndex = 0;
+        private SysColorIndex bgColor = SysColorIndex.COLOR_SCROLLBAR;
+        private Point pos1;
+
+        private void CycleBgColor()
+        {
+            var bgs = Enum.GetValues<SysColorIndex>();
+            bgColorIndex++;
+            if (bgColorIndex >= bgs.Length)
+            {
+                bgColorIndex = 0;
+            }
+            bgColor = bgs[bgColorIndex];
+            Console.WriteLine($"Color change: {bgColor}");
+        }
+
         #region Public methods
         /// <summary>
         /// Processes the window message.
@@ -244,9 +260,30 @@ namespace ManualWindow
                     {
                         ThrowLastSystemError();
                     }
-                    var brush = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_WINDOW);
+                    var brush = NativeMethods.GetSysColorBrush(bgColor);
                     var res = NativeMethods.FillRect(new HDC(hdc), ps.rcPaint, brush);
                     var suc = NativeMethods.EndPaint(windowHandle, ps);
+                    break;
+                case WindowProcessMessage.KEY_DOWN:
+                    var key = (VirtualKeyCode)messageExtra1;
+                    if (key == VirtualKeyCode.I)
+                    {
+                        CycleBgColor();
+                        var ress = NativeMethods.InvalidateRect(windowHandle, true);
+                    }
+                    break;
+                case WindowProcessMessage.MOUSE_LEFT_BUTTON_DOWN:
+                    pos1 = PointFromLParam(messageExtra2);
+                    break;
+                case WindowProcessMessage.MOUSE_LEFT_BUTTON_UP:
+                    CycleBgColor();
+                    var pos2 = PointFromLParam(messageExtra2);
+                    var rect = new NativeMethodStructs.Rectangle(pos1.X, pos1.Y, pos2.X, pos2.Y);
+                    Console.WriteLine($"Recolored: ({pos1.X}, {pos1.Y}, {pos2.X}, {pos2.Y})");
+                    unsafe
+                    {
+                        var ress = NativeMethods.InvalidateRect(windowHandle, &rect, true);
+                    }
                     break;
             }
 

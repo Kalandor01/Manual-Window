@@ -481,6 +481,56 @@ namespace ManualWindow
 		/// </remarks>
 		[DllImport("user32.dll", EntryPoint = "GetClipboardFormatNameW", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern int GetClipboardFormatName(uint format, PWSTR lpszFormatName, int cchMaxCount);
+
+        /// <summary>Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message. (SendMessageW)</summary>
+        /// <param name="hWnd">
+        /// <para>Type: <b>HWND</b> A handle to the window whose window procedure will receive the message. If this parameter is <b>HWND_BROADCAST</b> ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows. Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal integrity level.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+        /// </param>
+        /// <param name="msg">
+        /// <para>Type: <b>UINT</b> The message to be sent. For lists of the system-provided messages, see <a href="https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues">System-Defined Messages</a>.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+        /// </param>
+        /// <param name="wParam">
+        /// <para>Type: <b>WPARAM</b> Additional message-specific information.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+        /// </param>
+        /// <param name="lParam">
+        /// <para>Type: <b>LPARAM</b> Additional message-specific information.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+        /// </param>
+        /// <returns>
+        /// <para>Type: <b>LRESULT</b> The return value specifies the result of the message processing; it depends on the message sent.</para>
+        /// </returns>
+        /// <remarks>
+        /// <para>When a message is blocked by UIPI the last error, retrieved with <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>, is set to 5 (access denied). Applications that need to communicate using <b>HWND_BROADCAST</b> should use the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-registerwindowmessagea">RegisterWindowMessage</a> function to obtain a unique message for inter-application communication. The system only does marshalling for system messages (those in the range 0 to (<a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-user">WM_USER</a>-1)). To send other messages (those &gt;= <b>WM_USER</b>) to another process, you must do custom marshalling. If the specified window was created by the calling thread, the window procedure is called immediately as a subroutine. If the specified window was created by a different thread, the system switches to that thread and calls the appropriate window procedure. Messages sent between threads are processed only when the receiving thread executes message retrieval code. The sending thread is blocked until the receiving thread processes the message. However, the sending thread will process incoming nonqueued messages while waiting for its message to be processed. To prevent this, use <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendmessagetimeouta">SendMessageTimeout</a> with SMTO_BLOCK set. For more information on nonqueued messages, see <a href="https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues">Nonqueued Messages</a>. An accessibility application can use <b>SendMessage</b> to send <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-appcommand">WM_APPCOMMAND</a> messages  to the shell to launch applications. This  functionality is not guaranteed to work for other types of applications.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#">Read more on docs.microsoft.com</see>.</para>
+        /// </remarks>
+        [DllImport("user32.dll", EntryPoint = "SendMessageW", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern nint SendMessage(WindowHandle hWnd, uint msg, nint wParam, nint lParam);
+
+        /// <summary>The InvalidateRect function adds a rectangle to the specified window's update region. The update region represents the portion of the window's client area that must be redrawn.</summary>
+        /// <param name="hWnd">A handle to the window whose update region has changed. If this parameter is <b>NULL</b>, the system invalidates and redraws all windows, not just the windows for this application, and sends the <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-erasebkgnd">WM_ERASEBKGND</a> and <a href="https://docs.microsoft.com/windows/desktop/gdi/wm-ncpaint">WM_NCPAINT</a> messages before the function returns. Setting this parameter to <b>NULL</b> is not recommended.</param>
+        /// <param name="lpRect">A pointer to a <a href="https://docs.microsoft.com/windows/desktop/api/windef/ns-windef-rect">RECT</a> structure that contains the client coordinates of the rectangle to be added to the update region. If this parameter is <b>NULL</b>, the entire client area is added to the update region.</param>
+        /// <param name="erase">Specifies whether the background within the update region is to be erased when the update region is processed. If this parameter is <b>TRUE</b>, the background is erased when the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-beginpaint">BeginPaint</a> function is called. If this parameter is <b>FALSE</b>, the background remains unchanged.</param>
+        /// <returns>
+        /// <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</para>
+        /// </returns>
+        /// <remarks>
+        /// <para>The invalidated areas accumulate in the update region until the region is processed when the next <a href="https://docs.microsoft.com/windows/desktop/gdi/wm-paint">WM_PAINT</a> message occurs or until the region is validated by using the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-validaterect">ValidateRect</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-validatergn">ValidateRgn</a> function. The system sends a <a href="https://docs.microsoft.com/windows/desktop/gdi/wm-paint">WM_PAINT</a> message to a window whenever its update region is not empty and there are no other messages in the application queue for that window. If the <i>bErase</i> parameter is <b>TRUE</b> for any part of the update region, the background is erased in the entire region, not just in the specified part.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-invalidaterect#">Read more on docs.microsoft.com</see>.</para>
+        /// </remarks>
+		[DllImport("user32.dll", EntryPoint = "InvalidateRect", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern unsafe bool InvalidateRect(WindowHandle hWnd, [Optional] Rectangle* lpRect, bool erase);
+
+		/// <inheritdoc cref="InvalidateRect(WindowHandle, Rectangle*, bool)"/>
+        internal static bool InvalidateRect(WindowHandle hWnd, bool erase)
+		{
+			unsafe
+			{
+                return InvalidateRect(hWnd, null, erase);
+            }
+		}
         #endregion
     }
 }
