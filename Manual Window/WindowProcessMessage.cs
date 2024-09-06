@@ -10,7 +10,13 @@
         /// return: 0
         /// </summary>
         ON_CREATE = 1,
-        WM_DESTROY = 2,
+        /// <summary>
+        /// WM_DESTROY<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        ON_BEING_DESTROYED = 2,
         /// <summary>
         /// WM_MOVE<br/>
         /// extra1: -<br/>
@@ -58,7 +64,13 @@
         /// return: 0
         /// </summary>
         PAINT_WINDOW_REQUEST = 15,
-        WM_CLOSE = 16,
+        /// <summary>
+        /// WM_CLOSE<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        SHOULD_TERMINATE = 16,
         WM_QUERYENDSESSION = 17,
         WM_QUIT = 18,
         WM_QUERYOPEN = 19,
@@ -158,7 +170,7 @@
         WM_USERCHANGED = 84,
         WM_NOTIFYFORMAT = 85,
         /// <summary>
-        /// WM_CONTEXTMENU <br/>
+        /// WM_CONTEXTMENU<br/>
         /// extra1: A handle to the window in which the user requested the context menu.<br/>
         /// extra2: The lower half is the x-coordinate, the upper half is the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area. If the values are -1, the event was not rased by right clicking with the mouse.<br/>
         /// return: 0
@@ -168,7 +180,7 @@
         WM_STYLECHANGED = 125,
         WM_DISPLAYCHANGE = 126,
         /// <summary>
-        /// WM_GETICON <br/>
+        /// WM_GETICON<br/>
         /// extra1: The type of the icon. The values map to the values of the WindowIconType enum.<br/>
         /// extra2: The DPI of the icon being retrieved.<br/>
         /// return: A handle to the large or small icon (HICON), depending on the value of extra1.
@@ -176,13 +188,19 @@
         GET_ICON = 127,
         WM_SETICON = 128,
         /// <summary>
-        /// WM_NCCREATE <br/>
+        /// WM_NCCREATE<br/>
         /// extra1: -<br/>
         /// extra2: A pointer to CREATESTRUCT struct: <see cref="https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-createstructa">[LINK]</see><br/>
         /// return: true to continue creation, false to abort.
         /// </summary>
         BEFORE_WINDOW_CREATED = 129,
-        WM_NCDESTROY = 130,
+        /// <summary>
+        /// WM_NCDESTROY<br/>
+        /// extra1: -<br/>
+        /// extra2: -<br/>
+        /// return: 0
+        /// </summary>
+        ON_NONCLIENT_BEING_DESTROYED = 130,
         /// <summary>
         /// WM_NCCALCSIZE<br/>
         /// extra1: If true, it specifies that the application should indicate which part of the client area contains valid information. The system copies the valid information to the specified area within the new client area.<br/>
@@ -355,16 +373,30 @@
         BM_SETIMAGE = 247,
         BM_SETDONTCLICK = 248,
         WM_INPUT = 255,
-        WM_KEYDOWN = 256,
-        WM_KEYFIRST = 256,
-        WM_KEYUP = 257,
+        // symbolic constant
+        //WM_KEYFIRST = 256,
+        /// <summary>
+        /// WM_KEYDOWN<br/>
+        /// extra1: A value from the VirtualKeyCode enum.<br/>
+        /// extra2: The repeat count, scan code, extended-key flag, context code, previous key-state flag, and transition-state flag.<br/>
+        /// return: 0
+        /// </summary>
+        KEY_DOWN = 256,
+        /// <summary>
+        /// WM_KEYUP<br/>
+        /// extra1: A value from the VirtualKeyCode enum.<br/>
+        /// extra2: The repeat count, scan code, extended-key flag, context code, previous key-state flag, and transition-state flag.<br/>
+        /// return: 0
+        /// </summary>
+        KEY_UP = 257,
         WM_CHAR = 258,
         WM_DEADCHAR = 259,
         WM_SYSKEYDOWN = 260,
         WM_SYSKEYUP = 261,
         WM_SYSCHAR = 262,
         WM_SYSDEADCHAR = 263,
-        WM_KEYLAST = 264,
+        // symbolic constant
+        //WM_KEYLAST = 264,
         WM_UNICHAR_OR_WM_KEYLAST = 265,
         WM_WNT_CONVERTREQUESTEX = 265,
         WM_CONVERTREQUEST = 266,

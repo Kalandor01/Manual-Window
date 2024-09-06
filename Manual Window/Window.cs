@@ -56,6 +56,46 @@ namespace ManualWindow
             return (ushort)(param >> 16);
         }
 
+        public static bool GetBit(nint num, int bitNumber)
+        {
+            return (num & (1 << bitNumber)) != 0;
+        }
+
+        public static void GetKeystrokeMessageFlags(
+            nint param,
+            out short repeatCount,
+            out byte scanCode,
+            out bool isExtendedKey,
+            out bool[] reserved,
+            out bool contextCode,
+            out bool isPreviouslyDown,
+            out bool transitionState
+        )
+        {
+            repeatCount = (short)param;
+            scanCode = (byte)(param >> 16);
+            isExtendedKey = GetBit(param, 24);
+            reserved = [GetBit(param, 25), GetBit(param, 26), GetBit(param, 27), GetBit(param, 28)];
+            contextCode = GetBit(param, 29);
+            isPreviouslyDown = GetBit(param, 30);
+            transitionState = GetBit(param, 31);
+        }
+
+        public static string GetKeystrokeMessageFlagsStr(nint param)
+        {
+            GetKeystrokeMessageFlags(
+                param,
+                out var repeatCount,
+                out var scanCode,
+                out var isExtendedKey,
+                out var reserved,
+                out var contextCode,
+                out var isPreviouslyDown,
+                out var transitionState
+            );
+            return $"repeat count: {repeatCount}, scan code: {scanCode}, extended key: {isExtendedKey}, reserved bits: {string.Join("", reserved.Select(b => b ? 1 : 0))}, context code: {(contextCode ? 1 : 0)}, previously down: {isPreviouslyDown}, transition state: {(transitionState ? 1 : 0)}";
+        }
+
         /// <summary>
         /// Returns a string representation of the message.
         /// </summary>
@@ -91,7 +131,10 @@ namespace ManualWindow
                 WindowProcessMessage.SYNC_WINDOW_PAINT or
                 WindowProcessMessage.MOUSE_LEAVE_NONCLIENT_AREA or
                 WindowProcessMessage.ENTER_SIZING_OR_MOVING_MODE or
-                WindowProcessMessage.EXIT_SIZING_OR_MOVING_MODE
+                WindowProcessMessage.EXIT_SIZING_OR_MOVING_MODE or
+                WindowProcessMessage.SHOULD_TERMINATE or
+                WindowProcessMessage.ON_BEING_DESTROYED or
+                WindowProcessMessage.ON_NONCLIENT_BEING_DESTROYED
                     => null,
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => $"MINMAXINFO pointer: {messageExtra2}",
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => $"CREATESTRUCT pointer: {messageExtra2}",
@@ -157,6 +200,8 @@ namespace ManualWindow
                 WindowProcessMessage.MOUSE_CAPTURE_LOST => $"capture gainet window handle: {messageExtra2}",
                 WindowProcessMessage.WINDOW_MOVING => $"current position RECT pointer: {messageExtra2}",
                 WindowProcessMessage.WINDOW_SIZING => $"sized edge: {(WindowSizingEdge)messageExtra1}, current position RECT pointer: {messageExtra2}",
+                WindowProcessMessage.KEY_DOWN => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
+                WindowProcessMessage.KEY_UP => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
                 _ => "[UNREGISTERED MESSAGE]",
             };
 
@@ -248,7 +293,12 @@ namespace ManualWindow
                 WindowProcessMessage.WINDOW_MENU_COMMAND or
                 WindowProcessMessage.MOUSE_CAPTURE_LOST or
                 WindowProcessMessage.ENTER_SIZING_OR_MOVING_MODE or
-                WindowProcessMessage.EXIT_SIZING_OR_MOVING_MODE
+                WindowProcessMessage.EXIT_SIZING_OR_MOVING_MODE or
+                WindowProcessMessage.SHOULD_TERMINATE or
+                WindowProcessMessage.ON_BEING_DESTROYED or
+                WindowProcessMessage.ON_NONCLIENT_BEING_DESTROYED or
+                WindowProcessMessage.KEY_DOWN or
+                WindowProcessMessage.KEY_UP
                     => nint.Zero,
                 WindowProcessMessage.X_BUTTON_DOWN or
                 WindowProcessMessage.X_BUTTON_UP or
@@ -315,7 +365,7 @@ namespace ManualWindow
                 cbWndExtra = 0,
                 hInstance = Marshal.GetHINSTANCE(GetType().Module), // alternative: Process.GetCurrentProcess().Handle
                 hIcon = IconHandle.Null,
-                hCursor = NativeMethods.LoadCursor(nint.Zero, (int)IDC_CROSS), // Crosshair cursor
+                hCursor = NativeMethods.LoadCursor(CursorImage.CROSS),
                 hbrBackground = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_BACKGROUND + 1),
                 lpszMenuName = null,
                 lpszClassName = "myClass",
@@ -368,6 +418,7 @@ namespace ManualWindow
                     continue;
                 }
 
+                // invalid window handle on close
                 if (res == -1)
                 {
                     ThrowLastSystemError();

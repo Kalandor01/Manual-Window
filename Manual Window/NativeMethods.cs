@@ -217,7 +217,7 @@ namespace ManualWindow
 		/// <para>Type: <b>HINSTANCE</b> A handle to an instance of the module whose executable file contains the cursor to be loaded.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw#parameters">Read more on docs.microsoft.com</see>.</para>
 		/// </param>
-		/// <param name="lpCursorName">
+		/// <param name="cursor">
 		/// <para>Type: <b>LPCTSTR</b> The name of the cursor resource to be loaded. Alternatively, this parameter can consist of the resource identifier in the low-order word and zero in the high-order word. The <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-makeintresourcea">MAKEINTRESOURCE</a> macro can also be used to create this value. To use one of the predefined cursors, the application must set the <i>hInstance</i> parameter to <b>NULL</b> and the <i>lpCursorName</i> parameter to one the following values. </para>
 		/// <para>This doc was truncated.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw#parameters">Read more on docs.microsoft.com</see>.</para>
@@ -230,7 +230,13 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll", EntryPoint = "LoadCursorW", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern nint LoadCursor(nint hInstance, int lpCursorName);
+        private static extern nint LoadCursor(nint hInstance, int cursor);
+
+		/// <inheritdoc cref="LoadCursor(nint, int)"/>
+        internal static nint LoadCursor(CursorImage cursor)
+		{
+			return LoadCursor(IntPtr.Zero, (int)cursor);
+		}
 
         /// <summary>The BeginPaint function prepares the specified window for painting and fills a PAINTSTRUCT structure with information about the painting.</summary>
 		/// <param name="hWnd">Handle to the window to be repainted.</param>
