@@ -4,23 +4,23 @@ using System.Runtime.InteropServices;
 namespace ManualWindow.NativeMethodStructs
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct PointS
+    public struct Point
     {
-        public short x;
-        public short y;
+        public int x;
+        public int y;
 
-        public PointS(nint pointer)
+        public Point(nint pointer)
         {
-            var ps = new PointS();
+            var ps = new Point();
             unsafe
             {
-                ps = *(PointS*)&pointer;
+                ps = *(Point*)&pointer;
             }
             x = ps.x;
             y = ps.y;
         }
 
-        public PointS(short x, short y)
+        public Point(int x, int y)
         {
             this.x = x;
             this.y = y;
@@ -33,7 +33,7 @@ namespace ManualWindow.NativeMethodStructs
 
         public override readonly bool Equals([NotNullWhen(true)] object? obj)
         {
-            if (obj == null || obj is not PointS p)
+            if (obj == null || obj is not Point p)
             {
                 return false;
             }
@@ -45,12 +45,12 @@ namespace ManualWindow.NativeMethodStructs
             return HashCode.Combine(x, y);
         }
 
-        public static bool operator ==(PointS left, PointS right)
+        public static bool operator ==(Point left, Point right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(PointS left, PointS right)
+        public static bool operator !=(Point left, Point right)
         {
             return !(left == right);
         }

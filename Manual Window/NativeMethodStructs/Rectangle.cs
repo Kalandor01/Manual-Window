@@ -31,6 +31,12 @@ namespace ManualWindow.NativeMethodStructs
             this.bottom = bottom;
         }
 
+        public Rectangle(Point topLeft, Point bottomRight)
+            :this(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y)
+        {
+
+        }
+
         public int Width
         {
             get
@@ -65,7 +71,6 @@ namespace ManualWindow.NativeMethodStructs
 
         public override string ToString()
         {
-            //return $"pos: ({right}, {bottom}), size: ({Width}, {Height})";
             return $"t: {top}, l: {left}, r: {right}, b: {bottom}";
         }
     }

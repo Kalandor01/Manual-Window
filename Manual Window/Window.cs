@@ -1,8 +1,8 @@
 ﻿using ManualWindow.NativeMethodEnums;
 using ManualWindow.NativeMethodStructs;
+using ManualWindow.WindowEventArgs;
 using ManualWindow.WindowMessageEnums;
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using Windows.Win32.Graphics.Gdi;
 
@@ -20,6 +20,58 @@ namespace ManualWindow
 
         #region Private fields
         private WindowHandle _windowHandle;
+        private WndProc _windowProcDelegate;
+        #endregion
+
+        #region Event delegates
+        /// <summary>
+        /// Called when a window paint request is sent.
+        /// </summary>
+        /// <param name="sender">The window that called this event.</param>
+        public delegate void PaintRequestEventHandler(Window sender, PaintRequestEventArgs args);
+
+        /// <summary>
+        /// Called when the left mouse button is down.
+        /// </summary>
+        /// <param name="sender">The window that called this event.</param>
+        /// <param name="args">The arguments for this event.</param>
+        public delegate void MouseLeftButtonDownEventHandler(Window sender, MouseLeftButtonDownEventArgs args);
+
+        /// <summary>
+        /// Called when the left mouse button is released.
+        /// </summary>
+        /// <param name="sender">The window that called this event.</param>
+        /// <param name="args">The arguments for this event.</param>
+        public delegate void MouseLeftButtonUpEventHandler(Window sender, MouseLeftButtonUpEventArgs args);
+
+        /// <summary>
+        /// Called when a key is being pressed.
+        /// </summary>
+        /// <param name="sender">The window that called this event.</param>
+        /// <param name="args">The arguments for this event.</param>
+        public delegate void KeyDownEventHandler(Window sender, KeyDownEventArgs args);
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Called when a window paint request is sent.<br/>
+        /// </summary>
+        public event PaintRequestEventHandler PaintRequest;
+
+        /// <summary>
+        /// Called when the left mouse button is down.
+        /// </summary>
+        public event MouseLeftButtonDownEventHandler MouseLeftButtonDown;
+
+        /// <summary>
+        /// Called when the left mouse button is released.
+        /// </summary>
+        public event MouseLeftButtonUpEventHandler MouseLeftButtonUp;
+
+        /// <summary>
+        /// Called when a key is being pressed.<br/>
+        /// </summary>
+        public event KeyDownEventHandler KeyDown;
         #endregion
 
         #region Constructors
@@ -30,60 +82,15 @@ namespace ManualWindow
         #endregion
 
         #region Public fnctions
-        /// <summary>
-        /// Utility function for getting screen position from <paramref name="lParam"/>.
-        /// </summary>
-        /// <param name="lParam"></param>
-        /// <returns></returns>
-        public static Point PointFromLParam(nint lParam)
-        {
-            return new Point((int)lParam & 0xFFFF, ((int)lParam >> 16) & 0xFFFF);
-        }
-
         public static CursorPosWindowPart GetWindowPartFromPos(nint lparam)
         {
-            var pos = PointFromLParam(lparam);
+            var pos = Tools.PointFromLParam(lparam);
             return CursorPosWindowPart.CLIENT;
-        }
-
-        public static ushort GetLowerHalf(nint param)
-        {
-            return (ushort)param;
-        }
-
-        public static ushort GetUpperHalf(nint param)
-        {
-            return (ushort)(param >> 16);
-        }
-
-        public static bool GetBit(nint num, int bitNumber)
-        {
-            return (num & (1 << bitNumber)) != 0;
-        }
-
-        public static void GetKeystrokeMessageFlags(
-            nint param,
-            out short repeatCount,
-            out byte scanCode,
-            out bool isExtendedKey,
-            out bool[] reserved,
-            out bool contextCode,
-            out bool isPreviouslyDown,
-            out bool transitionState
-        )
-        {
-            repeatCount = (short)param;
-            scanCode = (byte)(param >> 16);
-            isExtendedKey = GetBit(param, 24);
-            reserved = [GetBit(param, 25), GetBit(param, 26), GetBit(param, 27), GetBit(param, 28)];
-            contextCode = GetBit(param, 29);
-            isPreviouslyDown = GetBit(param, 30);
-            transitionState = GetBit(param, 31);
         }
 
         public static string GetKeystrokeMessageFlagsStr(nint param)
         {
-            GetKeystrokeMessageFlags(
+            Tools.GetKeystrokeMessageFlags(
                 param,
                 out var repeatCount,
                 out var scanCode,
@@ -114,7 +121,7 @@ namespace ManualWindow
         {
             string ContextMenuRequestExtraPart()
             {
-                var pos = new Points((short)GetLowerHalf(messageExtra2), (short)GetUpperHalf(messageExtra2));
+                var pos = new Point((short)Tools.GetLowerHalf(messageExtra2), (short)Tools.GetUpperHalf(messageExtra2));
                 return pos.x == -1 && pos.x == -1 ? "[NOT RIGHT CLICK TRIGGERED]" : pos.ToString();
             }
 
@@ -138,13 +145,18 @@ namespace ManualWindow
                     => null,
                 WindowProcessMessage.BEFORE_SIZE_OR_POSITION_CHANGE => $"MINMAXINFO pointer: {messageExtra2}",
                 WindowProcessMessage.BEFORE_WINDOW_CREATED => $"CREATESTRUCT pointer: {messageExtra2}",
-                WindowProcessMessage.CALCULATE_SIZE_AND_POSITION => $"{(messageExtra1 == 1 ? "NCCALCSIZE_PARAMS" : "RECT")} pointer: {messageExtra2}{(messageExtra1 == 0 ? "" : " The application should indicate which part of the client area contains valid information.")}",
+                WindowProcessMessage.CALCULATE_SIZE_AND_POSITION
+                    => $"{(messageExtra1 == 1 ? "NCCALCSIZE_PARAMS" : "RECT")} pointer: {messageExtra2}{(messageExtra1 == 0 ? "" : " The application should indicate which part of the client area contains valid information.")}",
                 WindowProcessMessage.ON_CREATE => $"CREATESTRUCT pointer: {messageExtra2}",
-                WindowProcessMessage.WINDOW_SHOWN_OR_HIDE => $"window {(messageExtra1 == 1 ? "shown" : "hidden")}, reson: {(WindowShowHideReason)messageExtra2}",
+                WindowProcessMessage.WINDOW_SHOWN_OR_HIDE
+                    => $"window {(messageExtra1 == 1 ? "shown" : "hidden")}, reson: {(WindowShowHideReason)messageExtra2}",
                 WindowProcessMessage.BEFORE_WINDOW_POS_CHANGE => $"the WINDOWPOS object: {new WindowPos(messageExtra2)}",
-                WindowProcessMessage.BEFORE_ACTIVATE_DEACTIVATE => $"window {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
-                WindowProcessMessage.NONCLIENT_ACTIVATE_DEACTIVEATE => $"title bar/icon {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
-                WindowProcessMessage.ACTIVATE_DEACTIVEATE => $"(de)activation method: {(WindowActivatedLowerHalf)GetLowerHalf(messageExtra1)}, window {(GetUpperHalf(messageExtra1) == 0 ? "not" : "")} minimized, pointer to {((WindowActivatedLowerHalf)GetLowerHalf(messageExtra1) == WindowActivatedLowerHalf.DEACTIVATED ? "" : "de")}activating window: {messageExtra2}",
+                WindowProcessMessage.BEFORE_ACTIVATE_DEACTIVATE
+                    => $"window {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
+                WindowProcessMessage.NONCLIENT_ACTIVATE_DEACTIVEATE
+                    => $"title bar/icon {(messageExtra1 == 1 ? "activated" : "deactivated")}, other window's owner thread ID: {messageExtra2}",
+                WindowProcessMessage.ACTIVATE_DEACTIVEATE
+                    => $"(de)activation method: {(WindowActivatedLowerHalf)Tools.GetLowerHalf(messageExtra1)}, window {(Tools.GetUpperHalf(messageExtra1) == 0 ? "not" : "")} minimized, pointer to {((WindowActivatedLowerHalf)Tools.GetLowerHalf(messageExtra1) == WindowActivatedLowerHalf.DEACTIVATED ? "" : "de")}activating window: {messageExtra2}",
                 WindowProcessMessage.GET_ICON => $"icon type: {(WindowIconType)messageExtra1}, icon DPI: {messageExtra2}",
                 WindowProcessMessage.IME_ACTIVATE_DEACTIVATE => $"window {(messageExtra1 == 1 ? "" : "in")}active, display options: [{
                     string.Join(", ",
@@ -161,12 +173,15 @@ namespace ManualWindow
                 WindowProcessMessage.BACKGROUND_ERASE_NEEDED => $"device context handle: {messageExtra1}",
                 WindowProcessMessage.WINDOW_POS_CHANGED => $"the WINDOWPOS(pointer: {messageExtra2}) object: {new WindowPos(messageExtra2)}",
                 WindowProcessMessage.CLIPBOARD_SIZE_CHANGED => $"clipboard viewer window hadle: {messageExtra1}, RECT pointer: {messageExtra2}",
-                WindowProcessMessage.WINDOW_SIZE_CHANGED => $"resize type: {(WindowResizeType)messageExtra1}, new size: [width: {GetLowerHalf(messageExtra2)}, height: {GetUpperHalf(messageExtra2)}]",
-                WindowProcessMessage.WINDOW_MOVED => $"new position: [x: {GetLowerHalf(messageExtra2)}, y: {GetUpperHalf(messageExtra2)}]",
-                WindowProcessMessage.NONCLIENT_AREA_RENDERING_POLICY_CHANGED => $"DWM rendering for the non-client area of the window: {(messageExtra1 == 1 ? "enabled" : "disabled")}",
+                WindowProcessMessage.WINDOW_SIZE_CHANGED
+                    => $"resize type: {(WindowResizeType)messageExtra1}, new size: [width: {Tools.GetLowerHalf(messageExtra2)}, height: {Tools.GetUpperHalf(messageExtra2)}]",
+                WindowProcessMessage.WINDOW_MOVED => $"new position: [x: {Tools.GetLowerHalf(messageExtra2)}, y: {Tools.GetUpperHalf(messageExtra2)}]",
+                WindowProcessMessage.NONCLIENT_AREA_RENDERING_POLICY_CHANGED
+                    => $"DWM rendering for the non-client area of the window: {(messageExtra1 == 1 ? "enabled" : "disabled")}",
                 WindowProcessMessage.BEFORE_KEYBOARD_FOCUS_LOST => $"keyboard focus gained window handle: {messageExtra1}",
-                WindowProcessMessage.SCREEN_POS_TO_WINDOW_PART => $"cursor pos: {PointFromLParam(messageExtra2)}",
-                WindowProcessMessage.CURSOR_MOVE => $"cursor window handle: {messageExtra1}, part hit: {(CursorPosWindowPart)GetLowerHalf(messageExtra2)}, event trigger: {(WindowProcessMessage)GetUpperHalf(messageExtra2)}",
+                WindowProcessMessage.SCREEN_POS_TO_WINDOW_PART => $"cursor pos: {Tools.PointFromLParam(messageExtra2)}",
+                WindowProcessMessage.CURSOR_MOVE
+                    => $"cursor window handle: {messageExtra1}, part hit: {(CursorPosWindowPart)Tools.GetLowerHalf(messageExtra2)}, event trigger: {(WindowProcessMessage)Tools.GetUpperHalf(messageExtra2)}",
                 WindowProcessMessage.NONCLIENT_MOUSE_MOVE or
                 WindowProcessMessage.NONCLIENT_LEFT_BUTTON_DOWN or
                 WindowProcessMessage.NONCLIENT_LEFT_BUTTON_UP or
@@ -177,7 +192,7 @@ namespace ManualWindow
                 WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOWN or
                 WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_UP or
                 WindowProcessMessage.NONCLIENT_MIDDLE_BUTTON_DOUBLE_CLICK
-                    => $"part hit: {(CursorPosWindowPart)messageExtra1}, cursor pos: {new Points(messageExtra2)}",
+                    => $"part hit: {(CursorPosWindowPart)messageExtra1}, cursor pos: {new Point(messageExtra2)}",
                 WindowProcessMessage.MOUSE_MOVE or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_DOWN or
                 WindowProcessMessage.MOUSE_LEFT_BUTTON_UP or
@@ -188,20 +203,28 @@ namespace ManualWindow
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOWN or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_UP or
                 WindowProcessMessage.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK
-                     => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys((int)messageExtra1))}], cursor pos: {PointFromLParam(messageExtra2)}",
-                WindowProcessMessage.MOUSE_KEY_PRESSED_IN_INACTIVE_WINDOW => $"activated top level window handle {messageExtra1}, part hit: {(CursorPosWindowPart)GetLowerHalf(messageExtra2)}, mouse message ID: {(WindowProcessMessage)GetUpperHalf(messageExtra2)}",
-                WindowProcessMessage.CONTEXT_MENU_REQUESTED => $"menu requested window handle: {messageExtra1}, trigger location: {ContextMenuRequestExtraPart()}",
-                WindowProcessMessage.MOUSE_WHEEL_SCROLL => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(GetLowerHalf(messageExtra1)))}], distance rotated: {(short)GetUpperHalf(messageExtra1)}, cursor pos: {PointFromLParam(messageExtra2)}",
+                    => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys((int)messageExtra1))}], cursor pos: {Tools.PointFromLParam(messageExtra2)}",
+                //=> "",
+                WindowProcessMessage.MOUSE_KEY_PRESSED_IN_INACTIVE_WINDOW
+                    => $"activated top level window handle {messageExtra1}, part hit: {(CursorPosWindowPart)Tools.GetLowerHalf(messageExtra2)}, mouse message ID: {(WindowProcessMessage)Tools.GetUpperHalf(messageExtra2)}",
+                WindowProcessMessage.CONTEXT_MENU_REQUESTED
+                    => $"menu requested window handle: {messageExtra1}, trigger location: {ContextMenuRequestExtraPart()}",
+                WindowProcessMessage.MOUSE_WHEEL_SCROLL
+                    => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(Tools.GetLowerHalf(messageExtra1)))}], distance rotated: {(short)Tools.GetUpperHalf(messageExtra1)}, cursor pos: {Tools.PointFromLParam(messageExtra2)}",
                 WindowProcessMessage.X_BUTTON_DOWN or
                 WindowProcessMessage.X_BUTTON_UP or
                 WindowProcessMessage.X_BUTTON_DOUBLE_CLICK
-                    => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(GetLowerHalf(messageExtra1)))}], X button {GetUpperHalf(messageExtra1)} triggered this event, cursor pos: {PointFromLParam(messageExtra2)}",
-                WindowProcessMessage.WINDOW_MENU_COMMAND => $"command: {(SystemCommand)messageExtra1}, cursor pos: {PointFromLParam(messageExtra2)}",
+                    => $"buttons pressed: [{string.Join(", ", GetPressedVirtualKeys(Tools.GetLowerHalf(messageExtra1)))}], X button {Tools.GetUpperHalf(messageExtra1)} triggered this event, cursor pos: {Tools.PointFromLParam(messageExtra2)}",
+                WindowProcessMessage.WINDOW_MENU_COMMAND
+                    => $"command: {(SystemCommand)messageExtra1}, cursor pos: {Tools.PointFromLParam(messageExtra2)}",
                 WindowProcessMessage.MOUSE_CAPTURE_LOST => $"capture gainet window handle: {messageExtra2}",
                 WindowProcessMessage.WINDOW_MOVING => $"current position RECT pointer: {messageExtra2}",
-                WindowProcessMessage.WINDOW_SIZING => $"sized edge: {(WindowSizingEdge)messageExtra1}, current position RECT pointer: {messageExtra2}",
-                WindowProcessMessage.KEY_DOWN => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
-                WindowProcessMessage.KEY_UP => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
+                WindowProcessMessage.WINDOW_SIZING
+                    => $"sized edge: {(WindowSizingEdge)messageExtra1}, current position RECT pointer: {messageExtra2}",
+                WindowProcessMessage.KEY_DOWN
+                    => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
+                WindowProcessMessage.KEY_UP
+                    => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
                 _ => "[UNREGISTERED MESSAGE]",
             };
 
@@ -225,22 +248,6 @@ namespace ManualWindow
         }
         #endregion
 
-        private int bgColorIndex = 0;
-        private SysColorIndex bgColor = SysColorIndex.COLOR_SCROLLBAR;
-        private Point pos1;
-
-        private void CycleBgColor()
-        {
-            var bgs = Enum.GetValues<SysColorIndex>();
-            bgColorIndex++;
-            if (bgColorIndex >= bgs.Length)
-            {
-                bgColorIndex = 0;
-            }
-            bgColor = bgs[bgColorIndex];
-            Console.WriteLine($"Color change: {bgColor}");
-        }
-
         #region Public methods
         /// <summary>
         /// Processes the window message.
@@ -255,35 +262,23 @@ namespace ManualWindow
             switch (message)
             {
                 case WindowProcessMessage.PAINT_WINDOW_REQUEST:
-                    var hdc = NativeMethods.BeginPaint(windowHandle, out var ps);
+                    var hdc = NativeMethods.BeginPaint(windowHandle, out var paint);
                     if (hdc == nint.Zero)
                     {
                         ThrowLastSystemError();
                     }
-                    var brush = NativeMethods.GetSysColorBrush(bgColor);
-                    var res = NativeMethods.FillRect(new HDC(hdc), ps.rcPaint, brush);
-                    var suc = NativeMethods.EndPaint(windowHandle, ps);
+
+                    PaintRequest(this, new PaintRequestEventArgs(hdc, paint));
+                    var suc = NativeMethods.EndPaint(windowHandle, paint);
                     break;
                 case WindowProcessMessage.KEY_DOWN:
-                    var key = (VirtualKeyCode)messageExtra1;
-                    if (key == VirtualKeyCode.I)
-                    {
-                        CycleBgColor();
-                        var ress = NativeMethods.InvalidateRect(windowHandle, true);
-                    }
+                    KeyDown(this, new KeyDownEventArgs(messageExtra1, messageExtra2));
                     break;
                 case WindowProcessMessage.MOUSE_LEFT_BUTTON_DOWN:
-                    pos1 = PointFromLParam(messageExtra2);
+                    MouseLeftButtonDown(this, new MouseLeftButtonDownEventArgs(messageExtra1, messageExtra2));
                     break;
                 case WindowProcessMessage.MOUSE_LEFT_BUTTON_UP:
-                    CycleBgColor();
-                    var pos2 = PointFromLParam(messageExtra2);
-                    var rect = new NativeMethodStructs.Rectangle(pos1.X, pos1.Y, pos2.X, pos2.Y);
-                    Console.WriteLine($"Recolored: ({pos1.X}, {pos1.Y}, {pos2.X}, {pos2.Y})");
-                    unsafe
-                    {
-                        var ress = NativeMethods.InvalidateRect(windowHandle, &rect, true);
-                    }
+                    MouseLeftButtonUp(this, new MouseLeftButtonUpEventArgs(messageExtra1, messageExtra2));
                     break;
             }
 
@@ -393,11 +388,12 @@ namespace ManualWindow
 
         public bool RegisterWindow()
         {
+            _windowProcDelegate = new WndProc(WindowProc);
             var windowClass = new WindowClass
             {
                 cbSize = (uint)Marshal.SizeOf(typeof(WindowClass)),
                 style = WindowClassStyle.HREDRAW | WindowClassStyle.VREDRAW | WindowClassStyle.DBLCLKS,
-                lpfnWndProc = new WndProc(WindowProc),
+                lpfnWndProc = _windowProcDelegate,
                 cbClsExtra = 0,
                 cbWndExtra = 0,
                 hInstance = Marshal.GetHINSTANCE(GetType().Module), // alternative: Process.GetCurrentProcess().Handle
@@ -467,6 +463,19 @@ namespace ManualWindow
             }
             while (res != 0);
             return true;
+        }
+
+        public bool RepaintWindow(bool eraseBackground)
+        {
+            return NativeMethods.InvalidateRect(_windowHandle, eraseBackground);
+        }
+
+        public bool RepaintWindowArea(Rectangle repaintArea, bool eraseBackground)
+        {
+            unsafe
+            {
+                return NativeMethods.InvalidateRect(_windowHandle, &repaintArea, eraseBackground);
+            }
         }
         #endregion
     }

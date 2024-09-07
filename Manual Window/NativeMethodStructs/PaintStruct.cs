@@ -3,12 +3,12 @@
 namespace ManualWindow.NativeMethodStructs
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    internal struct PaintStruct
+    public struct PaintStruct
     {
         /// <summary>
         /// A handle to the device context.
         /// </summary>
-        public Windows.Win32.Graphics.Gdi.HDC hdc;
+        public DeviceContextHandle deviceContextHandle;
         public bool fErase;
         /// <summary>
         /// A handle to the rectangle that needs to be painted.

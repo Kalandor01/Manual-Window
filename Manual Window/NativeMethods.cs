@@ -249,7 +249,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-beginpaint#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern nint BeginPaint(WindowHandle hWnd, out PaintStruct lpPaint);
+        internal static extern DeviceContextHandle BeginPaint(WindowHandle hWnd, out PaintStruct lpPaint);
 
         /// <summary>The BeginPaint function prepares the specified window for painting and fills a PAINTSTRUCT structure with information about the painting.</summary>
 		/// <param name="hWnd">Handle to the window to be repainted.</param>
@@ -265,7 +265,7 @@ namespace ManualWindow
         internal static extern bool EndPaint(WindowHandle hWnd, in PaintStruct lpPaint);
 
         /// <summary>The FillRect function fills a rectangle by using the specified brush. This function includes the left and top borders, but excludes the right and bottom borders of the rectangle.</summary>
-		/// <param name="hDC">A handle to the device context.</param>
+		/// <param name="deviceContextHandle">A handle to the device context.</param>
 		/// <param name="lprc">A pointer to a <a href="https://docs.microsoft.com/windows/desktop/api/windef/ns-windef-rect">RECT</a> structure that contains the logical coordinates of the rectangle to be filled.</param>
 		/// <param name="hbr">A handle to the brush used to fill the rectangle.</param>
 		/// <returns>
@@ -278,7 +278,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-fillrect#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int FillRect([In] HDC hDC, [In] Rectangle lprc, [In] HBRUSH hbr);
+        internal static extern int FillRect([In] DeviceContextHandle deviceContextHandle, [In] Rectangle lprc, [In] HBRUSH hbr);
 
         /// <summary>Retrieves the current color of the specified display element.</summary>
 		/// <param name="index">Type: <b>int</b></param>
