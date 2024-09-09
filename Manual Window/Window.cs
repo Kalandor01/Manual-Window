@@ -4,7 +4,6 @@ using ManualWindow.WindowEventArgs;
 using ManualWindow.WindowMessageEnums;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using Windows.Win32.Graphics.Gdi;
 
 namespace ManualWindow
 {
@@ -269,6 +268,7 @@ namespace ManualWindow
                     }
 
                     PaintRequest(this, new PaintRequestEventArgs(hdc, paint));
+
                     var suc = NativeMethods.EndPaint(windowHandle, paint);
                     break;
                 case WindowProcessMessage.KEY_DOWN:

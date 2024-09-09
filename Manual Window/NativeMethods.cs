@@ -19,21 +19,24 @@ namespace ManualWindow
         internal static extern uint GetLastError();
 
         /// <summary>Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked. (MessageBoxW)</summary>
-		/// <param name="hWnd">
+		/// <param name="windowHandle">
 		/// <para>Type: <b>HWND</b> A handle to the owner window of the message box to be created. If this parameter is <b>NULL</b>, the message box has no owner window.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw#parameters">Read more on docs.microsoft.com</see>.</para>
 		/// </param>
-		/// <param name="lpText">
+		/// <param name="text">
 		/// <para>Type: <b>LPCTSTR</b> The message to be displayed. If the string consists of more than one line, you can separate the lines using a carriage return and/or linefeed character between each line.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw#parameters">Read more on docs.microsoft.com</see>.</para>
 		/// </param>
-		/// <param name="lpCaption">
+		/// <param name="caption">
 		/// <para>Type: <b>LPCTSTR</b> The dialog box title. If this parameter is <b>NULL</b>, the default title is <b>Error</b>.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw#parameters">Read more on docs.microsoft.com</see>.</para>
 		/// </param>
-		/// <param name="uType">
+		/// <param name="type">
 		/// <para>Type: <b>UINT</b> The contents and behavior of the dialog box. This parameter can be a combination of flags from the following groups of flags.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw#parameters">Read more on docs.microsoft.com</see>.</para>
+		/// </param>
+		/// <param name="languageId">
+		/// The language for the text displayed in the message box button(s). Specifying a value of zero (0) indicates to display the button text in the default system language. If this parameter is MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), the current language associated with the calling thread is used.
 		/// </param>
 		/// <returns>
 		/// <para>Type: <b>int</b> If a message box has a <b>Cancel</b> button, the function returns the <b>IDCANCEL</b> value if either the ESC key is pressed or the <b>Cancel</b> button is selected. If the message box has no <b>Cancel</b> button, pressing ESC will no effect - unless an MB_OK button is present. If an MB_OK button is displayed and the user presses ESC, the return value will be <b>IDOK</b>. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>. If the function succeeds, the return value is one of the following menu-item values. </para>
@@ -44,8 +47,14 @@ namespace ManualWindow
 		/// <para>This doc was truncated.</para>
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
-        [DllImport("user32.dll", EntryPoint = "MessageBox", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern MessageBoxResult MessageBox(WindowHandle hWnd, string lpText, string lpCaption, MessageBoxStyle uType);
+        [DllImport("user32.dll", EntryPoint = "MessageBoxExW", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern MessageBoxResult MessageBox(WindowHandle windowHandle, string text, string caption, MessageBoxStyle type, ushort languageId = 0);
+
+		/// <inheritdoc cref="MessageBox(WindowHandle, string, string, MessageBoxStyle, ushort)"/>
+		internal static MessageBoxResult MessageBox(string text, string caption, MessageBoxStyle type, ushort languageId = 0)
+		{
+			return MessageBox(new WindowHandle(0), text, caption, type, languageId);
+		}
 
         /// <summary>The UpdateWindow function updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty.</summary>
 		/// <param name="hWnd">Handle to the window to be updated.</param>
@@ -510,8 +519,8 @@ namespace ManualWindow
         internal static extern nint SendMessage(WindowHandle hWnd, uint msg, nint wParam, nint lParam);
 
         /// <summary>The InvalidateRect function adds a rectangle to the specified window's update region. The update region represents the portion of the window's client area that must be redrawn.</summary>
-        /// <param name="hWnd">A handle to the window whose update region has changed. If this parameter is <b>NULL</b>, the system invalidates and redraws all windows, not just the windows for this application, and sends the <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-erasebkgnd">WM_ERASEBKGND</a> and <a href="https://docs.microsoft.com/windows/desktop/gdi/wm-ncpaint">WM_NCPAINT</a> messages before the function returns. Setting this parameter to <b>NULL</b> is not recommended.</param>
-        /// <param name="lpRect">A pointer to a <a href="https://docs.microsoft.com/windows/desktop/api/windef/ns-windef-rect">RECT</a> structure that contains the client coordinates of the rectangle to be added to the update region. If this parameter is <b>NULL</b>, the entire client area is added to the update region.</param>
+        /// <param name="windowHandle">A handle to the window whose update region has changed. If this parameter is <b>NULL</b>, the system invalidates and redraws all windows, not just the windows for this application, and sends the <a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-erasebkgnd">WM_ERASEBKGND</a> and <a href="https://docs.microsoft.com/windows/desktop/gdi/wm-ncpaint">WM_NCPAINT</a> messages before the function returns. Setting this parameter to <b>NULL</b> is not recommended.</param>
+        /// <param name="rectanglePointer">A pointer to a <a href="https://docs.microsoft.com/windows/desktop/api/windef/ns-windef-rect">RECT</a> structure that contains the client coordinates of the rectangle to be added to the update region. If this parameter is <b>NULL</b>, the entire client area is added to the update region.</param>
         /// <param name="erase">Specifies whether the background within the update region is to be erased when the update region is processed. If this parameter is <b>TRUE</b>, the background is erased when the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-beginpaint">BeginPaint</a> function is called. If this parameter is <b>FALSE</b>, the background remains unchanged.</param>
         /// <returns>
         /// <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</para>
@@ -521,16 +530,41 @@ namespace ManualWindow
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-invalidaterect#">Read more on docs.microsoft.com</see>.</para>
         /// </remarks>
 		[DllImport("user32.dll", EntryPoint = "InvalidateRect", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern unsafe bool InvalidateRect(WindowHandle hWnd, [Optional] Rectangle* lpRect, bool erase);
+        internal static extern unsafe bool InvalidateRect(WindowHandle windowHandle, [Optional] Rectangle* rectanglePointer, bool erase);
 
 		/// <inheritdoc cref="InvalidateRect(WindowHandle, Rectangle*, bool)"/>
-        internal static bool InvalidateRect(WindowHandle hWnd, bool erase)
+        internal static bool InvalidateRect(WindowHandle windowHandle, bool erase)
 		{
 			unsafe
 			{
-                return InvalidateRect(hWnd, null, erase);
+                return InvalidateRect(windowHandle, null, erase);
             }
 		}
+
+        /// <summary>
+        /// The DrawTextEx function draws formatted text in the specified rectangle.
+        /// </summary>
+        /// <param name="deviceContext">A handle to the device context in which to draw.</param>
+        /// <param name="text">A pointer to the string that contains the text to draw. If the cchText parameter is -1, the string must be null-terminated.<br/>
+        /// If dwDTFormat includes DT_MODIFYSTRING, the function could add up to four additional characters to this string. The buffer containing the string should be large enough to accommodate these extra characters.</param>
+        /// <param name="textLength">The length of the string pointed to by lpchText. If cchText is -1, then the lpchText parameter is assumed to be a pointer to a null-terminated string and DrawTextEx computes the character count automatically.</param>
+        /// <param name="area">A pointer to a RECT structure that contains the rectangle, in logical coordinates, in which the text is to be formatted.</param>
+        /// <param name="format">The formatting options. This parameter can be one or more of TextDrawingFormat enum values.</param>
+        /// <param name="drawTextParams">A pointer to a DRAWTEXTPARAMS structure that specifies additional formatting options. This parameter can be NULL.</param>
+        /// <returns>If the function succeeds, the return value is the text height in logical units.<br/>
+		/// If DT_VCENTER or DT_BOTTOM is specified, the return value is the offset from lprc->top to the bottom of the drawn text.<br/>
+		/// If the function fails, the return value is zero.</returns>
+        [DllImport("user32.dll", EntryPoint = "DrawTextExW", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int DrawText(
+			DeviceContextHandle deviceContext,
+			string text,
+			int textLength,
+			Rectangle area,
+			DrawTextFormat format,
+			DrawTextParams drawTextParams
+		);
+
+
         #endregion
     }
 }

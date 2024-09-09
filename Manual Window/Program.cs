@@ -40,19 +40,24 @@ namespace ManualWindow
                 var rectBrush = NativeMethods.GetSysColorBrush(rectangle.color);
                 var rectRes = NativeMethods.FillRect(args.deviceContextHandle, rectangle.rect, rectBrush);
             }
+
+            var txt = "test text\tTAB: éűáÉŰÁÚŐÖÜÓöó";
+            var paras = new DrawTextParams(4, 0, 0, (uint)txt.Length);
+            var height = NativeMethods.DrawText(args.deviceContextHandle, txt, txt.Length, new Rectangle(0, 0, 200, 50), DrawTextFormat.NONE, paras);
         }
 
         private static void OnKeyDown(Window sender, KeyDownEventArgs args)
         {
-            if (args.pressedKey == VirtualKeyCode.B)
+            switch (args.pressedKey)
             {
-                CycleBgColor();
-                var res = sender.RepaintWindow(true);
-            }
-            else if (args.pressedKey == VirtualKeyCode.C)
-            {
-                rectangles.Clear();
-                var res = sender.RepaintWindow(true);
+                case VirtualKeyCode.B:
+                    CycleBgColor();
+                    sender.RepaintWindow(true);
+                    break;
+                case VirtualKeyCode.C:
+                    rectangles.Clear();
+                    sender.RepaintWindow(true);
+                    break;
             }
         }
 
