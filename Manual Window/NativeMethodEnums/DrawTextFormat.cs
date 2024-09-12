@@ -1,6 +1,6 @@
 ﻿namespace ManualWindow.NativeMethodEnums
 {
-    internal enum DrawTextFormat : uint
+    public enum DrawTextFormat : uint
     {
         /// <summary>
         /// Text is not vertically snapped to pixel boundaries. This setting is recommended for text that is being animated.

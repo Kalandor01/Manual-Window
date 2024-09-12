@@ -8,7 +8,13 @@ namespace ManualWindow.NativeMethodStructs
     {
         internal readonly IntPtr Value;
 
-        internal WindowHandle(IntPtr value) => Value = value;
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public WindowHandle() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+
+        internal WindowHandle(IntPtr value)
+        {
+            Value = value;
+        }
 
         internal static WindowHandle Null => default;
 

@@ -26,6 +26,9 @@ namespace ManualWindow.NativeMethodStructs
         /// </summary>
         uint lengthDrawn;
 
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public DrawTextParams() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+        
         /// <summary>
         /// 
         /// </summary>

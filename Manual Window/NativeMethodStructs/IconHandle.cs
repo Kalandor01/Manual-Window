@@ -8,7 +8,13 @@ namespace ManualWindow.NativeMethodStructs
     {
         internal readonly IntPtr Value;
 
-        internal IconHandle(IntPtr value) => Value = value;
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public IconHandle() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+        
+        internal IconHandle(IntPtr value)
+        {
+            Value = value;
+        }
 
         internal static IconHandle Null => default;
 

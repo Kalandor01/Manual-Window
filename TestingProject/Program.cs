@@ -2,17 +2,16 @@
 using ManualWindow.NativeMethodStructs;
 using ManualWindow.WindowEventArgs;
 using ManualWindow.WindowMessageEnums;
+using ManualWindow;
 
-namespace ManualWindow
+namespace TestProject
 {
     internal class Program
     {
         #region Fields
-        private static int bgColorIndex = 0;
-        private static SysColorIndex bgColor = SysColorIndex.COLOR_SCROLLBAR;
-        private static SysColorIndex fgColor = SysColorIndex.COLOR_SCROLLBAR;
+        private static ColorReference bgColor = new ColorReference(0, 0, 0);
         private static Point pos1;
-        private static List<(Rectangle rect, SysColorIndex color)> rectangles = [];
+        private static List<(Rectangle rect, ColorReference color)> rectangles = [];
         #endregion
 
         #region Contructors
@@ -33,17 +32,17 @@ namespace ManualWindow
 
         private static void OnPaintRequest(Window sender, PaintRequestEventArgs args)
         {
-            var bgBrush = NativeMethods.GetSysColorBrush(bgColor);
-            var bgRes = NativeMethods.FillRect(args.deviceContextHandle, args.paint.rcPaint, bgBrush);
+            var bgBrush = NativeMethods.CreateSolidBrush(bgColor);
+            var bgRes = NativeMethods.FillRect(args.deviceContextHandle, args.paint.paintArea, bgBrush);
             foreach (var rectangle in rectangles)
             {
-                var rectBrush = NativeMethods.GetSysColorBrush(rectangle.color);
+                var rectBrush = NativeMethods.CreateSolidBrush(rectangle.color);
                 var rectRes = NativeMethods.FillRect(args.deviceContextHandle, rectangle.rect, rectBrush);
             }
 
             var txt = "test text\tTAB: éűáÉŰÁÚŐÖÜÓöó";
             var paras = new DrawTextParams(4, 0, 0, (uint)txt.Length);
-            var height = NativeMethods.DrawText(args.deviceContextHandle, txt, txt.Length, new Rectangle(0, 0, 200, 50), DrawTextFormat.NONE, paras);
+            var height = NativeMethods.DrawText(args.deviceContextHandle, txt, new Rectangle(0, 0, 200, 50), DrawTextFormat.NONE, paras);
         }
 
         private static void OnKeyDown(Window sender, KeyDownEventArgs args)
@@ -51,7 +50,8 @@ namespace ManualWindow
             switch (args.pressedKey)
             {
                 case VirtualKeyCode.B:
-                    CycleBgColor();
+                    bgColor = GetRandomColor();
+                    Console.WriteLine($"BG Color change: {bgColor}");
                     sender.RepaintWindow(true);
                     break;
                 case VirtualKeyCode.C:
@@ -68,7 +68,8 @@ namespace ManualWindow
 
         private static void OnMouseLeftButtonUp(Window sender, MouseLeftButtonUpEventArgs args)
         {
-            CycleFgColor();
+            var fgColor = GetRandomColor();
+            Console.WriteLine($"FG Color change: {fgColor}");
             var rect = new Rectangle(pos1, args.mousePosition);
             rectangles.Add((rect, fgColor));
             Console.WriteLine($"Recolored: {rect}");
@@ -98,16 +99,10 @@ namespace ManualWindow
             return nextColor;
         }
 
-        private static void CycleBgColor()
+        private static ColorReference GetRandomColor()
         {
-            bgColor = CycleColor(bgColor);
-            Console.WriteLine($"BG Color change: {bgColor}");
-        }
-
-        private static void CycleFgColor()
-        {
-            fgColor = CycleColor(fgColor);
-            Console.WriteLine($"FG Color change: {fgColor}");
+            var rc = new Random().Next();
+            return new ColorReference((byte)((rc & 0xff0000) >> 16), (byte)((rc & 0xff00) >> 8), (byte)rc);
         }
         #endregion
     }

@@ -399,7 +399,7 @@ namespace ManualWindow
                 hInstance = Marshal.GetHINSTANCE(GetType().Module), // alternative: Process.GetCurrentProcess().Handle
                 hIcon = IconHandle.Null,
                 hCursor = NativeMethods.LoadCursor(CursorImage.CROSS),
-                hbrBackground = NativeMethods.GetSysColorBrush(SysColorIndex.COLOR_BACKGROUND + 1),
+                hbrBackground = NativeMethods.GetSysColorBrush(SysColorIndex.BACKGROUND + 1),
                 lpszMenuName = null,
                 lpszClassName = "myClass",
                 hIconSm = IconHandle.Null,

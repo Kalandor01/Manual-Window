@@ -9,9 +9,12 @@ namespace ManualWindow.NativeMethodStructs
         public int x;
         public int y;
 
-        public Point(nint pointer)
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public Point() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+        
+        internal Point(nint pointer)
         {
-            var ps = new Point();
+            Point ps;
             unsafe
             {
                 ps = *(Point*)&pointer;

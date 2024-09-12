@@ -13,7 +13,7 @@ namespace ManualWindow.NativeMethodStructs
         /// <summary>
         /// A handle to the rectangle that needs to be painted.
         /// </summary>
-        public Rectangle rcPaint;
+        public Rectangle paintArea;
         public bool fRestore;
         public bool fIncUpdate;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]

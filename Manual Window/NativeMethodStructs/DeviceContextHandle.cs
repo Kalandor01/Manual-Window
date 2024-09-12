@@ -8,7 +8,13 @@ namespace ManualWindow.NativeMethodStructs
     {
         internal readonly nint Value;
 
-        internal DeviceContextHandle(nint value) => this.Value = value;
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public DeviceContextHandle() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+        
+        internal DeviceContextHandle(nint value)
+        {
+            Value = value;
+        }
 
         public static implicit operator nint(DeviceContextHandle value) => value.Value;
 
@@ -18,12 +24,12 @@ namespace ManualWindow.NativeMethodStructs
 
         public static bool operator !=(DeviceContextHandle left, DeviceContextHandle right) => !(left == right);
 
-        public bool Equals(DeviceContextHandle other) => this.Value == other.Value;
+        public bool Equals(DeviceContextHandle other) => Value == other.Value;
 
         public override bool Equals(object obj) => obj is DeviceContextHandle other && Equals(other);
 
-        public override int GetHashCode() => this.Value.GetHashCode();
+        public override int GetHashCode() => Value.GetHashCode();
 
-        public override string ToString() => $"0x{this.Value:x}";
+        public override string ToString() => $"0x{Value:x}";
     }
 }

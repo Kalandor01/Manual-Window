@@ -1,6 +1,5 @@
 ﻿using ManualWindow.NativeMethodEnums;
 using System.Runtime.InteropServices;
-using Windows.Win32.Graphics.Gdi;
 
 namespace ManualWindow.NativeMethodStructs
 {
@@ -64,7 +63,7 @@ namespace ManualWindow.NativeMethodStructs
         /// <para>This doc was truncated.</para>
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw#members">Read more on docs.microsoft.com</see>.</para>
         /// </summary>
-        public HBRUSH hbrBackground;
+        public BrushHandle hbrBackground;
 
         /// <summary>
         /// <para>Type: <b>LPCTSTR</b> Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file. If you use an integer to identify the menu, use the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-makeintresourcea">MAKEINTRESOURCE</a> macro. If this member is <b>NULL</b>, windows belonging to this class have no default menu.</para>
@@ -84,6 +83,5 @@ namespace ManualWindow.NativeMethodStructs
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw#members">Read more on docs.microsoft.com</see>.</para>
         /// </summary>
         public IconHandle hIconSm;
-
     }
 }

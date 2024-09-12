@@ -38,13 +38,16 @@ namespace ManualWindow.NativeMethodStructs
         /// </summary>
         public uint flags;
 
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public WindowPos() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+
         /// <summary>
         /// <inheritdoc cref="WindowPos" path="//summary"/>
         /// </summary>
         /// <param name="pointer">A pointer to a WINDOWPOS object.</param>
-        public WindowPos(nint pointer)
+        internal WindowPos(nint pointer)
         {
-            var wp = new WindowPos();
+            WindowPos wp;
             unsafe
             {
                 wp = *(WindowPos*)&pointer;

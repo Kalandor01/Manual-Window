@@ -3,12 +3,11 @@ using ManualWindow.NativeMethodStructs;
 using ManualWindow.WindowMessageEnums;
 using System.Runtime.InteropServices;
 using Windows.Win32.Foundation;
-using Windows.Win32.Graphics.Gdi;
 using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace ManualWindow
 {
-    internal class NativeMethods
+    public class NativeMethods
     {
         #region NativeMethods
         /// <summary>
@@ -287,7 +286,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-fillrect#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern int FillRect([In] DeviceContextHandle deviceContextHandle, [In] Rectangle lprc, [In] HBRUSH hbr);
+        public static extern int FillRect([In] DeviceContextHandle deviceContextHandle, [In] Rectangle lprc, [In] BrushHandle hbr);
 
         /// <summary>Retrieves the current color of the specified display element.</summary>
 		/// <param name="index">Type: <b>int</b></param>
@@ -299,7 +298,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getsyscolor#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
 		[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern uint GetSysColor(SysColorIndex index);
+        public static extern ColorReference GetSysColor(SysColorIndex index);
 
         /// <summary>The CreateSolidBrush function creates a logical brush that has the specified solid color.</summary>
 		/// <param name="color">The color of the brush. To create a <a href="https://docs.microsoft.com/windows/desktop/gdi/colorref">COLORREF</a> color value, use the <a href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-rgb">RGB</a> macro.</param>
@@ -311,7 +310,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createsolidbrush#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
         [DllImport("gdi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern HBRUSH CreateSolidBrush(COLORREF color);
+        public static extern BrushHandle CreateSolidBrush(ColorReference color);
 
         /// <summary>The GetSysColorBrush function retrieves a handle identifying a logical brush that corresponds to the specified color index.</summary>
 		/// <param name="nIndex">A color index. This value corresponds to the color used to paint one of the window elements. See <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getsyscolor">GetSysColor</a> for system color index values.</param>
@@ -321,7 +320,7 @@ namespace ManualWindow
 		/// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getsyscolorbrush#">Read more on docs.microsoft.com</see>.</para>
 		/// </remarks>
 		[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern HBRUSH GetSysColorBrush(SysColorIndex nIndex);
+        public static extern BrushHandle GetSysColorBrush(SysColorIndex nIndex);
 
         /// <summary>Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for retrieval. (GetMessageW)</summary>
 		/// <param name="lpMsg">
@@ -564,7 +563,17 @@ namespace ManualWindow
 			DrawTextParams drawTextParams
 		);
 
-
+		/// <inheritdoc cref="DrawText(DeviceContextHandle, string, int, Rectangle, DrawTextFormat, DrawTextParams)"/>
+		public static int DrawText(
+            DeviceContextHandle deviceContext,
+            string text,
+            Rectangle area,
+            DrawTextFormat format,
+            DrawTextParams drawTextParams
+        )
+		{
+			return DrawText(deviceContext, text, text.Length, area, format, drawTextParams);
+		}
         #endregion
     }
 }

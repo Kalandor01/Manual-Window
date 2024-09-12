@@ -10,9 +10,12 @@ namespace ManualWindow.NativeMethodStructs
         public int right;
         public int bottom;
 
-        public Rectangle(nint pointer)
+        [Obsolete("You may not use the parameterless constructor.", error: true)]
+        public Rectangle() => throw new InvalidOperationException("You may not use the parameterless constructor.");
+        
+        internal Rectangle(nint pointer)
         {
-            var r = new Rectangle();
+            Rectangle r;
             unsafe
             {
                 r = *(Rectangle*)&pointer;
