@@ -224,6 +224,7 @@ namespace ManualWindow
                     => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
                 WindowProcessMessage.KEY_UP
                     => $"virtual key code: {(VirtualKeyCode)messageExtra1}, flags: {GetKeystrokeMessageFlagsStr(messageExtra2)}",
+                WindowProcessMessage.COPY_TEXT_TO_BUFFER => $"maximum nuber of characters to copy: {messageExtra1}, destination buffer pointer: {messageExtra2}",
                 _ => "[UNREGISTERED MESSAGE]",
             };
 
@@ -258,6 +259,8 @@ namespace ManualWindow
         /// <returns>The result of the message processing, and depends on the message sent.</returns>
         public nint ProcessMessage(WindowHandle windowHandle, WindowProcessMessage message, nint messageExtra1, nint messageExtra2)
         {
+            var erasedBackground = false;
+
             switch (message)
             {
                 case WindowProcessMessage.PAINT_WINDOW_REQUEST:
@@ -270,6 +273,9 @@ namespace ManualWindow
                     PaintRequest(this, new PaintRequestEventArgs(hdc, paint));
 
                     var suc = NativeMethods.EndPaint(windowHandle, paint);
+                    break;
+                case WindowProcessMessage.BACKGROUND_ERASE_NEEDED:
+                    erasedBackground = false;
                     break;
                 case WindowProcessMessage.KEY_DOWN:
                     KeyDown(this, new KeyDownEventArgs(messageExtra1, messageExtra2));
@@ -345,13 +351,16 @@ namespace ManualWindow
                 WindowProcessMessage.GET_ICON => nint.Zero,
                 WindowProcessMessage.IME_ACTIVATE_DEACTIVATE => nint.Zero,
                 WindowProcessMessage.IME_NOTIFY => nint.Zero,
-                WindowProcessMessage.BACKGROUND_ERASE_NEEDED => nint.Zero,
+                WindowProcessMessage.BACKGROUND_ERASE_NEEDED => erasedBackground ? 1 : 0,
                 WindowProcessMessage.SCREEN_POS_TO_WINDOW_PART => (int)GetWindowPartFromPos(messageExtra2),
                 WindowProcessMessage.CURSOR_MOVE => nint.Zero,
                 WindowProcessMessage.MOUSE_KEY_PRESSED_IN_INACTIVE_WINDOW => (int)InactiveWindowMouseActionReturnValue.ACTIVATE,
+                WindowProcessMessage.COPY_TEXT_TO_BUFFER => nint.Zero,
                 _ => nint.Zero,
             };
         }
+
+        private List<WindowProcessMessage> mess = [];
 
         /// <summary>
         /// 
@@ -364,6 +373,11 @@ namespace ManualWindow
         public nint WindowProc(WindowHandle windowHandle, uint message, nint messageExtra1, nint messageExtra2)
         {
             var messageEnum = (WindowProcessMessage)message;
+            //var hmm = string.Join(" ||\n", mess.Select(m => $"messageEnum == WindowProcessMessage.{m}"));
+            //if (!mess.Contains(messageEnum))
+            //{
+            //    mess.Add(messageEnum);
+            //}
             var knownMessage = Enum.IsDefined(messageEnum);
             var response = nint.Zero;
             if (knownMessage)
@@ -371,16 +385,29 @@ namespace ManualWindow
                 response = ProcessMessage(windowHandle, messageEnum, messageExtra1, messageExtra2);
             }
 
+            if (knownMessage)
+            {
+                Console.WriteLine(WindowMessageToString(windowHandle, message, messageExtra1, messageExtra2) + $"\t-> {response}");
+            }
+            else
+            {
+                Console.WriteLine($"UNKNOWN MESSAGE: {message}");
+            }
+
             var defResponse = NativeMethods.DefWindowProc(windowHandle, message, messageExtra1, messageExtra2);
 
             if (knownMessage)
             {
-                Console.WriteLine(WindowMessageToString(windowHandle, message, messageExtra1, messageExtra2) + $"\t-> {response}{(response != defResponse ? $"(def: {defResponse})" : "")}");
+                if (response != defResponse)
+                {
+                    Console.WriteLine($"\t-> (def: {defResponse})");
+                }
             }
             else
             {
-                Console.WriteLine($"UNKNOWN MESSAGE: {message}\t-> (def: {defResponse})");
+                Console.WriteLine($"\t-> (def: {defResponse})");
             }
+
             response = defResponse;
 
             return response;

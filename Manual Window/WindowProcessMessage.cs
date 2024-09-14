@@ -55,7 +55,13 @@
         WM_ENABLE = 10,
         WM_SETREDRAW = 11,
         WM_SETTEXT = 12,
-        WM_GETTEXT = 13,
+        /// <summary>
+        /// WM_GETTEXT<br/>
+        /// extra1: The maximum number of characters to be copied, including the terminating null character.<br/>
+        /// extra2: A pointer to the buffer that is to receive the text.<br/>
+        /// return: The number of characters copied, not including the terminating null character.
+        /// </summary>
+        COPY_TEXT_TO_BUFFER = 13,
         WM_GETTEXTLENGTH = 14,
         /// <summary>
         /// WM_PAINT<br/>
